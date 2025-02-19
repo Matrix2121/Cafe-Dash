@@ -12,18 +12,29 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
-          options={{ title: 'Sign Up' }}
-        />
-      </Stack.Navigator>
+    <Stack.Navigator
+      initialRouteName="Login"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#EDC4B3',
+        },
+        headerTintColor: '#774936',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Register"
+        component={RegisterScreen}
+        options={{ title: 'Sign Up' }}
+      />
+    </Stack.Navigator>
   );
 };
 
