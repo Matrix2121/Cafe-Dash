@@ -98,7 +98,7 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
-    resizeMode: 'stretch', // Adjust the image to cover the entire screen
+    resizeMode: 'stretch',
   },
   container: {
     flex: 1,
