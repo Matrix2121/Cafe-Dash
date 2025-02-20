@@ -33,6 +33,10 @@ const LoginScreen = () => {
     }, 2000);
   };
 
+  const handleRegusterButton = () => {
+    navigation.navigate('Register');
+  };
+
   return (
     <ImageBackground
       source={require('../../assets/images/login-background.jpg')}
@@ -81,7 +85,7 @@ const LoginScreen = () => {
 
           <Button
             mode="contained"
-            onPress={handleLogin}
+            onPress={handleRegusterButton}
             style={styles.registerButton}
             labelStyle={{ color: '#444444' }} 
             theme={{ colors: { primary: '#444444' } }}
