@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/navigation';
+import { RootStackParamList } from '../../navigation/navigation';
+import styles from "./Login.style";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,7 @@ const LoginScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../assets/images/login-background.jpg')}
+      source={require('../../../assets/images/login-background.jpg')}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView
@@ -43,7 +44,7 @@ const LoginScreen = () => {
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Image source={require('../../assets/images/logo.png')} style={styles.logo}/>
+        <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
           <Text style={styles.title}>Welcome to Cafe-Dash</Text>
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -94,63 +95,5 @@ const LoginScreen = () => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'stretch', // Adjust the image to cover the entire screen
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 50,
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: '#444444',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#444444',
-    backgroundColor: '#CECECC',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#444444',
-    padding: 5,
-  },
-  input: {
-    width: '130%',
-    marginBottom: 10,
-    backgroundColor: '#CECECC',
-  },
-  loginButton: {
-    marginTop: 30,
-    width: '100%',
-    backgroundColor: '#444444',
-  },
-  registerButton: {
-    marginTop: 10,
-    width: '100%',
-    borderColor: '#444444',
-    borderWidth: 2.5,
-    backgroundColor: '#CECECC',
-  },
-  errorText: {
-    color: '#444444',
-    marginBottom: 10,
-  },
-});
 
 export default LoginScreen;
