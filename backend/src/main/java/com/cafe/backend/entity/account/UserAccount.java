@@ -1,9 +1,6 @@
 package com.cafe.backend.entity.account;
 
-import com.cafe.backend.entity.customer.Customer;
-import com.cafe.backend.entity.employee.Employee;
 import com.cafe.backend.enums.UserType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,14 +14,14 @@ import java.util.List;
  * @author AngelStoynov
  */
 
-@Data
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
-@Builder
 @Table(name = "users")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserAccount implements UserDetails {
+public abstract class UserAccount implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,14 +37,6 @@ public class UserAccount implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
     private UserType userType;
-
-    @OneToOne(mappedBy = "userAccount", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Customer customer;
-
-    @OneToOne(mappedBy = "userAccount", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Employee employee;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

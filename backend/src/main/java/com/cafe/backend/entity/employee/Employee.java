@@ -5,45 +5,37 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * {@code Employee} is an abstract entity class.
+ * {@code Employee} is an abstract entity class. Extends {@link UserAccount}.
  * @author AngelStoynov
  */
 
-@MappedSuperclass
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "employee")
 @Data
 @Builder
 @NoArgsConstructor
 
-public abstract class Employee {
+public abstract class Employee extends UserAccount {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "salary", columnDefinition = "DOUBLE DEFAULT 0.0")
-    private Double salary;
+    @Column(name = "salary")
+    private double salary;
 
     @Column(name = "location", length = 100, nullable = false)
     private String location;
 
     @Column(name = "rating")
-    private Double rating;
+    private double rating;
 
     @Column(name = "phone_number", nullable = false)
-    private String phone_number;
+    private String phoneNumber;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true, nullable = false)
-    private UserAccount userAccount;
-
-    public Employee(Long id, Double salary, String location, Double rating, String phone_number, UserAccount userAccount) {
-        this.id = id;
+    public Employee(double salary, String location, double rating, String phoneNumber) {
         this.salary = salary;
         this.location = location;
         setRating(rating);
-        this.phone_number = phone_number;
-        this.userAccount = userAccount;
+        this.phoneNumber = phoneNumber;
     }
 
     /**

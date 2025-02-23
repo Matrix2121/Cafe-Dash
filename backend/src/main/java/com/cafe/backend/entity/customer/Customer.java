@@ -7,10 +7,11 @@ import lombok.*;
 import java.util.List;
 
 /**
- * {@code Customer} is an entity class.
+ * {@code Customer} is an entity class. Extends {@link UserAccount}.
  * @author AngelStoynov
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Builder
@@ -18,25 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Customer {
+public abstract class Customer extends UserAccount{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "balance", columnDefinition = "DOUBLE DEFAULT 0.0")
-    private Double balance;
+    @Column(name = "balance")
+    private double balance;
 
     @Column(name = "location", length = 100, nullable = false)
     private String location;
 
     @Column(name = "phone_number", nullable = false)
-    private String phone_number;
-
-    @OneToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true, nullable = false)
-    private UserAccount userAccount;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Order> orders;

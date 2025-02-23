@@ -18,20 +18,19 @@ import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "cafeteria")
-@Data
 @NoArgsConstructor
 public class CafeteriaBulgaria extends Cafeteria {
     private static final double MIN_RATING = 0.0;
     private static final double MAX_RATING = 5.0;
 
-    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Product> products;
+    public CafeteriaBulgaria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
+        super(id, name, location, rating, phone_number, cafeteriaDeliveryStatus, products);
+    }
 
     @Override
     protected void validateRating(double rating) {
         if (rating < MIN_RATING || rating > MAX_RATING) {
-            throw new IllegalArgumentException("Cafeteria rating cannot be lower than " + MIN_RATING + " and bigger than " + MAX_RATING);
+            throw new IllegalArgumentException("Cafeteria rating cannot be lower than " + MIN_RATING + " and higher than " + MAX_RATING);
         }
     }
 }

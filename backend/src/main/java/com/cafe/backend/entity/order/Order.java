@@ -6,6 +6,8 @@ import com.cafe.backend.entity.product.Product;
 import com.cafe.backend.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Formula;
+
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -28,11 +30,15 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "amount")
+    @Column(name = "amount", updatable = false, insertable = false)
+    @Formula("(SELECT COALESCE(SUM(p.price), 0) FROM order_product op " +
+            "JOIN product p ON op.product_id = p.id " +
+            "WHERE op.order_id = orders.id) " +
+            "* (1 - COALESCE(orders.discount, 0) / 100) + COALESCE(orders.tip_amount, 0)")
     private Double amount;
 
     @Column(name = "discount")
-    private Integer discount;
+    private int discount;
 
     @Column(name = "expected_delivery")
     private LocalDateTime expectedDelivery;
@@ -42,7 +48,7 @@ public class Order {
     private OrderStatus status;
 
     @Column(name = "tip_amount")
-    private Integer tip;
+    private int tip;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)

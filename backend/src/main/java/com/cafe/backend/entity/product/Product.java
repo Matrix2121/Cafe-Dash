@@ -29,10 +29,10 @@ public class Product {
     private String name;
 
     @Column(name = "price")
-    private Double price;
+    private double price;
 
-    @Column(name = "quantity", columnDefinition = "INTEGER DEFAULT 0")
-    private Integer quantity;
+    @Column(name = "quantity")
+    private int quantity;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
