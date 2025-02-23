@@ -15,11 +15,10 @@ import java.util.List;
 @Data
 @Entity
 @Builder
-@Table(name = "customer")
 @NoArgsConstructor
 @AllArgsConstructor
 
-public abstract class Customer extends UserAccount{
+public class Customer extends UserAccount{
 
     @Column(name = "balance")
     private double balance;
