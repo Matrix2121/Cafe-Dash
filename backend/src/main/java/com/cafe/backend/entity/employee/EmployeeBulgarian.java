@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 
-public class EmployeeBulgarian extends Employee {
+public abstract class EmployeeBulgarian extends Employee {
     private static final double MIN_RATING = 0.0;
     private static final double MAX_RATING = 5.0;
 
