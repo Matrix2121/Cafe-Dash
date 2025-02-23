@@ -12,6 +12,7 @@ import java.util.Set;
  */
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "cafeteria_type", discriminatorType = DiscriminatorType.STRING)
 @Entity
 @Table(name = "cafeteria")
 @Data
@@ -41,7 +42,12 @@ public abstract class Cafeteria {
     @Column(name = "delivery_status", nullable = false)
     private CafeteriaDeliveryStatus cafeteriaDeliveryStatus;
 
-    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @JoinTable(
+            name = "cafeteria_product",
+            joinColumns = @JoinColumn(name = "cafeteria_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private Set<Product> products;
 
     public Cafeteria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
@@ -62,7 +68,7 @@ public abstract class Cafeteria {
     /**
      * The method {@code setRating} is used in the constructor to set the validated rating.
      */
-    private void setRating(double rating) {
+    protected void setRating(double rating) {
         validateRating(rating);
         this.rating = rating;
     }

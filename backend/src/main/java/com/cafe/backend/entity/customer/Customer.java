@@ -4,7 +4,7 @@ import com.cafe.backend.entity.account.UserAccount;
 import com.cafe.backend.entity.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * {@code Customer} is an entity class. Extends {@link UserAccount}.
@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Customer extends UserAccount{
+public abstract class Customer extends UserAccount {
 
     @Column(name = "balance")
     private double balance;
@@ -29,6 +29,11 @@ public class Customer extends UserAccount{
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Order> orders;
+    @ManyToMany
+    @JoinTable(
+            name = "customer_order",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private Set<Order> orders;
 }
