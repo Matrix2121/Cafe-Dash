@@ -4,7 +4,6 @@ import com.cafe.backend.entity.product.Product;
 import com.cafe.backend.enums.CafeteriaDeliveryStatus;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.Set;
 
 /**
@@ -12,11 +11,12 @@ import java.util.Set;
  * @author AngelStoynov
  */
 
-@MappedSuperclass
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Entity
+@Table(name = "cafeteria")
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 
 public abstract class Cafeteria {
 
@@ -32,7 +32,7 @@ public abstract class Cafeteria {
     private String location;
 
     @Column(name = "rating")
-    private Double rating;
+    private double rating;
 
     @Column(name = "phone_number", nullable = false)
     private String phone_number;
@@ -41,6 +41,18 @@ public abstract class Cafeteria {
     @Column(name = "delivery_status", nullable = false)
     private CafeteriaDeliveryStatus cafeteriaDeliveryStatus;
 
+    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Product> products;
+
+    public Cafeteria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        setRating(rating);
+        this.phone_number = phone_number;
+        this.cafeteriaDeliveryStatus = cafeteriaDeliveryStatus;
+        this.products = products;
+    }
 
     /**
      * The abstract method {@code validateRating} must be handled in the subclasses of {@link Cafeteria}.
@@ -50,7 +62,7 @@ public abstract class Cafeteria {
     /**
      * The method {@code setRating} is used in the constructor to set the validated rating.
      */
-    public void setRating(double rating) {
+    private void setRating(double rating) {
         validateRating(rating);
         this.rating = rating;
     }
