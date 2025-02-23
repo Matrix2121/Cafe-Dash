@@ -12,7 +12,6 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "employee")
 @Data
 @Builder
 @NoArgsConstructor
