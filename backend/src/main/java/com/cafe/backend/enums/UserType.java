@@ -1,4 +1,4 @@
-package com.cafe.backend;
+package com.cafe.backend.enums;
 
 public enum UserType {
     ADMIN,

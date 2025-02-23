@@ -1,17 +1,21 @@
-package com.cafe.backend.entity;
+package com.cafe.backend.entity.account;
 
-import com.cafe.backend.UserType;
+import com.cafe.backend.entity.customer.Customer;
+import com.cafe.backend.entity.employee.Employee;
+import com.cafe.backend.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import java.util.Collection;
 import java.util.List;
+
+/**
+ * {@code UserAccount} is an entity class that implements {@link UserDetails}
+ * @author AngelStoynov
+ */
 
 @Data
 @Entity
@@ -19,6 +23,7 @@ import java.util.List;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserAccount implements UserDetails {
 
     @Id
@@ -35,6 +40,14 @@ public class UserAccount implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
     private UserType userType;
+
+    @OneToOne(mappedBy = "userAccount", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Customer customer;
+
+    @OneToOne(mappedBy = "userAccount", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Employee employee;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
