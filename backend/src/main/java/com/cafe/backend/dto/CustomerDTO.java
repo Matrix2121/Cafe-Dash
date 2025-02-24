@@ -7,7 +7,6 @@ import java.util.List;
  */
 public record CustomerDTO(
         double balance,
-        String location,
         String phoneNumber,
         List<OrderDTO> orders
 ) { }

@@ -3,14 +3,11 @@ package com.cafe.backend.entity.account;
 import com.cafe.backend.enums.UserType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * {@code UserAccount} is an entity class that implements {@link UserDetails}
+ * {@code UserAccount} is an entity class.
  * @author AngelStoynov
  */
 
@@ -18,10 +15,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 
-public abstract class UserAccount implements UserDetails {
+public abstract class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,28 +33,13 @@ public abstract class UserAccount implements UserDetails {
     @Column(name = "user_type", nullable = false)
     private UserType userType;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(userType.name()));
+    public UserAccount() {
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public UserAccount(Long id, String username, String password, UserType userType) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
     }
 }
