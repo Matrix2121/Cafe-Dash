@@ -13,7 +13,6 @@ public record OrderDTO(
         LocalDateTime expectedDelivery,
         OrderStatus orderStatus,
         int tip,
-        EmployeeDTO employee,
         CafeteriaDTO cafeteria,
         Set<ProductDTO> products
 ) { }

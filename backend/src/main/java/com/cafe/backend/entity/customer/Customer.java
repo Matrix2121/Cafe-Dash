@@ -2,6 +2,7 @@ package com.cafe.backend.entity.customer;
 
 import com.cafe.backend.entity.account.UserAccount;
 import com.cafe.backend.entity.order.Order;
+import com.cafe.backend.enums.UserType;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Set;
@@ -15,16 +16,11 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 
 public abstract class Customer extends UserAccount {
 
     @Column(name = "balance")
     private double balance;
-
-    @Column(name = "location", length = 100, nullable = false)
-    private String location;
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
@@ -36,4 +32,15 @@ public abstract class Customer extends UserAccount {
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
     private Set<Order> orders;
+
+    public Customer() {
+    }
+
+    public Customer(Long id, String username, String password, UserType userType, double balance, String phoneNumber, Set<Order> orders) {
+        super(id, username, password, userType);
+        this.balance = balance;
+        this.phoneNumber = phoneNumber;
+        this.orders = orders;
+    }
+
 }

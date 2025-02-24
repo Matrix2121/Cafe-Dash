@@ -1,7 +1,6 @@
 package com.cafe.backend.entity.order;
 
 import com.cafe.backend.entity.cafeteria.Cafeteria;
-import com.cafe.backend.entity.employee.Employee;
 import com.cafe.backend.entity.product.Product;
 import com.cafe.backend.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -49,10 +48,6 @@ public class Order {
 
     @Column(name = "tip_amount")
     private int tip;
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id", referencedColumnName = "id", nullable = false)
-    private Employee employee;
 
     @ManyToOne
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id", nullable = false)

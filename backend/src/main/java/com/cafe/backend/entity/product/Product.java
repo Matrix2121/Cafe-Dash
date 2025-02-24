@@ -15,8 +15,6 @@ import java.util.Set;
 @Entity
 @Builder
 @Table(name = "product")
-@NoArgsConstructor
-@AllArgsConstructor
 
 public class Product {
 
@@ -37,4 +35,51 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private ProductType productType;
+
+    public Product() {
+    }
+
+    public Product(Long id, String name, double price, int quantity, ProductType productType) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.productType = productType;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
 }
