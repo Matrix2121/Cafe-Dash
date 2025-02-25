@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * {@code CafeteriaBulgarian} extends the base class {@link Cafeteria}.
@@ -20,14 +22,16 @@ import java.util.Set;
 public class CafeteriaBulgaria extends Cafeteria {
     private static final double MIN_RATING = 0.0;
     private static final double MAX_RATING = 5.0;
+    private static final String PHONE_NUMBER_REGEX = "^\\+359[0-9]{9}$";
 
     public CafeteriaBulgaria() {
         super();
     }
 
-    public CafeteriaBulgaria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
-        super(id, name, location, rating, phone_number, cafeteriaDeliveryStatus, products);
+    public CafeteriaBulgaria(Long id, String name, String location, double rating, String phoneNumber, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
+        super(id, name, location, rating, phoneNumber, cafeteriaDeliveryStatus, products);
         setRating(rating);
+        setPhoneNumber(phoneNumber);
     }
 
     @Override
@@ -37,4 +41,13 @@ public class CafeteriaBulgaria extends Cafeteria {
         }
     }
 
+    @Override
+    protected void validatePhoneNumber(String phoneNumber) {
+        Pattern pattern = Pattern.compile(PHONE_NUMBER_REGEX);
+        Matcher matcher = pattern.matcher(phoneNumber);
+
+        if(!matcher.matches()) {
+            throw new IllegalArgumentException("Incorrect phone number " + phoneNumber + " it needs to match this expression: " + PHONE_NUMBER_REGEX);
+        }
+    }
 }

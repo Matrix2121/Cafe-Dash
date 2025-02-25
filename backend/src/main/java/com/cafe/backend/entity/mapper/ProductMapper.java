@@ -11,6 +11,9 @@ public class ProductMapper {
     }
 
     public static ProductDTO mapToProductDTO(Product product) {
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null.");
+        }
         try{
             return new ProductDTO(
                     product.getId(),
