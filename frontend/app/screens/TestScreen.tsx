@@ -1,11 +1,16 @@
 import React from 'react';
-import { View, Text, Pressable, GestureResponderEvent } from 'react-native'; // 🟢 Добавих импорт на Text
+import { View, Text, Pressable, GestureResponderEvent, Button } from 'react-native';
 import CafeCard from '../components/cafeCard/cafeCard';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import navigation, { RootStackParamList } from '../navigation/navigation';
+import styles from './TestScreen.style'
 
 const TestScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View>
-        <CafeCard cafeName="Zad ftori" cafeRating="5.0 (23)" whatToOffer="Coffee, Sandwiches"></CafeCard>
+        <Pressable style={styles.testButton} onPress={() => navigation.navigate("MainMenu")}/>
     </View>
   );
 };
