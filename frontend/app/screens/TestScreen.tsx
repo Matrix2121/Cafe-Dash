@@ -5,7 +5,7 @@ import CafeCard from '../components/cafeCard/cafeCard';
 const TestScreen = () => {
   return (
     <View>
-        <CafeCard cafeName="asd" cafeRating="asd" whatToOffer="asd"></CafeCard>
+        <CafeCard cafeName="Zad ftori" cafeRating="5.0 (23)" whatToOffer="Coffee, Sandwiches"></CafeCard>
     </View>
   );
 };

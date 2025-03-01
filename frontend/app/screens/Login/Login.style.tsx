@@ -59,7 +59,7 @@ export default StyleSheet.create({
     testButton: {
         top: 8,
         right: 0,
-        width: 120,
+        width: 117,
         height: 40,
         borderColor: '#444444',
         borderWidth: 2.5,
