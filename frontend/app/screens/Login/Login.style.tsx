@@ -56,4 +56,19 @@ export default StyleSheet.create({
         color: '#444444',
         marginBottom: 10,
     },
+    testButton: {
+        top: 8,
+        right: 0,
+        width: 120,
+        height: 40,
+        borderColor: '#444444',
+        borderWidth: 2.5,
+        backgroundColor: '#000000',
+        position: 'absolute',
+
+    },
+    testButtonText: {
+        color: '#FFFFFF',
+        fontSize: 30
+    }
 });

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigation/navigation';
 import styles from "./Login.style";
+import RegisterScreen from '../Register/RegisterScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -39,11 +41,19 @@ const LoginScreen = () => {
       source={require('../../../assets/images/login-background.jpg')}
       style={styles.backgroundImage}
     >
+
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Pressable 
+          style={styles.testButton}
+          onPress={() => navigation.navigate("Test")}
+        >
+          <Text style={styles.testButtonText}>Test Area
+          </Text>
+        </Pressable>
         <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
           <Text style={styles.title}>Welcome to Cafe-Dash</Text>
 
@@ -82,7 +92,7 @@ const LoginScreen = () => {
 
           <Button
             mode="contained"
-            onPress={handleLogin}
+            onPress={() => navigation.navigate("Register")}
             style={styles.registerButton}
             labelStyle={{ color: '#444444' }} 
             theme={{ colors: { primary: '#444444' } }}
