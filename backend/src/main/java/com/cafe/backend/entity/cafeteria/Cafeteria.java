@@ -17,7 +17,6 @@ import java.util.Set;
 @Table(name = "cafeteria")
 @Data
 @Builder
-@NoArgsConstructor
 
 public abstract class Cafeteria {
 
@@ -49,6 +48,9 @@ public abstract class Cafeteria {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> products;
+
+    public Cafeteria() {
+    }
 
     public Cafeteria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
         this.id = id;
