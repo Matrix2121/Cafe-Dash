@@ -5,8 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../navigation/navigation';
 import styles from "./Login.style";
-import RegisterScreen from '../Register/RegisterScreen';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -49,7 +47,7 @@ const LoginScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
         <Pressable 
           style={styles.testButton}
-          onPress={() => navigation.navigate("Test")}
+          onPress={() => navigation.navigate("TestScreen")}
         >
           <Text style={styles.testButtonText}>Test Area
           </Text>
