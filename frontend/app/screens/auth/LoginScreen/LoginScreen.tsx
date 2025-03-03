@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable } from 'react-native';
-import { TextInput, Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/navigation';
-import styles from "./Login.style";
+import { RootStackParamList } from '../../../navigation/navigation';
+
+import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable } from 'react-native';
+import { TextInput, Button, Text } from 'react-native-paper';
+import styles from "./LoginScreen.style";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -45,6 +46,8 @@ const LoginScreen = () => {
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
+
+
         <Pressable 
           style={styles.testButton}
           onPress={() => navigation.navigate("TestScreen")}
@@ -52,6 +55,8 @@ const LoginScreen = () => {
           <Text style={styles.testButtonText}>Test Area
           </Text>
         </Pressable>
+
+
         <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
           <Text style={styles.title}>Welcome to Cafe-Dash</Text>
 

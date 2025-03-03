@@ -2,9 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import styles from './MainMenu.style'
-import CafeScreen from '../CafesScreen/CafesScreen';
-import OrderScreen from '../OrderScreen/OrderScreen';
+import CafeScreen from '../../cafes/CafeListScreen/CafesListScreen';
+import OrderScreen from '../../orders/CartScreen/CartScreen';
+import styles from './MainHubScreen.style'
 
 const Tab = createBottomTabNavigator();
 

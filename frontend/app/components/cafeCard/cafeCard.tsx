@@ -1,26 +1,29 @@
 import React from "react";
-import {
-  Text,
-  Pressable,
-  GestureResponderEvent,
-  View
-} from "react-native";
+import { Text, Pressable, GestureResponderEvent, View } from "react-native";
 import { Card } from "react-native-paper";
-import styles from "./cafeCard.style";
+import styles from "./CafeCard.style";
 
-const CafeCard = ({cafeName, cafeRating, whatToOffer,}: {
+import { RootStackParamList } from '@/app/navigation/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+const CafeCard = ({id, cafeName, cafeRating, whatToOffer,}: {
+  id: number;
   cafeName: string;
   cafeRating: string;
   whatToOffer: string;
+  onPress?: (id: number) => void;
 }) => {
 
-  function onPress(e: GestureResponderEvent): void {
-    throw new Error("Function not implemented.");
-  }
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  
+  const handlePress = (e: GestureResponderEvent) => {
+    navigation.navigate('CafesScreen');
+  };
 
   return (
-    <Pressable>
-      <Card style={styles.cardStyle} onPress={onPress}>
+    <Pressable onPress={handlePress}>
+      <Card style={styles.cardStyle}>
         <Card.Cover
           source={require("../../../assets/images/logo.png")}
           style={styles.imageStyle}

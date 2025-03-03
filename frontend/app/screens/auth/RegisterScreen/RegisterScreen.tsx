@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/navigation';
-import styles from "./Register.style";
+import { RootStackParamList } from '../../../navigation/navigation';
+
+import { View, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-paper';
+import styles from "./RegisterScreen.style";
 
 const RegisterScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
