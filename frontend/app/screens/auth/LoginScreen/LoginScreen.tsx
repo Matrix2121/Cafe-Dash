@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation/navigation';
+import { RootStackParamList } from '../../../navigation/Navigation';
 
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
@@ -37,7 +37,7 @@ const LoginScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/images/login-background.jpg')}
+      source={require('../../../../assets/images/login-background.jpg')}
       style={styles.backgroundImage}
     >
 
@@ -57,7 +57,7 @@ const LoginScreen = () => {
         </Pressable>
 
 
-        <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
+        <Image source={require('../../../../assets/images/logo.png')} style={styles.logo}/>
           <Text style={styles.title}>Welcome to Cafe-Dash</Text>
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}

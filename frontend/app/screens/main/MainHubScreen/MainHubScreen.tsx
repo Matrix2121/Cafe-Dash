@@ -18,7 +18,7 @@ const MainMenu = () => {
           <Text style={styles.locationText}>Downtown Coffee District</Text>
         </View>
         <Image 
-          source={require('../../../assets/images/logo.png')} 
+          source={require('../../../../assets/images/logo.png')} 
           style={styles.profileImage}
         />
       </View>
