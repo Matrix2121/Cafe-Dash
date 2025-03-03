@@ -1,5 +1,5 @@
 import React from 'react';
-import { RootStackParamList } from '@/app/navigation/navigation';
+import { RootStackParamList } from '@/app/navigation/Navigation';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
@@ -12,13 +12,6 @@ import CafeCard from '../../../components/CafeCard/CafeCard';
   ];
 
 const CafeScreen = () => {
-
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
-  const onPress = (id: number) => {
-    navigation.navigate('CafesListScreen');
-  };
-
   return (
     <View>
       <FlatList
@@ -29,7 +22,6 @@ const CafeScreen = () => {
             cafeName={item.cafeName}
             cafeRating={item.cafeRating}
             whatToOffer={item.whatToOffer}
-            onPress={onPress}
           />
         )}
         keyExtractor={(item) => item.id.toString()}

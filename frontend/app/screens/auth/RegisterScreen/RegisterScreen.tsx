@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation/navigation';
+import { RootStackParamList } from '../../../navigation/Navigation';
 
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';

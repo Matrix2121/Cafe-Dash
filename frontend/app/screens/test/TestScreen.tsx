@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/navigation';
+import { RootStackParamList } from '../../navigation/Navigation';
 
 import { View, Text, Pressable, GestureResponderEvent, Button } from 'react-native';
 import styles from './TestScreen.style';

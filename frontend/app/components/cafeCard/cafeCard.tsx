@@ -1,24 +1,23 @@
 import React from "react";
+import { RootStackParamList } from '@/app/navigation/Navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
 import { Text, Pressable, GestureResponderEvent, View } from "react-native";
 import { Card } from "react-native-paper";
 import styles from "./CafeCard.style";
 
-import { RootStackParamList } from '@/app/navigation/navigation';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-
-const CafeCard = ({id, cafeName, cafeRating, whatToOffer,}: {
+const CafeCard = ({id, cafeName, cafeRating, whatToOffer}: {
   id: number;
   cafeName: string;
   cafeRating: string;
   whatToOffer: string;
-  onPress?: (id: number) => void;
 }) => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   
   const handlePress = (e: GestureResponderEvent) => {
-    navigation.navigate('CafesScreen');
+    navigation.navigate('CafeDetailScreen', {cafeId: id});
   };
 
   return (
