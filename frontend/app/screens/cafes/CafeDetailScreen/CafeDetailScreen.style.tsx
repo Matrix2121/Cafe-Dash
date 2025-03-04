@@ -17,7 +17,16 @@ const styles = StyleSheet.create({
     detail: {
       fontSize: 14,
       marginBottom: 4
-    }
+    },
+    section: {
+      marginBottom: 24,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      marginBottom: 8,
+      color: '#333',
+    },
   });
 
 export default styles

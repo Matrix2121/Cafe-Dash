@@ -30,7 +30,17 @@ const useCafes = () => {
     fetchCafes();
   }, []);
 
-  return { cafes, loading, error };
+  const fetchCafeById = async (id: number) => {
+    try {
+      const response = await api.get(`/cafes/${id}`);
+      return response.data;
+    } catch (err) {
+      setError('Failed to fetch cafe details');
+      return null;
+    }
+  };
+
+  return { cafes, loading, error, fetchCafeById };
 };
 
 export default useCafes;
