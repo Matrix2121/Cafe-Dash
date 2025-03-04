@@ -13,20 +13,8 @@ export type RootStackParamList = {
   RegisterScren: undefined;
   MainHubScreen: undefined;
   CafesListScreen: undefined;
-  CafeDetailScreen: { cafe: CafeDetails };
+  CafeDetailScreen: { cafeId: number };
   TestScreen: undefined;
-};
-
-export type CafeDetails = {
-  id: number;
-  name: string;
-  description: string;
-  openingHours: string;
-  address: string;
-  phone: string;
-  rating: number;
-  reviewCount: number;
-  specialties: string[];
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
