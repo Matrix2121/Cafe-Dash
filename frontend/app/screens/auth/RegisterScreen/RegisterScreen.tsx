@@ -15,7 +15,7 @@ const RegisterScreen = () => {
       <Text style={styles.title}>Register Screen</Text>
       <Button
         mode="contained"
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('LoginScreen')}
         style={styles.button}
         theme={{ colors: { primary: '#774936' } }}
       >

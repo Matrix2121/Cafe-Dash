@@ -1,17 +1,20 @@
 import React from 'react';
-import { RootStackParamList } from '@/app/navigation/Navigation';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-
-import { FlatList, View } from 'react-native';
+import { View, ActivityIndicator, Text } from 'react-native';
+import { FlatList } from 'react-native-gesture-handler';
 import CafeCard from '../../../components/CafeCard/CafeCard';
+import useCafes from '../../../hooks/useCafes';
 
-  const cafes = [
-    { id: 1, cafeName: "Zad ftori", cafeRating: "5.0 (23)", whatToOffer: "Coffee, Sandwiches" },
-    { id: 2, cafeName: "Coffee Corner", cafeRating: "4.5 (15)", whatToOffer: "Coffee, Pastries" },
-  ];
+const CafesListScreen = () => {
+  const { cafes, loading, error } = useCafes();
 
-const CafeScreen = () => {
+  if (loading) {
+    return <ActivityIndicator size="large" />;
+  }
+
+  if (error) {
+    return <Text>{error}</Text>;
+  }
+
   return (
     <View>
       <FlatList
@@ -19,15 +22,15 @@ const CafeScreen = () => {
         renderItem={({ item }) => (
           <CafeCard
             id={item.id}
-            cafeName={item.cafeName}
-            cafeRating={item.cafeRating}
-            whatToOffer={item.whatToOffer}
+            name={item.name}
+            rating={item.rating}
+            reviewCount={item.reviewCount}
+            specialties={item.specialties}
           />
         )}
-        keyExtractor={(item) => item.id.toString()}
       />
     </View>
   );
 };
 
-export default CafeScreen;
+export default CafesListScreen;

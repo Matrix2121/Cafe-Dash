@@ -8,8 +8,16 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 24,
       fontWeight: 'bold',
-      marginBottom: 16,
+      marginBottom: 8,
     },
+    description: {
+      fontSize: 16,
+      marginBottom: 12 
+    },
+    detail: {
+      fontSize: 14,
+      marginBottom: 4
+    }
   });
 
 export default styles

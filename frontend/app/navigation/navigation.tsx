@@ -6,10 +6,11 @@ import TestScreen from '../screens/test/TestScreen';
 import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
 import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
 import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
+import ProtectedRoute from './ProtectedRoute';
 
 export type RootStackParamList = {
-  Login: undefined;
-  Register: undefined;
+  LoginScreen: undefined;
+  RegisterScren: undefined;
   MainHubScreen: undefined;
   CafesListScreen: undefined;
   CafeDetailScreen: { cafeId: number };
@@ -22,26 +23,30 @@ const Navigation = () => {
   return (
       <Stack.Navigator>
         <Stack.Screen
-          name="Login"
+          name="LoginScreen"
           component={LoginScreen}
           options={{ headerShown: false }}
         />
 
         <Stack.Screen
-          name="Register"
+          name="RegisterScren"
           component={RegisterScreen}
           options={{ title: 'Sign Up' }}
         />
         
-        <Stack.Screen
+        <Stack.Screen 
           name="MainHubScreen"
-          component={MainHubScreen}
-          options={{ headerShown: false }}
-        />
+          options={{ headerShown: false }}>
+          {() => (
+            <ProtectedRoute>
+              <MainHubScreen />
+            </ProtectedRoute>
+          )}
+        </Stack.Screen>
         
         <Stack.Screen
           name="TestScreen"
-          component={TestScreen}
+          component={MainHubScreen}
         />
 
         <Stack.Screen

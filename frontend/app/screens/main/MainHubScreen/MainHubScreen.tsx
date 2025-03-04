@@ -1,14 +1,14 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { View, StyleSheet, Image, Text } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import CafeScreen from '../../cafes/CafeListScreen/CafesListScreen';
-import OrderScreen from '../../orders/CartScreen/CartScreen';
+import CafeListScreen from '../../cafes/CafeListScreen/CafesListScreen';
+import CartScreen from '../../orders/CartScreen/CartScreen';
 import styles from './MainHubScreen.style'
 
 const Tab = createBottomTabNavigator();
 
-const MainMenu = () => {
+const MainHubScreen = () => {
   return (
     <>
       {/* Top Navigation Bar */}
@@ -34,7 +34,7 @@ const MainMenu = () => {
       >
         <Tab.Screen 
           name="Cafes" 
-          component={CafeScreen}
+          component={CafeListScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="local-cafe" size={24} color={color} />
@@ -42,8 +42,8 @@ const MainMenu = () => {
           }}
         />
         <Tab.Screen 
-          name="Order" 
-          component={OrderScreen}
+          name="Cart" 
+          component={CartScreen}
           options={{
             tabBarIcon: ({ color }) => (
               <MaterialIcons name="shopping-cart" size={24} color={color} />
@@ -55,4 +55,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+export default MainHubScreen;

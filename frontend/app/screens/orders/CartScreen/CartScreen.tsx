@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { List } from 'react-native-paper';
 import styles from './CartScreen.styles';
 
-const OrderScreen = () => {
+const CartScreen = () => {
   return (
     <View style={styles.container}>
       <List.Section>
@@ -26,4 +26,4 @@ const OrderScreen = () => {
   );
 };
 
-export default OrderScreen;
+export default CartScreen;
