@@ -21,29 +21,11 @@ type CafeDetails = {
 };
 
 const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
-  const { cafeId } = route.params;
-  const [cafe, setCafe] = useState<CafeDetails | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { cafe } = route.params; // Extract dummy data from route params
 
-  useEffect(() => {
-    const fetchCafeDetails = async () => {
-      try {
-        const response = await api.get(`/cafes/${cafeId}`);
-        setCafe(response.data);
-      } catch (err) {
-        setError('Failed to fetch cafe details');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCafeDetails();
-  }, [cafeId]);
-
-  if (loading) return <ActivityIndicator size="large" />;
-  if (error) return <Text>{error}</Text>;
-  if (!cafe) return null;
+  if (!cafe) {
+    return <Text>No cafe data found.</Text>;
+  }
 
   // Organize cafe details into sections
   const sections = [
