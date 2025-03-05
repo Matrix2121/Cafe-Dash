@@ -13,7 +13,8 @@ export type RootStackParamList = {
   RegisterScren: undefined;
   MainHubScreen: undefined;
   CafesListScreen: undefined;
-  CafeDetailScreen: { cafeId: number };
+  CafeDetailScreen: undefined;
+  CafeMenuScreen: undefined;
   TestScreen: undefined;
 };
 

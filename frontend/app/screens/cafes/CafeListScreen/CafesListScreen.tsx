@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, ActivityIndicator, Text } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View, ActivityIndicator, Text, FlatList } from 'react-native';
 import CafeCard from '../../../components/CafeCard/CafeCard';
 import useCafes from '../../../hooks/useCafes';
 

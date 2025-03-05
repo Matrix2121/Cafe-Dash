@@ -1,3 +1,4 @@
+// src/screens/test/TestScreen.tsx
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -9,8 +10,12 @@ import styles from './TestScreen.style';
 const TestScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const handlePress = () => {
-    navigation.navigate('CafeDetailScreen', {cafeId: 1});
+  const handleDetailPress = () => {
+    navigation.navigate('CafeDetailScreen');
+  };
+
+  const handleMenuPress = () => {
+    navigation.navigate('CafeMenuScreen');
   };
 
   return (

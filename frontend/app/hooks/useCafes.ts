@@ -1,14 +1,7 @@
 // src/hooks/useCafes.ts
 import { useState, useEffect } from 'react';
 import api from '../services/apiClient';
-
-export type Cafe = {
-  id: number;
-  name: string;
-  rating: number;
-  reviewCount: number;
-  specialties: string[];
-};
+import {Cafe} from '../types/item';
 
 const useCafes = () => {
   const [cafes, setCafes] = useState<Cafe[]>([]);
