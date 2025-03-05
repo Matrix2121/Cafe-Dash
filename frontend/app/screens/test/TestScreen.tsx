@@ -22,7 +22,7 @@ const TestScreen = () => {
     <View>
         <Pressable 
         style={styles.testButton} 
-        onPress={handlePress}/>
+        onPress={handleMenuPress}/>
     </View>
   );
 };

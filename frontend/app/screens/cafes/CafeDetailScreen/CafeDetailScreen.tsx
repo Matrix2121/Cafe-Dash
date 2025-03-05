@@ -21,7 +21,6 @@ type CafeDetails = {
 };
 
 const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
-  const { cafeId } = route.params;
   const [cafe, setCafe] = useState<CafeDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -29,7 +28,7 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
   useEffect(() => {
     const fetchCafeDetails = async () => {
       try {
-        const response = await api.get(`/cafes/${cafeId}`);
+        const response = await api.get(`/cafes/`);
         setCafe(response.data);
       } catch (err) {
         setError('Failed to fetch cafe details');
@@ -39,7 +38,7 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
     };
 
     fetchCafeDetails();
-  }, [cafeId]);
+  }, []);
 
   if (loading) return <ActivityIndicator size="large" />;
   if (error) return <Text>{error}</Text>;

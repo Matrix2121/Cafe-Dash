@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, FlatList } from 'react-native';
-import CafeCard from '../../../components/CafeCard/CafeCard';
+import CafeCard from '../../../components/CafeCard/cafeCard';
 import useCafes from '../../../hooks/useCafes';
 
 const CafesListScreen = () => {

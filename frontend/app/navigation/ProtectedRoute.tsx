@@ -1,11 +1,11 @@
 // src/navigation/ProtectedRoute.tsx
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../navigation/Navigation';
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "./Navigation";
 
-import { useAuth } from '../context/AuthContext';
-import { ActivityIndicator, View } from 'react-native';
+import { useAuth } from "../context/AuthContext";
+import { ActivityIndicator, View } from "react-native";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();

@@ -39,7 +39,7 @@ const LoginScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../../assets/images/login-background.jpg')}
+      source={require('../../../assets/images/login-background.jpg')}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView
@@ -54,7 +54,7 @@ const LoginScreen = () => {
             <Text style={styles.testButtonText}>Test Area</Text>
           </Pressable>
 
-          <Image source={require('../../../../assets/images/logo.png')} style={styles.logo}/>
+          <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
           <Text style={styles.title}>Welcome to Cafe-Dash</Text>
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}

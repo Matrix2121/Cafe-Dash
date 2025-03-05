@@ -19,7 +19,7 @@ const CafeCard = ({ id, name, rating, reviewCount, specialties }: Props) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
-    <Pressable onPress={() => navigation.navigate('CafeDetailScreen', { cafeId: id })}>
+    <Pressable onPress={() => navigation.navigate('CafeDetailScreen')}>
       <Card style={styles.cardStyle}>
         <Card.Content>
           <Text style={styles.titleStyle}>{name}</Text>

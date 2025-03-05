@@ -1,7 +1,7 @@
 // src/hooks/useCafes.ts
 import { useState, useEffect } from 'react';
 import api from '../services/apiClient';
-import {Cafe} from '../types/item';
+import { Cafe } from '../types/items';
 
 const useCafes = () => {
   const [cafes, setCafes] = useState<Cafe[]>([]);
