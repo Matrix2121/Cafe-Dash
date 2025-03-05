@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '@/app/navigation/Navigation';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-import api from '../../../services/apiClient';
-import CafeItem from '../../../components/CafeItem/CafeItem';
-import styles from './CafeDetailScreen.style';
+import React, { useEffect, useState } from "react";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
+import api from "../../../services/apiClient";
+import CafeItem from "../../../components/ItemCard/ItemCard";
+import styles from "./CafeDetailScreen.style";
 
-type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
+type CafeDetailRouteProp = RouteProp<RootStackParamList, "CafeDetailScreen">;
 
 type CafeDetails = {
   id: number;
@@ -30,24 +36,24 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
   // Organize cafe details into sections
   const sections = [
     {
-      title: 'General Information',
+      title: "General Information",
       data: [
-        { label: 'Description', value: cafe.description },
-        { label: 'Opening Hours', value: cafe.openingHours },
-        { label: 'Address', value: cafe.address },
-        { label: 'Phone', value: cafe.phone },
+        { label: "Description", value: cafe.description },
+        { label: "Opening Hours", value: cafe.openingHours },
+        { label: "Address", value: cafe.address },
+        { label: "Phone", value: cafe.phone },
       ],
     },
     {
-      title: 'Ratings & Reviews',
+      title: "Ratings & Reviews",
       data: [
-        { label: 'Rating', value: `${cafe.rating} ⭐` },
-        { label: 'Reviews', value: `${cafe.reviewCount} reviews` },
+        { label: "Rating", value: `${cafe.rating} ⭐` },
+        { label: "Reviews", value: `${cafe.reviewCount} reviews` },
       ],
     },
     {
-      title: 'Specialties',
-      data: [{ label: 'Specialties', value: cafe.specialties.join(', ') }],
+      title: "Specialties",
+      data: [{ label: "Specialties", value: cafe.specialties.join(", ") }],
     },
   ];
 

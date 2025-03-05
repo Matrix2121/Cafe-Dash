@@ -6,6 +6,7 @@ import TestScreen from '../screens/test/TestScreen';
 import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
 import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
 import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
+import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen'
 import ProtectedRoute from './ProtectedRoute';
 
 export type RootStackParamList = {
@@ -14,6 +15,7 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   CafesListScreen: undefined;
   CafeDetailScreen: { cafe: CafeDetails };
+  CafeMenuScreen: undefined;
   TestScreen: undefined;
 };
 
@@ -69,6 +71,11 @@ const Navigation = () => {
         <Stack.Screen
           name ="CafeDetailScreen"
           component={CafeDetailScreen}
+        />
+
+        <Stack.Screen
+          name ="CafeMenuScreen"
+          component={CafeMenuScreen}
         />
       </Stack.Navigator>
   );
