@@ -22,9 +22,7 @@ const ItemCard = ( {item} : ItemCardProps) => {
       <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
         <Text style={styles.addButtonText}>+</Text>
       </TouchableOpacity>
-
       <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.productType}>{item.productType}</Text>
       <Text style={styles.price}>${item.price.toFixed(2)}</Text>
     </View>
   );

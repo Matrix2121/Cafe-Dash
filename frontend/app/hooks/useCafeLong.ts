@@ -42,7 +42,7 @@ const useCafeLong = (id: number) => {
                 setError(null);
                 setLoading(false);
             }, 1000);
-//MockData stop
+//MockData end
 
 
     }, [id]);

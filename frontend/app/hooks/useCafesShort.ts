@@ -25,7 +25,7 @@ const useCafesShort = () => {
     // fetchCafesShort();
 
 
-
+//MockData start
     setLoading(true);
 
     setTimeout(() => {
@@ -45,7 +45,7 @@ const useCafesShort = () => {
       setError(null);
       setLoading(false);
     }, 1000);
-
+//MockData end
 
 
 

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3, // For Android
-    width: '48%', // Make cards smaller to fit more on the screen
+    width: '100%', // Make cards smaller to fit more on the screen
   },
   addButton: {
     position: 'absolute',
@@ -29,6 +29,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF', // surface (white text)
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center', // Ensures text is horizontally centered
+    marginBottom: 3,
   },
   name: {
     fontSize: 16, // Smaller font size
