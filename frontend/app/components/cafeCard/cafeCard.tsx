@@ -3,32 +3,27 @@ import { RootStackParamList } from '@/app/navigation/Navigation';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-import { Text, Pressable } from "react-native";
+import { CafeShort } from "@/app/types/items";
+import { Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
 import styles from "./CafeCard.style";
 
-type Props = {
-  id: number;
-  name: string;
-  rating: number;
-  reviewCount: number;
-  specialties: string[];
-};
-
-const CafeCard = ({ id, name, rating, reviewCount, specialties }: Props) => {
+const CafeCard = ({ id, name, location, rating, reviewCount }: CafeShort) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
-    <Pressable onPress={() => navigation.navigate('CafeDetailScreen')}>
+    <Pressable onPress={() => navigation.navigate('CafeDetailScreen', {id})}>
       <Card style={styles.cardStyle}>
         <Card.Content>
           <Text style={styles.titleStyle}>{name}</Text>
-          <Text style={styles.ratingStyle}>
-            ⭐ {rating} ({reviewCount} reviews)
-          </Text>
-          <Text style={styles.titleStyle}>
-            {specialties.join(', ')}
-          </Text>
+          <View style={styles.ratingLocationStyle}>
+            <Text style={styles.locationStyle}>
+              {location}
+            </Text>
+            <Text style={styles.ratingStyle}>
+              ⭐ {rating} ({reviewCount} reviews)
+            </Text>
+          </View>
         </Card.Content>
       </Card>
     </Pressable>

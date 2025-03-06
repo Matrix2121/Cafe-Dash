@@ -1,82 +1,72 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import {ActivityIndicator} from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/app/navigation/Navigation';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-import api from '../../../services/apiClient';
-import CafeItem from '../../../components/CafeItem/CafeItem';
+import { View, Text, ScrollView } from 'react-native';
 import styles from './CafeDetailScreen.style';
+import useCafeLong from '@/app/hooks/useCafeLong';
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
 
-type CafeDetails = {
-  id: number;
-  name: string;
-  description: string;
-  openingHours: string;
-  address: string;
-  phone: string;
-  rating: number;
-  reviewCount: number;
-  specialties: string[];
-};
-
 const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
-  const [cafe, setCafe] = useState<CafeDetails | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { id } = route.params;
+  const { cafeLong, loading, error } = useCafeLong(id);
 
-  useEffect(() => {
-    const fetchCafeDetails = async () => {
-      try {
-        const response = await api.get(`/cafes/`);
-        setCafe(response.data);
-      } catch (err) {
-        setError('Failed to fetch cafe details');
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#444444" />
+        <Text>Loading cafe details...</Text>
+      </View>
+    );
+  }
 
-    fetchCafeDetails();
-  }, []);
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
 
-  if (loading) return <ActivityIndicator size="large" />;
-  if (error) return <Text>{error}</Text>;
-  if (!cafe) return null;
-
-  // Organize cafe details into sections
+  if (!cafeLong) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>No cafe data available.</Text>
+      </View>
+    );
+  }
+  
   const sections = [
     {
       title: 'General Information',
       data: [
-        { label: 'Description', value: cafe.description },
-        { label: 'Opening Hours', value: cafe.openingHours },
-        { label: 'Address', value: cafe.address },
-        { label: 'Phone', value: cafe.phone },
+        { label: 'Opening Hours', value: cafeLong.openingHours },
+        { label: 'Address', value: cafeLong.location },
+        { label: 'Phone', value: cafeLong.phone },
       ],
     },
     {
       title: 'Ratings & Reviews',
       data: [
-        { label: 'Rating', value: `${cafe.rating} ⭐` },
-        { label: 'Reviews', value: `${cafe.reviewCount} reviews` },
+        { label: 'Rating', value: `${cafeLong.rating} ⭐` },
+        { label: 'Reviews', value: `${cafeLong.reviewCount} reviews` },
       ],
-    },
-    {
-      title: 'Specialties',
-      data: [{ label: 'Specialties', value: cafe.specialties.join(', ') }],
     },
   ];
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{cafe.name}</Text>
+      <Text style={styles.title}>{cafeLong.name}</Text>
 
       {sections.map((section, index) => (
         <View key={index} style={styles.section}>
           <Text style={styles.sectionTitle}>{section.title}</Text>
           {section.data.map((item, idx) => (
-            <CafeItem key={idx} label={item.label} value={item.value} />
+            <View key={idx} style={styles.itemContainer}>
+              <Text style={styles.label}>{item.label}</Text>
+              <Text style={styles.value}>{item.value}</Text>
+            </View>
           ))}
         </View>
       ))}

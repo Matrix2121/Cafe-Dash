@@ -1,33 +1,30 @@
 // src/types/item.ts
-export type Item = {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    category: string;
-  };
-  
-  export type CartItem = {
-    itemId: number;
-    quantity: number;
-  };
-  
-  export type Cafe = {
-    id: number;
-    name: string;
-    rating: number;
-    reviewCount: number;
-    specialties: string[];
-  };
-  
-  export type CafeDetails = {
-    id: number;
-    name: string;
-    description: string;
-    openingHours: string;
-    address: string;
-    phone: string;
-    rating: number;
-    reviewCount: number;
-    specialties: string[];
-  };
+export type CafeLong = {
+  id: number;
+  name: string;
+  location: string;
+  rating: number;
+  reviewCount: number;
+  phone: string;
+  openingHours: string;
+};
+
+export type CafeShort = {
+  id: number;
+  name: string;
+  location: string;
+  rating: number;
+  reviewCount: number;
+};
+
+export type Product = {
+  id: number;
+  name: string;
+  price: number;
+  productType: string;
+};
+
+// export type CartItem = {
+//   itemId: number;
+//   quantity: number;
+// };

@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginBottom: 4, // Smaller margin
     color: '#333333', // textPrimary
   },
-  category: {
+  productType: {
     fontSize: 12, // Smaller font size
     color: '#777777', // textSecondary
     marginBottom: 8, // Smaller margin

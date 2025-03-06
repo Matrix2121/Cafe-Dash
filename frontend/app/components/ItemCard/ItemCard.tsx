@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Item } from '../../types/items';
+import { Product } from '../../types/items';
 import styles from './ItemCard.style';
 
 type ItemCardProps = {
-  item: Item;
+  item: Product;
 };
 
 const ItemCard = ( {item} : ItemCardProps) => {
@@ -24,8 +24,7 @@ const ItemCard = ( {item} : ItemCardProps) => {
       </TouchableOpacity>
 
       <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.category}>{item.category}</Text>
-      <Text style={styles.description}>{item.description}</Text>
+      <Text style={styles.productType}>{item.productType}</Text>
       <Text style={styles.price}>${item.price.toFixed(2)}</Text>
     </View>
   );

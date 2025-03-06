@@ -1,30 +1,48 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, FlatList } from 'react-native';
-import CafeCard from '../../../components/CafeCard/cafeCard';
-import useCafes from '../../../hooks/useCafes';
+import CafeCard from '../../../components/CafeCard/CafeCard';
+import useCafesShort from '../../../hooks/useCafesShort';
+import styles from './CafesListScreen.style'
 
 const CafesListScreen = () => {
-  const { cafes, loading, error } = useCafes();
+  const { cafesShort, loading, error } = useCafesShort();
 
   if (loading) {
-    return <ActivityIndicator size="large" />;
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#444444" />
+        <Text>Loading cafe details...</Text>
+      </View>
+    );
   }
 
   if (error) {
-    return <Text>{error}</Text>;
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>{error}</Text>
+      </View>
+    );
+  }
+
+  if (!cafesShort) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>No cafe data available.</Text>
+      </View>
+    );
   }
 
   return (
     <View>
       <FlatList
-        data={cafes}
+        data={cafesShort}
         renderItem={({ item }) => (
           <CafeCard
             id={item.id}
             name={item.name}
+            location={item.location}
             rating={item.rating}
             reviewCount={item.reviewCount}
-            specialties={item.specialties}
           />
         )}
       />

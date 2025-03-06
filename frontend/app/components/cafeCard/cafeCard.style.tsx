@@ -1,39 +1,38 @@
 import { StyleSheet } from "react-native";
+import { theme } from "@/app/theme/theme";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   cardStyle: {
-    margin: 10,
-    borderRadius: 10,
-    overflow: "hidden",
-    backgroundColor: "#FFFFFF", // Add a background color
-    elevation: 3, // Add shadow for Android
-    shadowColor: "#000", // Add shadow for iOS
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
+    marginVertical: theme.spacing.sm,
+    padding: theme.spacing.md,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-  },
-  imageStyle: {
-    height: 150,
-    resizeMode: "cover", // Ensure the image covers the area
+    elevation: 3, // For Android shadow
   },
   titleStyle: {
-    fontSize: 18,
+    fontSize: theme.fontSizes.title,
     fontWeight: "bold",
-    color: "#333",
-    marginBottom: 5,
-    marginTop: 4,
+    color: theme.colors.textPrimary,
+    marginBottom: theme.spacing.xs,
   },
   ratingStyle: {
-    color: "#777", // Add a color for the rating text
-    fontSize: 14,
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.textSecondary,
+    marginBottom: theme.spacing.xs,
   },
-  whatToOfferStyle: {
-    marginLeft: "auto", // Align to the right
-    color: "#777", // Add a color for the "what to offer" text
-    fontSize: 14,
+  locationStyle: {
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.textSecondary,
   },
-  topTextContainer: {
+  ratingLocationStyle: {
     flexDirection: "row",
-    alignItems: "center", // Align items vertically
-  },
+    alignItems: "center",
+    justifyContent: "space-between",
+  }
 });
+
+export default styles;

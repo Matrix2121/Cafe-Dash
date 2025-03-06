@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import api from '../services/apiClient';
-import { Item } from '../types/items';
+import { Product } from '../types/items';
 
-const useItem = () => {
-    const [items, setItems] = useState<Item[]>([]);
+const useProduct = () => {
+    const [items, setItems] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -25,4 +25,4 @@ const useItem = () => {
     return { items, loading, error };
 };
 
-export default useItem;
+export default useProduct;
