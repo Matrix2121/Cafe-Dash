@@ -15,7 +15,7 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   CafesListScreen: undefined;
   CafeDetailScreen: {id: number};
-  CafeMenuScreen: undefined;
+  CafeMenuScreen: {id: number};
   TestScreen: undefined;
 };
 

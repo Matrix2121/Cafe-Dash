@@ -6,8 +6,6 @@ import { RootStackParamList } from '../../navigation/Navigation';
 
 import { View, Pressable } from 'react-native';
 import styles from './TestScreen.style';
-import CafeCard from '@/app/components/CafeCard/CafeCard';
-import ItemCard from '@/app/components/ItemCard/ItemCard';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
@@ -19,7 +17,7 @@ const TestScreen = () => {
   };
 
   const handleMenuPress = () => {
-    navigation.navigate('CafeMenuScreen');
+    navigation.navigate('CafeMenuScreen', {id: 1});
   };
 
   const handleListPress = () => {
@@ -29,13 +27,6 @@ const TestScreen = () => {
   const handleHubPress = () => {
     navigation.navigate('MainHubScreen')
   }
-
-  const item = {
-    id: 1,
-    name: 'latte',
-    price: 5,
-    productType: "DRINKABLE",
-  };
 
   return (
     <ScrollView>
@@ -56,32 +47,6 @@ const TestScreen = () => {
             style={styles.testButton} 
             onPress={handleHubPress}/>
           
-          <CafeCard
-            id={1}
-            name={"asd"}
-            location='lokaciq 2'
-            rating={4.2}
-            reviewCount={123}/>
-
-          <CafeCard
-            id={1}
-            name={"dasd"}
-            location='lokaciq 1'
-            rating={2}
-            reviewCount={31}/>
-
-          <ItemCard
-            item={item}/>
-
-          <ItemCard
-            item={item}/>
-
-          <ItemCard
-            item={item}/>
-
-          <ItemCard
-            item={item}/>
-
       </View>
     </ScrollView>
   );
