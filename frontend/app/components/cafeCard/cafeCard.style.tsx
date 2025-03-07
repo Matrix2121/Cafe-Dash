@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.md,
     marginVertical: theme.spacing.sm,
-    padding: theme.spacing.md,
+    padding: theme.spacing.xs,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',        // Full width of container
-    height: 200,          // Fixed height for consistency
+    height: 130,          // Fixed height for consistency
     borderRadius: 8,      // Match your card border radius
     marginBottom: 16,     // Space between image and content
     backgroundColor: '#CECECC', // Secondary color for loading state
@@ -44,6 +44,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,         // Android shadow
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA', // background color
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F8F9FA', // background color
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#777777', // textSecondary
   },
 });
 

@@ -41,6 +41,18 @@ const useCafesShort = () => {
         location: "pred ftori",
         rating: 3.9,
         reviewCount: 12,
+      },{
+        id: 3,
+        name: "cafene3",
+        location: "zad ftori",
+        rating: 3.4,
+        reviewCount: 32,
+      },{
+        id: 4,
+        name: "cafene4",
+        location: "pred ftori",
+        rating: 3.9,
+        reviewCount: 12,
       }]);
       setError(null);
       setLoading(false);

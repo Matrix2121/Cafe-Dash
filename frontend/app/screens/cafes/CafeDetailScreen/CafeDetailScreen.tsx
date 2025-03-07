@@ -1,18 +1,20 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import { ActivityIndicator, Image } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './CafeDetailScreen.style';
 import useCafeLong from '@/app/hooks/useCafeLong';
+import useCafeImage from '@/app/hooks/useCafeImage';
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
 
 const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
   const { id } = route.params;
   const { cafeLong, loading, error } = useCafeLong(id);
+  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(id);
 
-  if (loading) {
+  if (loading || loadingImage) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#444444" />
@@ -21,15 +23,17 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
     );
   }
 
-  if (error) {
+  if (error || errorImage) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{error}</Text>
+        <Text style={styles.errorText}>
+          {error || errorImage || 'Failed to load cafe data'}
+        </Text>
       </View>
     );
   }
 
-  if (!cafeLong) {
+  if (!cafeLong || !imageUrl) {
     return (
       <View style={styles.errorContainer}>
         <Text style={styles.errorText}>No cafe data available.</Text>
@@ -58,7 +62,12 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{cafeLong.name}</Text>
-
+      <Image
+        source={imageUrl}
+        style={styles.headerImage}
+        resizeMode="cover"
+        onError={() => console.log('Error loading image')}
+      />
       {sections.map((section, index) => (
         <View key={index} style={styles.section}>
           <Text style={styles.sectionTitle}>{section.title}</Text>

@@ -3,6 +3,7 @@ import { View, ActivityIndicator, Text, FlatList } from 'react-native';
 import CafeCard from '../../../components/CafeCard/CafeCard';
 import useCafesShort from '../../../hooks/useCafesShort';
 import styles from './CafesListScreen.style'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const CafesListScreen = () => {
   const { cafesShort, loading, error } = useCafesShort();
@@ -33,20 +34,22 @@ const CafesListScreen = () => {
   }
 
   return (
-    <View>
-      <FlatList
-        data={cafesShort}
-        renderItem={({ item }) => (
-          <CafeCard
-            id={item.id}
-            name={item.name}
-            location={item.location}
-            rating={item.rating}
-            reviewCount={item.reviewCount}
-          />
-        )}
-      />
-    </View>
+    <ScrollView style={styles.mainContainer}>
+      <View>
+        <FlatList
+          data={cafesShort}
+          renderItem={({ item }) => (
+            <CafeCard
+              id={item.id}
+              name={item.name}
+              location={item.location}
+              rating={item.rating}
+              reviewCount={item.reviewCount}
+            />
+          )}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
