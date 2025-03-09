@@ -1,6 +1,6 @@
 package com.cafe.backend.enums;
 
-public enum UserType {
+public enum UserTypeEnum {
     ADMIN,
     CUSTOMER,
     CLIENT,

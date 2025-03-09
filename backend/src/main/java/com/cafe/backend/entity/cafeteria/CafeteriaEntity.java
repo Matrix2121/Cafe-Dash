@@ -1,7 +1,7 @@
 package com.cafe.backend.entity.cafeteria;
 
-import com.cafe.backend.entity.product.Product;
-import com.cafe.backend.enums.CafeteriaDeliveryStatus;
+import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.enums.DeliveryStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Set;
@@ -18,7 +18,7 @@ import java.util.Set;
 @Data
 @Builder
 
-public abstract class Cafeteria {
+public abstract class CafeteriaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +39,7 @@ public abstract class Cafeteria {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_status", nullable = false)
-    private CafeteriaDeliveryStatus cafeteriaDeliveryStatus;
+    private DeliveryStatusEnum cafeteriaDeliveryStatus;
 
     @OneToMany
     @JoinTable(
@@ -47,12 +47,12 @@ public abstract class Cafeteria {
             joinColumns = @JoinColumn(name = "cafeteria_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> products;
+    private Set<ProductEntity> products;
 
-    public Cafeteria() {
+    public CafeteriaEntity() {
     }
 
-    public Cafeteria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
+    public CafeteriaEntity(Long id, String name, String location, double rating, String phone_number, DeliveryStatusEnum cafeteriaDeliveryStatus, Set<ProductEntity> products) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -63,7 +63,7 @@ public abstract class Cafeteria {
     }
 
     /**
-     * The abstract method {@code validateRating} must be handled in the subclasses of {@link Cafeteria}.
+     * The abstract method {@code validateRating} must be handled in the subclasses of {@link CafeteriaEntity}.
      */
     protected abstract void validateRating(double rating);
 

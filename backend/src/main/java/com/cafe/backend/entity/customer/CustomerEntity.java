@@ -1,14 +1,14 @@
 package com.cafe.backend.entity.customer;
 
-import com.cafe.backend.entity.account.UserAccount;
-import com.cafe.backend.entity.order.Order;
-import com.cafe.backend.enums.UserType;
+import com.cafe.backend.entity.account.UserAccountEntity;
+import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.enums.UserTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Set;
 
 /**
- * {@code Customer} is an entity class. Extends {@link UserAccount}.
+ * {@code Customer} is an entity class. Extends {@link UserAccountEntity}.
  * @author AngelStoynov
  */
 
@@ -17,7 +17,7 @@ import java.util.Set;
 @Entity
 @Builder
 
-public abstract class Customer extends UserAccount {
+public abstract class CustomerEntity extends UserAccountEntity {
 
     @Column(name = "balance")
     private double balance;
@@ -31,12 +31,12 @@ public abstract class Customer extends UserAccount {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
-    private Set<Order> orders;
+    private Set<OrderEntity> orders;
 
-    public Customer() {
+    public CustomerEntity() {
     }
 
-    public Customer(Long id, String username, String password, UserType userType, double balance, String phoneNumber, Set<Order> orders) {
+    public CustomerEntity(Long id, String username, String password, UserTypeEnum userType, double balance, String phoneNumber, Set<OrderEntity> orders) {
         super(id, username, password, userType);
         this.balance = balance;
         this.phoneNumber = phoneNumber;

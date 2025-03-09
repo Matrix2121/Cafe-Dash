@@ -1,6 +1,6 @@
 package com.cafe.backend.entity.product;
 
-import com.cafe.backend.enums.ProductType;
+import com.cafe.backend.enums.ProductTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 @Builder
 @Table(name = "product")
 
-public class Product {
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +34,12 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
-    private ProductType productType;
+    private ProductTypeEnum productType;
 
-    public Product() {
+    public ProductEntity() {
     }
 
-    public Product(Long id, String name, double price, int quantity, ProductType productType) {
+    public ProductEntity(Long id, String name, double price, int quantity, ProductTypeEnum productType) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -63,7 +63,7 @@ public class Product {
         return quantity;
     }
 
-    public ProductType getProductType() {
+    public ProductTypeEnum getProductType() {
         return productType;
     }
 
@@ -79,7 +79,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public void setProductType(ProductType productType) {
+    public void setProductType(ProductTypeEnum productType) {
         this.productType = productType;
     }
 }
