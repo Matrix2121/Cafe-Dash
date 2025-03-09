@@ -1,6 +1,6 @@
 package com.cafe.backend.entity.account;
 
-import com.cafe.backend.enums.UserType;
+import com.cafe.backend.enums.UserTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Collection;
@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "users")
 @Data
 
-public abstract class UserAccount {
+public abstract class UserAccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +31,12 @@ public abstract class UserAccount {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
-    private UserType userType;
+    private UserTypeEnum userType;
 
-    public UserAccount() {
+    public UserAccountEntity() {
     }
 
-    public UserAccount(Long id, String username, String password, UserType userType) {
+    public UserAccountEntity(Long id, String username, String password, UserTypeEnum userType) {
         this.id = id;
         this.username = username;
         this.password = password;

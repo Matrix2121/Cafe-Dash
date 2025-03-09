@@ -1,6 +1,6 @@
 package com.cafe.backend.dto;
 
-import com.cafe.backend.enums.UserType;
+import com.cafe.backend.enums.UserTypeEnum;
 
 /**
  * @author AngelStoynov
@@ -8,5 +8,5 @@ import com.cafe.backend.enums.UserType;
 public record UserAccountDTO(
     String username,
     String password,
-    UserType userType
+    UserTypeEnum userType
 ) { }

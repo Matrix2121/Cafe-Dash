@@ -1,6 +1,6 @@
 package com.cafe.backend.dto;
 
-import com.cafe.backend.enums.OrderStatus;
+import com.cafe.backend.enums.OrderStatusEnum;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -11,7 +11,7 @@ public record OrderDTO(
         Double amount,
         int discount,
         LocalDateTime expectedDelivery,
-        OrderStatus orderStatus,
+        OrderStatusEnum orderStatus,
         int tip,
         CafeteriaDTO cafeteria,
         Set<ProductDTO> products

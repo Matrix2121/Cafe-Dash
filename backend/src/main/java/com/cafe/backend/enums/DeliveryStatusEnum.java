@@ -1,6 +1,6 @@
 package com.cafe.backend.enums;
 
-public enum CafeteriaDeliveryStatus {
+public enum DeliveryStatusEnum {
     NO,
     CURRENTLY_UNAVAILABLE,
     HOME_DELIVERY,

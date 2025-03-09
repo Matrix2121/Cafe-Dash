@@ -1,6 +1,6 @@
 package com.cafe.backend.enums;
 
-public enum OrderStatus {
+public enum OrderStatusEnum {
     CANCELLED,
     PROCESSING,
     DELIVERED,

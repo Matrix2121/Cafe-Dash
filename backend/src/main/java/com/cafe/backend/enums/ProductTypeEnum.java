@@ -1,6 +1,6 @@
 package com.cafe.backend.enums;
 
-public enum ProductType {
+public enum ProductTypeEnum {
     PROMO,
     EDIBLE,
     DRINKABLE

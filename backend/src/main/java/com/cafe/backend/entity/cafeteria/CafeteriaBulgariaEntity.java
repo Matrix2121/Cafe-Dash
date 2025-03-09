@@ -1,14 +1,14 @@
 package com.cafe.backend.entity.cafeteria;
 
-import com.cafe.backend.entity.product.Product;
-import com.cafe.backend.enums.CafeteriaDeliveryStatus;
+import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.enums.DeliveryStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
 
 /**
- * {@code CafeteriaBulgarian} extends the base class {@link Cafeteria}.
+ * {@code CafeteriaBulgarian} extends the base class {@link CafeteriaEntity}.
  * The subclass is responsible for setting the rating for a specific country.
  * @author AngelStoynov
  */
@@ -17,15 +17,15 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("cafeteria_bulgaria")
 
-public class CafeteriaBulgaria extends Cafeteria {
+public class CafeteriaBulgariaEntity extends CafeteriaEntity {
     private static final double MIN_RATING = 0.0;
     private static final double MAX_RATING = 5.0;
 
-    public CafeteriaBulgaria() {
+    public CafeteriaBulgariaEntity() {
         super();
     }
 
-    public CafeteriaBulgaria(Long id, String name, String location, double rating, String phone_number, CafeteriaDeliveryStatus cafeteriaDeliveryStatus, Set<Product> products) {
+    public CafeteriaBulgariaEntity(Long id, String name, String location, double rating, String phone_number, DeliveryStatusEnum cafeteriaDeliveryStatus, Set<ProductEntity> products) {
         super(id, name, location, rating, phone_number, cafeteriaDeliveryStatus, products);
         setRating(rating);
     }
