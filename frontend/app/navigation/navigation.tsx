@@ -1,40 +1,71 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from '../screens/Login/LoginScreen';
-import RegisterScreen from '../screens/Register/RegisterScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from '../screens/auth/LoginScreen/LoginScreen';
+import RegisterScreen from '../screens/auth/RegisterScreen/RegisterScreen';
+import TestScreen from '../screens/test/TestScreen';
+import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
+import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
+import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
+import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen'
+import ProtectedRoute from './ProtectedRoute';
 
 export type RootStackParamList = {
-  Login: undefined;
-  Register: undefined;
+  LoginScreen: undefined;
+  RegisterScren: undefined;
+  MainHubScreen: undefined;
+  CafesListScreen: undefined;
+  CafeDetailScreen: {id: number};
+  CafeMenuScreen: {id: number};
+  TestScreen: undefined;
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Login"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#EDC4B3',
-        },
-        headerTintColor: '#774936',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}
-    >
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Register"
-        component={RegisterScreen}
-        options={{ title: 'Sign Up' }}
-      />
-    </Stack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen
+          name="RegisterScren"
+          component={RegisterScreen}
+          options={{ title: 'Sign Up' }}
+        />
+        
+        <Stack.Screen 
+          name="MainHubScreen"
+          options={{ headerShown: false }}>
+          {() => (
+            <ProtectedRoute>
+              <MainHubScreen />
+            </ProtectedRoute>
+          )}
+        </Stack.Screen>
+        
+        <Stack.Screen
+          name="TestScreen"
+          component={TestScreen}
+        />
+
+        <Stack.Screen
+          name="CafesListScreen"
+          component={CafesListScreen}
+        />
+
+        <Stack.Screen
+          name ="CafeDetailScreen"
+          component={CafeDetailScreen}
+        />
+
+        <Stack.Screen
+          name ="CafeMenuScreen"
+          component={CafeMenuScreen}
+        />
+      </Stack.Navigator>
   );
 };
 
