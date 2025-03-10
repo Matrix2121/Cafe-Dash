@@ -1,9 +1,12 @@
 package com.cafe.backend.controller;
 
 import com.cafe.backend.dto.ProductDTO;
+import com.cafe.backend.exception.BadRequestException;
+import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.ProductService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -17,35 +20,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
-
 public class ProductController {
-    private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
+    @Autowired private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) {
-        ProductDTO savedProduct = productService.createProduct(productDTO);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) throws BadRequestException {
+        return productService.createProduct(productDTO);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) {
-        ProductDTO productDTO = productService.getProductById(id);
-        return ResponseEntity.ok(productDTO);
+    @GetMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public ProductDTO getProductById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
+        return productService.getProductById(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() {
-        List<ProductDTO> products = productService.getAllProducts();
-        return ResponseEntity.ok(products);
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<ProductDTO> getAllProducts() throws BadRequestException, NotFoundException {
+        return productService.getAllProducts();
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO updatedProduct) {
-        ProductDTO product = productService.updateProduct(productId, updatedProduct);
-        return ResponseEntity.ok(product);
+    @PutMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO updatedProduct) throws BadRequestException, NotFoundException {
+        return productService.updateProduct(productId, updatedProduct);
     }
+    
+    
 }
