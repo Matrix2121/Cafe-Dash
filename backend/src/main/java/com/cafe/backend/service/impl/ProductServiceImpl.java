@@ -4,7 +4,6 @@ import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.mapper.ProductMapper;
 import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.BadRequestException;
-import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.ProductRepository;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * {@code ProductServiceImpl} is class that implements {@link ProductService}.

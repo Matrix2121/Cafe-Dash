@@ -21,6 +21,7 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("/api/products")
+
 public class ProductController {
     @Autowired private ProductService productService;
 
@@ -47,6 +48,4 @@ public class ProductController {
     public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO updatedProduct) throws BadRequestException, NotFoundException {
         return productService.updateProduct(productId, updatedProduct);
     }
-    
-    
 }

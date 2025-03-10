@@ -1,6 +1,8 @@
 package com.cafe.backend.service;
 
 import com.cafe.backend.dto.CafeteriaDTO;
+import com.cafe.backend.exception.BadRequestException;
+import com.cafe.backend.exception.NotFoundException;
 
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  * @author AngelStoynov
  */
 public interface CafeteriaService {
-    CafeteriaDTO getCafeteriaById(Long id);
-    List<CafeteriaDTO> getAllCafeterias();
-    CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO);
+    CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException;
+    CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException;
+    List<CafeteriaDTO> getAllCafeterias() throws NotFoundException, BadRequestException;
 }

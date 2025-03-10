@@ -29,17 +29,12 @@ public abstract class UserAccountEntity {
     @Column(name = "password", length = 120, nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type", nullable = false)
-    private UserTypeEnum userType;
-
     public UserAccountEntity() {
     }
 
-    public UserAccountEntity(Long id, String username, String password, UserTypeEnum userType) {
+    public UserAccountEntity(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.userType = userType;
     }
 }

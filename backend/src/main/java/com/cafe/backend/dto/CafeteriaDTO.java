@@ -9,6 +9,7 @@ import java.util.Set;
 public record CafeteriaDTO(
         Long id,
         String name,
+        String brand,
         String location,
         double rating,
         String phoneNumber,
