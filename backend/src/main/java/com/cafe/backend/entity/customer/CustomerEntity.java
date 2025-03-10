@@ -16,8 +16,10 @@ import java.util.Set;
 @Data
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
-public abstract class CustomerEntity extends UserAccountEntity {
+public class CustomerEntity extends UserAccountEntity {
 
     @Column(name = "balance")
     private double balance;
@@ -32,15 +34,4 @@ public abstract class CustomerEntity extends UserAccountEntity {
             inverseJoinColumns = @JoinColumn(name = "order_id")
     )
     private Set<OrderEntity> orders;
-
-    public CustomerEntity() {
-    }
-
-    public CustomerEntity(Long id, String username, String password, UserTypeEnum userType, double balance, String phoneNumber, Set<OrderEntity> orders) {
-        super(id, username, password, userType);
-        this.balance = balance;
-        this.phoneNumber = phoneNumber;
-        this.orders = orders;
-    }
-
 }

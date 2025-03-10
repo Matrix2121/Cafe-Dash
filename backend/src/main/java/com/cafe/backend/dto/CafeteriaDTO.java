@@ -7,7 +7,9 @@ import java.util.Set;
  * @author AngelStoynov
  */
 public record CafeteriaDTO(
+        Long id,
         String name,
+        String brand,
         String location,
         double rating,
         String phoneNumber,
