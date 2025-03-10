@@ -1,7 +1,7 @@
 package com.cafe.backend.entity.mapper;
 
 import com.cafe.backend.dto.ProductDTO;
-import com.cafe.backend.entity.product.Product;
+import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.DataMappingException;
 
 public class ProductMapper {
@@ -10,10 +10,7 @@ public class ProductMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static ProductDTO mapToProductDTO(Product product) {
-        if (product == null) {
-            throw new IllegalArgumentException("Product cannot be null.");
-        }
+    public static ProductDTO mapToProductDTO(ProductEntity product) throws DataMappingException {
         try{
             return new ProductDTO(
                     product.getId(),
@@ -27,9 +24,9 @@ public class ProductMapper {
         }
     }
 
-    public static Product mapToProduct(ProductDTO productDTO) {
+    public static ProductEntity mapToProduct(ProductDTO productDTO) throws DataMappingException {
         try{
-            return new Product(
+            return new ProductEntity(
                     productDTO.id(),
                     productDTO.name(),
                     productDTO.price(),

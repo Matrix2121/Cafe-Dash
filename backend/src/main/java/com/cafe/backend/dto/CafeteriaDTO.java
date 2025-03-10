@@ -1,6 +1,6 @@
 package com.cafe.backend.dto;
 
-import com.cafe.backend.enums.CafeteriaDeliveryStatus;
+import com.cafe.backend.enums.DeliveryStatusEnum;
 import java.util.Set;
 
 /**
@@ -12,6 +12,6 @@ public record CafeteriaDTO(
         String location,
         double rating,
         String phoneNumber,
-        CafeteriaDeliveryStatus cafeteriaDeliveryStatus,
+        DeliveryStatusEnum cafeteriaDeliveryStatus,
         Set<ProductDTO> products
 ) { }

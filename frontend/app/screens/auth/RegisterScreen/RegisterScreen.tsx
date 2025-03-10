@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../navigation/navigation';
-import styles from "./Register.style";
+import { RootStackParamList } from '../../../navigation/Navigation';
+
+import { View, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-paper';
+import styles from "./RegisterScreen.style";
 
 const RegisterScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -14,7 +15,7 @@ const RegisterScreen = () => {
       <Text style={styles.title}>Register Screen</Text>
       <Button
         mode="contained"
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('LoginScreen')}
         style={styles.button}
         theme={{ colors: { primary: '#774936' } }}
       >
