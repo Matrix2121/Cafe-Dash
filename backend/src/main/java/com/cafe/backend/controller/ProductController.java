@@ -7,7 +7,6 @@ import com.cafe.backend.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,27 +24,27 @@ public class ProductController {
     @Autowired private ProductService productService;
 
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO) throws BadRequestException {
-        ProductDTO savedProduct = productService.createProduct(productDTO);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public ProductDTO createProduct(@RequestBody ProductDTO productDTO) throws BadRequestException {
+        return productService.createProduct(productDTO);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDTO> getProductById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
-        ProductDTO productDTO = productService.getProductById(id);
-        return ResponseEntity.ok(productDTO);
+    @ResponseStatus(value = HttpStatus.OK)
+    public ProductDTO getProductById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
+        return productService.getProductById(id);
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDTO>> getAllProducts() throws BadRequestException, NotFoundException {
-        List<ProductDTO> products = productService.getAllProducts();
-        return ResponseEntity.ok(products);
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<ProductDTO> getAllProducts() throws BadRequestException, NotFoundException {
+        return productService.getAllProducts();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO updatedProduct) throws BadRequestException, NotFoundException {
-        ProductDTO product = productService.updateProduct(productId, updatedProduct);
-        return ResponseEntity.ok(product);
+    @ResponseStatus(value = HttpStatus.OK)
+    public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO updatedProduct) throws BadRequestException, NotFoundException {
+        return productService.updateProduct(productId, updatedProduct);
     }
     
     

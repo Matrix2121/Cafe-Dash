@@ -53,8 +53,7 @@ public class ProductServiceImpl implements ProductService {
         for(ProductEntity entity : products) {
         	results.add(ProductMapper.mapToProductDTO(entity));
         }
-        return results;
-        //        return products.stream().map(ProductMapper::mapToProductDTO).collect(Collectors.toList());
+        return results; 
     }
 
     @Override

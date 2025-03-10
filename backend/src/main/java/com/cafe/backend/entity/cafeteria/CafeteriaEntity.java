@@ -37,10 +37,6 @@ public abstract class CafeteriaEntity {
     @Column(name = "phone_number", nullable = false)
     private String phone_number;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "delivery_status", nullable = false)
-    private DeliveryStatusEnum cafeteriaDeliveryStatus;
-
     @OneToMany
     @JoinTable(
             name = "cafeteria_product",
@@ -58,7 +54,6 @@ public abstract class CafeteriaEntity {
         this.location = location;
         setRating(rating);
         this.phone_number = phone_number;
-        this.cafeteriaDeliveryStatus = cafeteriaDeliveryStatus;
         this.products = products;
     }
 
