@@ -32,7 +32,7 @@ public class CafeteriaController {
         return cafeteriaService.createCafeteria(cafeteriaDTO);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public CafeteriaDTO getCafeteriaById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
         return cafeteriaService.getCafeteriaById(id);
@@ -42,5 +42,11 @@ public class CafeteriaController {
     @ResponseStatus(value = HttpStatus.OK)
     public List<CafeteriaDTO> getAllCafeterias() throws BadRequestException, NotFoundException {
         return cafeteriaService.getAllCafeterias();
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public CafeteriaDTO updateCafeteria(@PathVariable("id") Long id, @RequestBody CafeteriaDTO updatedCafeteriaDTO) throws NotFoundException, BadRequestException {
+        return cafeteriaService.updateCafeteria(id, updatedCafeteriaDTO);
     }
 }

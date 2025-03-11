@@ -14,4 +14,5 @@ public interface CafeteriaService {
     CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException;
     CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException;
     List<CafeteriaDTO> getAllCafeterias() throws NotFoundException, BadRequestException;
+    CafeteriaDTO updateCafeteria(Long id, CafeteriaDTO cafeteriaDTO) throws NotFoundException, BadRequestException;
 }

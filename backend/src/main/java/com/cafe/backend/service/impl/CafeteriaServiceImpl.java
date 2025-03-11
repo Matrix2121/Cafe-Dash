@@ -28,8 +28,16 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     @Autowired private CafeteriaRepository cafeteriaRepository;
 
     @Override
+    public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
+        CafeteriaEntity cafeteria = CafeteriaMapper.mapToCafeteria(cafeteriaDTO);
+        CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
+        return CafeteriaMapper.mapToCafeteriaDTO(savedCafeteria);
+    }
+
+    @Override
     public CafeteriaDTO getCafeteriaById(Long id)  throws NotFoundException, BadRequestException {
-        CafeteriaEntity cafeteria = cafeteriaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
+        CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
         return CafeteriaMapper.mapToCafeteriaDTO(cafeteria);
     }
 
@@ -49,9 +57,20 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     }
 
     @Override
-    public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
-        CafeteriaEntity cafeteria = CafeteriaMapper.mapToCafeteria(cafeteriaDTO);
-        CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
-        return CafeteriaMapper.mapToCafeteriaDTO(savedCafeteria);
+    public CafeteriaDTO updateCafeteria(Long id, CafeteriaDTO cafeteriaDTO) throws NotFoundException, BadRequestException {
+        CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id:" + id));
+        CafeteriaEntity newUpdatedCafeteria = updateCafeteriaFields(cafeteriaDTO, cafeteria);
+        return CafeteriaMapper.mapToCafeteriaDTO(newUpdatedCafeteria);
+    }
+
+    private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {
+        cafeteria.setName(updatedCafeteria.name());
+        cafeteria.setBrand(updatedCafeteria.brand());
+        cafeteria.setLocation(updatedCafeteria.location());
+        cafeteria.setRating(updatedCafeteria.rating());
+        cafeteria.setDeliveryStatus(updatedCafeteria.cafeteriaDeliveryStatus());
+        cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber());
+        return cafeteriaRepository.save(cafeteria);
     }
 }
