@@ -38,6 +38,9 @@ public class CafeteriaEntity {
     @Column(name = "rating")
     private double rating;
 
+    @Column(name = "count_reviews")
+    private int countReview;
+
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
