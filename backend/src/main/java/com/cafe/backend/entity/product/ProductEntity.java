@@ -1,10 +1,9 @@
 package com.cafe.backend.entity.product;
 
+import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.enums.ProductTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 /**
  * {@code Product} is an entity class.
@@ -15,6 +14,10 @@ import java.util.Set;
 @Entity
 @Builder
 @Table(name = "product")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class ProductEntity {
 
@@ -36,50 +39,7 @@ public class ProductEntity {
     @Column(name = "type")
     private ProductTypeEnum productType;
 
-    public ProductEntity() {
-    }
-
-    public ProductEntity(Long id, String name, double price, int quantity, ProductTypeEnum productType) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.productType = productType;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public ProductTypeEnum getProductType() {
-        return productType;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setProductType(ProductTypeEnum productType) {
-        this.productType = productType;
-    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cafeteria_id", referencedColumnName = "id")
+    private CafeteriaEntity cafeteria;
 }

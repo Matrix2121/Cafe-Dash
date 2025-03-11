@@ -15,6 +15,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 
 public abstract class UserAccountEntity {
 
@@ -28,18 +30,4 @@ public abstract class UserAccountEntity {
 
     @Column(name = "password", length = 120, nullable = false)
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type", nullable = false)
-    private UserTypeEnum userType;
-
-    public UserAccountEntity() {
-    }
-
-    public UserAccountEntity(Long id, String username, String password, UserTypeEnum userType) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.userType = userType;
-    }
 }
