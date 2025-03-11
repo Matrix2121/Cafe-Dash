@@ -44,12 +44,4 @@ public class CafeteriaEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_status", nullable = false)
     private DeliveryStatusEnum deliveryStatus;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "cafeteria_product",
-            joinColumns = @JoinColumn(name = "cafeteria_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<ProductEntity> products;
 }

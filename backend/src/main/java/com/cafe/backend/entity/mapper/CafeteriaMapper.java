@@ -21,12 +21,6 @@ public class CafeteriaMapper {
         }
 
         try {
-            Set<ProductDTO> productDTOs = new HashSet<>();
-            for (ProductEntity product : cafeteria.getProducts()) {
-                ProductDTO productDTO = ProductMapper.mapToProductDTO(product);
-                productDTOs.add(productDTO);
-            }
-
             return new CafeteriaDTO(
                     cafeteria.getId(),
                     cafeteria.getName(),
@@ -34,8 +28,7 @@ public class CafeteriaMapper {
                     cafeteria.getLocation(),
                     cafeteria.getRating(),
                     cafeteria.getPhoneNumber(),
-                    cafeteria.getDeliveryStatus(),
-                    productDTOs
+                    cafeteria.getDeliveryStatus()
             );
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaDTO", e);
@@ -44,25 +37,15 @@ public class CafeteriaMapper {
 
     public static CafeteriaEntity mapToCafeteria(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
         try {
-            CafeteriaEntity cafeteria = new CafeteriaEntity(
+            return new CafeteriaEntity(
                     cafeteriaDTO.id(),
                     cafeteriaDTO.name(),
                     cafeteriaDTO.brand(),
                     cafeteriaDTO.location(),
                     cafeteriaDTO.rating(),
                     cafeteriaDTO.phoneNumber(),
-                    cafeteriaDTO.cafeteriaDeliveryStatus(),
-                    new HashSet<>()
+                    cafeteriaDTO.cafeteriaDeliveryStatus()
             );
-            if (cafeteriaDTO.products() != null) {
-                Set<ProductEntity> productEntities = new HashSet<>();
-                for (ProductDTO productDTO : cafeteriaDTO.products()) {
-                    ProductEntity productEntity = ProductMapper.mapToProduct(productDTO);
-                    productEntities.add(productEntity);
-                }
-                cafeteria.setProducts(productEntities);
-            }
-            return cafeteria;
         } catch (Exception e) {
             throw new DataMappingException("Could not map to product", e);
         }

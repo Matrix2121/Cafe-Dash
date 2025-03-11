@@ -1,11 +1,14 @@
 package com.cafe.backend.service.impl;
 
 import com.cafe.backend.dto.ProductDTO;
+import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.mapper.ProductMapper;
 import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.BadRequestException;
+import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
+import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.ProductRepository;
 import com.cafe.backend.service.ProductService;
 
@@ -26,10 +29,16 @@ import java.util.List;
 @Transactional
 public class ProductServiceImpl implements ProductService {
     @Autowired private ProductRepository productRepository;
+    @Autowired private CafeteriaRepository cafeteriaRepository;
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) throws BadRequestException {
-        ProductEntity product = ProductMapper.mapToProduct(productDTO);
+        CafeteriaEntity cafeteria = null;
+        if (productDTO.cafeteriaId() != null) {
+            cafeteria = cafeteriaRepository.findById(productDTO.cafeteriaId())
+                    .orElseThrow(() -> new DataMappingException("Cafeteria with this id is not found: " + productDTO.cafeteriaId()));
+        }
+        ProductEntity product = ProductMapper.mapToProduct(productDTO, cafeteria);
         ProductEntity savedProduct = productRepository.save(product);
         return ProductMapper.mapToProductDTO(savedProduct);
     }

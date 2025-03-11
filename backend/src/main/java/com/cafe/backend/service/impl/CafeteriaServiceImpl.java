@@ -51,9 +51,6 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     @Override
     public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
         CafeteriaEntity cafeteria = CafeteriaMapper.mapToCafeteria(cafeteriaDTO);
-        if (cafeteria.getProducts() == null) {
-            cafeteria.setProducts(new HashSet<>());
-        }
         CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
         return CafeteriaMapper.mapToCafeteriaDTO(savedCafeteria);
     }
