@@ -1,8 +1,9 @@
 package com.cafe.backend.entity.order;
 
-import com.cafe.backend.entity.cafeteria.Cafeteria;
-import com.cafe.backend.entity.product.Product;
-import com.cafe.backend.enums.OrderStatus;
+import com.cafe.backend.entity.account.UserAccountEntity;
+import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
+import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.enums.OrderStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Formula;
@@ -22,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Order {
+public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,14 +45,14 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private OrderStatus status;
+    private OrderStatusEnum status;
 
     @Column(name = "tip_amount")
     private int tip;
 
     @ManyToOne
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id", nullable = false)
-    private Cafeteria cafeteria;
+    private CafeteriaEntity cafeteria;
 
     @ManyToMany
     @JoinTable(
@@ -59,5 +60,8 @@ public class Order {
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private Set<Product> products;
+    private Set<ProductEntity> products;
+
+    @ManyToMany(mappedBy = "orders")
+    private Set<UserAccountEntity> users;
 }

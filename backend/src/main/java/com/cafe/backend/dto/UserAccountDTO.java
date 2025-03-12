@@ -1,6 +1,9 @@
 package com.cafe.backend.dto;
 
-import com.cafe.backend.enums.UserType;
+import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.role.RoleEntity;
+
+import java.util.Set;
 
 /**
  * @author AngelStoynov
@@ -8,5 +11,6 @@ import com.cafe.backend.enums.UserType;
 public record UserAccountDTO(
     String username,
     String password,
-    UserType userType
+    Set<RoleEntity> role,
+    Set<OrderEntity> orders
 ) { }
