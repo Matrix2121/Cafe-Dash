@@ -1,5 +1,6 @@
 package com.cafe.backend.entity.order;
 
+import com.cafe.backend.entity.account.UserAccountEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.enums.OrderStatusEnum;
@@ -60,4 +61,7 @@ public class OrderEntity {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<ProductEntity> products;
+
+    @ManyToMany(mappedBy = "orders")
+    private Set<UserAccountEntity> users;
 }

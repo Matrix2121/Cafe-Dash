@@ -11,6 +11,7 @@ public record CafeteriaDTO(
         String brand,
         String location,
         double rating,
+        int countReview,
         String phoneNumber,
         DeliveryStatusEnum cafeteriaDeliveryStatus
 ) { }

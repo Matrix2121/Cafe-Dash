@@ -27,6 +27,7 @@ public class CafeteriaMapper {
                     cafeteria.getBrand(),
                     cafeteria.getLocation(),
                     cafeteria.getRating(),
+                    cafeteria.getCountReview(),
                     cafeteria.getPhoneNumber(),
                     cafeteria.getDeliveryStatus()
             );
@@ -43,6 +44,7 @@ public class CafeteriaMapper {
                     cafeteriaDTO.brand(),
                     cafeteriaDTO.location(),
                     cafeteriaDTO.rating(),
+                    cafeteriaDTO.countReview(),
                     cafeteriaDTO.phoneNumber(),
                     cafeteriaDTO.cafeteriaDeliveryStatus()
             );

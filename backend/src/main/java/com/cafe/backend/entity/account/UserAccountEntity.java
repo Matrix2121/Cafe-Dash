@@ -1,24 +1,23 @@
 package com.cafe.backend.entity.account;
 
-import com.cafe.backend.enums.UserTypeEnum;
+import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 /**
  * {@code UserAccount} is an entity class.
  * @author AngelStoynov
  */
 
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
-public abstract class UserAccountEntity {
+public class UserAccountEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +29,20 @@ public abstract class UserAccountEntity {
 
     @Column(name = "password", length = 120, nullable = false)
     private String password;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<RoleEntity> roles;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_orders",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private Set<OrderEntity> orders;
 }
