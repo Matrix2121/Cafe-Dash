@@ -18,6 +18,8 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 
 public class CafeteriaEntity {
 

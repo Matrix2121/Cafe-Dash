@@ -22,6 +22,8 @@ import java.util.Set;
 @Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 
 public class OrderEntity {
 
@@ -35,7 +37,7 @@ public class OrderEntity {
             "JOIN product p ON op.product_id = p.id " +
             "WHERE op.order_id = orders.id) " +
             "* (1 - COALESCE(orders.discount, 0) / 100) + COALESCE(orders.tip_amount, 0)")
-    private Double amount;
+    private double amount;
 
     @Column(name = "discount")
     private int discount;
@@ -61,7 +63,4 @@ public class OrderEntity {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<ProductEntity> products;
-
-    @ManyToMany(mappedBy = "orders")
-    private Set<UserAccountEntity> users;
 }

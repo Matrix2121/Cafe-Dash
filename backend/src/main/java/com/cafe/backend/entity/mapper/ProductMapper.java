@@ -42,4 +42,18 @@ public class ProductMapper {
             throw new DataMappingException("Could not map to product entity", e);
         }
     }
+    public static ProductEntity mapToProduct(ProductDTO productDTO) throws DataMappingException {
+        try{
+            return new ProductEntity(
+                    productDTO.id(),
+                    productDTO.name(),
+                    productDTO.price(),
+                    productDTO.quantity(),
+                    productDTO.productType(),
+                    null
+            );
+        } catch (Exception e) {
+            throw new DataMappingException("Could not map to product entity", e);
+        }
+    }
 }

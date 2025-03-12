@@ -1,13 +1,8 @@
 package com.cafe.backend.entity.mapper;
 
 import com.cafe.backend.dto.CafeteriaDTO;
-import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.DataMappingException;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class CafeteriaMapper {
 
@@ -49,7 +44,7 @@ public class CafeteriaMapper {
                     cafeteriaDTO.cafeteriaDeliveryStatus()
             );
         } catch (Exception e) {
-            throw new DataMappingException("Could not map to product", e);
+            throw new DataMappingException("Could not map to cafeteriaEntity", e);
         }
     }
 }
