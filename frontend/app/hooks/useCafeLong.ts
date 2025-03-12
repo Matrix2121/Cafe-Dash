@@ -8,44 +8,23 @@ const useCafeLong = (id: number) => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-//         const fetchCafeLongById = async () => {
-//             setLoading(true);
-            
-//             try {
-//                 const response = await api.get(`/cafes/${id}`);
-//                 setCafeLong(response.data);
-//                 setError(null);
-//             } catch (err) {
-//                 setError('Failed to fetch cafe details');
-//                 return null;
-//             } finally {
-//                 setLoading(false);
-//             }
-//   };
-
-//   fetchCafeLongById()
-
-
-//MockData start
+        const fetchCafeLongById = async () => {
             setLoading(true);
-
-            setTimeout(() => {
-                setCafeLong({
-                    id: 1,
-                    name: "Mock Cafe",
-                    location: "123 Fake Street",
-                    rating: 4.2,
-                    reviewCount: 87,
-                    openingHours: "7 AM - 9 PM",
-                    phone: "+100200300",
-                });
+            
+            try {
+                const response = await api.get(`/cafeterias/${id}`);
+                setCafeLong(response.data);
                 setError(null);
+            } catch (err) {
+                setError('Failed to fetch cafe details');
+                return null;
+            } finally {
                 setLoading(false);
-            }, 1000);
-//MockData end
+            }
+  };
 
-
-    }, [id]);
+  fetchCafeLongById()
+}, [id]);
 
     return { cafeLong, loading, error };
 };
