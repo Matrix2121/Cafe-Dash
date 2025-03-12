@@ -33,19 +33,19 @@ const TestScreen = () => {
       <View>
           <Pressable 
             style={styles.testButton} 
-            onPress={handleDetailPress}/>
+            onPress={handleDetailPress}>CafeDetails</Pressable>
 
           <Pressable 
             style={styles.testButton} 
-            onPress={handleMenuPress}/>
+            onPress={handleMenuPress}>CafeMenu</Pressable>
 
           <Pressable 
             style={styles.testButton} 
-            onPress={handleListPress}/>
+            onPress={handleListPress}>CafeList</Pressable>
 
           <Pressable 
             style={styles.testButton} 
-            onPress={handleHubPress}/>
+            onPress={handleHubPress}>HubScreen</Pressable>
           
       </View>
     </ScrollView>

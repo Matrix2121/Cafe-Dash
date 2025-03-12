@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator, Text, FlatList } from 'react-native';
-import CafeCard from '../../../components/CafeCard/CafeCard';
+import CafeCard from '../../../components/cafeCard/CafeCard';
 import useCafesShort from '../../../hooks/useCafesShort';
 import styles from './CafesListScreen.style'
 import { ScrollView } from 'react-native-gesture-handler';

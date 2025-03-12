@@ -7,6 +7,7 @@ export default StyleSheet.create({
         borderColor: '#444444',
         borderWidth: 2.5,
         backgroundColor: '#000000',
+        color: '#FFFFFF'
     },
     testButtonText: {
         color: '#FFFFFF',

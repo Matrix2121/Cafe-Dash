@@ -25,3 +25,5 @@ export const theme = {
       lg: 16,
     },
   };
+
+export default theme;
