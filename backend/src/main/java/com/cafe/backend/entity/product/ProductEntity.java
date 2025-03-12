@@ -32,9 +32,6 @@ public class ProductEntity {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "quantity")
-    private int quantity;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private ProductTypeEnum productType;

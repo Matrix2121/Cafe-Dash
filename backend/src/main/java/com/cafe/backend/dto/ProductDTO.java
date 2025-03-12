@@ -9,7 +9,6 @@ public record ProductDTO(
         Long id,
         String name,
         double price,
-        int quantity,
         ProductTypeEnum productType,
         Long cafeteriaId
 ) { }

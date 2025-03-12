@@ -75,7 +75,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductEntity updateProductFields(ProductEntity product, ProductDTO updatedProduct) {
         product.setName(updatedProduct.name());
         product.setPrice(updatedProduct.price());
-        product.setQuantity(updatedProduct.quantity());
         product.setProductType(updatedProduct.productType());
         return productRepository.save(product);
     }

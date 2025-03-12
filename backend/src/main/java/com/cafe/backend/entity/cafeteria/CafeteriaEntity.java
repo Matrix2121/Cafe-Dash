@@ -1,11 +1,7 @@
 package com.cafe.backend.entity.cafeteria;
 
-import com.cafe.backend.entity.product.ProductEntity;
-import com.cafe.backend.enums.DeliveryStatusEnum;
-import com.cafe.backend.enums.UserTypeEnum;
 import jakarta.persistence.*;
 import lombok.*;
-import java.util.Set;
 
 /**
  * {@code Cafeteria} is an abstract entity class.
@@ -18,6 +14,8 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 
 public class CafeteriaEntity {
 
@@ -43,8 +41,4 @@ public class CafeteriaEntity {
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "delivery_status", nullable = false)
-    private DeliveryStatusEnum deliveryStatus;
 }
