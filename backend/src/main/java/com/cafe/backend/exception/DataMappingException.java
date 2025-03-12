@@ -1,12 +1,15 @@
 package com.cafe.backend.exception;
 
-public class DataMappingException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public DataMappingException(String message) {
-        super(message);
-    }
+public class DataMappingException extends BadRequestException {
 
-    public DataMappingException(String message, Throwable e) {
+	public DataMappingException(String message) {
+		super(message);
+	}
+
+	public DataMappingException(String message, Throwable e) {
         super(message, e);
     }
 }

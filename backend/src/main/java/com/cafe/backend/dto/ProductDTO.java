@@ -1,6 +1,6 @@
 package com.cafe.backend.dto;
 
-import com.cafe.backend.enums.ProductType;
+import com.cafe.backend.enums.ProductTypeEnum;
 
 /**
  * @author AngelStoynov
@@ -10,5 +10,6 @@ public record ProductDTO(
         String name,
         double price,
         int quantity,
-        ProductType productType
+        ProductTypeEnum productType,
+        Long cafeteriaId
 ) { }

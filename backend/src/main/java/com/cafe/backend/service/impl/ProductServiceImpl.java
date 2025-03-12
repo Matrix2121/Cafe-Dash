@@ -1,14 +1,24 @@
 package com.cafe.backend.service.impl;
 
 import com.cafe.backend.dto.ProductDTO;
+import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.mapper.ProductMapper;
-import com.cafe.backend.entity.product.Product;
+import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.exception.BadRequestException;
+import com.cafe.backend.exception.DataMappingException;
+import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
+import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.ProductRepository;
 import com.cafe.backend.service.ProductService;
+
+import jakarta.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * {@code ProductServiceImpl} is class that implements {@link ProductService}.
@@ -16,43 +26,53 @@ import java.util.stream.Collectors;
  * @author AngelStoynov
  */
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
-    private final ProductRepository productRepository;
-
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    @Autowired private ProductRepository productRepository;
+    @Autowired private CafeteriaRepository cafeteriaRepository;
 
     @Override
-    public ProductDTO createProduct(ProductDTO productDTO) {
-        Product product = ProductMapper.mapToProduct(productDTO);
-        Product savedProduct = productRepository.save(product);
+    public ProductDTO createProduct(ProductDTO productDTO) throws BadRequestException {
+        CafeteriaEntity cafeteria = null;
+        if (productDTO.cafeteriaId() != null) {
+            cafeteria = cafeteriaRepository.findById(productDTO.cafeteriaId())
+                    .orElseThrow(() -> new DataMappingException("Cafeteria with this id is not found: " + productDTO.cafeteriaId()));
+        }
+        ProductEntity product = ProductMapper.mapToProduct(productDTO, cafeteria);
+        ProductEntity savedProduct = productRepository.save(product);
         return ProductMapper.mapToProductDTO(savedProduct);
     }
 
     @Override
-    public ProductDTO getProductById(Long productId) {
-        Product product = productRepository.findById(productId)
+    public ProductDTO getProductById(Long productId) throws NotFoundException, BadRequestException {
+        ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
         return ProductMapper.mapToProductDTO(product);
     }
 
     @Override
-    public List<ProductDTO> getAllProducts() {
-        List<Product> products = productRepository.findAll();
-        return products.stream().map(ProductMapper::mapToProductDTO).collect(Collectors.toList());
+    public List<ProductDTO> getAllProducts() throws NotFoundException, BadRequestException {
+        List<ProductEntity> products = productRepository.findAll();
+        if(products.isEmpty()) {
+        	throw new ResourceNotFoundException("No products found");
+        }
+        List<ProductDTO> results = new ArrayList<ProductDTO>();
+        for(ProductEntity entity : products) {
+        	results.add(ProductMapper.mapToProductDTO(entity));
+        }
+        return results; 
     }
 
     @Override
-    public ProductDTO updateProduct(Long productId, ProductDTO updatedProduct) {
-        Product product = productRepository.findById(productId)
+    public ProductDTO updateProduct(Long productId, ProductDTO updatedProduct) throws NotFoundException, BadRequestException {
+        ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
 
-        Product newUpdatedProduct = updateProductFields(product, updatedProduct);
+        ProductEntity newUpdatedProduct = updateProductFields(product, updatedProduct);
         return ProductMapper.mapToProductDTO(newUpdatedProduct);
     }
 
-    private Product updateProductFields(Product product, ProductDTO updatedProduct) {
+    private ProductEntity updateProductFields(ProductEntity product, ProductDTO updatedProduct) {
         product.setName(updatedProduct.name());
         product.setPrice(updatedProduct.price());
         product.setQuantity(updatedProduct.quantity());
