@@ -19,7 +19,6 @@ public class ProductMapper {
                     product.getId(),
                     product.getName(),
                     product.getPrice(),
-                    product.getQuantity(),
                     product.getProductType(),
                     cafeteriaDTO.id()
             );
@@ -34,9 +33,21 @@ public class ProductMapper {
                     productDTO.id(),
                     productDTO.name(),
                     productDTO.price(),
-                    productDTO.quantity(),
                     productDTO.productType(),
                     cafeteria
+            );
+        } catch (Exception e) {
+            throw new DataMappingException("Could not map to product entity", e);
+        }
+    }
+    public static ProductEntity mapToProduct(ProductDTO productDTO) throws DataMappingException {
+        try{
+            return new ProductEntity(
+                    productDTO.id(),
+                    productDTO.name(),
+                    productDTO.price(),
+                    productDTO.productType(),
+                    null
             );
         } catch (Exception e) {
             throw new DataMappingException("Could not map to product entity", e);

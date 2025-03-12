@@ -8,7 +8,8 @@ import java.util.Set;
  * @author AngelStoynov
  */
 public record OrderDTO(
-        Double amount,
+        Long id,
+        double amount,
         int discount,
         LocalDateTime expectedDelivery,
         OrderStatusEnum orderStatus,
