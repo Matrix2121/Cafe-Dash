@@ -42,8 +42,8 @@ public class OrderEntity {
     @Column(name = "discount")
     private int discount;
 
-    @Column(name = "expected_delivery")
-    private LocalDateTime expectedDelivery;
+    @Column(name = "ready_pickup_time")
+    private LocalDateTime readyPickupTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")

@@ -19,7 +19,6 @@ public class ProductMapper {
                     product.getId(),
                     product.getName(),
                     product.getPrice(),
-                    product.getQuantity(),
                     product.getProductType(),
                     cafeteriaDTO.id()
             );
@@ -34,7 +33,6 @@ public class ProductMapper {
                     productDTO.id(),
                     productDTO.name(),
                     productDTO.price(),
-                    productDTO.quantity(),
                     productDTO.productType(),
                     cafeteria
             );
@@ -48,7 +46,6 @@ public class ProductMapper {
                     productDTO.id(),
                     productDTO.name(),
                     productDTO.price(),
-                    productDTO.quantity(),
                     productDTO.productType(),
                     null
             );

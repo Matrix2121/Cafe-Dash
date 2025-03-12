@@ -23,8 +23,7 @@ public class CafeteriaMapper {
                     cafeteria.getLocation(),
                     cafeteria.getRating(),
                     cafeteria.getCountReview(),
-                    cafeteria.getPhoneNumber(),
-                    cafeteria.getDeliveryStatus()
+                    cafeteria.getPhoneNumber()
             );
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaDTO", e);
@@ -40,8 +39,7 @@ public class CafeteriaMapper {
                     cafeteriaDTO.location(),
                     cafeteriaDTO.rating(),
                     cafeteriaDTO.countReview(),
-                    cafeteriaDTO.phoneNumber(),
-                    cafeteriaDTO.cafeteriaDeliveryStatus()
+                    cafeteriaDTO.phoneNumber()
             );
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaEntity", e);

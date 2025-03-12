@@ -18,7 +18,7 @@ public class RoleMapper {
         try {
             return new RoleDTO(
                     role.getId(),
-                    role.getType()
+                    role.getRoleName()
             );
         } catch (Exception e) {
             throw new DataMappingException("Cannot not map to roleDTO", e);

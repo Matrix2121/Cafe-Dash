@@ -30,7 +30,7 @@ public class OrderMapper {
                     orderEntity.getId(),
                     orderEntity.getAmount(),
                     orderEntity.getDiscount(),
-                    orderEntity.getExpectedDelivery(),
+                    orderEntity.getReadyPickupTime(),
                     orderEntity.getStatus(),
                     orderEntity.getTip(),
                     cafeteriaDTO,
