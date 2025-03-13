@@ -1,18 +1,14 @@
 import React from 'react';
 import { ActivityIndicator, Image } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './CafeDetailScreen.style';
 import useCafeLong from '@/app/hooks/useCafeLong';
 import useCafeImage from '@/app/hooks/useCafeImage';
 
-type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
-
-const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
-  const { id } = route.params;
-  const { cafeLong, loading, error } = useCafeLong(id);
-  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(id);
+const CafeDetailScreen = ({ route }: { route: { params: { cafeId: number } } }) => {
+  const { cafeId } = route.params;
+  const { cafeLong, loading, error } = useCafeLong(cafeId);
+  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafeId);
 
   if (loading || loadingImage) {
     return (

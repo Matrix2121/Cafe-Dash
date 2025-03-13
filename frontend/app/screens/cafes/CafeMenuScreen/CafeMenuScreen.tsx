@@ -1,10 +1,22 @@
 import React from 'react';
-import { FlatList, SectionList, View, Text, ActivityIndicator } from 'react-native';
+import { FlatList, SectionList, View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { RootStackParamList } from '@/app/navigation/Navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+
 import ItemCard from '../../../components/ItemCard/ItemCard';
 import useProducts from '@/app/hooks/useProducts';
 import styles from './CafeMenuScreen.style';
 
-const CafeMenuScreen = () => {
+const CafeMenuScreen = ({ route }: { route: { params: { cafeId: number } } }) => {
+    const { cafeId } = route.params; 
+    
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  
+    const handleShowDetails = (cafeId: number) => {
+      navigation.navigate('CafeDetailScreen', { cafeId });
+    };
+
     const { products, loading, error } = useProducts();
 
     if (loading) {
@@ -48,7 +60,17 @@ const CafeMenuScreen = () => {
 
   return (
     <View style={styles.container}>
-    <Text style={styles.title}>Cafe Menu</Text>
+
+      <View style={styles.headerContainer}>
+        <Text style={styles.title}>Cafe Menu</Text>
+        <TouchableOpacity
+        style={styles.detailsButton}
+        onPress={() => handleShowDetails(cafeId)}
+        >
+          <Text style={styles.detailsButtonText}>View Details</Text>
+        </TouchableOpacity>
+    </View>
+
     <SectionList
       sections={sections}
       keyExtractor={(item) => item.id.toString()}
