@@ -9,35 +9,17 @@ import { Text, Pressable, View } from "react-native";
 import { ActivityIndicator, Card } from "react-native-paper";
 import useCafeImage from "@/app/hooks/useCafeImage";
 import styles from "../cafeCard/cafeCard.style";
+import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 const CafeCard = ({ id, name, location, rating, reviewCount }: CafeShort) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const { imageUrl, loading, error } = useCafeImage(id);
 
-  if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#444444" />
-        <Text>Loading cafe details...</Text>
-      </View>
-    );
-  }
+  const hasData = !!imageUrl;
 
-  if (error) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{error}</Text>
-      </View>
-    );
-  }
-
-  if (!imageUrl) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>No cafe data available.</Text>
-      </View>
-    );
+  if (loading || error || !hasData) {
+    return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
   }
 
   return (

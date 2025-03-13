@@ -6,39 +6,26 @@ import { View, Text, ScrollView } from 'react-native';
 import styles from './CafeDetailScreen.style';
 import useCafeLong from '@/app/hooks/useCafeLong';
 import useCafeImage from '@/app/hooks/useCafeImage';
+import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
 
-const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
+interface CafeDetailScreenProps {
+  route: CafeDetailRouteProp;
+}
+
+const CafeDetailScreen : React.FC<CafeDetailScreenProps> = ({route}) => {
   const { id } = route.params;
   const { cafeLong, loading, error } = useCafeLong(id);
   const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(id);
 
-  if (loading || loadingImage) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#444444" />
-        <Text>Loading cafe details...</Text>
-      </View>
-    );
-  }
+  const isLoading = loading || loadingImage;
+  const combinedError = error || errorImage;
+  const hasData = !!cafeLong && !!imageUrl;
 
-  if (error || errorImage) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>
-          {error || errorImage || 'Failed to load cafe data'}
-        </Text>
-      </View>
-    );
-  }
 
-  if (!cafeLong || !imageUrl) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>No cafe data available.</Text>
-      </View>
-    );
+  if (isLoading || combinedError || !hasData) {
+    return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
   }
   
   const sections = [
