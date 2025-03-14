@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, Image } from 'react-native';
+import {ActivityIndicator, Image, ImageSourcePropType} from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';
@@ -62,8 +62,9 @@ const CafeDetailScreen = ({ route }: { route: CafeDetailRouteProp }) => {
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{cafeLong.name}</Text>
+        {/*IMAGE SHOULD NOT BE any or ImageSourcePropType*/}
       <Image
-        source={imageUrl}
+        source={imageUrl as ImageSourcePropType}
         style={styles.headerImage}
         resizeMode="cover"
         onError={() => console.log('Error loading image')}
