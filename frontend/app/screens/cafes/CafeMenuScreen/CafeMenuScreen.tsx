@@ -3,33 +3,15 @@ import { FlatList, SectionList, View, Text, ActivityIndicator } from 'react-nati
 import ItemCard from '../../../components/ItemCard/ItemCard';
 import useProducts from '@/app/hooks/useProducts';
 import styles from './CafeMenuScreen.style';
+import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 const CafeMenuScreen = () => {
     const { products, loading, error } = useProducts();
 
-    if (loading) {
-      return (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#444444" />
-          <Text>Loading cafe details...</Text>
-        </View>
-      );
-    }
-  
-    if (error) {
-      return (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      );
-    }
-  
-    if (!products) {
-      return (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>No cafe data available.</Text>
-        </View>
-      );
+    const hasData = !!products && products.length > 0;
+
+    if (loading || error || !hasData) {
+        return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
     }
 
     const drinkables = products.filter(item => item.productType === 'DRINKABLE');

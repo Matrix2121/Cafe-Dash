@@ -11,7 +11,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 export type RootStackParamList = {
   LoginScreen: undefined;
-  RegisterScren: undefined;
+  RegisterScreen: undefined;
   MainHubScreen: undefined;
   CafesListScreen: undefined;
   CafeDetailScreen: {id: number};
@@ -31,7 +31,7 @@ const Navigation = () => {
         />
 
         <Stack.Screen
-          name="RegisterScren"
+          name="RegisterScreen"
           component={RegisterScreen}
           options={{ title: 'Sign Up' }}
         />

@@ -92,7 +92,7 @@ const LoginScreen = () => {
 
           <Button
             mode="contained"
-            onPress={() => navigation.navigate("RegisterScren")}
+            onPress={() => navigation.navigate("RegisterScreen")}
             style={styles.registerButton}
             labelStyle={{ color: '#444444' }} 
             theme={{ colors: { primary: '#444444' } }}
