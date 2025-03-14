@@ -2,28 +2,64 @@ import {StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
     profileContainer: {
-
+        flex: 1,
     },
     profileLogoContainer: {
-        flex: 1,
-        justifyContent: "center",
+        flexDirection: "column",
+        justifyContent: "flex-end",
         alignItems: "center",
-        backgroundColor: "#bd2f2f",
+        paddingTop: 40
     },
-    profileTextLogo:{
+    profileTextLogo: {
       fontSize: 20,
+        color: "black",
+    },
+    secondaryText: {
+        fontSize: 14,
+        color: "gray",
     },
     circle: {
-        width: 44,
-        height: 44,
-        borderRadius: 44/2,
+        width: 88,
+        height: 88,
+        borderRadius: 88/2,
         backgroundColor: "#000000",
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: "absolute",
+        top: -52,
     },
     letterInsideTheLogo: {
         fontSize: 18,
         color: "#fff",
+    },
+    imageLogo: {
+        width: "100%",
+        height: 200,
+        position: "relative",
+    },
+    imageContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    orderContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        width: "100%",
+    },
+    rowContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    orderTextLogo: {
+        fontSize: 20,
+    },
+    notificationLogo: {
+        width: 30,
+        height: 30,
+        marginRight: 5
     }
 })
 
