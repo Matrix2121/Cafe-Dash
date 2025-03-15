@@ -3,8 +3,9 @@ import {Image, Pressable, Text, View} from "react-native";
 import React from "react";
 import {RootStackParamList} from "@/app/navigation/navigation";
 import {RouteProp} from "@react-navigation/native";
-import logout from "../../assets/images/logout.png";
-import profileBackground from "../../assets/images/profileBackground.jpg";
+import profile from "../../assets/images/profileScreen/profile.png";
+import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
+import orders from "../../assets/images/profileScreen/orders.png";
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'ProfileScreen'>;
 
@@ -28,8 +29,12 @@ const ProfileScreen = ({ route } : IProps) => {
             </View>
             <View style={styles.orderContainer}>
                 <Pressable style={styles.rowContainer}>
-                    <Image source={logout} style={styles.notificationLogo} />
-                    <Text style={styles.orderTextLogo}>Logout</Text>
+                    <Image source={profile} style={styles.logo} />
+                    <Text style={styles.orderTextLogo}>Profile details</Text>
+                </Pressable>
+                <Pressable style={styles.rowContainer}>
+                    <Image source={orders} style={styles.logo} />
+                    <Text style={styles.orderTextLogo}>Previous Orders</Text>
                 </Pressable>
             </View>
         </View>

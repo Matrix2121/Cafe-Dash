@@ -3,6 +3,7 @@ import {StyleSheet} from "react-native";
 const styles = StyleSheet.create({
     profileContainer: {
         flex: 1,
+
     },
     profileLogoContainer: {
         flexDirection: "column",
@@ -11,8 +12,9 @@ const styles = StyleSheet.create({
         paddingTop: 40
     },
     profileTextLogo: {
-      fontSize: 20,
+        fontSize: 20,
         color: "black",
+        textAlign: "center"
     },
     secondaryText: {
         fontSize: 14,
@@ -42,25 +44,31 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     orderContainer: {
-        flex: 1,
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "column",
-        width: "100%",
+        marginTop: 20
     },
+
     rowContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
+        marginVertical: 10,
+        width: 200,
     },
-    orderTextLogo: {
-        fontSize: 20,
-    },
-    notificationLogo: {
+
+    logo: {
         width: 30,
         height: 30,
-        marginRight: 5
-    }
+        marginRight: 15,
+    },
+
+    orderTextLogo: {
+        fontSize: 20,
+        textAlign: "left",
+        flex: 1
+    },
 })
 
 export default styles
