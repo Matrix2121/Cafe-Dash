@@ -54,51 +54,53 @@ const LoginScreen = () => {
             <Text style={styles.testButtonText}>Test Area</Text>
           </Pressable>
 
-          <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
-          <Text style={styles.title}>Welcome to Cafe-Dash</Text>
+          <View style={styles.loginContainer}>
+            <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
+            <Text style={styles.title}><Text style={styles.highlight}>Welcome to </Text>Cafe-Dash</Text>
 
-          {error ? <Text style={styles.errorText}>{error}</Text> : null}
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-          <TextInput
-            label="Email"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            style={styles.input}
-            mode="outlined" 
-            theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
-          />
-          <TextInput
-            label="Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-            style={styles.input}
-            mode="outlined" 
-            theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
-          />
+            <TextInput
+              label="Email"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              style={styles.input}
+              mode="outlined"
+              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
+            />
+            <TextInput
+              label="Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry
+              style={styles.input}
+              mode="outlined"
+              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
+            />
 
-          <Button
-            mode="contained"
-            onPress={handleLogin}
-            style={styles.loginButton}
-            loading={loading}
-            disabled={loading}
-            theme={{ colors: { primary: '#444444' } }}
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </Button>
+            <Button
+              mode="contained"
+              onPress={handleLogin}
+              style={styles.loginButton}
+              loading={loading}
+              disabled={loading}
+              theme={{ colors: { primary: '#444444' } }}
+            >
+              {loading ? 'Logging in...' : 'Login'}
+            </Button>
 
-          <Button
-            mode="contained"
-            onPress={() => navigation.navigate("RegisterScreen")}
-            style={styles.registerButton}
-            labelStyle={{ color: '#444444' }} 
-            theme={{ colors: { primary: '#444444' } }}
-          >
-            Sign Up
-          </Button>
+            <Button
+              mode="contained"
+              onPress={() => navigation.navigate("RegisterScreen")}
+              style={styles.registerButton}
+              labelStyle={{ color: '#444444' }}
+              theme={{ colors: { primary: '#444444' } }}
+            >
+              Sign Up
+            </Button>
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </ImageBackground>
