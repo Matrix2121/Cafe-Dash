@@ -23,8 +23,7 @@ public class CafeteriaMapper {
                     cafeteria.getLocation(),
                     cafeteria.getRating(),
                     cafeteria.getCountReview(),
-                    cafeteria.getPhoneNumber()
-            );
+                    cafeteria.getPhoneNumber());
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaDTO", e);
         }
@@ -32,15 +31,15 @@ public class CafeteriaMapper {
 
     public static CafeteriaEntity toEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
         try {
-        	return CafeteriaEntity.builder()
-        	        .id(cafeteriaDTO.id())
-        	        .name(cafeteriaDTO.name())
-        	        .brand(cafeteriaDTO.brand())
-        	        .location(cafeteriaDTO.location())
-        	        .rating(cafeteriaDTO.rating())
-        	        .countReview(cafeteriaDTO.countReview())
-        	        .phoneNumber(cafeteriaDTO.phoneNumber())
-        	        .build();
+            return CafeteriaEntity.builder()
+                    .id(cafeteriaDTO.id())
+                    .name(cafeteriaDTO.name())
+                    .brand(cafeteriaDTO.brand())
+                    .location(cafeteriaDTO.location())
+                    .rating(cafeteriaDTO.rating())
+                    .countReview(cafeteriaDTO.countReview())
+                    .phoneNumber(cafeteriaDTO.phoneNumber())
+                    .build();
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaEntity", e);
         }

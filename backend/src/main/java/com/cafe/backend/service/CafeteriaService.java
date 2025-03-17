@@ -9,12 +9,17 @@ import java.util.List;
 
 /**
  * {@code CafeteriaService} is an interface that defines basic CRUD methods.
+ * 
  * @author AngelStoynov
  */
 public interface CafeteriaService {
     CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException;
+
     CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException;
+
     List<CafeteriaDTO> getAllCafeterias() throws NotFoundException, BadRequestException;
+
     CafeteriaDTO updateCafeteria(Long id, CafeteriaDTO cafeteriaDTO) throws NotFoundException, BadRequestException;
-    List<ProductDTO> getAllProductsForCafeteriaName(String name);
+
+    List<ProductDTO> getAllProductsForCafeteriaId(Long id) throws NotFoundException;
 }
