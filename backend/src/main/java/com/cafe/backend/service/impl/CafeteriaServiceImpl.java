@@ -1,6 +1,7 @@
 package com.cafe.backend.service.impl;
 
 import com.cafe.backend.dto.CafeteriaDTO;
+import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.mapper.CafeteriaMapper;
 import com.cafe.backend.exception.BadRequestException;
@@ -29,16 +30,17 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
     @Override
     public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
-        CafeteriaEntity cafeteria = CafeteriaMapper.mapToCafeteria(cafeteriaDTO);
+        CafeteriaEntity cafeteria = CafeteriaMapper.toEntity(cafeteriaDTO);
+        cafeteria.setId(null);
         CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
-        return CafeteriaMapper.mapToCafeteriaDTO(savedCafeteria);
+        return CafeteriaMapper.toDTO(savedCafeteria);
     }
 
     @Override
     public CafeteriaDTO getCafeteriaById(Long id)  throws NotFoundException, BadRequestException {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
-        return CafeteriaMapper.mapToCafeteriaDTO(cafeteria);
+        return CafeteriaMapper.toDTO(cafeteria);
     }
 
     @Override
@@ -51,7 +53,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
         List<CafeteriaDTO> results = new ArrayList<>();
         for (CafeteriaEntity entity: cafeterias) {
-            results.add(CafeteriaMapper.mapToCafeteriaDTO(entity));
+            results.add(CafeteriaMapper.toDTO(entity));
         }
         return results;
     }
@@ -61,7 +63,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id:" + id));
         CafeteriaEntity newUpdatedCafeteria = updateCafeteriaFields(cafeteriaDTO, cafeteria);
-        return CafeteriaMapper.mapToCafeteriaDTO(newUpdatedCafeteria);
+        return CafeteriaMapper.toDTO(newUpdatedCafeteria);
     }
 
     private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {
@@ -69,8 +71,13 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         cafeteria.setBrand(updatedCafeteria.brand());
         cafeteria.setLocation(updatedCafeteria.location());
         cafeteria.setRating(updatedCafeteria.rating());
-        cafeteria.setDeliveryStatus(updatedCafeteria.cafeteriaDeliveryStatus());
         cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber());
         return cafeteriaRepository.save(cafeteria);
     }
+
+	@Override
+	public List<ProductDTO> getAllProductsForCafeteriaName(String name) {
+		
+		return null;
+	}
 }

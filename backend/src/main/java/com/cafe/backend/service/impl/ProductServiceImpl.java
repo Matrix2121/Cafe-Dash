@@ -37,17 +37,20 @@ public class ProductServiceImpl implements ProductService {
         if (productDTO.cafeteriaId() != null) {
             cafeteria = cafeteriaRepository.findById(productDTO.cafeteriaId())
                     .orElseThrow(() -> new DataMappingException("Cafeteria with this id is not found: " + productDTO.cafeteriaId()));
+            
         }
-        ProductEntity product = ProductMapper.mapToProduct(productDTO, cafeteria);
+        ProductEntity product = ProductMapper.toEntity(productDTO, cafeteria);
+        product.setId(null);
+        product.setDeleted(false);
         ProductEntity savedProduct = productRepository.save(product);
-        return ProductMapper.mapToProductDTO(savedProduct);
+        return ProductMapper.toDTO(savedProduct);
     }
 
     @Override
     public ProductDTO getProductById(Long productId) throws NotFoundException, BadRequestException {
         ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
-        return ProductMapper.mapToProductDTO(product);
+        return ProductMapper.toDTO(product);
     }
 
     @Override
@@ -58,7 +61,7 @@ public class ProductServiceImpl implements ProductService {
         }
         List<ProductDTO> results = new ArrayList<ProductDTO>();
         for(ProductEntity entity : products) {
-        	results.add(ProductMapper.mapToProductDTO(entity));
+        	results.add(ProductMapper.toDTO(entity));
         }
         return results; 
     }
@@ -69,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
 
         ProductEntity newUpdatedProduct = updateProductFields(product, updatedProduct);
-        return ProductMapper.mapToProductDTO(newUpdatedProduct);
+        return ProductMapper.toDTO(newUpdatedProduct);
     }
 
     private ProductEntity updateProductFields(ProductEntity product, ProductDTO updatedProduct) {

@@ -20,4 +20,7 @@ public class RoleEntity {
 
     @Column(name = "role_name", length = 100, nullable = false)
     private String roleName;
+    
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

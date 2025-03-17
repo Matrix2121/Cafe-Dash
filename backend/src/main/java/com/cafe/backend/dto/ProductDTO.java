@@ -11,4 +11,4 @@ public record ProductDTO(
         double price,
         ProductTypeEnum productType,
         Long cafeteriaId
-) { }
+) {}
