@@ -2,8 +2,12 @@ package com.cafe.backend.entity.account;
 
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,7 +21,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class UserAccountEntity {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +42,9 @@ public class UserAccountEntity {
     )
     private Set<RoleEntity> roles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_orders",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
-    private Set<OrderEntity> orders;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<OrderEntity> orders = new HashSet<>();
+    
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

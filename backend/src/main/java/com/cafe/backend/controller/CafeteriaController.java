@@ -1,6 +1,7 @@
 package com.cafe.backend.controller;
 
 import com.cafe.backend.dto.CafeteriaDTO;
+import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.CafeteriaService;
@@ -20,7 +21,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/cafeterias")
-
 public class CafeteriaController {
 
     @Autowired
@@ -36,6 +36,12 @@ public class CafeteriaController {
     @ResponseStatus(value = HttpStatus.OK)
     public CafeteriaDTO getCafeteriaById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
         return cafeteriaService.getCafeteriaById(id);
+    }
+    
+    @GetMapping("/{cafeteriaName}/products")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<ProductDTO> getCafeteriaById(@PathVariable("cafeteriaName") String name) throws BadRequestException, NotFoundException {
+        return cafeteriaService.getAllProductsForCafeteriaName(name);
     }
 
     @GetMapping

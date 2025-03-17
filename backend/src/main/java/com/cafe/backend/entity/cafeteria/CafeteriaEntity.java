@@ -14,8 +14,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 
 public class CafeteriaEntity {
 
@@ -41,4 +39,9 @@ public class CafeteriaEntity {
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+    
+    // @OneToMany() // here are all the products for one cafeteria
+    
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

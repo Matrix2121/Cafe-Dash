@@ -10,7 +10,7 @@ public class CafeteriaMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static CafeteriaDTO mapToCafeteriaDTO(CafeteriaEntity cafeteria) throws DataMappingException {
+    public static CafeteriaDTO toDTO(CafeteriaEntity cafeteria) throws DataMappingException {
         if (cafeteria == null) {
             throw new DataMappingException("Cafeteria cannot be null");
         }
@@ -30,17 +30,17 @@ public class CafeteriaMapper {
         }
     }
 
-    public static CafeteriaEntity mapToCafeteria(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
+    public static CafeteriaEntity toEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
         try {
-            return new CafeteriaEntity(
-                    cafeteriaDTO.id(),
-                    cafeteriaDTO.name(),
-                    cafeteriaDTO.brand(),
-                    cafeteriaDTO.location(),
-                    cafeteriaDTO.rating(),
-                    cafeteriaDTO.countReview(),
-                    cafeteriaDTO.phoneNumber()
-            );
+        	return CafeteriaEntity.builder()
+        	        .id(cafeteriaDTO.id())
+        	        .name(cafeteriaDTO.name())
+        	        .brand(cafeteriaDTO.brand())
+        	        .location(cafeteriaDTO.location())
+        	        .rating(cafeteriaDTO.rating())
+        	        .countReview(cafeteriaDTO.countReview())
+        	        .phoneNumber(cafeteriaDTO.phoneNumber())
+        	        .build();
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaEntity", e);
         }
