@@ -1,10 +1,16 @@
 package com.cafe.backend.entity.cafeteria;
 
+import java.util.Set;
+
+import com.cafe.backend.entity.order_product.OrderProductEntity;
+import com.cafe.backend.entity.product.ProductEntity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
 /**
  * {@code Cafeteria} is an abstract entity class.
+ * 
  * @author AngelStoynov
  */
 
@@ -14,8 +20,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 
 public class CafeteriaEntity {
 
@@ -41,4 +45,10 @@ public class CafeteriaEntity {
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<ProductEntity> products;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

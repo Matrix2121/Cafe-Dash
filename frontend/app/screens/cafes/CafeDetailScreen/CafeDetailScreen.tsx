@@ -1,40 +1,32 @@
 import React from 'react';
-import { ActivityIndicator, Image } from 'react-native';
+
+import { ActivityIndicator, Image, ImageSourcePropType } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
+import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './CafeDetailScreen.style';
 import useCafeLong from '@/app/hooks/useCafeLong';
 import useCafeImage from '@/app/hooks/useCafeImage';
+import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
-const CafeDetailScreen = ({ route }: { route: { params: { cafeId: number } } }) => {
-  const { cafeId } = route.params;
-  const { cafeLong, loading, error } = useCafeLong(cafeId);
-  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafeId);
+type CafeDetailRouteProp = RouteProp<RootStackParamList, 'CafeDetailScreen'>;
 
-  if (loading || loadingImage) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#444444" />
-        <Text>Loading cafe details...</Text>
-      </View>
-    );
-  }
+interface CafeDetailScreenProps {
+  route: CafeDetailRouteProp;
+}
 
-  if (error || errorImage) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>
-          {error || errorImage || 'Failed to load cafe data'}
-        </Text>
-      </View>
-    );
-  }
+const CafeDetailScreen : React.FC<CafeDetailScreenProps> = ({route}) => {
+  const { id } = route.params;
+  const { cafeLong, loading, error } = useCafeLong(id);
+  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(id);
 
-  if (!cafeLong || !imageUrl) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>No cafe data available.</Text>
-      </View>
-    );
+  const isLoading = loading || loadingImage;
+  const combinedError = error || errorImage;
+  const hasData = !!cafeLong && !!imageUrl;
+
+
+  if (isLoading || combinedError || !hasData) {
+    return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
   }
   
   const sections = [
@@ -58,8 +50,9 @@ const CafeDetailScreen = ({ route }: { route: { params: { cafeId: number } } }) 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{cafeLong.name}</Text>
+        {/*IMAGE SHOULD NOT BE any or ImageSourcePropType*/}
       <Image
-        source={imageUrl}
+        source={imageUrl as ImageSourcePropType}
         style={styles.headerImage}
         resizeMode="cover"
         onError={() => console.log('Error loading image')}

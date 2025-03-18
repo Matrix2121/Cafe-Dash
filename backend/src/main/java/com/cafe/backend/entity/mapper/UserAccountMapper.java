@@ -3,7 +3,7 @@ package com.cafe.backend.entity.mapper;
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.dto.UserAccountDTO;
-import com.cafe.backend.entity.account.UserAccountEntity;
+import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;

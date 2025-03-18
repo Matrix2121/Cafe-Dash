@@ -1,42 +1,46 @@
 package com.cafe.backend.entity.order;
 
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.enums.OrderStatusEnum;
-import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.Formula;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.LocalDateTime;
-import java.util.Set;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
- * {@code Order} is an entity class.
- * @author AngelStoynov
+ * @author ZapryanZapryanov
  */
 
-@Data
 @Entity
-@Builder
 @Table(name = "orders")
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "amount", updatable = false, insertable = false)
-    @Formula("(SELECT COALESCE(SUM(p.price), 0) FROM order_product op " +
-            "JOIN product p ON op.product_id = p.id " +
-            "WHERE op.order_id = orders.id) " +
-            "* (1 - COALESCE(orders.discount, 0) / 100) + COALESCE(orders.tip_amount, 0)")
-    private double amount;
 
     @Column(name = "discount")
     private int discount;
@@ -49,17 +53,32 @@ public class OrderEntity {
     private OrderStatusEnum status;
 
     @Column(name = "tip_amount")
-    private int tip;
+    private double tip;
 
     @ManyToOne
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id", nullable = false)
     private CafeteriaEntity cafeteria;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private UserEntity user;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private Set<ProductEntity> products;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<OrderProductEntity> orderProducts;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderEntity that = (OrderEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -8,11 +8,13 @@ import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
 import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
 import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen'
 import ProtectedRoute from './ProtectedRoute';
+import ProfileScreen from "@/app/screens/profile/ProfileScreen";
 
 export type RootStackParamList = {
   LoginScreen: undefined;
-  RegisterScren: undefined;
+  RegisterScreen: undefined;
   MainHubScreen: undefined;
+  ProfileScreen: { username: string; age: number; userRole: string };
   CafesListScreen: undefined;
   CafeDetailScreen: {cafeId: number};
   CafeMenuScreen: {cafeId: number};
@@ -31,7 +33,7 @@ const Navigation = () => {
         />
 
         <Stack.Screen
-          name="RegisterScren"
+          name="RegisterScreen"
           component={RegisterScreen}
           options={{ title: 'Sign Up' }}
         />
@@ -63,6 +65,8 @@ const Navigation = () => {
           name ="CafeMenuScreen"
           component={CafeMenuScreen}
         />
+
+        <Stack.Screen name = "ProfileScreen" component={ProfileScreen}/>
       </Stack.Navigator>
   );
 };

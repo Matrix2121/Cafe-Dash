@@ -1,6 +1,7 @@
 package com.cafe.backend.controller;
 
 import com.cafe.backend.dto.CafeteriaDTO;
+import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.CafeteriaService;
@@ -11,16 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * The {@code CafeteriaController} serves as the RESTful API entry point for managing cafeterias.
- * <p>This controller handles HTTP requests from the frontend and interacts with the service layer
- * to perform CRUD operations on products.</p>
+ * The {@code CafeteriaController} serves as the RESTful API entry point for
+ * managing cafeterias.
+ * <p>
+ * This controller handles HTTP requests from the frontend and interacts with
+ * the service layer
+ * to perform CRUD operations on products.
+ * </p>
  *
  * @author AngelStoynov
  */
 
 @RestController
 @RequestMapping("/api/cafeterias")
-
 public class CafeteriaController {
 
     @Autowired
@@ -46,7 +50,15 @@ public class CafeteriaController {
 
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public CafeteriaDTO updateCafeteria(@PathVariable("id") Long id, @RequestBody CafeteriaDTO updatedCafeteriaDTO) throws NotFoundException, BadRequestException {
+    public CafeteriaDTO updateCafeteria(@PathVariable("id") Long id, @RequestBody CafeteriaDTO updatedCafeteriaDTO)
+            throws NotFoundException, BadRequestException {
         return cafeteriaService.updateCafeteria(id, updatedCafeteriaDTO);
+    }
+
+    @GetMapping("/{cafeteriaId}/products")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<ProductDTO> getAllProductsForCafeteriaId(@PathVariable("cafeteriaId") Long id) 
+            throws BadRequestException, NotFoundException {
+        return cafeteriaService.getAllProductsForCafeteriaId(id);
     }
 }

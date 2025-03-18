@@ -1,66 +1,53 @@
 package com.cafe.backend.entity.mapper;
 
-import com.cafe.backend.dto.CafeteriaDTO;
-import com.cafe.backend.dto.OrderDTO;
-import com.cafe.backend.dto.ProductDTO;
-import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.order.OrderEntity;
-import com.cafe.backend.entity.product.ProductEntity;
-import com.cafe.backend.exception.DataMappingException;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.dto.OrderProductDTO;
+import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.order_product.OrderProductEntity;
+
+/**
+ * @author ZapryanZapryanov
+ */
+
 public class OrderMapper {
-
-    private OrderMapper() {
-        throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
+    public static OrderDTO toDTO(OrderEntity orderEntity) {
+        if (orderEntity == null) return null;
+       Set<OrderProductDTO> orderProductDTOs = new HashSet<OrderProductDTO>();
+       Double totalPrice = 0.0;
+       Set<OrderProductEntity> orderProductEntities = orderEntity.getOrderProducts();
+       if(orderProductEntities == null) {
+    	   return null; // exception
+       }
+       for(OrderProductEntity orderProductEntity : orderProductEntities) {
+    	   orderProductDTOs.add(OrderProductMapper.toDTO(orderProductEntity));
+    	   totalPrice += orderProductEntity.getProductPrice()*orderProductEntity.getProductQuantity();
+       }
+       OrderDTO dto = new OrderDTO(
+                orderEntity.getId(),
+                orderEntity.getDiscount(),
+                orderEntity.getReadyPickupTime(),
+                orderEntity.getStatus(),
+                orderEntity.getTip(),
+                orderEntity.getUser().getId(),
+                orderEntity.getCafeteria().getId(),
+                totalPrice,
+                orderProductDTOs
+        );
+       return dto;
     }
 
-    public static OrderDTO mapToOrderDTO(OrderEntity orderEntity) throws DataMappingException {
-        try {
-            CafeteriaDTO cafeteriaDTO = CafeteriaMapper.mapToCafeteriaDTO(orderEntity.getCafeteria());
-            Set<ProductDTO> productDTOSet = new HashSet<>();
+    public static OrderEntity toEntity(OrderDTO orderDTO) {
+        if (orderDTO == null) return null;
 
-            for (ProductEntity productEntity: orderEntity.getProducts()) {
-                productDTOSet.add(ProductMapper.mapToProductDTO(productEntity));
-            }
-
-            return new OrderDTO(
-                    orderEntity.getId(),
-                    orderEntity.getAmount(),
-                    orderEntity.getDiscount(),
-                    orderEntity.getReadyPickupTime(),
-                    orderEntity.getStatus(),
-                    orderEntity.getTip(),
-                    cafeteriaDTO,
-                    productDTOSet
-            );
-
-        } catch (DataMappingException e) {
-            throw new DataMappingException("Could not map to orderDTO", e);
-        }
-    }
-
-    public static OrderEntity mapToEntity(OrderDTO orderDTO) throws DataMappingException {
-        try {
-            CafeteriaEntity cafeteria = CafeteriaMapper.mapToCafeteria(orderDTO.cafeteria());
-            Set<ProductEntity> productEntities = new HashSet<>();
-            for (ProductDTO product: orderDTO.products()) {
-                productEntities.add(ProductMapper.mapToProduct(product));
-            }
-            return new OrderEntity(
-                    orderDTO.id(),
-                    orderDTO.amount(),
-                    orderDTO.discount(),
-                    orderDTO.expectedDelivery(),
-                    orderDTO.orderStatus(),
-                    orderDTO.tip(),
-                    cafeteria,
-                    productEntities
-            );
-        } catch (DataMappingException e) {
-            throw new DataMappingException("Could not map to orderEntity.", e);
-        }
+        return OrderEntity.builder()
+                .id(orderDTO.id())
+                .discount(orderDTO.discount())
+                .readyPickupTime(orderDTO.readyPickupTime())
+                .status(orderDTO.status())
+                .tip(orderDTO.tip())
+                .build();
     }
 }

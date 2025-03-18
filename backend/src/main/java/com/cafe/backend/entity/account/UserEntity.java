@@ -40,7 +40,6 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderEntity> orders = new HashSet<>();
-
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

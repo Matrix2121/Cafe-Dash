@@ -4,11 +4,11 @@ package com.cafe.backend.dto;
  * @author AngelStoynov
  */
 public record CafeteriaDTO(
-        Long id,
-        String name,
-        String brand,
-        String location,
-        double rating,
-        int countReview,
-        String phoneNumber
+        Long id, // null for creation
+        String name, // required for creation
+        String brand, // required for creation
+        String location, // required for creation
+        double rating, // 0.0 for creation
+        int countReview, // 0 required for creation
+        String phoneNumber // required for creation
 ) { }

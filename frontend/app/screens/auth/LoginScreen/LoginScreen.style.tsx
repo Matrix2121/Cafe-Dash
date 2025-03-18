@@ -14,43 +14,58 @@ export default StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 50,
+        paddingTop: 50,
     },
     logo: {
         width: 100,
         height: 100,
         marginBottom: 20,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: '#444444',
+        elevation: 10,
+        shadowColor: 'black',
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+    },
+    loginContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(142,129,129,0.4)',
+        width: 340,
+        height: 400,
+        borderRadius: 20,
+        margin: 0
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 20,
-        color: '#444444',
-        backgroundColor: '#CECECC',
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#444444',
+        color: "white",
+        borderBottomColor: '#CECECC',
+        borderBottomWidth: 3,
         padding: 5,
     },
     input: {
-        width: '130%',
+        width: 300,
         marginBottom: 10,
+        marginHorizontal: 30,
         backgroundColor: '#CECECC',
+        borderColor: '#444444',
     },
     loginButton: {
         marginTop: 30,
-        width: '100%',
+        width: 200,
         backgroundColor: '#444444',
     },
     registerButton: {
         marginTop: 10,
-        width: '100%',
+        width: 200,
         borderColor: '#444444',
-        borderWidth: 2.5,
+        borderWidth: 2,
         backgroundColor: '#CECECC',
+    },
+    highlight: {
+        color: "#444444",
+        fontWeight: "bold",
     },
     errorText: {
         color: '#444444',
@@ -72,6 +87,6 @@ export default StyleSheet.create({
         fontSize: 30
     },
     error: {
-        
+
     }
 });

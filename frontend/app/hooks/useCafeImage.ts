@@ -1,9 +1,9 @@
 // src/hooks/useCafeImage.ts
-import { useEffect, useState } from 'react';
-import api from '../services/apiClient';
+import { useEffect, useState } from "react";
+import api from "../services/apiClient";
 
 const useCafeImage = (cafeId: number) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -24,11 +24,10 @@ const useCafeImage = (cafeId: number) => {
     setLoading(true);
 
     setTimeout(() => {
-      setImageUrl(require('../assets/images/logo.png'))
+      setImageUrl(require("../assets/images/logo.png"));
       setError(null);
       setLoading(false);
     }, 1000);
-
   }, [cafeId]);
 
   return { imageUrl, loading, error };

@@ -5,15 +5,16 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
- * @author AngelStoynov
+ * @author ZapryanZapryanov
  */
 public record OrderDTO(
         Long id,
-        double amount,
-        int discount,
-        LocalDateTime expectedDelivery,
-        OrderStatusEnum orderStatus,
-        int tip,
-        CafeteriaDTO cafeteria,
-        Set<ProductDTO> products
-) { }
+        int discount, // 0.0 for creation
+        LocalDateTime readyPickupTime, // required for creation
+        OrderStatusEnum status, // PROCESSING for creation
+        double tip, // 0.0 for creation
+        Long cafeteriaId,
+        Long userId,
+        double totalPrice,
+        Set<OrderProductDTO> orderProducts
+) {}
