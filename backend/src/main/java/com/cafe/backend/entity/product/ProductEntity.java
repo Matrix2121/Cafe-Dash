@@ -1,11 +1,7 @@
 package com.cafe.backend.entity.product;
 
-import java.util.Set;
-
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.enums.ProductTypeEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.*;
