@@ -8,7 +8,7 @@ import { CafeShort } from "@/app/types/items";
 import { Text, Pressable, View } from "react-native";
 import { ActivityIndicator, Card } from "react-native-paper";
 import useCafeImage from "@/app/hooks/useCafeImage";
-import styles from "../cafeCard/cafeCard.style";
+import styles from "./CafeCard.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 const CafeCard = ({ id, name, location, rating, reviewCount }: CafeShort) => {

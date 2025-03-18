@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ActivityIndicator, Image, ImageSourcePropType } from 'react-native';
+import { Image, ImageSourcePropType } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';
@@ -16,9 +16,9 @@ interface CafeDetailScreenProps {
 }
 
 const CafeDetailScreen : React.FC<CafeDetailScreenProps> = ({route}) => {
-  const { id } = route.params;
-  const { cafeLong, loading, error } = useCafeLong(id);
-  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(id);
+  const { cafeId } = route.params;
+  const { cafeLong, loading, error } = useCafeLong(cafeId);
+  const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafeId);
 
   const isLoading = loading || loadingImage;
   const combinedError = error || errorImage;
