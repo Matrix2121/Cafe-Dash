@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.dto.UserAccountDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.mapper.OrderMapper;
+import com.cafe.backend.entity.mapper.RegisterUserMapper;
 import com.cafe.backend.entity.mapper.RoleMapper;
 import com.cafe.backend.entity.mapper.UserAccountMapper;
 import com.cafe.backend.entity.order.OrderEntity;
@@ -39,6 +41,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserAccountDTO createUser(UserAccountDTO userDTO) throws BadRequestException {
         UserEntity user = UserAccountMapper.ToEntity(userDTO);
+        user.setId(null);
+        user.setOrders(null);
+        UserEntity savedUser = userRepository.save(user);
+        return UserAccountMapper.ToDTO(savedUser);
+    }
+    
+    @Override
+    public UserAccountDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException {
+        UserEntity user = RegisterUserMapper.toEntity(registerUserDTO);
         user.setId(null);
         user.setOrders(null);
         UserEntity savedUser = userRepository.save(user);

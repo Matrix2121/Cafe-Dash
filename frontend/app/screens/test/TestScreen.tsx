@@ -44,7 +44,11 @@ const TestScreen = () => {
                 <Pressable style={styles.testButton} onPress={() => navigateToScreen("ProfileScreen", { userRole: 'Customer', username: 'Angel',  age: 25})}>
                     <Text style={styles.testButtonText}>{"ProfileScreen"}</Text>
                 </Pressable>
+                <Pressable style={styles.testButton} onPress={() => navigateToScreen("CreateCafeteriaScreen")}>
+                    <Text style={styles.testButtonText}>{("CreateCafeteriaScreen")}</Text>
+                </Pressable>
             </View>
+            
         </ScrollView>
     );
 };
