@@ -1,9 +1,13 @@
 package com.cafe.backend.entity.order;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Set;
+
+import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.enums.OrderStatusEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
