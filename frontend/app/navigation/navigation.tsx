@@ -6,8 +6,9 @@ import TestScreen from '../screens/test/TestScreen';
 import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
 import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
 import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
-import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen'
+import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen';;
 import ProtectedRoute from './ProtectedRoute';
+import CreateCafeteriaScreen from '../screens/cafes/CafeCreateScreen/CreateCafeScreen';
 import ProfileScreen from "@/app/screens/profile/ProfileScreen";
 
 export type RootStackParamList = {
@@ -16,9 +17,11 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   ProfileScreen: { username: string; age: number; userRole: string };
   CafesListScreen: undefined;
-  CafeDetailScreen: {id: number};
-  CafeMenuScreen: {id: number};
+  CafeDetailScreen: {cafeId: number};
+  CafeMenuScreen: {cafeId: number};
   TestScreen: undefined;
+  AdminCreateCafeteria: undefined;
+  CreateCafeteriaScreen: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -42,9 +45,7 @@ const Navigation = () => {
           name="MainHubScreen"
           options={{ headerShown: false }}>
           {() => (
-            <ProtectedRoute>
               <MainHubScreen />
-            </ProtectedRoute>
           )}
         </Stack.Screen>
         
@@ -66,6 +67,11 @@ const Navigation = () => {
         <Stack.Screen
           name ="CafeMenuScreen"
           component={CafeMenuScreen}
+        />
+
+        <Stack.Screen
+          name ="CreateCafeteriaScreen"
+          component={CreateCafeteriaScreen}
         />
 
         <Stack.Screen name = "ProfileScreen" component={ProfileScreen}/>

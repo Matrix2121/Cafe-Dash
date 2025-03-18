@@ -1,9 +1,10 @@
 package com.cafe.backend.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.cafe.backend.entity.account.UserEntity;
 
-public interface UserRepository extends JpaRepository<UserEntity, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 }

@@ -17,27 +17,52 @@ public class UserAccountMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static UserAccountDTO mapToUserAccountDTO(UserEntity account) throws DataMappingException {
+    public static UserAccountDTO ToDTO(UserEntity userEntity) throws DataMappingException {
         try {
+            if (userEntity == null) return null;
 
             Set<RoleDTO> roleDTOS = new HashSet<>();
-            for (RoleEntity role: account.getRoles()) {
+            for (RoleEntity role : userEntity.getRoles()) {
                 roleDTOS.add(RoleMapper.toDTO(role));
             }
 
             Set<OrderDTO> orderDTOS = new HashSet<>();
-            for (OrderEntity order: account.getOrders()) {
+            for (OrderEntity order : userEntity.getOrders()) {
                 orderDTOS.add(OrderMapper.toDTO(order));
             }
 
             return new UserAccountDTO(
-                    account.getId(),
-                    account.getUsername(),
+                    userEntity.getId(),
+                    userEntity.getUsername(),
                     roleDTOS,
-                    orderDTOS
-            );
+                    orderDTOS);
         } catch (Exception e) {
             throw new DataMappingException("Cannot map userAccount to dto.", e);
+        }
+    }
+
+    public static UserEntity ToEntity(UserAccountDTO userDTO) throws DataMappingException {
+        try{
+            if (userDTO == null) return null;
+            
+            Set<RoleEntity> roleEntities = new HashSet<>();
+            for(RoleDTO role : userDTO.role()){
+                roleEntities.add(RoleMapper.toEntity(role));
+            }
+
+            Set<OrderEntity> orderEntities = new HashSet<>();
+            for(OrderDTO order : userDTO.orders()){
+                orderEntities.add(OrderMapper.toEntity(order));
+            }
+
+        return UserEntity.builder()
+                .id(userDTO.id())
+                .username(userDTO.username())
+                .roles(roleEntities)
+                .orders(orderEntities)
+                .build();
+        } catch (Exception e){
+            throw new DataMappingException("Cannot map userAccount to entity.", e);
         }
     }
 }
