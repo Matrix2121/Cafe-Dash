@@ -10,5 +10,4 @@ public record UserAccountDTO(
         String username,
         Set<RoleDTO> role,
         Set<OrderDTO> orders
-) {
-}
+) {}
