@@ -23,7 +23,10 @@ public class CafeteriaMapper {
                     cafeteria.getLocation(),
                     cafeteria.getRating(),
                     cafeteria.getCountReview(),
-                    cafeteria.getPhoneNumber());
+                    cafeteria.getPhoneNumber(),
+                    cafeteria.getOpeningHour(),
+                    cafeteria.getClosingHour()
+            );
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaDTO", e);
         }
@@ -39,6 +42,8 @@ public class CafeteriaMapper {
                     .rating(cafeteriaDTO.rating())
                     .countReview(cafeteriaDTO.countReview())
                     .phoneNumber(cafeteriaDTO.phoneNumber())
+                    .openingHour(cafeteriaDTO.openingHour())
+                    .closingHour(cafeteriaDTO.closingHour())
                     .build();
         } catch (Exception e) {
             throw new DataMappingException("Could not map to cafeteriaEntity", e);
