@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3, // For Android shadow
+    width: "49%",
+    elevation: 3,
   },
   titleStyle: {
     fontSize: theme.fontSizes.title,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',        // Full width of container
-    height: 130,          // Fixed height for consistency
+    height: 240,          // Fixed height for consistency
     borderRadius: 8,      // Match your card border radius
     marginBottom: 16,     // Space between image and content
     backgroundColor: '#CECECC', // Secondary color for loading state
