@@ -5,6 +5,13 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#F5F5F5",
   },
+  gridContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "100%",
+    justifyContent: "space-evenly", // или "flex-start" ако искаш по-плътно
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',

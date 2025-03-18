@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Cafe} from '../types/items';
 import axios from "axios";
 import {url} from "@/app/common/constants";
 
-const useCafesShort = () => {
+const useCafes = (id?: number) => {
     const [cafes, setCafes] = useState<Cafe[]>([]);
     const [cafe, setCafe] = useState<Cafe | null>(null);
     const [loading, setLoading] = useState(true);
@@ -34,7 +34,17 @@ const useCafesShort = () => {
             });
     }
 
-    return {cafes, cafe, fetchAllCafes, fetchCafeById, loading, error};
+    useEffect(() => {
+        fetchAllCafes()
+    }, []);
+
+    useEffect(() => {
+        if (id != null) {
+            fetchCafeById(id);
+        }
+    }, []);
+
+    return {cafes, cafe, loading, error};
 };
 
-export default useCafesShort;
+export default useCafes;
