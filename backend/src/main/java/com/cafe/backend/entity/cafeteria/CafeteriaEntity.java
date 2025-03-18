@@ -1,5 +1,6 @@
 package com.cafe.backend.entity.cafeteria;
 
+import java.time.LocalTime;
 import java.util.Set;
 
 import com.cafe.backend.entity.product.ProductEntity;
@@ -23,7 +24,7 @@ import lombok.*;
 public class CafeteriaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "id")
     private Long id;
 
@@ -44,6 +45,12 @@ public class CafeteriaEntity {
 
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+
+    @Column(name = "opening_hour")
+    private LocalTime openingHour;
+
+    @Column(name = "closing_hour")
+    private LocalTime closingHour;
 
     @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ProductEntity> products;

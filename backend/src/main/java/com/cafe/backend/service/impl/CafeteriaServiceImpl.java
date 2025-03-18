@@ -43,14 +43,14 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         CafeteriaEntity cafeteria = CafeteriaMapper.toEntity(cafeteriaDTO);
         cafeteria.setId(null);
         CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
-        return CafeteriaMapper.toDTO(savedCafeteria);
+        return CafeteriaMapper.mapToDTO(savedCafeteria);
     }
 
     @Override
     public CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
-        return CafeteriaMapper.toDTO(cafeteria);
+        return CafeteriaMapper.mapToDTO(cafeteria);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
         List<CafeteriaDTO> results = new ArrayList<>();
         for (CafeteriaEntity entity : cafeterias) {
-            results.add(CafeteriaMapper.toDTO(entity));
+            results.add(CafeteriaMapper.mapToDTO(entity));
         }
         return results;
     }
@@ -74,7 +74,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id:" + id));
         CafeteriaEntity newUpdatedCafeteria = updateCafeteriaFields(cafeteriaDTO, cafeteria);
-        return CafeteriaMapper.toDTO(newUpdatedCafeteria);
+        return CafeteriaMapper.mapToDTO(newUpdatedCafeteria);
     }
 
     private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {
