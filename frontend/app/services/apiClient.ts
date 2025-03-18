@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Create axios instance with base URL
 const api = axios.create({
-  baseURL: 'localhost:8080/api', // Replace with your backend URL
+  baseURL: 'http://localhost:8080/api', // Replace with your backend URL
 });
 
 // Add request interceptor to inject JWT token

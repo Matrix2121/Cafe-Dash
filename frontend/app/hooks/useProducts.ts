@@ -11,7 +11,7 @@ const useProduct = () => {
         // const fetchProducts = async () => {
         // try {
         //     const response = await api.get(`/items/`);
-        //     setItems(response.data);
+        //     setProducts(response.data);
         // } catch (err) {
         //     setError('Failed to fetch item details');
         // } finally {
@@ -21,7 +21,7 @@ const useProduct = () => {
 
         // fetchProducts();
 
-//MockData start
+   //MockData start
     setLoading(true);
 
     setTimeout(() => {
@@ -59,7 +59,7 @@ const useProduct = () => {
         setError(null);
         setLoading(false);
     }, 1000);
-//MockData end
+   //MockData end
     }, []);
 
     return { products, loading, error };

@@ -6,6 +6,16 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#F8F9FA', // background color
   },
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#CECECC', // Secondary color (same as section header)
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    borderRadius: 8,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -44,6 +54,17 @@ const styles = StyleSheet.create({
   errorText: {
     fontSize: 16,
     color: '#777777', // textSecondary
+  },
+  detailsButton: {
+    backgroundColor: 'transparent', // Match the section header style
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  detailsButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#444444', // Same color as section header text
   },
 });
 

@@ -8,59 +8,21 @@ const useCafesShort = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // const fetchCafesShort = async () => {
-    //   setLoading(true);
+    const fetchCafesShort = async () => {
+      setLoading(true);
       
-    //   try {
-    //     const response = await api.get('/cafes');
-    //     setCafesShort(response.data);
-    //     setError(null);
-    //   } catch (err) {
-    //     setError('Failed to fetch cafes');
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
+      try {
+        const response = await api.get('/cafeterias');
+        setCafesShort(response.data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to fetch cafes');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    // fetchCafesShort();
-
-
-//MockData start
-    setLoading(true);
-
-    setTimeout(() => {
-      setCafesShort([{
-        id: 1,
-        name: "cafene1",
-        location: "zad ftori",
-        rating: 3.4,
-        reviewCount: 32,
-      },{
-        id: 2,
-        name: "cafene2",
-        location: "pred ftori",
-        rating: 3.9,
-        reviewCount: 12,
-      },{
-        id: 3,
-        name: "cafene3",
-        location: "zad ftori",
-        rating: 3.4,
-        reviewCount: 32,
-      },{
-        id: 4,
-        name: "cafene4",
-        location: "pred ftori",
-        rating: 3.9,
-        reviewCount: 12,
-      }]);
-      setError(null);
-      setLoading(false);
-    }, 1000);
-//MockData end
-
-
-
+    fetchCafesShort();
   }, []);
 
   return { cafesShort, loading, error };

@@ -16,8 +16,8 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   ProfileScreen: { username: string; age: number; userRole: string };
   CafesListScreen: undefined;
-  CafeDetailScreen: {id: number};
-  CafeMenuScreen: {id: number};
+  CafeDetailScreen: {cafeId: number};
+  CafeMenuScreen: {cafeId: number};
   TestScreen: undefined;
 };
 
@@ -42,9 +42,7 @@ const Navigation = () => {
           name="MainHubScreen"
           options={{ headerShown: false }}>
           {() => (
-            <ProtectedRoute>
               <MainHubScreen />
-            </ProtectedRoute>
           )}
         </Stack.Screen>
         

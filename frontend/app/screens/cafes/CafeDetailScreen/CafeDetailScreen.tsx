@@ -1,5 +1,6 @@
 import React from 'react';
-import {ActivityIndicator, Image, ImageSourcePropType} from 'react-native';
+
+import { ActivityIndicator, Image, ImageSourcePropType } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { RootStackParamList } from '@/app/navigation/Navigation';
 import { View, Text, ScrollView } from 'react-native';

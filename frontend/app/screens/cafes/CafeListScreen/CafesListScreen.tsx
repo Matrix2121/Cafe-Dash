@@ -7,6 +7,12 @@ import CafeCard from "@/app/components/cafeCard/cafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 const CafesListScreen = () => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const handlePressCafe = (cafeId: number) => {
+    navigation.navigate('CafeMenuScreen', { cafeId });
+  };
+  
   const { cafesShort, loading, error } = useCafesShort();
 
     const hasData = !!cafesShort && cafesShort.length > 0;
@@ -16,22 +22,20 @@ const CafesListScreen = () => {
     }
 
   return (
-    <ScrollView style={styles.mainContainer}>
-      <View>
-        <FlatList
-          data={cafesShort}
-          renderItem={({ item }) => (
-            <CafeCard
-              id={item.id}
-              name={item.name}
-              location={item.location}
-              rating={item.rating}
-              reviewCount={item.reviewCount}
-            />
-          )}
-        />
-      </View>
-    </ScrollView>
+    <FlatList
+      data={cafesShort}
+      renderItem={({ item }) => (
+        <Pressable onPress={() => handlePressCafe(item.id)}>
+          <CafeCard
+            id={item.id}
+            name={item.name}
+            location={item.location}
+            rating={item.rating}
+            reviewCount={item.reviewCount}
+          />
+        </Pressable>
+      )}
+    />
   );
 };
 

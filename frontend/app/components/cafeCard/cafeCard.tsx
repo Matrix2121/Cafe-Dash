@@ -12,7 +12,6 @@ import styles from "../cafeCard/cafeCard.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 const CafeCard = ({ id, name, location, rating, reviewCount }: CafeShort) => {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const { imageUrl, loading, error } = useCafeImage(id);
 
