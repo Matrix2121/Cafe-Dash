@@ -22,6 +22,7 @@ const CafesListScreen = () => {
     );
   }
 
+
   return (
     <ScrollView style={styles.mainContainer}>
       <View style={styles.gridContainer}>
