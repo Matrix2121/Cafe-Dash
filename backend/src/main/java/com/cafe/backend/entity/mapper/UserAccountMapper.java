@@ -34,6 +34,7 @@ public class UserAccountMapper {
             return new UserAccountDTO(
                     userEntity.getId(),
                     userEntity.getUsername(),
+                    userEntity.getEmail(),
                     roleDTOS,
                     orderDTOS);
         } catch (Exception e) {
@@ -58,6 +59,7 @@ public class UserAccountMapper {
         return UserEntity.builder()
                 .id(userDTO.id())
                 .username(userDTO.username())
+                .email(userDTO.email())
                 .roles(roleEntities)
                 .orders(orderEntities)
                 .build();

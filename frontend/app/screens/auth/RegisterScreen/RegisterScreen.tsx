@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation/Navigation';
+import { RootStackParamList } from '@/app/navigation/navigation';
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import CryptoJS from 'crypto-js';
@@ -32,7 +32,6 @@ const RegisterScreen = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        // Sending data as per the new RegisterUserDTO structure:
         body: JSON.stringify({
           username: username,
           email: email,
