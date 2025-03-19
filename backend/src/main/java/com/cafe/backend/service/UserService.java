@@ -1,6 +1,7 @@
 package com.cafe.backend.service;
 
 import com.cafe.backend.dto.UserDTO;
+import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 
@@ -16,4 +17,6 @@ public interface UserService {
     UserDTO updateUser(Long id, UserDTO userDTO) throws BadRequestException, NotFoundException;
 
     UserDTO getUserById(Long id) throws BadRequestException, NotFoundException;
+    
+    UserDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException;
 }
