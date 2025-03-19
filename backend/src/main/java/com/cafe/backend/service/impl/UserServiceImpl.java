@@ -6,6 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
@@ -42,18 +43,22 @@ import com.cafe.backend.service.UserService;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public UserDTO createUser(UserDTO userDTO) throws BadRequestException {
-        UserEntity user = UserMapper.mapToEntity(userDTO);
+        UserEntity user = userMapper.mapToEntity(userDTO);
         user.setId(null);
+        user.setRoles(null);
         user.setOrders(null);
+        user.setReviews(null);
+        user.setDeleted(false);
         UserEntity savedUser = userRepository.save(user);
-        return UserMapper.mapToDTO(savedUser);
+        return userMapper.mapToDTO(savedUser);
     }
     
     @Override
@@ -70,7 +75,7 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         UserEntity updatedUser = updateUserFields(userDTO, user);
-        return UserMapper.mapToDTO(updatedUser);
+        return userMapper.mapToDTO(updatedUser);
     }
 
     private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
@@ -98,7 +103,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserById(Long id) throws BadRequestException, NotFoundException {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Couldnot find user with this id:" + id));
-        return UserMapper.mapToDTO(user);
+        return userMapper.mapToDTO(user);
     }
 
 }

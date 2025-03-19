@@ -39,6 +39,9 @@ public class ReviewEntity {
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
