@@ -6,7 +6,9 @@ import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -35,8 +37,8 @@ public class UserEntity {
     @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
-    // @Column(name = "password", length = 120, nullable = false)
-    // private String password;
+    @Column(name = "password", length = 120, nullable = false)
+    private String password;
 
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -48,7 +50,7 @@ public class UserEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<ReviewEntity> reviews = new HashSet<>();
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
