@@ -16,6 +16,7 @@ const CafesListScreen = () => {
         return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
     }
 
+
   return (
     <ScrollView style={styles.mainContainer}>
         <View style={styles.gridContainer}>

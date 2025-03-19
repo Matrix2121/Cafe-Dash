@@ -5,7 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import { Image, ImageSourcePropType } from "react-native";
 import { Text, Pressable, View } from "react-native";
-import { Card } from "react-native-paper";
+import {Button, Card} from "react-native-paper";
 import useCafeImage from "@/app/hooks/useCafeImage";
 import styles from "../cafeCard/cafeCard.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
@@ -37,6 +37,10 @@ const CafeCard = ({
     );
   }
 
+  const isValidTime = (time: string | null | undefined) => {
+    return !!time && time !== "00:00:00";
+  };
+
   return (
     <Pressable
       style={styles.cardStyle}
@@ -49,15 +53,22 @@ const CafeCard = ({
             source={imageUrl as ImageSourcePropType}
             style={styles.image}
           />
-          <Text style={styles.titleStyle}>{name}</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleStyle}>{name}</Text>
+              {isValidTime(openingHour) && isValidTime(closingHour) && (
+                  <View>
+                    <Text style={styles.timeStyle}>Opening Hours:</Text>
+                    <Text style={styles.timeStyle}>
+                      {openingHour} - {closingHour}
+                    </Text>
+                  </View>
+              )}
+          </View>
           <Text style={styles.locationStyle}>{brand}</Text>
+          <Text style={styles.locationStyle}>{location}</Text>
           <View style={styles.ratingLocationStyle}>
-            <Text style={styles.locationStyle}>{location}</Text>
             <Text style={styles.ratingStyle}>
               ⭐ {rating} ({countReview} reviews)
-            </Text>
-            <Text style={styles.locationStyle}>
-              {openingHour} - {closingHour}
             </Text>
           </View>
         </Card.Content>
