@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import com.cafe.backend.dto.UserDTO;
+import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.UserService;
@@ -29,6 +30,12 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.CREATED)
     public UserDTO createUser(@RequestBody UserDTO userDTO) throws BadRequestException {
         return userService.createUser(userDTO);
+    }
+    
+    @PostMapping("/register")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public UserAccountDTO registerUser(@RequestBody RegisterUserDTO registerUserDTO) throws BadRequestException {
+        return userService.createUser(registerUserDTO);
     }
 
     @PutMapping("/{id}")
