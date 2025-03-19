@@ -1,11 +1,14 @@
 package com.cafe.backend.entity.account;
 
 import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,6 +44,10 @@ public class UserEntity {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderEntity> orders = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
