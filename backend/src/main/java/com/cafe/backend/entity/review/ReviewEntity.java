@@ -16,6 +16,7 @@ import lombok.*;
 @Data
 @Entity
 @Table(name = "review")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 
