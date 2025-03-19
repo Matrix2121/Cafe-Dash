@@ -7,12 +7,8 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.md,
     marginVertical: theme.spacing.sm,
     padding: theme.spacing.xs,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
+
     width: "49%",
-    elevation: 3,
   },
   titleStyle: {
     fontSize: theme.fontSizes.title,
@@ -30,9 +26,9 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
   },
   ratingLocationStyle: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
   image: {
     width: '100%',        // Full width of container
@@ -59,9 +55,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#F8F9FA', // background color
   },
   errorText: {
-    fontSize: 16,
+    fontSize: theme.fontSizes.body,
     color: '#777777', // textSecondary
   },
+  titleContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  timeStyle: {
+    fontSize: theme.fontSizes.subheader,
+    color: theme.colors.textSecondary,
+  }
 });
 
 export default styles;
