@@ -9,6 +9,15 @@ import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.UserService;
 
+/**
+ * The {@code UserController} serves as the RESTful API entry point for managing users.
+ * <p>This controller handles HTTP requests from the frontend and interacts with the service layer
+ * to perform CRUD operations on users.</p>
+ *
+ * @author VasilStoykov
+ */
+
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
