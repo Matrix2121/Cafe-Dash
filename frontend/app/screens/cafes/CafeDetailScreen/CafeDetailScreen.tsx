@@ -15,13 +15,13 @@ interface CafeDetailScreenProps {
 }
 
 const CafeDetailScreen: React.FC<CafeDetailScreenProps> = ({ route }) => {
-  const { id } = route.params;
-  const { cafe, loading, error } = useCafes(id);
+  const { cafeId } = route.params;
+  const { cafe, loading, error } = useCafes(cafeId);
   const {
     imageUrl,
     loading: loadingImage,
     error: errorImage,
-  } = useCafeImage(id);
+  } = useCafeImage(cafeId);
 
   const isLoading = loading || loadingImage;
   const combinedError = error || errorImage;

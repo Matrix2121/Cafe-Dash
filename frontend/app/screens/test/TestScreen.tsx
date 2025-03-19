@@ -23,11 +23,11 @@ const TestScreen = () => {
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.rowContainer}>
-                <Pressable style={styles.testButton} onPress={() => navigateToScreen("CafeDetailScreen", {id: 1})}>
+                <Pressable style={styles.testButton} onPress={() => navigateToScreen("CafeDetailScreen", {cafeId: 1})}>
                     <Text style={styles.testButtonText}>{"CafeDetailScreen"}</Text>
                 </Pressable>
 
-                <Pressable style={styles.testButton} onPress={() => navigateToScreen("CafeMenuScreen", {id: 1})}>
+                <Pressable style={styles.testButton} onPress={() => navigateToScreen("CafeMenuScreen", {cafeId: 1})}>
                     <Text style={styles.testButtonText}>{("CafeMenuScreen")}</Text>
                 </Pressable>
             </View>
