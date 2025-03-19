@@ -3,7 +3,6 @@ package com.cafe.backend.service.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +18,6 @@ import com.cafe.backend.entity.mapper.RoleMapper;
 import com.cafe.backend.entity.mapper.UserMapper;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
-
-import com.cafe.backend.entity.mapper.OrderMapper;
-import com.cafe.backend.entity.mapper.RoleMapper;
-import com.cafe.backend.entity.mapper.UserMapper;
 
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
@@ -62,12 +57,12 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public UserAccountDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException {
+    public UserDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException {
         UserEntity user = RegisterUserMapper.toEntity(registerUserDTO);
         user.setId(null);
         user.setOrders(null);
         UserEntity savedUser = userRepository.save(user);
-        return UserAccountMapper.ToDTO(savedUser);
+        return userMapper.mapToDTO(savedUser);
     }
 
     @Override

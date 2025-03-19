@@ -35,8 +35,8 @@ public class UserEntity {
     @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 
-    // @Column(name = "password", length = 120, nullable = false)
-    // private String password;
+    @Column(name = "password", length = 120, nullable = false)
+    private String password;
 
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

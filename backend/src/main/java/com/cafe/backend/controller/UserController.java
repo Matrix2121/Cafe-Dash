@@ -34,7 +34,7 @@ public class UserController {
     
     @PostMapping("/register")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public UserAccountDTO registerUser(@RequestBody RegisterUserDTO registerUserDTO) throws BadRequestException {
+    public UserDTO registerUser(@RequestBody RegisterUserDTO registerUserDTO) throws BadRequestException {
         return userService.createUser(registerUserDTO);
     }
 

@@ -22,7 +22,7 @@ public class RegisterUserMapper {
             Set<RoleEntity> roleEntities = new HashSet<>();
             if(registerUserDTO.roles() != null) {
             	for (RoleDTO role : registerUserDTO.roles()) {
-                    roleEntities.add(RoleMapper.toEntity(role));
+                    roleEntities.add(RoleMapper.mapToEntity(role));
                 }
             }
 
