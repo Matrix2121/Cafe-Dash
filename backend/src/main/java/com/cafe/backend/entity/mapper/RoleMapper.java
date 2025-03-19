@@ -10,7 +10,7 @@ public class RoleMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static RoleDTO toDTO(RoleEntity role) throws DataMappingException {
+    public static RoleDTO mapToDTO(RoleEntity role) throws DataMappingException {
         if (role == null) {
             throw new DataMappingException("Role cannot be null");
         }
@@ -18,19 +18,18 @@ public class RoleMapper {
         try {
             return new RoleDTO(
                     role.getId(),
-                    role.getRoleName()
-            );
+                    role.getRoleName());
         } catch (Exception e) {
             throw new DataMappingException("Cannot not map to roleDTO", e);
         }
     }
 
-    public static RoleEntity toEntity(RoleDTO roleDTO) throws DataMappingException {
+    public static RoleEntity mapToEntity(RoleDTO roleDTO) throws DataMappingException {
         try {
-        	return RoleEntity.builder()
-        			.id(roleDTO.id())
-        			.roleName(roleDTO.roleName())
-        			.build();
+            return RoleEntity.builder()
+                    .id(roleDTO.id())
+                    .roleName(roleDTO.roleName())
+                    .build();
         } catch (Exception e) {
             throw new DataMappingException("Cannot not map to role", e);
         }

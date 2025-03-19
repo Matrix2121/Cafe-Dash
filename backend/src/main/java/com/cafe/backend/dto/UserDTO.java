@@ -5,7 +5,7 @@ import java.util.Set;
 /**
  * @author AngelStoynov
  */
-public record UserAccountDTO(
+public record UserDTO(
         Long id,
         String username,
         Set<RoleDTO> role,

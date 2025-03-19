@@ -4,23 +4,24 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import jakarta.transaction.Transactional;
 
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.mapper.ReviewMapper;
-import com.cafe.backend.entity.mapper.UserAccountMapper;
 import com.cafe.backend.entity.review.ReviewEntity;
+
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
+
 import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.ReviewRepository;
 import com.cafe.backend.repository.UserRepository;
-import com.cafe.backend.service.ReviewService;
 
-import jakarta.transaction.Transactional;
+import com.cafe.backend.entity.mapper.ReviewMapper;
+import com.cafe.backend.service.ReviewService;
 
 /**
  * {@code ReviewServiceImpl} is class that implements {@link ReviewService}.
@@ -50,13 +51,13 @@ public class ReviewServiceImpl implements ReviewService {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(reviewDTO.cafeteriaId())
                 .orElseThrow(() -> new DataMappingException("Cafeteria not found with ID: " + reviewDTO.cafeteriaId()));
 
-        ReviewEntity review = ReviewMapper.toEntity(reviewDTO, user, cafeteria);
+        ReviewEntity review = ReviewMapper.mapToEntity(reviewDTO, user, cafeteria);
 
         review.setId(null);
         review.setCreatedAt(LocalDateTime.now());
 
         ReviewEntity savedReview = reviewRepository.save(review);
-        return ReviewMapper.toDTO(savedReview);
+        return ReviewMapper.mapToDTO(savedReview);
     }
 
     @Override
@@ -65,10 +66,10 @@ public class ReviewServiceImpl implements ReviewService {
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find review with this id:" + id));
 
         ReviewEntity updatedReview = updateReviewFields(reviewDTO, review);
-        return ReviewMapper.toDTO(updatedReview);
+        return ReviewMapper.mapToDTO(updatedReview);
     }
 
-    private ReviewEntity updateReviewFields(ReviewDTO newReviewDTO, ReviewEntity review) throws DataMappingException{
+    private ReviewEntity updateReviewFields(ReviewDTO newReviewDTO, ReviewEntity review) throws DataMappingException {
         try {
             review.setTitle(newReviewDTO.title());
             review.setBody(newReviewDTO.body());

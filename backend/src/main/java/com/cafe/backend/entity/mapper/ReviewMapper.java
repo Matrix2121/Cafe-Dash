@@ -14,7 +14,7 @@ import com.cafe.backend.exception.DataMappingException;
 
 public class ReviewMapper {
 
-    public static ReviewDTO toDTO(ReviewEntity reveiwEntity) {
+    public static ReviewDTO mapToDTO(ReviewEntity reveiwEntity) {
         if (reveiwEntity == null)
             return null;
 
@@ -28,7 +28,8 @@ public class ReviewMapper {
                 reveiwEntity.getCafeteria().getId());
     }
 
-    public static ReviewEntity toEntity(ReviewDTO reviewDTO, UserEntity user, CafeteriaEntity cafeteria) throws DataMappingException {
+    public static ReviewEntity mapToEntity(ReviewDTO reviewDTO, UserEntity user, CafeteriaEntity cafeteria)
+            throws DataMappingException {
         try {
             if (reviewDTO == null)
                 return null;

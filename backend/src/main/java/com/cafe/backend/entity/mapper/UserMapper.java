@@ -2,7 +2,7 @@ package com.cafe.backend.entity.mapper;
 
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RoleDTO;
-import com.cafe.backend.dto.UserAccountDTO;
+import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
@@ -11,27 +11,28 @@ import com.cafe.backend.exception.DataMappingException;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UserAccountMapper {
+public class UserMapper {
 
-    private UserAccountMapper() {
+    private UserMapper() {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static UserAccountDTO ToDTO(UserEntity userEntity) throws DataMappingException {
+    public static UserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
         try {
-            if (userEntity == null) return null;
+            if (userEntity == null)
+                return null;
 
             Set<RoleDTO> roleDTOS = new HashSet<>();
             for (RoleEntity role : userEntity.getRoles()) {
-                roleDTOS.add(RoleMapper.toDTO(role));
+                roleDTOS.add(RoleMapper.mapToDTO(role));
             }
 
             Set<OrderDTO> orderDTOS = new HashSet<>();
             for (OrderEntity order : userEntity.getOrders()) {
-                orderDTOS.add(OrderMapper.toDTO(order));
+                orderDTOS.add(OrderMapper.mapToDTO(order));
             }
 
-            return new UserAccountDTO(
+            return new UserDTO(
                     userEntity.getId(),
                     userEntity.getUsername(),
                     roleDTOS,
@@ -41,27 +42,28 @@ public class UserAccountMapper {
         }
     }
 
-    public static UserEntity ToEntity(UserAccountDTO userDTO) throws DataMappingException {
-        try{
-            if (userDTO == null) return null;
-            
+    public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
+        try {
+            if (userDTO == null)
+                return null;
+
             Set<RoleEntity> roleEntities = new HashSet<>();
-            for(RoleDTO role : userDTO.role()){
-                roleEntities.add(RoleMapper.toEntity(role));
+            for (RoleDTO role : userDTO.role()) {
+                roleEntities.add(RoleMapper.mapToEntity(role));
             }
 
             Set<OrderEntity> orderEntities = new HashSet<>();
-            for(OrderDTO order : userDTO.orders()){
-                orderEntities.add(OrderMapper.toEntity(order));
+            for (OrderDTO order : userDTO.orders()) {
+                orderEntities.add(OrderMapper.mapToEntity(order));
             }
 
-        return UserEntity.builder()
-                .id(userDTO.id())
-                .username(userDTO.username())
-                .roles(roleEntities)
-                .orders(orderEntities)
-                .build();
-        } catch (Exception e){
+            return UserEntity.builder()
+                    .id(userDTO.id())
+                    .username(userDTO.username())
+                    .roles(roleEntities)
+                    .orders(orderEntities)
+                    .build();
+        } catch (Exception e) {
             throw new DataMappingException("Cannot map userAccount to entity.", e);
         }
     }
