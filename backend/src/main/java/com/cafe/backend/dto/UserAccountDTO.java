@@ -8,6 +8,7 @@ import java.util.Set;
 public record UserAccountDTO(
         Long id,
         String username,
+        String email,
         Set<RoleDTO> role,
         Set<OrderDTO> orders
 ) {}

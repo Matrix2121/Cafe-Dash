@@ -41,7 +41,7 @@ const TestScreen = () => {
                 </Pressable>
             </View>
             <View style={styles.rowContainer}>
-                <Pressable style={styles.testButton} onPress={() => navigateToScreen("ProfileScreen", { userRole: 'Customer', username: 'Angel',  age: 25})}>
+                <Pressable style={styles.testButton} onPress={() => navigateToScreen("ProfileScreen", { userId: 1})}>
                     <Text style={styles.testButtonText}>{"ProfileScreen"}</Text>
                 </Pressable>
                 <Pressable style={styles.testButton} onPress={() => navigateToScreen("CreateCafeteriaScreen")}>
