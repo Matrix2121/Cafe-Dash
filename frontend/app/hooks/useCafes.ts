@@ -42,7 +42,7 @@ const useCafes = (id?: number) => {
         if (id != null) {
             fetchCafeById(id);
         }
-    }, []);
+    }, [id]);
 
     return {cafes, cafe, loading, error};
 };
