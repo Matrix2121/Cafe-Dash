@@ -11,15 +11,18 @@ import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.dto.UserAccountDTO;
 import com.cafe.backend.entity.account.UserEntity;
+import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.role.RoleEntity;
+
 import com.cafe.backend.entity.mapper.OrderMapper;
 import com.cafe.backend.entity.mapper.RoleMapper;
 import com.cafe.backend.entity.mapper.UserAccountMapper;
-import com.cafe.backend.entity.order.OrderEntity;
-import com.cafe.backend.entity.role.RoleEntity;
+
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
+
 import com.cafe.backend.repository.UserRepository;
 import com.cafe.backend.service.UserService;
 
@@ -53,19 +56,19 @@ public class UserServiceImpl implements UserService {
         return UserAccountMapper.ToDTO(updatedUser);
     }
 
-    private UserEntity updateUserFields(UserAccountDTO updatedUserDTO, UserEntity user) throws DataMappingException {
+    private UserEntity updateUserFields(UserAccountDTO newUserDTO, UserEntity user) throws DataMappingException {
         try {
             Set<RoleEntity> roleEntities = new HashSet<>();
-            for (RoleDTO role : updatedUserDTO.role()) {
+            for (RoleDTO role : newUserDTO.role()) {
                 roleEntities.add(RoleMapper.toEntity(role));
             }
 
             Set<OrderEntity> orderEntities = new HashSet<>();
-            for (OrderDTO order : updatedUserDTO.orders()) {
+            for (OrderDTO order : newUserDTO.orders()) {
                 orderEntities.add(OrderMapper.toEntity(order));
             }
 
-            user.setUsername(updatedUserDTO.username());
+            user.setUsername(newUserDTO.username());
             user.setRoles(roleEntities);
             user.setOrders(orderEntities);
             return userRepository.save(user);
