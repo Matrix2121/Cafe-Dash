@@ -34,23 +34,23 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
     @Autowired
     private CafeteriaRepository cafeteriaRepository;
-    
+
     @Autowired
     private ProductRepository productRepository;
 
     @Override
     public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
-        CafeteriaEntity cafeteria = CafeteriaMapper.toEntity(cafeteriaDTO);
+        CafeteriaEntity cafeteria = CafeteriaMapper.mapToEntity(cafeteriaDTO);
         cafeteria.setId(null);
         CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
-        return CafeteriaMapper.toDTO(savedCafeteria);
+        return CafeteriaMapper.mapToDTO(savedCafeteria);
     }
 
     @Override
     public CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
-        return CafeteriaMapper.toDTO(cafeteria);
+        return CafeteriaMapper.mapToDTO(cafeteria);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
         List<CafeteriaDTO> results = new ArrayList<>();
         for (CafeteriaEntity entity : cafeterias) {
-            results.add(CafeteriaMapper.toDTO(entity));
+            results.add(CafeteriaMapper.mapToDTO(entity));
         }
         return results;
     }
@@ -74,7 +74,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id:" + id));
         CafeteriaEntity newUpdatedCafeteria = updateCafeteriaFields(cafeteriaDTO, cafeteria);
-        return CafeteriaMapper.toDTO(newUpdatedCafeteria);
+        return CafeteriaMapper.mapToDTO(newUpdatedCafeteria);
     }
 
     private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {
@@ -97,7 +97,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         List<ProductDTO> results = new ArrayList<>();
 
         for (ProductEntity entity : products) {
-            results.add(ProductMapper.toDTO(entity));
+            results.add(ProductMapper.mapToDTO(entity));
         }
 
         return results;

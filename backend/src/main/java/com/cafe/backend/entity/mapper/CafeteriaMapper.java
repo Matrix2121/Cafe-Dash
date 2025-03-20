@@ -10,7 +10,7 @@ public class CafeteriaMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static CafeteriaDTO toDTO(CafeteriaEntity cafeteria) throws DataMappingException {
+    public static CafeteriaDTO mapToDTO(CafeteriaEntity cafeteria) throws DataMappingException {
         if (cafeteria == null) {
             throw new DataMappingException("Cafeteria cannot be null");
         }
@@ -29,7 +29,7 @@ public class CafeteriaMapper {
         }
     }
 
-    public static CafeteriaEntity toEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
+    public static CafeteriaEntity mapToEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
         try {
             return CafeteriaEntity.builder()
                     .id(cafeteriaDTO.id())

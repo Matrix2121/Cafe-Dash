@@ -22,57 +22,64 @@ import java.util.List;
 
 /**
  * {@code ProductServiceImpl} is class that implements {@link ProductService}.
- * It uses {@code productRepository} to save/find the necessary data by the provided methods by {@code JpaRepository} which {@link ProductRepository} extends.
+ * It uses {@code productRepository} to save/find the necessary data by the
+ * provided methods by {@code JpaRepository} which {@link ProductRepository}
+ * extends.
+ * 
  * @author AngelStoynov
  */
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
-    @Autowired private ProductRepository productRepository;
-    @Autowired private CafeteriaRepository cafeteriaRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private CafeteriaRepository cafeteriaRepository;
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) throws BadRequestException {
         CafeteriaEntity cafeteria = null;
         if (productDTO.cafeteriaId() != null) {
             cafeteria = cafeteriaRepository.findById(productDTO.cafeteriaId())
-                    .orElseThrow(() -> new DataMappingException("Cafeteria with this id is not found: " + productDTO.cafeteriaId()));
-            
+                    .orElseThrow(() -> new DataMappingException(
+                            "Cafeteria with this id is not found: " + productDTO.cafeteriaId()));
+
         }
-        ProductEntity product = ProductMapper.toEntity(productDTO, cafeteria);
+        ProductEntity product = ProductMapper.mapToEntity(productDTO, cafeteria);
         product.setId(null);
         product.setDeleted(false);
         ProductEntity savedProduct = productRepository.save(product);
-        return ProductMapper.toDTO(savedProduct);
+        return ProductMapper.mapToDTO(savedProduct);
     }
 
     @Override
     public ProductDTO getProductById(Long productId) throws NotFoundException, BadRequestException {
         ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
-        return ProductMapper.toDTO(product);
+        return ProductMapper.mapToDTO(product);
     }
 
     @Override
     public List<ProductDTO> getAllProducts() throws NotFoundException, BadRequestException {
         List<ProductEntity> products = productRepository.findAll();
-        if(products.isEmpty()) {
-        	throw new ResourceNotFoundException("No products found");
+        if (products.isEmpty()) {
+            throw new ResourceNotFoundException("No products found");
         }
         List<ProductDTO> results = new ArrayList<ProductDTO>();
-        for(ProductEntity entity : products) {
-        	results.add(ProductMapper.toDTO(entity));
+        for (ProductEntity entity : products) {
+            results.add(ProductMapper.mapToDTO(entity));
         }
-        return results; 
+        return results;
     }
 
     @Override
-    public ProductDTO updateProduct(Long productId, ProductDTO updatedProduct) throws NotFoundException, BadRequestException {
+    public ProductDTO updateProduct(Long productId, ProductDTO updatedProduct)
+            throws NotFoundException, BadRequestException {
         ProductEntity product = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + productId));
 
         ProductEntity newUpdatedProduct = updateProductFields(product, updatedProduct);
-        return ProductMapper.toDTO(newUpdatedProduct);
+        return ProductMapper.mapToDTO(newUpdatedProduct);
     }
 
     private ProductEntity updateProductFields(ProductEntity product, ProductDTO updatedProduct) {

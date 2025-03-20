@@ -5,9 +5,10 @@ import java.util.Set;
 /**
  * @author AngelStoynov
  */
-public record UserAccountDTO(
+public record UserDTO(
         Long id,
         String username,
         Set<RoleDTO> role,
-        Set<OrderDTO> orders
+        Set<OrderDTO> orders,
+        Set<ReviewDTO> reviews
 ) {}

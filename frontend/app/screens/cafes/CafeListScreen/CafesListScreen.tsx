@@ -1,10 +1,11 @@
 import React from "react";
-import { View, ActivityIndicator, Text, FlatList } from "react-native";
+import { FlatList, Pressable } from "react-native";
 import useCafesShort from "../../../hooks/useCafesShort";
-import styles from "./CafesListScreen.style";
-import { ScrollView } from "react-native-gesture-handler";
 import CafeCard from "@/app/components/cafeCard/cafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
+import { RootStackParamList } from '@/app/navigation/Navigation';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const CafesListScreen = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();

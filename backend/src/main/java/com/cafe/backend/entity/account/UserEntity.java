@@ -1,6 +1,7 @@
 package com.cafe.backend.entity.account;
 
 import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -44,6 +45,10 @@ public class UserEntity {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<OrderEntity> orders = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<ReviewEntity> reviews = new HashSet<>();
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
