@@ -62,7 +62,7 @@ public class UserMapper {
     }
 
     public UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
-        // try {
+        try {
             if (userDTO == null)
                 return null;
             
@@ -95,8 +95,8 @@ public class UserMapper {
                     .orders(orderEntities)
                     .reviews(reviewEntities)
                     .build();
-        // } catch (Exception e) {
-        //     throw new DataMappingException("Cannot map userAccount to entity.", e);
-        // }
+        } catch (Exception e) {
+            throw new DataMappingException("Cannot map userAccount to entity.", e);
+        }
     }
 }
