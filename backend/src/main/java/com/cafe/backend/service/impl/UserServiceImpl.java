@@ -42,18 +42,17 @@ import com.cafe.backend.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Override
     public UserDTO createUser(UserDTO userDTO) throws BadRequestException {
-        UserEntity user = userMapper.mapToEntity(userDTO);
+        UserEntity user = UserMapper.mapToEntity(userDTO);
         user.setId(null);
         user.setRoles(null);
         user.setOrders(null);
         user.setReviews(null);
         user.setDeleted(false);
         UserEntity savedUser = userRepository.save(user);
-        return userMapper.mapToDTO(savedUser);
+        return UserMapper.mapToDTO(savedUser);
     }
     
     @Override
@@ -62,7 +61,7 @@ public class UserServiceImpl implements UserService {
         user.setId(null);
         user.setOrders(null);
         UserEntity savedUser = userRepository.save(user);
-        return userMapper.mapToDTO(savedUser);
+        return UserMapper.mapToDTO(savedUser);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         UserEntity updatedUser = updateUserFields(userDTO, user);
-        return userMapper.mapToDTO(updatedUser);
+        return UserMapper.mapToDTO(updatedUser);
     }
 
     private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserById(Long id) throws BadRequestException, NotFoundException {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Couldnot find user with this id:" + id));
-        return userMapper.mapToDTO(user);
+        return UserMapper.mapToDTO(user);
     }
 
 }
