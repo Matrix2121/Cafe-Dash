@@ -6,10 +6,8 @@ import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.review.ReviewEntity;
 
 import com.cafe.backend.exception.DataMappingException;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
 
 /**
  * @author VasilStoykov
@@ -21,7 +19,6 @@ public class ReviewMapper {
         if (reviewEntity == null) {
             throw new DataMappingException("ReviewEntity cannot be null");
         }
-
         return new ReviewDTO(
                 reviewEntity.getId(),
                 reviewEntity.getTitle(),
@@ -33,7 +30,7 @@ public class ReviewMapper {
         );
     }
 
-    //  Up for discussion
+
     public static ReviewEntity mapToEntity(ReviewDTO reviewDTO) throws DataMappingException {
         if (reviewDTO == null) {
             throw new DataMappingException("ReviewDTO cannot be null");

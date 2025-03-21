@@ -34,14 +34,6 @@ public class UserMapper {
                 orderDTOS.add(OrderMapper.mapToDTO(order));
             }
         }
-
-        Set<ReviewDTO> reviewDTOS = new HashSet<>();
-        if (userEntity.getReviews() != null) {
-            for (ReviewEntity review : userEntity.getReviews()) {
-                reviewDTOS.add(ReviewMapper.mapToDTO(review));
-            }
-        }
-
         return new UserDTO(
                 userEntity.getId(),
                 userEntity.getUsername(),

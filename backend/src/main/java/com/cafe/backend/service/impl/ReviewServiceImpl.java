@@ -36,7 +36,6 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) throws BadRequestException {
         ReviewEntity review = ReviewMapper.mapToEntity(reviewDTO);
-
         review.setId(null);
         review.setCreatedAt(LocalDateTime.now());
 

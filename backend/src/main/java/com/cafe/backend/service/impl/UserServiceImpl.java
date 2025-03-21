@@ -100,5 +100,6 @@ public class UserServiceImpl implements UserService {
             orderEntities.add(OrderMapper.mapToEntity(order));
         }
         return orderEntities;
+
     }
 }
