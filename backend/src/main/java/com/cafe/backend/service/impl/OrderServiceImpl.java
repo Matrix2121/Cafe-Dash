@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.cafe.backend.exception.DataMappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<OrderDTO> getAllOrders() throws ResourceNotFoundException {
+    public List<OrderDTO> getAllOrders() throws ResourceNotFoundException, DataMappingException {
         List<OrderEntity> ordersList = orderRepository.findAllByIsDeletedFalse();
         if (ordersList.isEmpty()) {
             throw new ResourceNotFoundException("No orders found");
@@ -57,13 +58,13 @@ public class OrderServiceImpl implements OrderService {
         return orderDTOs;
     }
 
-    public OrderDTO getOrderById(Long id) throws ResourceNotFoundException {
+    public OrderDTO getOrderById(Long id) throws ResourceNotFoundException, DataMappingException {
         OrderEntity order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
         return OrderMapper.mapToDTO(order);
     }
 
-    public OrderDTO createOrder(OrderDTO orderDTO) throws ResourceNotFoundException {
+    public OrderDTO createOrder(OrderDTO orderDTO) throws ResourceNotFoundException, DataMappingException {
         Set<OrderProductEntity> orderProductEntities = new HashSet<>();
 
         for (OrderProductDTO orderProduct : orderDTO.orderProducts()) {
@@ -103,7 +104,7 @@ public class OrderServiceImpl implements OrderService {
         return OrderMapper.mapToDTO(savedOrder);
     }
 
-    public OrderDTO updateOrder(Long id, OrderDTO updatedOrderDTO) throws ResourceNotFoundException {
+    public OrderDTO updateOrder(Long id, OrderDTO updatedOrderDTO) throws ResourceNotFoundException, DataMappingException {
         OrderEntity order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
         order.setDiscount(updatedOrderDTO.discount());

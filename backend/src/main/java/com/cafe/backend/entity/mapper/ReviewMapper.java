@@ -7,21 +7,20 @@ import com.cafe.backend.entity.review.ReviewEntity;
 
 import com.cafe.backend.exception.DataMappingException;
 
-import com.cafe.backend.repository.CafeteriaRepository;
-import com.cafe.backend.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
+
+/**
+ * @author VasilStoykov
+ */
+
 public class ReviewMapper {
 
-    private final UserRepository userRepository;
-    private final CafeteriaRepository cafeteriaRepository;
-
-    public ReviewDTO mapToDTO(ReviewEntity reviewEntity) {
-        if (reviewEntity == null) return null;
+    public static ReviewDTO mapToDTO(ReviewEntity reviewEntity) throws DataMappingException {
+        if (reviewEntity == null) {
+            throw new DataMappingException("ReviewEntity cannot be null");
+        }
 
         return new ReviewDTO(
                 reviewEntity.getId(),
@@ -34,28 +33,18 @@ public class ReviewMapper {
         );
     }
 
-    public ReviewEntity mapToEntity(ReviewDTO reviewDTO) throws DataMappingException {
-        try {
-            if (reviewDTO == null) return null;
-
-            UserEntity user = userRepository.findById(reviewDTO.userId())
-                    .orElseThrow(() -> new DataMappingException("User not found with ID: " + reviewDTO.userId()));
-
-            CafeteriaEntity cafeteria = cafeteriaRepository.findById(reviewDTO.cafeteriaId())
-                    .orElseThrow(() -> new DataMappingException("Cafeteria not found with ID: " + reviewDTO.cafeteriaId()));
-
-            return ReviewEntity.builder()
-                    .id(reviewDTO.id())
-                    .title(reviewDTO.title())
-                    .body(reviewDTO.body())
-                    .rating(reviewDTO.rating())
-                    .createdAt(reviewDTO.createdAt())
-                    .user(user)
-                    .cafeteria(cafeteria)
-                    .build();
-
-        } catch (Exception e) {
-            throw new DataMappingException("Cannot map Review to entity", e);
+    //  Up for discussion
+    public static ReviewEntity mapToEntity(ReviewDTO reviewDTO) throws DataMappingException {
+        if (reviewDTO == null) {
+            throw new DataMappingException("ReviewDTO cannot be null");
         }
+
+        return ReviewEntity.builder()
+                .id(reviewDTO.id())
+                .title(reviewDTO.title())
+                .body(reviewDTO.body())
+                .rating(reviewDTO.rating())
+                .createdAt(reviewDTO.createdAt())
+                .build();
     }
 }

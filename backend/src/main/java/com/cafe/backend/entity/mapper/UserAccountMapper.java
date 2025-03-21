@@ -1,10 +1,12 @@
 package com.cafe.backend.entity.mapper;
 
 import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.dto.RoleDTO;
-import com.cafe.backend.dto.UserAccountDTO;
+import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
 
@@ -17,44 +19,51 @@ public class UserAccountMapper {
         throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
     }
 
-    public static UserAccountDTO ToDTO(UserEntity userEntity) throws DataMappingException {
-        try {
-            if (userEntity == null) return null;
+    public static UserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
 
-            Set<RoleDTO> roleDTOS = new HashSet<>();
-            for (RoleEntity role : userEntity.getRoles()) {
-                roleDTOS.add(RoleMapper.toDTO(role));
-            }
-
-            Set<OrderDTO> orderDTOS = new HashSet<>();
-            for (OrderEntity order : userEntity.getOrders()) {
-                orderDTOS.add(OrderMapper.toDTO(order));
-            }
-
-            return new UserAccountDTO(
-                    userEntity.getId(),
-                    userEntity.getUsername(),
-                    userEntity.getEmail(),
-                    roleDTOS,
-                    orderDTOS);
-        } catch (Exception e) {
-            throw new DataMappingException("Cannot map userAccount to dto.", e);
+        if (userEntity == null) {
+            throw new DataMappingException("UserEntity cannot be null");
         }
+
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        for (RoleEntity role : userEntity.getRoles()) {
+            roleDTOS.add(RoleMapper.mapToDTO(role));
+        }
+
+        Set<OrderDTO> orderDTOS = new HashSet<>();
+        for (OrderEntity order : userEntity.getOrders()) {
+            orderDTOS.add(OrderMapper.mapToDTO(order));
+        }
+
+        Set<ReviewDTO> reviewDTOS = new HashSet<>();
+        for (ReviewEntity reviewEntity : userEntity.getReviews()) {
+            reviewDTOS.add(ReviewMapper.mapToDTO(reviewEntity));
+        }
+
+        return new UserDTO(
+                userEntity.getId(),
+                userEntity.getUsername(),
+                userEntity.getEmail(),
+                roleDTOS,
+                orderDTOS,
+                reviewDTOS
+        );
     }
 
-    public static UserEntity ToEntity(UserAccountDTO userDTO) throws DataMappingException {
-        try{
-            if (userDTO == null) return null;
-            
-            Set<RoleEntity> roleEntities = new HashSet<>();
-            for(RoleDTO role : userDTO.role()){
-                roleEntities.add(RoleMapper.toEntity(role));
-            }
+    public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
+        if (userDTO == null) {
+            throw new DataMappingException("UserDTO cannot be null");
+        }
 
-            Set<OrderEntity> orderEntities = new HashSet<>();
-            for(OrderDTO order : userDTO.orders()){
-                orderEntities.add(OrderMapper.toEntity(order));
-            }
+        Set<RoleEntity> roleEntities = new HashSet<>();
+        for (RoleDTO role : userDTO.role()) {
+            roleEntities.add(RoleMapper.mapToEntity(role));
+        }
+
+        Set<OrderEntity> orderEntities = new HashSet<>();
+        for (OrderDTO order : userDTO.orders()) {
+            orderEntities.add(OrderMapper.mapToEntity(order));
+        }
 
         return UserEntity.builder()
                 .id(userDTO.id())
@@ -63,8 +72,6 @@ public class UserAccountMapper {
                 .roles(roleEntities)
                 .orders(orderEntities)
                 .build();
-        } catch (Exception e){
-            throw new DataMappingException("Cannot map userAccount to entity.", e);
-        }
+
     }
 }

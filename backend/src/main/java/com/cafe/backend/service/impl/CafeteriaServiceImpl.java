@@ -7,6 +7,7 @@ import com.cafe.backend.entity.mapper.CafeteriaMapper;
 import com.cafe.backend.entity.mapper.ProductMapper;
 import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.BadRequestException;
+import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.CafeteriaRepository;
@@ -87,7 +88,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     }
 
     @Override
-    public List<ProductDTO> getAllProductsForCafeteriaId(Long id) throws ResourceNotFoundException {
+    public List<ProductDTO> getAllProductsForCafeteriaId(Long id) throws ResourceNotFoundException, DataMappingException {
         List<ProductEntity> products = productRepository.findByCafeteriaId(id);
 
         if (products.isEmpty()) {
