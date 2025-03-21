@@ -7,7 +7,6 @@ import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
 import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
 import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
 import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen';;
-import ProtectedRoute from './ProtectedRoute';
 import CreateCafeteriaScreen from '../screens/cafes/CafeCreateScreen/CreateCafeScreen';
 import ProfileScreen from "@/app/screens/profile/ProfileScreen";
 
@@ -15,7 +14,7 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   MainHubScreen: undefined;
-  ProfileScreen: { username: string; age: number; userRole: string };
+  ProfileScreen: { userId: number };
   CafesListScreen: undefined;
   CafeDetailScreen: {cafeId: number};
   CafeMenuScreen: {cafeId: number};

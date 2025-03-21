@@ -1,20 +1,15 @@
 // src/types/item.ts
-export type CafeLong = {
+export type Cafe = {
   id: number;
   name: string;
+  brand: string;
   location: string;
   rating: number;
-  reviewCount: number;
-  phone: string;
-  openingHours: string;
-};
-
-export type CafeShort = {
-  id: number;
-  name: string;
-  location: string;
-  rating: number;
-  reviewCount: number;
+  countReview: number;
+  phoneNumber: string;
+  openingHour: string;
+  closingHour: string;
+  isDeleted: boolean;
 };
 
 export type Product = {
@@ -22,9 +17,44 @@ export type Product = {
   name: string;
   price: number;
   productType: string;
+  cafeteriaId: number;
+  isDeleted: boolean;
 };
 
 export type CartItem = {
   itemId: number;
   quantity: number;
 };
+
+export type User = {
+  id: number;
+  username: string;
+  email: string;
+  role: Role[];
+  orders: Order[];
+}
+
+export type Role = {
+  id: number;
+  roleName: string;
+}
+
+export type Order = {
+  id: number;
+  discount: number;
+  readyPickupTime: string;
+  status: string;
+  tip: number
+  cafeteriaId: number;
+  userId: number;
+  totalPrice: number;
+  orderProducts: OrderProduct[];
+}
+
+export type OrderProduct = {
+  id: number;
+  orderId: number;
+  productId: number;
+  productPrice: number;
+  productQuantity: number;
+}

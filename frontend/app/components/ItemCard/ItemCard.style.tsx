@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     elevation: 3, // For Android
     width: '100%', // Make cards smaller to fit more on the screen
   },
+  cafeteriaContainer: {
+    flex: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+  },
   addButton: {
     position: 'absolute',
     top: 8,
@@ -33,7 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   name: {
-    fontSize: 16, // Smaller font size
+    fontSize: 18, // Smaller font size
     fontWeight: 'bold',
     marginBottom: 4, // Smaller margin
     color: '#333333', // textPrimary
@@ -52,7 +57,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16, // Smaller font size
     fontWeight: 'bold',
-    color: '#444444', // primary
+    color: 'grey', // primary
   },
 });
 
