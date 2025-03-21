@@ -11,20 +11,12 @@ import com.cafe.backend.entity.role.RoleEntity;
 
 import com.cafe.backend.exception.DataMappingException;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.stereotype.Component;
-
-@Component
-@RequiredArgsConstructor
 public class UserMapper {
 
-    private final ReviewMapper reviewMapper;
-
-    public UserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
+    public static UserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
         try {
             if (userEntity == null)
                 return null;
@@ -46,7 +38,7 @@ public class UserMapper {
             Set<ReviewDTO> reviewDTOS = new HashSet<>();
             if(userEntity.getReviews() != null){
                 for (ReviewEntity review : userEntity.getReviews()) {
-                    reviewDTOS.add(reviewMapper.mapToDTO(review));
+                    reviewDTOS.add(ReviewMapper.mapToDTO(review));
                 }
             }
 
@@ -61,39 +53,14 @@ public class UserMapper {
         }
     }
 
-    public UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
+    public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
         try {
             if (userDTO == null)
                 return null;
-            
-            Set<RoleEntity> roleEntities = new HashSet<>();
-            if(userDTO.role() != null){
-                for (RoleDTO role : userDTO.role()) {
-                    roleEntities.add(RoleMapper.mapToEntity(role));
-                }
-            }
-            
-
-            Set<OrderEntity> orderEntities = new HashSet<>();
-            if(userDTO.orders() != null){
-                for (OrderDTO order : userDTO.orders()) {
-                    orderEntities.add(OrderMapper.mapToEntity(order));
-                }
-            }
-
-            Set<ReviewEntity> reviewEntities = new HashSet<>();
-            if(userDTO.reviews() != null){
-                for (ReviewDTO review : userDTO.reviews()) {
-                    reviewEntities.add(reviewMapper.mapToEntity(review));
-                }
-            }
 
             return UserEntity.builder()
                     .id(userDTO.id())
                     .username(userDTO.username())
-                    .roles(roleEntities)
-                    .orders(orderEntities)
-                    .reviews(reviewEntities)
                     .build();
         } catch (Exception e) {
             throw new DataMappingException("Cannot map userAccount to entity.", e);

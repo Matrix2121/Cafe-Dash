@@ -15,9 +15,11 @@ import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
-
+import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.ReviewRepository;
-
+import com.cafe.backend.repository.UserRepository;
+import com.cafe.backend.entity.account.UserEntity;
+import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.mapper.ReviewMapper;
 import com.cafe.backend.service.ReviewService;
 
@@ -36,17 +38,24 @@ import com.cafe.backend.service.ReviewService;
 public class ReviewServiceImpl implements ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ReviewMapper reviewMapper;
+    private final UserRepository userRepository;
+    private final CafeteriaRepository cafeteriaRepository;
 
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) throws BadRequestException {
-        ReviewEntity review = reviewMapper.mapToEntity(reviewDTO);
+        UserEntity user = userRepository.findById(reviewDTO.userId())
+                    .orElseThrow(() -> new DataMappingException("User not found with ID: " + reviewDTO.userId()));
+
+        CafeteriaEntity cafeteria = cafeteriaRepository.findById(reviewDTO.cafeteriaId())
+                .orElseThrow(() -> new DataMappingException("Cafeteria not found with ID: " + reviewDTO.cafeteriaId()));
+
+        ReviewEntity review = ReviewMapper.mapToEntity(reviewDTO, user, cafeteria);
 
         review.setId(null);
         review.setCreatedAt(LocalDateTime.now());
 
         ReviewEntity savedReview = reviewRepository.save(review);
-        return reviewMapper.mapToDTO(savedReview);
+        return ReviewMapper.mapToDTO(savedReview);
     }
 
     @Override
@@ -55,7 +64,7 @@ public class ReviewServiceImpl implements ReviewService {
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find review with this id:" + id));
 
         ReviewEntity updatedReview = updateReviewFields(reviewDTO, review);
-        return reviewMapper.mapToDTO(updatedReview);
+        return ReviewMapper.mapToDTO(updatedReview);
     }
 
     private ReviewEntity updateReviewFields(ReviewDTO newReviewDTO, ReviewEntity review) throws DataMappingException {
@@ -80,7 +89,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         List<ReviewDTO> reviewDTOs = new LinkedList<ReviewDTO>();
         for(ReviewEntity reviewEntity : reviewEntities){
-            reviewDTOs.add(reviewMapper.mapToDTO(reviewEntity));
+            reviewDTOs.add(ReviewMapper.mapToDTO(reviewEntity));
         }
 
         return reviewDTOs;
