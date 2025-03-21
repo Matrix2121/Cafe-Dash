@@ -12,6 +12,9 @@ const styles = StyleSheet.create({
     color: '#333333', // textPrimary
     marginBottom: 16,
   },
+  detailsContainer: {
+    marginBottom: 16,
+  },
   section: {
     backgroundColor: '#FFFFFF', // surface color
     borderRadius: 10,

@@ -45,6 +45,7 @@ public class UserMapper {
             return new UserDTO(
                     userEntity.getId(),
                     userEntity.getUsername(),
+                    userEntity.getEmail(),
                     roleDTOS,
                     orderDTOS,
                     reviewDTOS);
@@ -61,6 +62,7 @@ public class UserMapper {
             return UserEntity.builder()
                     .id(userDTO.id())
                     .username(userDTO.username())
+                    .email(userDTO.email())
                     .build();
         } catch (Exception e) {
             throw new DataMappingException("Cannot map userAccount to entity.", e);

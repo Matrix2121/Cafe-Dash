@@ -1,11 +1,9 @@
 package com.cafe.backend.entity.cafeteria;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalTime;
 import java.util.Set;
 
 import com.cafe.backend.entity.product.ProductEntity;
-import com.cafe.backend.entity.review.ReviewEntity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,7 +24,7 @@ import lombok.*;
 public class CafeteriaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "id")
     private Long id;
 
@@ -48,12 +46,14 @@ public class CafeteriaEntity {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
+    @Column(name = "opening_hour")
+    private LocalTime openingHour;
+
+    @Column(name = "closing_hour")
+    private LocalTime closingHour;
+
     @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ProductEntity> products;
-
-    @Builder.Default
-    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL)
-    private List<ReviewEntity> reviews = new ArrayList<>();
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

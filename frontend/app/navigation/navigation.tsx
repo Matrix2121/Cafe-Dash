@@ -16,7 +16,7 @@ export type RootStackParamList = {
   LoginScreen: undefined;
   RegisterScreen: undefined;
   MainHubScreen: undefined;
-  ProfileScreen: { username: string; age: number; userRole: string };
+  ProfileScreen: { userId: number };
   CafesListScreen: undefined;
   CafeDetailScreen: { cafeId: number };
   CafeMenuScreen: { cafeId: number };

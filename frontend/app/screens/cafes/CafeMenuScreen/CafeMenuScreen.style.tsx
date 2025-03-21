@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   itemContainer: {
-    flex: 1,
+    flex: 2,
     marginRight: 16, // Space between items
   },
   itemList: {

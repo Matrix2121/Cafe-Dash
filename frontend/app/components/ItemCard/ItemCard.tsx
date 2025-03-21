@@ -1,31 +1,30 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
-import { Product } from '../../types/items';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
+import {Product} from '../../types/items';
 import styles from './ItemCard.style';
 
 type ItemCardProps = {
-  item: Product;
+    product: Product;
 };
 
-const ItemCard = ( {item} : ItemCardProps) => {
-  const handleAddToCart = async () => {
-    try {
-      // Add to cart logic here
-      Alert.alert('Success', 'Item added to cart!');
-    } catch (error) {
-      Alert.alert('Error', 'Failed to add item to cart');
-    }
-  };
+const ItemCard = ({product}: ItemCardProps) => {
+    const handleAddToCart = async () => {
+        try {
+            Alert.alert('Success', 'Item added to cart!');
+        } catch (error) {
+            Alert.alert('Error', 'Failed to add product to cart');
+        }
+    };
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
-        <Text style={styles.addButtonText}>+</Text>
-      </TouchableOpacity>
-      <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.price}>${item.price.toFixed(2)}</Text>
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
+                <Text style={styles.addButtonText}>+</Text>
+            </TouchableOpacity>
+            <Text style={styles.name}>{product.name}</Text>
+            <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+        </View>
+    );
 };
 
 export default ItemCard;
