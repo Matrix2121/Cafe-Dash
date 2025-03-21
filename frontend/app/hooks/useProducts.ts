@@ -10,7 +10,7 @@ const useProduct = () => {
     useEffect(() => {
         // const fetchProducts = async () => {
         // try {
-        //     const response = await api.get(`/items/`);
+        //     const response = await api.get(`/products/`);
         //     setProducts(response.data);
         // } catch (err) {
         //     setError('Failed to fetch item details');

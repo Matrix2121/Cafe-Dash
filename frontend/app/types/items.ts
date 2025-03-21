@@ -1,4 +1,3 @@
-// src/types/item.ts
 export type CafeLong = {
   id: number;
   name: string;
@@ -27,4 +26,12 @@ export type Product = {
 export type CartItem = {
   itemId: number;
   quantity: number;
+};
+
+export type Review = {
+  id: number;
+  title: string;
+  body: string;
+  rating: number;
+  createdAt: Date;
 };

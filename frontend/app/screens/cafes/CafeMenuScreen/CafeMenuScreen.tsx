@@ -18,6 +18,10 @@ const CafeMenuScreen = ({ route }: { route: { params: { cafeId: number } } }) =>
       navigation.navigate('CafeDetailScreen', { cafeId });
     };
 
+    const handleShowReviews = (cafeId: number) => {
+      navigation.navigate('CafeReviewScreen', { cafeId });
+    };
+
     const { products, loading, error } = useProducts();
 
     const hasData = !!products && products.length > 0;
@@ -44,12 +48,14 @@ const CafeMenuScreen = ({ route }: { route: { params: { cafeId: number } } }) =>
     <View style={styles.container}>
 
       <View style={styles.headerContainer}>
-        <Text style={styles.title}>Cafe Menu</Text>
-        <TouchableOpacity
-        style={styles.detailsButton}
-        onPress={() => handleShowDetails(cafeId)}
-        >
-          <Text style={styles.detailsButtonText}>View Details</Text>
+        <Text style={styles.title}>Menu</Text>
+
+        <TouchableOpacity style={styles.detailsButton} onPress={() => handleShowReviews(cafeId)}>
+          <Text style={styles.detailsButtonText}>Reviews</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.detailsButton} onPress={() => handleShowDetails(cafeId)}>
+          <Text style={styles.detailsButtonText}>Details</Text>
         </TouchableOpacity>
     </View>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlatList, Pressable } from "react-native";
 import useCafesShort from "../../../hooks/useCafesShort";
-import CafeCard from "@/app/components/cafeCard/cafeCard";
+import CafeCard from "@/app/components/cafeCard/CafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import { RootStackParamList } from '@/app/navigation/Navigation';
 import { useNavigation } from '@react-navigation/native';
@@ -16,11 +16,11 @@ const CafesListScreen = () => {
   
   const { cafesShort, loading, error } = useCafesShort();
 
-    const hasData = !!cafesShort && cafesShort.length > 0;
+  const hasData = !!cafesShort && cafesShort.length > 0;
 
-    if (loading || error || !hasData) {
-        return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
-    }
+  if (loading || error || !hasData) {
+      return <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />;
+  }
 
   return (
     <FlatList

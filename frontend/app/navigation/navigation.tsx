@@ -1,14 +1,15 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../screens/auth/LoginScreen/LoginScreen';
-import RegisterScreen from '../screens/auth/RegisterScreen/RegisterScreen';
-import TestScreen from '../screens/test/TestScreen';
-import MainHubScreen from '../screens/main/MainHubScreen/MainHubScreen';
-import CafesListScreen from '../screens/cafes/CafeListScreen/CafesListScreen';
-import CafeDetailScreen from '../screens/cafes/CafeDetailScreen/CafeDetailScreen';
-import CafeMenuScreen from '../screens/cafes/CafeMenuScreen/CafeMenuScreen';;
-import ProtectedRoute from './ProtectedRoute';
-import CreateCafeteriaScreen from '../screens/cafes/CafeCreateScreen/CreateCafeScreen';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import LoginScreen from "../screens/auth/LoginScreen/LoginScreen";
+import RegisterScreen from "../screens/auth/RegisterScreen/RegisterScreen";
+import TestScreen from "../screens/test/TestScreen";
+import MainHubScreen from "../screens/main/MainHubScreen/MainHubScreen";
+import CafesListScreen from "../screens/cafes/CafeListScreen/CafesListScreen";
+import CafeDetailScreen from "../screens/cafes/CafeDetailScreen/CafeDetailScreen";
+import CafeMenuScreen from "../screens/cafes/CafeMenuScreen/CafeMenuScreen";
+import CafeReviewScreen from "../screens/cafes/CafeReviewScreen/CafeReviewScreen";
+import ProtectedRoute from "./ProtectedRoute";
+import CreateCafeteriaScreen from "../screens/cafes/CafeCreateScreen/CreateCafeScreen";
 import ProfileScreen from "@/app/screens/profile/ProfileScreen";
 
 export type RootStackParamList = {
@@ -17,8 +18,9 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   ProfileScreen: { username: string; age: number; userRole: string };
   CafesListScreen: undefined;
-  CafeDetailScreen: {cafeId: number};
-  CafeMenuScreen: {cafeId: number};
+  CafeDetailScreen: { cafeId: number };
+  CafeMenuScreen: { cafeId: number };
+  CafeReviewScreen: { cafeId: number };
   TestScreen: undefined;
   AdminCreateCafeteria: undefined;
   CreateCafeteriaScreen: undefined;
@@ -28,54 +30,44 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Navigation = () => {
   return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="LoginScreen"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
 
-        <Stack.Screen
-          name="RegisterScreen"
-          component={RegisterScreen}
-          options={{ title: 'Sign Up' }}
-        />
-        
-        <Stack.Screen 
-          name="MainHubScreen"
-          options={{ headerShown: false }}>
-          {() => (
-              <MainHubScreen />
-          )}
-        </Stack.Screen>
-        
-        <Stack.Screen
-          name="TestScreen"
-          component={TestScreen}
-        />
+      <Stack.Screen
+        name="RegisterScreen"
+        component={RegisterScreen}
+        options={{ title: "Sign Up" }}
+      />
 
-        <Stack.Screen
-          name="CafesListScreen"
-          component={CafesListScreen}
-        />
+      <Stack.Screen name="MainHubScreen" options={{ headerShown: false }}>
+        {() => (
+          //<ProtectedRoute>
+          <MainHubScreen />
+          //</ProtectedRoute>
+        )}
+      </Stack.Screen>
 
-        <Stack.Screen
-          name ="CafeDetailScreen"
-          component={CafeDetailScreen}
-        />
+      <Stack.Screen name="TestScreen" component={TestScreen} />
 
-        <Stack.Screen
-          name ="CafeMenuScreen"
-          component={CafeMenuScreen}
-        />
+      <Stack.Screen name="CafesListScreen" component={CafesListScreen} />
 
-        <Stack.Screen
-          name ="CreateCafeteriaScreen"
-          component={CreateCafeteriaScreen}
-        />
+      <Stack.Screen name="CafeDetailScreen" component={CafeDetailScreen} />
 
-        <Stack.Screen name = "ProfileScreen" component={ProfileScreen}/>
-      </Stack.Navigator>
+      <Stack.Screen name="CafeMenuScreen" component={CafeMenuScreen} />
+
+      <Stack.Screen name="CafeReviewScreen" component={CafeReviewScreen} />
+
+      <Stack.Screen
+        name="CreateCafeteriaScreen"
+        component={CreateCafeteriaScreen}
+      />
+
+      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+    </Stack.Navigator>
   );
 };
 
