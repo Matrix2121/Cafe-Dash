@@ -1,13 +1,13 @@
 import React from 'react';
 import { ScrollView, View, ActivityIndicator, Text, FlatList } from 'react-native';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
-import useReview from '@/app/hooks/useReviews';
+import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
 import styles from './CafeReviewScreen.style'
 
 const CafeReviewScreen = ({ route }: { route: { params: { cafeId: number } } }) => {
     const { cafeId } = route.params;
-    const { reviews, loading, error } = useReview(cafeId);
+    const { reviews, loading, error } = useReviews(cafeId);
 
     const hasData = !!reviews && reviews.length > 0;
 
