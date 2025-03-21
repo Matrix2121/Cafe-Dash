@@ -1,16 +1,20 @@
 package com.cafe.backend.service;
 
+import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
-import com.cafe.backend.dto.UserAccountDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 
+/**
+ * {@code UserService} is an interface that defines basic CRUD methods.
+ * 
+ * @author VasilStoykov
+ */
+
 public interface UserService {
-    UserAccountDTO createUser(UserAccountDTO userDTO) throws BadRequestException;
-
-    UserAccountDTO updateUser(Long id, UserAccountDTO userDTO) throws BadRequestException, NotFoundException;
-
-    UserAccountDTO getUserById(Long id) throws BadRequestException, NotFoundException;
+    UserDTO createUser(UserDTO userDTO) throws BadRequestException;
+    UserDTO updateUser(Long id, UserDTO userDTO) throws BadRequestException, NotFoundException;
+    UserDTO getUserById(Long id) throws BadRequestException, NotFoundException;
     
-    UserAccountDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException;
+    UserDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException;
 }

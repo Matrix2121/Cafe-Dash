@@ -3,6 +3,7 @@ package com.cafe.backend.entity.cafeteria;
 import java.time.LocalTime;
 import java.util.Set;
 
+import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.entity.product.ProductEntity;
 
 import jakarta.persistence.*;

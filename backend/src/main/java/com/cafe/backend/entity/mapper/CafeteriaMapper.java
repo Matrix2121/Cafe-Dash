@@ -32,7 +32,7 @@ public class CafeteriaMapper {
         }
     }
 
-    public static CafeteriaEntity toEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
+    public static CafeteriaEntity mapToEntity(CafeteriaDTO cafeteriaDTO) throws DataMappingException {
         try {
             return CafeteriaEntity.builder()
                     .id(cafeteriaDTO.id())

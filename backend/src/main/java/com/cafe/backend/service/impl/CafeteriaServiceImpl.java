@@ -34,13 +34,13 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
     @Autowired
     private CafeteriaRepository cafeteriaRepository;
-    
+
     @Autowired
     private ProductRepository productRepository;
 
     @Override
     public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
-        CafeteriaEntity cafeteria = CafeteriaMapper.toEntity(cafeteriaDTO);
+        CafeteriaEntity cafeteria = CafeteriaMapper.mapToEntity(cafeteriaDTO);
         cafeteria.setId(null);
         CafeteriaEntity savedCafeteria = cafeteriaRepository.save(cafeteria);
         return CafeteriaMapper.mapToDTO(savedCafeteria);
@@ -97,7 +97,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         List<ProductDTO> results = new ArrayList<>();
 
         for (ProductEntity entity : products) {
-            results.add(ProductMapper.toDTO(entity));
+            results.add(ProductMapper.mapToDTO(entity));
         }
 
         return results;

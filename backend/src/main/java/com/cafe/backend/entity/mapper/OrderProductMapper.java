@@ -1,4 +1,4 @@
- package com.cafe.backend.entity.mapper;
+package com.cafe.backend.entity.mapper;
 
 import com.cafe.backend.dto.OrderProductDTO;
 import com.cafe.backend.entity.order_product.OrderProductEntity;
@@ -8,20 +8,21 @@ import com.cafe.backend.entity.order_product.OrderProductEntity;
  */
 
 public class OrderProductMapper {
-    public static OrderProductDTO toDTO(OrderProductEntity orderProductEntity) {
-        if (orderProductEntity == null) return null;
+    public static OrderProductDTO mapToDTO(OrderProductEntity orderProductEntity) {
+        if (orderProductEntity == null)
+            return null;
 
         return new OrderProductDTO(
                 orderProductEntity.getId(),
                 orderProductEntity.getOrder().getId(),
                 orderProductEntity.getProduct().getId(),
                 orderProductEntity.getProductPrice(),
-                orderProductEntity.getProductQuantity()
-        );
+                orderProductEntity.getProductQuantity());
     }
 
-    public static OrderProductEntity toEntity(OrderProductDTO orderProductDTO) {
-        if (orderProductDTO == null) return null;
+    public static OrderProductEntity mapToEntity(OrderProductDTO orderProductDTO) {
+        if (orderProductDTO == null)
+            return null;
 
         return OrderProductEntity.builder()
                 .id(orderProductDTO.id())
