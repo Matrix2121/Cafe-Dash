@@ -50,6 +50,7 @@ export default StyleSheet.create({
     marginHorizontal: 30,
     backgroundColor: '#CECECC',
     borderColor: '#444444',
+    color: '#774936',
   },
   registerButton: {
     width: 200,
