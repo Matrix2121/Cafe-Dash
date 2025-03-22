@@ -40,11 +40,7 @@ public class ProductEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id")
     private CafeteriaEntity cafeteria;
-    
-//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-//    @JsonIgnore
-//    private Set<OrderProductEntity> orderProducts;
-    
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

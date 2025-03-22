@@ -12,26 +12,23 @@ public class RoleMapper {
 
     public static RoleDTO mapToDTO(RoleEntity role) throws DataMappingException {
         if (role == null) {
-            throw new DataMappingException("Role cannot be null");
+            throw new DataMappingException("RoleEntity cannot be null");
         }
 
-        try {
-            return new RoleDTO(
-                    role.getId(),
-                    role.getRoleName());
-        } catch (Exception e) {
-            throw new DataMappingException("Cannot not map to roleDTO", e);
-        }
+        return new RoleDTO(
+                role.getId(),
+                role.getRoleName()
+        );
     }
 
     public static RoleEntity mapToEntity(RoleDTO roleDTO) throws DataMappingException {
-        try {
-            return RoleEntity.builder()
-                    .id(roleDTO.id())
-                    .roleName(roleDTO.roleName())
-                    .build();
-        } catch (Exception e) {
-            throw new DataMappingException("Cannot not map to role", e);
+        if (roleDTO == null) {
+            throw new DataMappingException("RoleDTO cannot be null");
         }
+
+        return RoleEntity.builder()
+                .id(roleDTO.id())
+                .roleName(roleDTO.roleName())
+                .build();
     }
 }
