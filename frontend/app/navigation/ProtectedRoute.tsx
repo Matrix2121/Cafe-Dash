@@ -1,4 +1,3 @@
-// src/navigation/ProtectedRoute.tsx
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -20,7 +19,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!user) {
-    navigation.navigate("LoginScreen");
+    navigation.navigate("login");
     return null;
   }
 

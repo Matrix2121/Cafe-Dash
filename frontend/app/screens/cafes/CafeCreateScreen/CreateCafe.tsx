@@ -1,10 +1,12 @@
-// src/screens/createCafeteria/CreateCafeteriaScreen.tsx
 import React, { useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View, StyleSheet } from 'react-native';
+import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation/Navigation';
+import { RootStackParamList } from '@/app/navigation/Navigation';
+import {url} from "@/app/common/constants";
+import loginBackground from "../../../assets/images/login-background.jpg";
+import styles from "@/app/screens/cafes/CafeCreateScreen/CreateCafe.style";
 
 const CreateCafeteriaScreen = () => {
   const [name, setName] = useState('');
@@ -35,8 +37,7 @@ const CreateCafeteriaScreen = () => {
     setLoading(true);
     setError('');
     try {
-      // Replace with your actual backend URL
-      const response = await fetch('http://localhost:8080/api/cafeterias', {
+      const response = await fetch(`${url}api/cafeterias`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cafeteriaData)
@@ -56,7 +57,7 @@ const CreateCafeteriaScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/images/login-background.jpg')}
+      source={loginBackground}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView
@@ -74,7 +75,6 @@ const CreateCafeteriaScreen = () => {
               onChangeText={setName}
               mode="outlined"
               style={styles.input}
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
             <TextInput
               label="Brand"
@@ -82,7 +82,6 @@ const CreateCafeteriaScreen = () => {
               onChangeText={setBrand}
               mode="outlined"
               style={styles.input}
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
             <TextInput
               label="Location"
@@ -90,7 +89,6 @@ const CreateCafeteriaScreen = () => {
               onChangeText={setLocation}
               mode="outlined"
               style={styles.input}
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
             <TextInput
               label="Phone Number"
@@ -99,7 +97,6 @@ const CreateCafeteriaScreen = () => {
               keyboardType="phone-pad"
               mode="outlined"
               style={styles.input}
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
 
             <Button
@@ -108,7 +105,6 @@ const CreateCafeteriaScreen = () => {
               loading={loading}
               disabled={loading}
               style={styles.createButton}
-              theme={{ colors: { primary: '#444444' } }}
             >
               {loading ? 'Creating...' : 'Create'}
             </Button>
@@ -118,54 +114,5 @@ const CreateCafeteriaScreen = () => {
     </ImageBackground>
   );
 };
-
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    resizeMode: 'stretch',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scrollContainer: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 50,
-  },
-  formContainer: {
-    backgroundColor: 'rgba(142,129,129,0.4)',
-    width: 340,
-    padding: 20,
-    borderRadius: 20,
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: "white",
-    borderBottomColor: '#CECECC',
-    borderBottomWidth: 3,
-    padding: 5,
-    textAlign: 'center',
-  },
-  input: {
-    width: 300,
-    marginBottom: 10,
-    backgroundColor: '#CECECC',
-  },
-  createButton: {
-    marginTop: 30,
-    width: 200,
-    backgroundColor: '#444444',
-  },
-  errorText: {
-    color: '#444444',
-    marginBottom: 10,
-  },
-});
 
 export default CreateCafeteriaScreen;
