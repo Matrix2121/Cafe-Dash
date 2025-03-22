@@ -21,6 +21,7 @@ import com.cafe.backend.service.UserService;
 
 @RestController
 @RequestMapping("/api/users")
+
 public class UserController {
 
     @Autowired

@@ -30,11 +30,16 @@ public class ReviewMapper {
         );
     }
 
-
     public static ReviewEntity mapToEntity(ReviewDTO reviewDTO) throws DataMappingException {
         if (reviewDTO == null) {
             throw new DataMappingException("ReviewDTO cannot be null");
         }
+
+        UserEntity user = new UserEntity();
+        user.setId(reviewDTO.userId());
+
+        CafeteriaEntity cafeteria = new CafeteriaEntity();
+        cafeteria.setId(reviewDTO.cafeteriaId());
 
         return ReviewEntity.builder()
                 .id(reviewDTO.id())
@@ -42,6 +47,8 @@ public class ReviewMapper {
                 .body(reviewDTO.body())
                 .rating(reviewDTO.rating())
                 .createdAt(reviewDTO.createdAt())
+                .user(user)
+                .cafeteria(cafeteria)
                 .build();
     }
 }
