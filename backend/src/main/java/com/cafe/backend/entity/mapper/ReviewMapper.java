@@ -4,10 +4,7 @@ import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.review.ReviewEntity;
-
 import com.cafe.backend.exception.DataMappingException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
 /**
  * @author VasilStoykov

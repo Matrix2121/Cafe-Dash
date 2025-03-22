@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.cafe.backend.dto.JWTUserDTO;
@@ -18,25 +17,16 @@ import com.cafe.backend.entity.mapper.JWTUserMapper;
 import com.cafe.backend.entity.mapper.OrderMapper;
 import com.cafe.backend.entity.mapper.RegisterUserMapper;
 import com.cafe.backend.entity.mapper.RoleMapper;
-import com.cafe.backend.entity.mapper.UserAccountMapper;
 import com.cafe.backend.entity.mapper.UserMapper;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
-import com.cafe.backend.exception.AuthenticationCustomException;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.RoleRepository;
 import com.cafe.backend.repository.UserRepository;
-import com.cafe.backend.security.CustomUserDetails;
 import com.cafe.backend.service.UserService;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import jakarta.transaction.Transactional;
 
@@ -51,7 +41,6 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-
 public class UserServiceImpl implements UserService {
 
     @Autowired

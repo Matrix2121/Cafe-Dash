@@ -1,18 +1,17 @@
 package com.cafe.backend.entity.mapper;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
-import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class UserMapper {
 
