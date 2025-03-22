@@ -1,5 +1,5 @@
 import {ActivityIndicator, Text, View} from "react-native";
-import styles from "@/app/screens/cafes/CafeListScreen/CafesListScreen.style";
+import styles from "@/app/screens/cafes/CafeListScreen/CafesList.style";
 import React from "react";
 
 interface Props {

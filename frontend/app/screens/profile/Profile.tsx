@@ -1,22 +1,22 @@
-import styles from "@/app/screens/profile/ProfileScreen.style";
-import {Image, ImageBackground, Modal, Pressable, Text, TouchableOpacity, View} from "react-native";
+import styles from "@/app/screens/profile/Profile.style";
+import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
 import React, {useState} from "react";
-import {RootStackParamList} from "@/app/navigation/navigation";
+import {RootStackParamList} from "@/app/navigation/Navigation";
 import {RouteProp} from "@react-navigation/native";
-import profile from "../../assets/images/profileScreen/profile.png";
+import profileImage from "../../assets/images/profileScreen/profile.png";
 import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
 import orders from "../../assets/images/profileScreen/orders.png";
 import useUser from "@/app/hooks/useUser";
 import {TextInput} from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
 
-type ProfileScreenRouteProp = RouteProp<RootStackParamList, 'ProfileScreen'>;
+type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
 
 interface IProps {
     route: ProfileScreenRouteProp;
 }
 
-const ProfileScreen = ({route}: IProps) => {
+const Profile = ({route}: IProps) => {
     const {userId} = route.params;
     const {user} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
@@ -45,7 +45,7 @@ const ProfileScreen = ({route}: IProps) => {
 
                 <View style={styles.orderContainer}>
                     <Pressable style={styles.rowContainer} onPress={openModal}>
-                        <Image source={profile} style={styles.logo}/>
+                        <Image source={profileImage} style={styles.logo}/>
                         <Text style={styles.orderTextLogo}>Profile details</Text>
                     </Pressable>
                 </View>
@@ -103,4 +103,4 @@ const ProfileScreen = ({route}: IProps) => {
     )
 }
 
-export default ProfileScreen;
+export default Profile;

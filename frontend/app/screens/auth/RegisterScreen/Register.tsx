@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
-import styles from "./RegisterScreen.style";
+import styles from "./Register.style";
 import useRegister from "@/app/hooks/useRegister";
 import logoSrc from "../../../assets/images/logo.png";
+import loginBackground from "../../../assets/images/login-background.jpg";
 
-const RegisterScreen = () => {
+const Register = () => {
   const {handleRegister, setUsername, setEmail, setPassword, username, email, password, loading, error, navigation} = useRegister();
 
   return (
     <ImageBackground
-      source={require('../../../assets/images/login-background.jpg')}
+      source={loginBackground}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView
@@ -65,7 +66,7 @@ const RegisterScreen = () => {
 
             <Button
               mode="contained"
-              onPress={() => navigation.navigate("LoginScreen")}
+              onPress={() => navigation.navigate("login")}
               style={styles.loginButton}
             >
               Back To Login
@@ -77,4 +78,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export default Register;

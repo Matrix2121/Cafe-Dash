@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../navigation/Navigation';
+import { RootStackParamList } from '@/app/navigation/Navigation';
 import { useAuth } from '@/app/context/AuthContext';
 
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable, View } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
-import styles from "./LoginScreen.style";
+import styles from "./Login.style";
+import loginBackground from "../../../assets/images/login-background.jpg";
+import logo from "../../../assets/images/logo.png";
 
-const LoginScreen = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -39,7 +41,7 @@ const LoginScreen = () => {
 
   return (
     <ImageBackground
-      source={require('../../../assets/images/login-background.jpg')}
+      source={loginBackground}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView
@@ -49,13 +51,13 @@ const LoginScreen = () => {
         <ScrollView contentContainerStyle={styles.scrollContainer}>
           <Pressable 
             style={styles.testButton}
-            onPress={() => navigation.navigate("TestScreen")}
+            onPress={() => navigation.navigate("test")}
           >
             <Text style={styles.testButtonText}>Test Area</Text>
           </Pressable>
 
           <View style={styles.loginContainer}>
-            <Image source={require('../../../assets/images/logo.png')} style={styles.logo}/>
+            <Image source={logo} style={styles.logo}/>
             <Text style={styles.title}><Text style={styles.highlight}>Welcome to </Text>Cafe-Dash</Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
@@ -68,7 +70,6 @@ const LoginScreen = () => {
               autoCapitalize="none"
               style={styles.input}
               mode="outlined"
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
             <TextInput
               label="Password"
@@ -77,7 +78,6 @@ const LoginScreen = () => {
               secureTextEntry
               style={styles.input}
               mode="outlined"
-              theme={{ colors: { primary: '#444444', background: '#CECECC' } }}
             />
 
             <Button
@@ -86,17 +86,14 @@ const LoginScreen = () => {
               style={styles.loginButton}
               loading={loading}
               disabled={loading}
-              theme={{ colors: { primary: '#444444' } }}
             >
               {loading ? 'Logging in...' : 'Login'}
             </Button>
 
             <Button
               mode="contained"
-              onPress={() => navigation.navigate("RegisterScreen")}
+              onPress={() => navigation.navigate("register")}
               style={styles.registerButton}
-              labelStyle={{ color: '#444444' }}
-              theme={{ colors: { primary: '#444444' } }}
             >
               Sign Up
             </Button>
@@ -107,4 +104,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default Login;

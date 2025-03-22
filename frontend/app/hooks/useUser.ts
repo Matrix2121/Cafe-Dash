@@ -35,14 +35,10 @@ const useUser = (id?: number) => {
     }
 
     useEffect(() => {
-        fetchAllUsers()
-    }, []);
-
-    useEffect(() => {
         if (id != null) {
             fetchUserById(id);
         }
-    }, []);
+    }, [id]);
 
     return {users, user, loading, error};
 };

@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { FlatList, SectionList, View, Text } from "react-native";
 import ItemCard from "../../../components/ItemCard/ItemCard";
 import useProducts from "@/app/hooks/useProducts";
-import styles from "./CafeMenuScreen.style";
+import styles from "./CafeMenu.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
-const CafeMenuScreen = () => {
+const CafeMenu = () => {
   const { products, fetchAllProducts, loading, error } = useProducts();
 
   useEffect(() => {
@@ -66,4 +66,4 @@ const CafeMenuScreen = () => {
   );
 };
 
-export default CafeMenuScreen;
+export default CafeMenu;

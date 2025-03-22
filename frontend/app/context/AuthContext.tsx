@@ -1,4 +1,3 @@
-// src/contexts/AuthContext.tsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/apiClient';
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Check for existing token on app load
   useEffect(() => {
     const loadUser = async () => {
       const token = await AsyncStorage.getItem('jwt');
@@ -39,14 +37,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loadUser();
   }, []);
 
-  // Login function
   const login = async (email: string, password: string) => {
     const response = await api.post('/auth/login', { email, password });
     await AsyncStorage.setItem('jwt', response.data.token);
     setUser(response.data.user);
   };
 
-  // Logout function
   const logout = async () => {
     await AsyncStorage.removeItem('jwt');
     setUser(null);

@@ -4,7 +4,7 @@ import axios from "axios";
 import {url} from "@/app/common/constants";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
-import {RootStackParamList} from "@/app/navigation/navigation";
+import {RootStackParamList} from "@/app/navigation/Navigation";
 import CryptoJS from "crypto-js";
 import useValidation from "@/app/hooks/validation/useValidation";
 
@@ -39,7 +39,7 @@ const useRegister = (id?: number) => {
                 const data = await response.json();
                 throw new Error(data.message || 'Registration failed');
             }
-            navigation.navigate("LoginScreen");
+            navigation.navigate("Login");
         } catch (err: any) {
             setError(err.message);
         } finally {
