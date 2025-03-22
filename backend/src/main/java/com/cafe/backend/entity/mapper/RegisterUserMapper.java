@@ -16,21 +16,17 @@ public class RegisterUserMapper {
     }
 
     public static UserEntity mapToEntity(RegisterUserDTO registerUserDTO) throws DataMappingException {
-        if (registerUserDTO == null) {
-            throw new DataMappingException("RegisterUserDTO cannot be null.");
-        }
+        try {
+            if (registerUserDTO == null) return null;
 
-        Set<RoleEntity> roleEntities = new HashSet<>();
-        for (RoleDTO role : registerUserDTO.roles()) {
-            roleEntities.add(RoleMapper.mapToEntity(role));
+            return UserEntity.builder()
+                    .username(registerUserDTO.username())
+                    .email(registerUserDTO.email())
+                    .password(registerUserDTO.passwordHash())
+                    .build();
+            
+        } catch (Exception e) {
+            throw new DataMappingException("Cannot map register user to entity.", e);
         }
-
-        return UserEntity.builder()
-                .id(registerUserDTO.id())
-                .username(registerUserDTO.username())
-                .email(registerUserDTO.email())
-                .password(registerUserDTO.passwordHash())
-                .roles(roleEntities)
-                .build();
     }
 }
