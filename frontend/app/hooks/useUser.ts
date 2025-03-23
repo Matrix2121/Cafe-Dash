@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {User, UserUpdate} from '../types/items';
-import axios from "axios";
+import api from '../services/apiClient';
 import {url} from "@/app/common/constants";
 
 const useUser = (id?: number) => {
@@ -10,7 +10,7 @@ const useUser = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllUsers = () => {
-        axios.get(`${url}api/users`)
+        api.get(`/users`)
             .then((response) => {
                 const allUsers = response.data;
                 setUsers(allUsers);
@@ -22,7 +22,7 @@ const useUser = (id?: number) => {
             });
     }
     const fetchUserById = (id: number) => {
-        axios.get(`${url}api/users/${id}`)
+        api.get(`/users/${id}`)
             .then((response) => {
                 const user = response.data;
                 setUser(user);
@@ -41,7 +41,7 @@ const useUser = (id?: number) => {
     }, [id]);
 
     const updateUser = (updatedUser: UserUpdate, id: number) => {
-        axios.put(`${url}api/users/${id}`, updatedUser)
+        api.put(`/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })
