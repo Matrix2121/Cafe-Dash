@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Cafe} from '../types/items';
-import axios from "axios";
+import api from '../services/apiClient';
 import {url} from "@/app/common/constants";
 
 const useCafes = (id?: number) => {
@@ -10,7 +10,7 @@ const useCafes = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllCafes = () => {
-        axios.get(`${url}api/cafeterias`)
+        api.get(`/cafeterias`)
             .then((response) => {
                 const allProducts = response.data;
                 setCafes(allProducts);
@@ -22,7 +22,7 @@ const useCafes = (id?: number) => {
             });
     }
     const fetchCafeById = (id: number) => {
-        axios.get(`${url}api/cafeterias/${id}`)
+        api.get(`/cafeterias/${id}`)
             .then((response) => {
                 const allProducts = response.data;
                 setCafe(allProducts);
