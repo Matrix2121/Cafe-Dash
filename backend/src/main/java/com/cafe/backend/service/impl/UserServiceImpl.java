@@ -4,20 +4,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import com.cafe.backend.dto.*;
+import com.cafe.backend.entity.mapper.*;
+import com.cafe.backend.entity.review.ReviewEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cafe.backend.dto.JWTUserDTO;
-import com.cafe.backend.dto.OrderDTO;
-import com.cafe.backend.dto.RegisterUserDTO;
-import com.cafe.backend.dto.RoleDTO;
-import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
-import com.cafe.backend.entity.mapper.JWTUserMapper;
-import com.cafe.backend.entity.mapper.OrderMapper;
-import com.cafe.backend.entity.mapper.RegisterUserMapper;
-import com.cafe.backend.entity.mapper.RoleMapper;
-import com.cafe.backend.entity.mapper.UserMapper;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.BadRequestException;
@@ -104,11 +97,26 @@ public class UserServiceImpl implements UserService {
     }
 
     private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
-        Set<RoleEntity> roleEntities = getRoleEntities(newUserDTO);
-        Set<OrderEntity> orderEntities = getOrderEntities(newUserDTO);
-        user.setUsername(newUserDTO.username());
-        user.setRoles(roleEntities);
-        user.setOrders(orderEntities);
+
+        if (newUserDTO.username() != null) {
+            user.setUsername(newUserDTO.username());
+        }
+
+        if (newUserDTO.role() != null) {
+            Set<RoleEntity> roleEntities = getRoleEntities(newUserDTO);
+            user.setRoles(roleEntities);
+        }
+
+        if (newUserDTO.orders() != null) {
+            Set<OrderEntity> orderEntities = getOrderEntities(newUserDTO);
+            user.setOrders(orderEntities);
+        }
+
+        if (newUserDTO.reviews() != null) {
+            Set<ReviewEntity> reviewEntities = getReviewsEntities(newUserDTO);
+            user.setReviews(reviewEntities);
+        }
+
         return userRepository.save(user);
     }
 
@@ -126,5 +134,13 @@ public class UserServiceImpl implements UserService {
             orderEntities.add(OrderMapper.mapToEntity(order));
         }
         return orderEntities;
+    }
+
+    private Set<ReviewEntity> getReviewsEntities(UserDTO newUserDTO) throws DataMappingException {
+        Set<ReviewEntity> reviewEntities = new HashSet<>();
+        for (ReviewDTO reviewDTO : newUserDTO.reviews()) {
+            reviewEntities.add(ReviewMapper.mapToEntity(reviewDTO));
+        }
+        return reviewEntities;
     }
 }

@@ -10,7 +10,7 @@ public record ReviewDTO(
     Long id,
     String title,
     String body,
-    Byte rating,
+    Integer rating,
     LocalDateTime createdAt,
     Long userId,
     Long cafeteriaId
