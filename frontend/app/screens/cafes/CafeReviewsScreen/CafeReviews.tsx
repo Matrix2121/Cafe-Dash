@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -29,7 +29,7 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
     
     //useFocusEffect is called every time the screen come into focus
     useFocusEffect(
-        React.useCallback(() => {
+        useCallback(() => {
             if(!hasFetched){
                 fetchReviewsByCafeId(cafe.id);
                 setHasFetched(true)
