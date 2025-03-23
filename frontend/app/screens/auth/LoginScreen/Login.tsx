@@ -7,7 +7,6 @@ import { useAuth } from '@/app/context/AuthContext';
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Pressable, View } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import styles from "./Login.style";
-import loginBackground from "../../../assets/images/login-background.jpg";
 import logo from "../../../assets/images/logo.png";
 
 const Login = () => {
@@ -41,7 +40,7 @@ const Login = () => {
 
   return (
     <ImageBackground
-      source={loginBackground}
+      source={{ uri: 'https://iili.io/3IoPfjI.jpg' }}
       style={styles.backgroundImage}
     >
       <KeyboardAvoidingView

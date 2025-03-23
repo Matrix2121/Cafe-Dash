@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {User} from '../types/items';
+import {User, UserUpdate} from '../types/items';
 import axios from "axios";
 import {url} from "@/app/common/constants";
 
@@ -40,7 +40,17 @@ const useUser = (id?: number) => {
         }
     }, [id]);
 
-    return {users, user, loading, error};
+    const updateUser = (updatedUser: UserUpdate, id: number) => {
+        axios.put(`${url}api/users/${id}`, updatedUser)
+            .then((response) => {
+                setUser(response.data);
+            })
+            .catch((error) => {
+                setError(error?.response?.data?.message || error);
+            })
+    }
+
+    return {users, user, updateUser, loading, error};
 };
 
 export default useUser;

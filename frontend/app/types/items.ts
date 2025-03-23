@@ -32,6 +32,13 @@ export type User = {
   email: string;
   role: Role[];
   orders: Order[];
+  reviews: Reviews[];
+}
+
+export type UserUpdate = {
+  id: number;
+  username: string;
+  email: string;
 }
 
 export type Role = {
@@ -57,4 +64,14 @@ export type OrderProduct = {
   productId: number;
   productPrice: number;
   productQuantity: number;
+}
+
+export type Reviews = {
+  id: number;
+  title: string;
+  body: string;
+  rating: number;
+  createdAt: string;
+  userId: number;
+  cafeteriaId: number;
 }

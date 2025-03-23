@@ -1,9 +1,10 @@
 import styles from "@/app/screens/profile/Profile.style";
 import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import {RouteProp} from "@react-navigation/native";
 import profileImage from "../../assets/images/profileScreen/profile.png";
+import editImage from "../../assets/images/profileScreen/edit.png";
 import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
 import orders from "../../assets/images/profileScreen/orders.png";
 import useUser from "@/app/hooks/useUser";
@@ -18,10 +19,26 @@ interface IProps {
 
 const Profile = ({route}: IProps) => {
     const {userId} = route.params;
-    const {user} = useUser(userId);
+    const {user, updateUser} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+
+    const handleSubmit = () => {
+        if (!user || !user.id) {
+            console.error('User or user.id is undefined');
+            return;
+        }
+        const updatedUser = {
+            id: user.id,
+            username: username || user.username,
+            email: email || user.email,
+        };
+        updateUser(updatedUser, userId);
+        setEditUsername(false);
+        setEditEmail(false);
+        setModalVisible(false);
+    };
 
     const openModal = () => {
         setModalVisible(true);
@@ -30,6 +47,11 @@ const Profile = ({route}: IProps) => {
     const closeModal = () => {
         setModalVisible(false);
     }
+
+    const [editUsername, setEditUsername] = useState(false);
+    const [editEmail, setEditEmail] = useState(false);
+    const toggleUsernameEdit = () => setEditUsername(prev => !prev);
+    const toggleEmailEdit = () => setEditEmail(prev => !prev);
 
     return (
         <View style={styles.profileContainer}>
@@ -62,29 +84,50 @@ const Profile = ({route}: IProps) => {
                             <View style={styles.modalContainer}>
                                 <View style={styles.profileDetailsContainer}>
                                     <View style={styles.form}>
-                                        <TextInput
-                                            label="Username"
-                                            value={username}
-                                            onChangeText={setUsername}
-                                            style={styles.input}
-                                            mode="outlined"
-                                            theme={{colors: {primary: '#774936', background: '#CECECC'}}}
-                                        />
-
-                                        <TextInput
-                                            label="Email"
-                                            value={email}
-                                            onChangeText={setEmail}
-                                            keyboardType="email-address"
-                                            autoCapitalize="none"
-                                            style={styles.input}
-                                            mode="outlined"
-                                            theme={{colors: {primary: '#774936', background: '#CECECC'}}}
-                                        />
+                                        <View style={styles.titleContainer}>
+                                            <Text style={styles.title}><Text style={styles.highlight}>Edit </Text>Profile:</Text>
+                                        </View>
+                                        <View style={styles.editContainer}>
+                                            {editUsername ? (
+                                                <TextInput
+                                                    label={user?.username}
+                                                    value={username}
+                                                    onChangeText={setUsername}
+                                                    style={styles.input}
+                                                    mode="outlined"
+                                                    editable={editUsername}
+                                                />
+                                            ) : (
+                                                <Text style={styles.editInput}>Username: {user?.username}</Text>
+                                            )}
+                                            <Pressable onPress={toggleUsernameEdit} style={styles.editButton}>
+                                                <Image source={editImage} style={styles.editLogo}/>
+                                            </Pressable>
+                                        </View>
+                                        <View style={styles.editContainer}>
+                                            {editEmail ? (
+                                                <TextInput
+                                                    label={user?.email}
+                                                    value={email}
+                                                    onChangeText={setEmail}
+                                                    style={styles.input}
+                                                    mode="outlined"
+                                                    editable={editEmail}
+                                                />
+                                            ) : (
+                                                <Text style={styles.editInput}>Email: {user?.email}</Text>
+                                            )}
+                                            <Pressable onPress={toggleEmailEdit} style={styles.editButton}>
+                                                <Image source={editImage} style={styles.editLogo}/>
+                                            </Pressable>
+                                        </View>
                                     </View>
-                                    <View>
+                                    <View style={styles.buttonContainer}>
                                         <Pressable onPress={closeModal} style={styles.pressableDetails}>
                                             <Text style={styles.pressableText}>Close</Text>
+                                        </Pressable>
+                                        <Pressable onPress={handleSubmit} style={styles.pressableSubmit}>
+                                            <Text style={styles.pressableText}>Submit</Text>
                                         </Pressable>
                                     </View>
                                 </View>

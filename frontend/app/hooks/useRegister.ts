@@ -39,7 +39,7 @@ const useRegister = (id?: number) => {
                 const data = await response.json();
                 throw new Error(data.message || 'Registration failed');
             }
-            navigation.navigate("Login");
+            navigation.navigate("login");
         } catch (err: any) {
             setError(err.message);
         } finally {
