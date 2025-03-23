@@ -12,8 +12,8 @@ const useCafes = (id?: number) => {
     const fetchAllCafes = () => {
         axios.get(`${url}api/cafeterias`)
             .then((response) => {
-                const allProducts = response.data;
-                setCafes(allProducts);
+                const allCafes = response.data;
+                setCafes(allCafes);
                 setLoading(false);
             })
             .catch((error) => {
@@ -24,8 +24,8 @@ const useCafes = (id?: number) => {
     const fetchCafeById = (id: number) => {
         axios.get(`${url}api/cafeterias/${id}`)
             .then((response) => {
-                const allProducts = response.data;
-                setCafe(allProducts);
+                const allCafes = response.data;
+                setCafe(allCafes);
                 setLoading(false);
             })
             .catch((error) => {

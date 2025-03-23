@@ -19,42 +19,28 @@ const CafeMenuScreen = ({ route }: IProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { cafeId } = route.params;
 
-    const handleShowReviews = (cafeId: number) => {
-      navigation.navigate('CafeReviewScreen', { cafeId });
-    };
+  const { products, fetchAllProducts, loading, error } = useProducts();
+    useEffect(() => {
+      fetchAllProducts();
+  }, []);
 
-    const handleShowDetails = (cafeId: number) => {
-      navigation.navigate('CafeDetailScreen', { cafeId });
-    };
-
-    const { products, fetchAllProducts, loading, error } = useProducts();
-      useEffect(() => {
-        fetchAllProducts();
-    }, []);
-
-  const hasData = !!products && products.length > 0;
-  if (loading || error || !hasData) {
-    return (
-      <LoadingErrorView
-        loading={loading}
-        error={error}
-        dataAvailable={hasData}
-      />
-    );
-  }
+  const hasData = Array.isArray(products) && products.length > 0;
 
   const sections = [
     {
-      title: "Drinkables",
-      data: products.filter((item) => item.productType === "DRINKS"),
+      title: "Drinks",
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "DRINKS") :
+      [],
     },
     {
       title: "Promotion",
-      data: products.filter((item) => item.productType === "PROMO"),
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "PROMO") :
+      [],
     },
     {
       title: "Eating",
-      data: products.filter((item) => item.productType === "Eating"),
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "Eating") :
+      [],
     },
   ];
 
@@ -64,15 +50,22 @@ const CafeMenuScreen = ({ route }: IProps) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Menu</Text>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => handleShowReviews(cafeId)}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeReviewScreen', { cafeId })}>
           <Text style={styles.detailsButtonText}>Reviews</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => handleShowDetails(cafeId)}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeDetailScreen', { cafeId })}>
           <Text style={styles.detailsButtonText}>Details</Text>
         </TouchableOpacity>
     </View>
 
+    {(loading || error || !hasData) ? (
+      <LoadingErrorView
+        loading={loading}
+        error={error}
+        dataAvailable={hasData}
+      />
+     ) : (
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.id.toString()}
@@ -94,6 +87,7 @@ const CafeMenuScreen = ({ route }: IProps) => {
           />
         )}
       />
+     )}
     </View>
   );
 };

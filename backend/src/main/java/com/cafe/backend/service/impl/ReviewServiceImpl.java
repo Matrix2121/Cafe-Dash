@@ -94,7 +94,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         return reviewDTOs;
         } catch (Exception e) {
-            throw new DataMappingException("Cannot map userAccount to entity.", e);
+            throw new DataMappingException("Cannot map userAccount to DTO.", e);
         }
         
     }
