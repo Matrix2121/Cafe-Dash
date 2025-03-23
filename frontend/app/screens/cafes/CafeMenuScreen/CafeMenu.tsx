@@ -20,7 +20,8 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
   const { cafe } = route.params;
 
   const { products, fetchAllProducts, loading, error } = useProducts();
-    useEffect(() => {
+  
+  useEffect(() => {
       fetchAllProducts();
   }, []);
 
@@ -50,7 +51,7 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Menu</Text>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafereviws', { cafe })}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafereviews', { cafe })}>
           <Text style={styles.detailsButtonText}>Reviews</Text>
         </TouchableOpacity>
 

@@ -7,6 +7,8 @@ import MainHub from '../screens/main/MainHubScreen/MainHub';
 import CafesList from '../screens/cafes/CafeListScreen/CafesList';
 import CafeDetail from '../screens/cafes/CafeDetailScreen/CafeDetail';
 import CafeMenu from '../screens/cafes/CafeMenuScreen/CafeMenu';
+import CafeReviews from '../screens/cafes/CafeReviewsScreen/CafeReviews';
+import LeaveReview from '../screens/leaveReview/LeaveReview';
 import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import Profile from "../screens/profile/Profile";
 import { Cafe } from '../types/items';
@@ -19,8 +21,8 @@ export type RootStackParamList = {
     cafeslist: { cafe: Cafe };
     cafedetail: { cafe: Cafe };
     cafemenu: { cafe: Cafe };
-    cafereviws: { cafe: Cafe };
-    leavereview: {cafeteriaId : number};
+    cafereviews: { cafe: Cafe };
+    leavereview: { cafe: Cafe; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
     test: undefined;
     createcafeteria: undefined;
 };
@@ -37,6 +39,8 @@ const Navigation = () => {
             <Stack.Screen name="cafeslist" component={CafesList} />
             <Stack.Screen name="cafedetail" component={CafeDetail} />
             <Stack.Screen name="cafemenu" component={CafeMenu} />
+            <Stack.Screen name="cafereviews" component={CafeReviews} />
+            <Stack.Screen name="leavereview" component={LeaveReview} />
             <Stack.Screen name="createcafeteria" component={CreateCafeteria} />
             <Stack.Screen name="profile" component={Profile} />
         </Stack.Navigator>

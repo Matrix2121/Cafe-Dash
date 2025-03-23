@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import { RouteProp } from "@react-navigation/native";
+import { useNavigation, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/app/navigation/Navigation";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { AirbnbRating } from "react-native-ratings"; // Install this package: npm install react-native-ratings
 
 import styles from "./LeaveReview.style"
@@ -15,7 +17,9 @@ interface LeaveReviewProps {
 }
 
 const LeaveReview = ({ route }: LeaveReviewProps) => {
-  const { cafeteriaId } = route.params
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { cafe, goingBack } = route.params;
+  const cafeteriaId = cafe.id;
   const { postReview } = useReviews(cafeteriaId);
 
   const [title, setTitle] = useState("");
@@ -24,7 +28,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
   const handleSubmitReview = async () => {
     if (!title || rating === 0) {
-      Alert.alert("Error", "Please fill out all required fields and provide a rating.");
+      Alert.alert("Error", "Please fill out all required fields and provide a rating.");  //needs refractoring
       return;
     }
 
@@ -36,7 +40,9 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
       userId: 1,
     };
 
-    postReview(reviewData);
+    await postReview(reviewData)
+        goingBack(); // goingBack is called to reset the state of hasFetched to false in CafeReviews
+        navigation.goBack(); //ensures the going back in the navigation stack
   };
 
 

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootStackParamList } from "@/app/navigation/Navigation";
-import { RouteProp, useNavigation } from "@react-navigation/native";
+import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import { ScrollView, Text, FlatList } from 'react-native';
@@ -10,7 +10,7 @@ import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
 import styles from './CafeReviews.style'
 import ReviewHeader from '@/app/components/reviewsHeader/ReviewsHeader';
 
-type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviws">;
+type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviews">;
 
 interface CafeReviewsProps {
     route: CafeReviewsRouteProp;
@@ -18,14 +18,30 @@ interface CafeReviewsProps {
 
 const CafeReviews = ({ route }: CafeReviewsProps) => {
     const { cafe } = route.params;
-    const { reviews, loading, error } = useReviews(cafe.id);
+    const { reviews, loading, error, postReview, fetchReviewsByCafeId } = useReviews(cafe.id);
 
     const hasData = Array.isArray(reviews) && reviews.length > 0;
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    
+    //hasFetched is used as a flag to check if the data is fetched when the screen comes into focus
+    const [hasFetched, setHasFetched] = useState(false);
+    
+    //useFocusEffect is called every time the screen come into focus
+    useFocusEffect(
+        React.useCallback(() => {
+            if(!hasFetched){
+                fetchReviewsByCafeId(cafe.id);
+                setHasFetched(true)
+            }
+        }, [hasFetched])
+    );
+    
 
     const handleLeaveReview = () => {
-        navigation.navigate('leavereview', { cafeteriaId : cafe.id });
+        navigation.navigate('leavereview', { 
+            cafe,
+            goingBack: () => setHasFetched(false), }); //sets the goingBack logic for when it is called in LeaveReview
     };
 
     return (

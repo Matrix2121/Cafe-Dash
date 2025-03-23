@@ -9,32 +9,29 @@ const useReviews = (cafeteriaId: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchReviewsByCafeId = (cafeteriaId: number) => {
+        setLoading(true);
         api.get(`${url}api/reviews/${cafeteriaId}`)
             .then((response) => {
                 const allReviews = response.data;
                 setReviews(allReviews);
-                setLoading(false);
+                setError(null);
             })
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
+            })
+            .finally(() => {
                 setLoading(false);
             });
-    }
+    };
 
-    const postReview = (review : Review) => {
-        api.post(`/reviews`, review)
+    const postReview = async (review : Review) => {
+        await api.post(`/reviews`, review) //waits for a response from the backend
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
             });
-    }
+    };
 
-    useEffect(() => {
-        if (cafeteriaId != null) {
-            fetchReviewsByCafeId(cafeteriaId);
-        }
-    }, [cafeteriaId]);
-
-    return { reviews, loading, error, postReview };
+    return { reviews, loading, error, postReview, fetchReviewsByCafeId };
 };
 
 export default useReviews;
