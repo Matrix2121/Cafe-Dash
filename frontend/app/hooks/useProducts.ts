@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import api from "../services/apiClient";
 import { Product } from "../types/items";
 import { url } from "@/app/common/constants";
-import axios from "axios";
 
 const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -11,7 +10,7 @@ const useProduct = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchAllProducts = () => {
-    axios
+    api
       .get(`${url}api/products`)
       .then((response) => {
         const allProducts = response.data;
@@ -29,7 +28,7 @@ const useProduct = () => {
   };
 
   const fetchProductById = (id: number) => {
-    axios
+    api
       .get(`${url}api/products/${id}`)
       .then((response) => {
         const product = response.data;

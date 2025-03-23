@@ -12,11 +12,13 @@ import com.cafe.backend.exception.NotFoundException;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadRequestException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public String handleBadRequestException(BadRequestException ex) {
         return ex.getMessage();
     }
 
     @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public String handleNotFoundException(NotFoundException ex) {
         return ex.getMessage();
     }

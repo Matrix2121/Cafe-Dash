@@ -6,16 +6,16 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { FlatList, SectionList, View, Text, TouchableOpacity } from "react-native";
 import ItemCard from "../../../components/ItemCard/ItemCard";
 import useProducts from "@/app/hooks/useProducts";
-import styles from "./CafeMenuScreen.style";
+import styles from "./CafeMenu.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
-type CafeMenuScreenRouteProp = RouteProp<RootStackParamList, "CafeMenuScreen">;
+type CafeMenuRouteProp = RouteProp<RootStackParamList, "cafemenu">;
 
-interface CafeMenuScreenScreenProps {
-  route: CafeMenuScreenRouteProp;
+interface CafeMenuProps {
+  route: CafeMenuRouteProp;
 }
 
-const CafeMenuScreen = ({ route }: CafeMenuScreenScreenProps) => {
+const CafeMenu = ({ route }: CafeMenuProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { cafe } = route.params;
 
@@ -50,11 +50,11 @@ const CafeMenuScreen = ({ route }: CafeMenuScreenScreenProps) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Menu</Text>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeReviewsScreen', { cafe })}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafereviws', { cafe })}>
           <Text style={styles.detailsButtonText}>Reviews</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeDetailScreen', { cafe })}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafedetail', { cafe })}>
           <Text style={styles.detailsButtonText}>Details</Text>
         </TouchableOpacity>
     </View>
@@ -92,4 +92,4 @@ const CafeMenuScreen = ({ route }: CafeMenuScreenScreenProps) => {
   );
 };
 
-export default CafeMenuScreen;
+export default CafeMenu;

@@ -7,16 +7,16 @@ import { ScrollView, Text, FlatList } from 'react-native';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
-import styles from './CafeReviewsScreen.style'
+import styles from './CafeReviews.style'
 import ReviewHeader from '@/app/components/reviewsHeader/ReviewsHeader';
 
-type CafeReviewsRouteProp = RouteProp<RootStackParamList, "CafeReviewsScreen">;
+type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviws">;
 
-interface CafeReviewsScreenProps {
+interface CafeReviewsProps {
     route: CafeReviewsRouteProp;
 }
 
-const CafeReviewsScreen = ({ route }: CafeReviewsScreenProps) => {
+const CafeReviews = ({ route }: CafeReviewsProps) => {
     const { cafe } = route.params;
     const { reviews, loading, error } = useReviews(cafe.id);
 
@@ -25,7 +25,7 @@ const CafeReviewsScreen = ({ route }: CafeReviewsScreenProps) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
     const handleLeaveReview = () => {
-        navigation.navigate('LeaveReviewScreen', { cafeteriaId : cafe.id });
+        navigation.navigate('leavereview', { cafeteriaId : cafe.id });
     };
 
     return (
@@ -51,4 +51,4 @@ const CafeReviewsScreen = ({ route }: CafeReviewsScreenProps) => {
     
 };
 
-export default CafeReviewsScreen;
+export default CafeReviews;

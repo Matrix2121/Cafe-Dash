@@ -3,17 +3,17 @@ import {Image} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import {View, Text, ScrollView} from "react-native";
-import styles from "./CafeDetailScreen.style";
+import styles from "./CafeDetail.style";
 import useCafeImage from "@/app/hooks/useCafeImage";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
-type CafeDetailRouteProp = RouteProp<RootStackParamList, "CafeDetailScreen">;
+type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
-interface CafeDetailScreenProps {
+interface CafeDetailProps {
     route: CafeDetailRouteProp;
 }
 
-const CafeDetailScreen = ({ route }: CafeDetailScreenProps) => {
+const CafeDetail = ({ route }: CafeDetailProps) => {
     const { cafe } = route.params;
     const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafe.id);
 
@@ -39,7 +39,7 @@ const CafeDetailScreen = ({ route }: CafeDetailScreenProps) => {
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{cafe.name}</Text>
             <Image
-                source={{uri: imageUrl}} // Use `uri` for network images
+                source={{uri: imageUrl}}
                 style={styles.headerImage}
                 resizeMode="cover"
                 onError={() => console.log("Error loading image")}
@@ -74,4 +74,4 @@ const CafeDetailScreen = ({ route }: CafeDetailScreenProps) => {
     );
 };
 
-export default CafeDetailScreen;
+export default CafeDetail;

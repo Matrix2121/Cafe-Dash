@@ -34,7 +34,7 @@ public class ReviewEntity {
     private String body;
 
     @Column(name = "rating")
-    private Byte rating;
+    private Integer rating;
 
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;

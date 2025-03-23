@@ -26,21 +26,19 @@ export type CartItem = {
   quantity: number;
 };
 
-export type Review = {
-  id?: number;
-  title: string;
-  body?: string;
-  rating: number;
-  cafeteriaId: number;
-  userId: number;
-  createdAt?: Date;
-};
 export type User = {
   id: number;
   username: string;
   email: string;
   role: Role[];
   orders: Order[];
+  reviews: Review[];
+}
+
+export type UserUpdate = {
+  id: number;
+  username: string;
+  email: string;
 }
 
 export type Role = {
@@ -66,4 +64,14 @@ export type OrderProduct = {
   productId: number;
   productPrice: number;
   productQuantity: number;
+}
+
+export type Review = {
+  id?: number;
+  title: string;
+  body?: string;
+  rating: number;
+  cafeteriaId: number;
+  userId: number;
+  createdAt?: Date;
 }

@@ -1,8 +1,5 @@
 package com.cafe.backend.entity.mapper;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.dto.RoleDTO;
@@ -13,31 +10,39 @@ import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
 
-public class UserMapper {
+import java.util.HashSet;
+import java.util.Set;
+
+public class UserAccountMapper {
+
+    private UserAccountMapper() {
+        throw new UnsupportedOperationException("Cannot initialize this class " + getClass().getSimpleName());
+    }
 
     public static UserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
-        if (userEntity == null) {
-            throw new DataMappingException("UserEntity cannot be null.");
-        }
 
+        if (userEntity == null) {
+            throw new DataMappingException("UserEntity cannot be null");
+        }
+        
         Set<RoleDTO> roleDTOS = new HashSet<>();
-        if (userEntity.getRoles() != null) {
+        if(userEntity.getRoles() != null) {
             for (RoleEntity role : userEntity.getRoles()) {
                 roleDTOS.add(RoleMapper.mapToDTO(role));
             }
         }
 
-        Set<OrderDTO> orderDTOS = new HashSet<>();
-        if (userEntity.getOrders() != null) {
+    	Set<OrderDTO> orderDTOS = new HashSet<>();
+        if(userEntity.getOrders() != null) {
             for (OrderEntity order : userEntity.getOrders()) {
                 orderDTOS.add(OrderMapper.mapToDTO(order));
             }
         }
 
         Set<ReviewDTO> reviewDTOS = new HashSet<>();
-        if (userEntity.getReviews() != null) {
-            for (ReviewEntity review : userEntity.getReviews()) {
-                reviewDTOS.add(ReviewMapper.mapToDTO(review));
+        if(userEntity.getReviews() != null) {
+        	for (ReviewEntity reviewEntity : userEntity.getReviews()) {
+                reviewDTOS.add(ReviewMapper.mapToDTO(reviewEntity));
             }
         }
 
@@ -53,7 +58,7 @@ public class UserMapper {
 
     public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
         if (userDTO == null) {
-            throw new DataMappingException("UserDTO cannot be null.");
+            throw new DataMappingException("UserDTO cannot be null");
         }
 
         Set<RoleEntity> roleEntities = new HashSet<>();
@@ -70,20 +75,13 @@ public class UserMapper {
             }
         }
 
-        // Up for discussion
-        Set<ReviewEntity> reviewEntities = new HashSet<>();
-        if(userDTO.reviews() != null) {
-        	for (ReviewDTO review : userDTO.reviews()) {
-                reviewEntities.add(ReviewMapper.mapToEntity(review));
-            }
-        }
-
         return UserEntity.builder()
                 .id(userDTO.id())
                 .username(userDTO.username())
+                .email(userDTO.email())
                 .roles(roleEntities)
                 .orders(orderEntities)
-                .reviews(reviewEntities)
                 .build();
+
     }
 }

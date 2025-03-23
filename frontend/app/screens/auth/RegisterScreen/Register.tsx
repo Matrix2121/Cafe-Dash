@@ -1,18 +1,38 @@
 import React, { useState } from 'react';
 import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '@/app/navigation/Navigation';
 import { TextInput, Button, Text } from 'react-native-paper';
-import styles from "./RegisterScreen.style";
-import useRegister from "@/app/hooks/useRegister";
+import styles from "./Register.style";
+import { useAuth } from '@/app/context/AuthContext';
 import logoSrc from "../../../assets/images/logo.png";
+import loginBackground from "../../../assets/images/login-background.jpg";
+import { useNavigation } from '@react-navigation/native';
 
-const RegisterScreen = () => {
-  const {handleRegister, setUsername, setEmail, setPassword, username, email, password, loading, error, navigation} = useRegister();
+const Register = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const handleRegister = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      await register(username, email, password);
+      navigation.navigate("mainhub");
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <ImageBackground
-      source={require('../../../assets/images/login-background.jpg')}
-      style={styles.backgroundImage}
-    >
+    <ImageBackground source={loginBackground} style={styles.backgroundImage}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
@@ -65,7 +85,7 @@ const RegisterScreen = () => {
 
             <Button
               mode="contained"
-              onPress={() => navigation.navigate("LoginScreen")}
+              onPress={() => navigation.navigate("login")}
               style={styles.loginButton}
             >
               Back To Login
@@ -77,4 +97,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export default Register;

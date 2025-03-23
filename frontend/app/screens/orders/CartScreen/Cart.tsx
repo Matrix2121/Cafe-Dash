@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { List } from 'react-native-paper';
-import styles from './CartScreen.styles';
+import styles from './Cart.styles';
 
-const CartScreen = () => {
+const Cart = () => {
   return (
     <View style={styles.container}>
       <List.Section>
@@ -26,4 +26,4 @@ const CartScreen = () => {
   );
 };
 
-export default CartScreen;
+export default Cart;

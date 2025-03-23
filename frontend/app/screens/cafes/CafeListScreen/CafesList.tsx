@@ -1,13 +1,14 @@
 import React from "react";
-import { View } from "react-native";
-import styles from "./CafesListScreen.style";
+import { View, ActivityIndicator, Text, FlatList } from "react-native";
+import useCafesShort from "../../../hooks/useCafes";
+import styles from "./CafesList.style";
 import { ScrollView } from "react-native-gesture-handler";
 import CafeCard from "@/app/components/cafeCard/cafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import useCafes from "../../../hooks/useCafes";
 import { Cafe } from "@/app/types/items";
 
-const CafesListScreen = () => {
+const CafesList = () => {
   const { cafes, loading, error } = useCafes();
 
   const hasData = !!cafes && cafes.length > 0;
@@ -37,4 +38,4 @@ const CafesListScreen = () => {
   );
 };
 
-export default CafesListScreen;
+export default CafesList;

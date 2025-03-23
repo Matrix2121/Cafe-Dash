@@ -4,17 +4,17 @@ import { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { AirbnbRating } from "react-native-ratings"; // Install this package: npm install react-native-ratings
 
-import styles from "./LeaveReviewScreen.style"
+import styles from "./LeaveReview.style"
 import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
 
-type LeaveReviewScreenRouteProp = RouteProp<RootStackParamList, "LeaveReviewScreen">;
+type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
-interface LeaveReviewScreenProps {
-  route: LeaveReviewScreenRouteProp;
+interface LeaveReviewProps {
+  route: LeaveReviewRouteProp;
 }
 
-const LeaveReviewScreen = ({ route }: LeaveReviewScreenProps) => {
+const LeaveReview = ({ route }: LeaveReviewProps) => {
   const { cafeteriaId } = route.params
   const { postReview } = useReviews(cafeteriaId);
 
@@ -79,4 +79,4 @@ const LeaveReviewScreen = ({ route }: LeaveReviewScreenProps) => {
   );
 };
 
-export default LeaveReviewScreen;
+export default LeaveReview;

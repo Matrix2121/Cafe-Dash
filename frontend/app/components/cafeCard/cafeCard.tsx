@@ -38,7 +38,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
   return (
     <Pressable
       style={styles.cardStyle}
-      onPress={() => navigation.navigate("CafeMenuScreen", { cafe })}
+      onPress={() => navigation.navigate("cafemenu", { cafe })}
     >
       <Card>
         <Card.Content>
