@@ -1,21 +1,37 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/apiClient';
+import CryptoJS from 'crypto-js';
+
+type Role = {
+  authority: string;
+};
 
 type User = {
-  id: number;
-  email: string;
-  name: string;
+  id: string;
+  username: string;
+  sub: string;
+  roles: Role[];
 };
 
 type AuthContextType = {
   user: User | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
+  register: (username: string, email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
+
+const decodeToken = (token: string) => {
+  try {
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  } catch (error) {
+    throw new Error('Invalid token');
+  }
+};
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -26,8 +42,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const token = await AsyncStorage.getItem('jwt');
       if (token) {
         try {
-          const response = await api.get('/auth/me');
-          setUser(response.data);
+          const decoded = decodeToken(token);
+          setUser(decoded);
         } catch (error) {
           await AsyncStorage.removeItem('jwt');
         }
@@ -37,10 +53,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     loadUser();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const response = await api.post('/auth/login', { email, password });
-    await AsyncStorage.setItem('jwt', response.data.token);
-    setUser(response.data.user);
+  const login = async (username: string, password: string) => {
+    const response = await api.post('/auth/login', { username, password });
+    const token = response.data;
+    await AsyncStorage.setItem('jwt', token);
+    const decoded = decodeToken(token);
+    setUser(decoded);
+  };
+
+  const register = async (username: string, email: string, password: string) => {
+    const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+    const response = await api.post('/auth/register', {
+      username,
+      email,
+      passwordHash,
+      roles: [] 
+    });
+    const token = response.data;
+    await AsyncStorage.setItem('jwt', token);
+    const decoded = decodeToken(token);
+    setUser(decoded);
   };
 
   const logout = async () => {
@@ -49,7 +81,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

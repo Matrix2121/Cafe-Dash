@@ -19,7 +19,7 @@ public class CustomUserDetails implements UserDetails {
     	this.password = jwtUserDTO.password();
         this.username = jwtUserDTO.username();
         this.authorities = jwtUserDTO.roles().stream()
-                .map(role -> (GrantedAuthority) () -> "ROLE_" + role.roleName().toUpperCase())
+                .map(role -> (GrantedAuthority) () -> role.roleName().toUpperCase())
                 .collect(Collectors.toSet());
     }
 
