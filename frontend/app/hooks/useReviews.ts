@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
-import {url} from "@/app/common/constants";
+import { url } from "@/app/common/constants";
 import { Review } from '../types/items';
+import api from '../services/apiClient';
 
 const useReviews = (cafeteriaId: number) => {
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchReviewsById = (cafeteriaId: number) => {
-        axios.get(`${url}api/reviews/${cafeteriaId}`)
+    const fetchReviewsByCafeId = (cafeteriaId: number) => {
+        api.get(`${url}api/reviews/${cafeteriaId}`)
             .then((response) => {
                 const allReviews = response.data;
                 setReviews(allReviews);
@@ -21,13 +21,20 @@ const useReviews = (cafeteriaId: number) => {
             });
     }
 
+    const postReview = (review : Review) => {
+        api.post(`/reviews`, review)
+            .catch((error) => {
+                setError(error?.response?.data?.message || error.message || 'Something went wrong');
+            });
+    }
+
     useEffect(() => {
         if (cafeteriaId != null) {
-            fetchReviewsById(cafeteriaId);
+            fetchReviewsByCafeId(cafeteriaId);
         }
     }, [cafeteriaId]);
 
-    return { reviews, loading, error };
+    return { reviews, loading, error, postReview };
 };
 
 export default useReviews;

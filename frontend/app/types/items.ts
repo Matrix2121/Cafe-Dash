@@ -27,11 +27,13 @@ export type CartItem = {
 };
 
 export type Review = {
-  id: number;
+  id?: number;
   title: string;
-  body: string;
+  body?: string;
   rating: number;
-  createdAt: Date;
+  cafeteriaId: number;
+  userId: number;
+  createdAt?: Date;
 };
 export type User = {
   id: number;

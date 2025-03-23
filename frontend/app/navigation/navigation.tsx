@@ -7,11 +7,12 @@ import MainHubScreen from "../screens/main/MainHubScreen/MainHubScreen";
 import CafesListScreen from "../screens/cafes/CafeListScreen/CafesListScreen";
 import CafeDetailScreen from "../screens/cafes/CafeDetailScreen/CafeDetailScreen";
 import CafeMenuScreen from "../screens/cafes/CafeMenuScreen/CafeMenuScreen";
-import CafeReviewScreen from "../screens/cafes/CafeReviewScreen/CafeReviewScreen";
+import CafeReviewsScreen from "../screens/cafes/CafeReviewsScreen/CafeReviewsScreen";
 import LeaveReviewScreen from "../screens/leaveReview/LeaveReviewScreen";
 import ProtectedRoute from "./ProtectedRoute";
 import CreateCafeteriaScreen from "../screens/cafes/CafeCreateScreen/CreateCafeScreen";
 import ProfileScreen from "@/app/screens/profile/ProfileScreen";
+import { Cafe } from "../types/items";
 
 export type RootStackParamList = {
   LoginScreen: undefined;
@@ -19,10 +20,10 @@ export type RootStackParamList = {
   MainHubScreen: undefined;
   ProfileScreen: { userId: number };
   CafesListScreen: undefined;
-  CafeDetailScreen: { cafeId: number };
-  CafeMenuScreen: { cafeId: number };
-  CafeReviewScreen: { cafeId: number };
-  LeaveReviewScreen: { cafeId: number };
+  CafeDetailScreen: { cafe: Cafe };
+  CafeMenuScreen: { cafe: Cafe };
+  CafeReviewsScreen: { cafe: Cafe };
+  LeaveReviewScreen: { cafeteriaId: number };
   TestScreen: undefined;
   AdminCreateCafeteria: undefined;
   CreateCafeteriaScreen: undefined;
@@ -61,7 +62,7 @@ const Navigation = () => {
 
       <Stack.Screen name="CafeMenuScreen" component={CafeMenuScreen} />
 
-      <Stack.Screen name="CafeReviewScreen" component={CafeReviewScreen} />
+      <Stack.Screen name="CafeReviewsScreen" component={CafeReviewsScreen} />
 
       <Stack.Screen name="LeaveReviewScreen" component={LeaveReviewScreen} />
 

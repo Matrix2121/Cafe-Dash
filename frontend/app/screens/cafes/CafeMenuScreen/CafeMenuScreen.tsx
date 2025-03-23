@@ -11,13 +11,13 @@ import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 type CafeMenuScreenRouteProp = RouteProp<RootStackParamList, "CafeMenuScreen">;
 
-interface IProps {
+interface CafeMenuScreenScreenProps {
   route: CafeMenuScreenRouteProp;
 }
 
-const CafeMenuScreen = ({ route }: IProps) => {
+const CafeMenuScreen = ({ route }: CafeMenuScreenScreenProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  const { cafeId } = route.params;
+  const { cafe } = route.params;
 
   const { products, fetchAllProducts, loading, error } = useProducts();
     useEffect(() => {
@@ -50,11 +50,11 @@ const CafeMenuScreen = ({ route }: IProps) => {
       <View style={styles.headerContainer}>
         <Text style={styles.title}>Menu</Text>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeReviewScreen', { cafeId })}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeReviewsScreen', { cafe })}>
           <Text style={styles.detailsButtonText}>Reviews</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeDetailScreen', { cafeId })}>
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('CafeDetailScreen', { cafe })}>
           <Text style={styles.detailsButtonText}>Details</Text>
         </TouchableOpacity>
     </View>

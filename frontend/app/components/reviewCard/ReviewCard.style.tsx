@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     },
     header: {
       flexDirection: 'row',
-      flexWrap: 'wrap',
+      justifyContent: 'space-between',
       alignItems: 'flex-start',
       marginBottom: theme.spacing.sm,
     },

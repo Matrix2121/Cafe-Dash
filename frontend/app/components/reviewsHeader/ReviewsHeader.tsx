@@ -3,16 +3,16 @@ import { View, Text, TouchableOpacity } from "react-native";
 import styles from "./ReviewsHeader.style"
 
 interface ReviewHeaderProps {
-  averageRating: number;
+  rating: number;
   totalReviews: number;
   onLeaveReview: () => void;
 }
 
-const ReviewHeader: React.FC<ReviewHeaderProps> = ({ averageRating, totalReviews, onLeaveReview }) => {
+const ReviewHeader: React.FC<ReviewHeaderProps> = ({ rating, totalReviews, onLeaveReview }) => {
   return (
     <View style={styles.container}>
       <View style={styles.ratingContainer}>
-        <Text style={styles.averageRating}>{averageRating.toFixed(1)}</Text>
+        <Text style={styles.averageRating}>{rating.toFixed(1)}</Text>
         <Text style={styles.ratingText}>out of 5</Text>
         <Text style={styles.totalReviews}>({totalReviews} reviews)</Text>
       </View>

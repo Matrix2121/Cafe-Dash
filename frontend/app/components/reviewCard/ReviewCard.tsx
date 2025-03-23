@@ -10,6 +10,12 @@ interface ReviewCardProps {
 
 const ReviewCard = ({ review }: ReviewCardProps) => {
     const { title, body, rating, createdAt } = review;
+
+    if (!createdAt) {
+      console.error('createdAt is undefined');
+      return null;
+    }
+
     const ratingStars = '⭐'.repeat(rating);
   
     return (
@@ -29,7 +35,7 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
           
           <View style={styles.footer}>
             <Text style={styles.date}>
-              {new Date(createdAt).toLocaleDateString()}
+              {new Date(createdAt).toLocaleDateString('en-GB')}
             </Text>
           </View>
         </Card.Content>
@@ -37,5 +43,4 @@ const ReviewCard = ({ review }: ReviewCardProps) => {
     );
   };
   
-
 export default ReviewCard;
