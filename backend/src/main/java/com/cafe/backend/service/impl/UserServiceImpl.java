@@ -63,12 +63,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public JWTUserDTO registerUser(RegisterUserDTO registerUserDTO) throws BadRequestException, ResourceNotFoundException {
+
     	Set<RoleEntity> roleEntities = new HashSet<>();
     	for(String roleName : registerUserDTO.roleNames()) {
     		RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
                     .orElseThrow(() -> new ResourceNotFoundException("Role not found with role : " + roleName));
     		roleEntities.add(roleEntity);
     	}
+
         UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
         user.setRoles(roleEntities);
         user.setId(null);
@@ -88,7 +90,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean doesUserExist(String username) {
     	Optional<UserEntity> userOptional = userRepository.findByUsernameAndIsDeletedFalse(username);
-    	if(userOptional.isEmpty()) {
+    	if (userOptional.isEmpty()) {
     		return false;
     	}
     	return true;
@@ -110,9 +112,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    private Set<RoleEntity> getRoleEntities(UserDTO newUserDTO) throws DataMappingException {
+    private Set<RoleEntity> getRoleEntities(UserDTO userDTO) throws DataMappingException {
         Set<RoleEntity> roleEntities = new HashSet<>();
-        for (RoleDTO role : newUserDTO.role()) {
+        for (RoleDTO role : userDTO.role()) {
             roleEntities.add(RoleMapper.mapToEntity(role));
         }
         return roleEntities;
