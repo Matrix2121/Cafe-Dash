@@ -32,7 +32,7 @@ export type User = {
   email: string;
   role: Role[];
   orders: Order[];
-  reviews: Reviews[];
+  reviews: Review[];
 }
 
 export type UserUpdate = {
@@ -66,12 +66,12 @@ export type OrderProduct = {
   productQuantity: number;
 }
 
-export type Reviews = {
-  id: number;
+export type Review = {
+  id?: number;
   title: string;
-  body: string;
+  body?: string;
   rating: number;
-  createdAt: string;
-  userId: number;
   cafeteriaId: number;
+  userId: number;
+  createdAt?: Date;
 }

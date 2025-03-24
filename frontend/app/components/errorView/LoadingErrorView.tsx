@@ -8,7 +8,7 @@ interface Props {
     dataAvailable: boolean;
 }
 
-const LoadingErrorView: React.FunctionComponent<Props> = ({loading, error, dataAvailable}) => {
+const LoadingErrorView = ({ loading, error, dataAvailable } : Props) => {
     if (loading) {
         return (
             <View style={styles.loadingContainer}>

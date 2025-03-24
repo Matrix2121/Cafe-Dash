@@ -20,14 +20,12 @@ const Test = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.rowContainer}>
-        <HasRoles roles={['ADMIN']}>
           <Pressable
             style={styles.testButton}
             onPress={() => navigateToScreen("cafedetail", { cafeId: 1 })}
           >
             <Text style={styles.testButtonText}>{"CafeDetail"}</Text>
           </Pressable>
-        </HasRoles>
 
         <Pressable
           style={styles.testButton}
@@ -57,12 +55,14 @@ const Test = () => {
         >
           <Text style={styles.testButtonText}>{"Profile"}</Text>
         </Pressable>
-        <Pressable
-          style={styles.testButton}
-          onPress={() => navigateToScreen("createcafeteria")}
-        >
-          <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
-        </Pressable>
+        <HasRoles roles={['admin']}>
+            <Pressable
+            style={styles.testButton}
+            onPress={() => navigateToScreen("createcafeteria")}
+            >
+            <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
+            </Pressable>
+        </HasRoles>
       </View>
     </ScrollView>
   );
