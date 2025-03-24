@@ -28,7 +28,6 @@ const Test = () => {
             <Text style={styles.testButtonText}>{"CafeDetail"}</Text>
           </Pressable>
         </HasRoles>
-
         <Pressable
           style={styles.testButton}
           onPress={() => navigateToScreen("cafemenu", { cafeId: 1 })}
@@ -53,7 +52,7 @@ const Test = () => {
       <View style={styles.rowContainer}>
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("profile", { userId: 2 })}
+          onPress={() => navigateToScreen("profile", { userId: 1 })}
         >
           <Text style={styles.testButtonText}>{"Profile"}</Text>
         </Pressable>
