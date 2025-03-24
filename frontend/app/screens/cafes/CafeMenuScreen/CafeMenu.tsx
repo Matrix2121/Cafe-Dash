@@ -1,46 +1,72 @@
 import React, { useEffect } from "react";
-import { FlatList, SectionList, View, Text } from "react-native";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { RouteProp, useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { FlatList, SectionList, View, Text, TouchableOpacity } from "react-native";
 import ItemCard from "../../../components/ItemCard/ItemCard";
 import useProducts from "@/app/hooks/useProducts";
 import styles from "./CafeMenu.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
-const CafeMenu = () => {
-  const { products, fetchAllProducts, loading, error } = useProducts();
+type CafeMenuRouteProp = RouteProp<RootStackParamList, "cafemenu">;
 
+interface CafeMenuProps {
+  route: CafeMenuRouteProp;
+}
+
+const CafeMenu = ({ route }: CafeMenuProps) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { cafe } = route.params;
+
+  const { products, fetchAllProducts, loading, error } = useProducts();
+  
   useEffect(() => {
-    fetchAllProducts();
+      fetchAllProducts();
   }, []);
 
-  const hasData = !!products && products.length > 0;
-  if (loading || error || !hasData) {
-    return (
-      <LoadingErrorView
-        loading={loading}
-        error={error}
-        dataAvailable={hasData}
-      />
-    );
-  }
+  const hasData = Array.isArray(products) && products.length > 0;
 
   const sections = [
     {
-      title: "Drinkables",
-      data: products.filter((item) => item.productType === "DRINKS"),
+      title: "Drinks",
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "DRINKS") :
+      [],
     },
     {
       title: "Promotion",
-      data: products.filter((item) => item.productType === "PROMO"),
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "PROMO") :
+      [],
     },
     {
       title: "Eating",
-      data: products.filter((item) => item.productType === "Eating"),
+      data: Array.isArray(products) ? products.filter((item) => item.productType === "Eating") :
+      [],
     },
   ];
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cafe Menu</Text>
+
+      <View style={styles.headerContainer}>
+        <Text style={styles.title}>Menu</Text>
+
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafereviews', { cafe })}>
+          <Text style={styles.detailsButtonText}>Reviews</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafedetail', { cafe })}>
+          <Text style={styles.detailsButtonText}>Details</Text>
+        </TouchableOpacity>
+    </View>
+
+    {(loading || error || !hasData) ? (
+      <LoadingErrorView
+        loading={loading}
+        error={error}
+        dataAvailable={hasData}
+      />
+     ) : (
       <SectionList
         sections={sections}
         keyExtractor={(item) => item.id.toString()}
@@ -62,6 +88,7 @@ const CafeMenu = () => {
           />
         )}
       />
+     )}
     </View>
   );
 };

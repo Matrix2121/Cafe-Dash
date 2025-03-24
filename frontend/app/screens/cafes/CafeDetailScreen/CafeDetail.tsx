@@ -6,32 +6,26 @@ import {View, Text, ScrollView} from "react-native";
 import styles from "./CafeDetail.style";
 import useCafeImage from "@/app/hooks/useCafeImage";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
-import useCafes from "@/app/hooks/useCafes";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
-interface CafeDetailScreenProps {
+interface CafeDetailProps {
     route: CafeDetailRouteProp;
 }
 
-const CafeDetail: React.FC<CafeDetailScreenProps> = ({route}) => {
-    const {cafeId} = route.params;
-    const {cafe, loading, error} = useCafes(cafeId);
-    const {
-        imageUrl,
-        loading: loadingImage,
-        error: errorImage,
-    } = useCafeImage(cafeId);
+const CafeDetail = ({ route }: CafeDetailProps) => {
+    const { cafe } = route.params;
+    const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafe.id);
 
-    const isLoading = loading || loadingImage;
-    const combinedError = error || errorImage;
-    const hasData = !!cafe && !!imageUrl;
+    const isLoading = loadingImage;
+    const combinedError = errorImage;
+    const hasData = !!imageUrl;
 
     if (isLoading || combinedError || !hasData) {
         return (
             <LoadingErrorView
-                loading={loading}
-                error={error}
+                loading={loadingImage}
+                error={errorImage}
                 dataAvailable={hasData}
             />
         );
