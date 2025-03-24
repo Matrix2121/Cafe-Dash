@@ -5,7 +5,7 @@ import Config from 'react-native-config';
 
 
 const api = axios.create({
-  baseURL: Config.API_URL,
+  baseURL:  process.env.API_URL
 });
 
 // Add request interceptor to inject JWT token
