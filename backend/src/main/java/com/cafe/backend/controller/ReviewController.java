@@ -32,7 +32,7 @@ public class ReviewController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public ReviewDTO createReview(@RequestBody ReviewDTO reviewDTO) throws BadRequestException {
+    public ReviewDTO createReview(@RequestBody ReviewDTO reviewDTO) throws BadRequestException, NotFoundException {
         return reviewService.createReview(reviewDTO);
     }
 

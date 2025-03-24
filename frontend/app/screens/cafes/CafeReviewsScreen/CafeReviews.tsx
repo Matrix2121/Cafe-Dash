@@ -36,7 +36,6 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
             }
         }, [hasFetched])
     );
-    
 
     const handleLeaveReview = () => {
         navigation.navigate('leavereview', { 

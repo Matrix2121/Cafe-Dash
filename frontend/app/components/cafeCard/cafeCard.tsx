@@ -62,7 +62,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
           <Text style={styles.locationStyle}>{cafe.location}</Text>
           <View style={styles.ratingLocationStyle}>
             <Text style={styles.ratingStyle}>
-              ⭐ {cafe.rating} ({cafe.countReview} reviews)
+              ⭐ {cafe.rating.toFixed(1)} ({cafe.countReview} reviews)
             </Text>
           </View>
         </Card.Content>

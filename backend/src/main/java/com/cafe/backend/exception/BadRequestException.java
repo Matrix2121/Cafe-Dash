@@ -1,8 +1,5 @@
 package com.cafe.backend.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 public abstract class BadRequestException extends Exception {
 	public BadRequestException(String message) {
         super(message);

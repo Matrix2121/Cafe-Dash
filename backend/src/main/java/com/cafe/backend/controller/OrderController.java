@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe.backend.dto.OrderDTO;
-import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.service.OrderService;
 
 /**
