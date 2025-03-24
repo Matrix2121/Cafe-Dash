@@ -5,6 +5,6 @@ import java.util.Set;
 public record JWTUserDTO(
         String username,
         String password,
-        Set<RoleDTO> roles
+        Set<String> roles
 )
 {}
