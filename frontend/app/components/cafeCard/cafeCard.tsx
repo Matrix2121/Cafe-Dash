@@ -5,26 +5,20 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import { Image, ImageSourcePropType } from "react-native";
 import { Text, Pressable, View } from "react-native";
-import {Button, Card} from "react-native-paper";
+import { Card } from "react-native-paper";
 import useCafeImage from "@/app/hooks/useCafeImage";
-import styles from "../cafeCard/cafeCard.style";
+import styles from "./cafeCard.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import { Cafe } from "@/app/types/items";
 
-const CafeCard = ({
-  id,
-  name,
-  brand,
-  location,
-  rating,
-  countReview,
-  openingHour,
-  closingHour,
-  isDeleted,
-}: Cafe) => {
+interface CafeCardProps {
+  cafe: Cafe;
+}
+
+const CafeCard = ({ cafe }: CafeCardProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const { imageUrl, loading, error } = useCafeImage(id);
+  const { imageUrl, loading, error } = useCafeImage(cafe.id);
   const hasData = !!imageUrl;
 
   if (loading || error || !hasData) {
@@ -44,7 +38,7 @@ const CafeCard = ({
   return (
     <Pressable
       style={styles.cardStyle}
-      onPress={() => navigation.navigate("cafemenu", { cafeId: id })}
+      onPress={() => navigation.navigate("cafemenu", { cafe })}
     >
       <Card>
         <Card.Content>
@@ -54,21 +48,21 @@ const CafeCard = ({
             style={styles.image}
           />
           <View style={styles.titleContainer}>
-            <Text style={styles.titleStyle}>{name}</Text>
-              {isValidTime(openingHour) && isValidTime(closingHour) && (
+            <Text style={styles.titleStyle}>{cafe.name}</Text>
+              {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
                   <View>
                     <Text style={styles.timeStyle}>Opening Hours:</Text>
                     <Text style={styles.timeStyle}>
-                      {openingHour} - {closingHour}
+                      {cafe.openingHour} - {cafe.closingHour}
                     </Text>
                   </View>
               )}
           </View>
-          <Text style={styles.locationStyle}>{brand}</Text>
-          <Text style={styles.locationStyle}>{location}</Text>
+          <Text style={styles.locationStyle}>{cafe.brand}</Text>
+          <Text style={styles.locationStyle}>{cafe.location}</Text>
           <View style={styles.ratingLocationStyle}>
             <Text style={styles.ratingStyle}>
-              ⭐ {rating} ({countReview} reviews)
+              ⭐ {cafe.rating} ({cafe.countReview} reviews)
             </Text>
           </View>
         </Card.Content>

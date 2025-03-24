@@ -104,6 +104,10 @@ public class UserServiceImpl implements UserService {
             user.setUsername(newUserDTO.username());
         }
 
+        if (newUserDTO.email() != null) {
+            user.setEmail(newUserDTO.email());
+        }
+
         if (newUserDTO.role() != null) {
             Set<RoleEntity> roleEntities = getRoleEntities(newUserDTO);
             user.setRoles(roleEntities);
