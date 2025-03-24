@@ -57,19 +57,25 @@ public class UserMapper {
         }
 
         Set<RoleEntity> roleEntities = new HashSet<>();
-        for (RoleDTO role : userDTO.role()) {
-            roleEntities.add(RoleMapper.mapToEntity(role));
+        if(userDTO.role() != null) {
+        	for (RoleDTO role : userDTO.role()) {
+                roleEntities.add(RoleMapper.mapToEntity(role));
+            }
         }
 
         Set<OrderEntity> orderEntities = new HashSet<>();
-        for (OrderDTO order : userDTO.orders()) {
-            orderEntities.add(OrderMapper.mapToEntity(order));
+        if(userDTO.orders() != null) {
+        	for (OrderDTO order : userDTO.orders()) {
+                orderEntities.add(OrderMapper.mapToEntity(order));
+            }
         }
 
         // Up for discussion
         Set<ReviewEntity> reviewEntities = new HashSet<>();
-        for (ReviewDTO review : userDTO.reviews()) {
-            reviewEntities.add(ReviewMapper.mapToEntity(review));
+        if(userDTO.reviews() != null) {
+        	for (ReviewDTO review : userDTO.reviews()) {
+                reviewEntities.add(ReviewMapper.mapToEntity(review));
+            }
         }
 
         return UserEntity.builder()

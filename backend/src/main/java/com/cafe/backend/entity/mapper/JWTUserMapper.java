@@ -11,18 +11,18 @@ import com.cafe.backend.exception.DataMappingException;
 
 public class JWTUserMapper {
 	
-	public static JWTUserDTO ToDTO(UserEntity userEntity) throws DataMappingException {
-			
-            Set<RoleDTO> roleDTOS = new HashSet<>();
-            if(userEntity.getRoles() != null) {
-            	for (RoleEntity role : userEntity.getRoles()) {
-                    roleDTOS.add(RoleMapper.mapToDTO(role));
-                }
+	public static JWTUserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
+		
+        Set<RoleDTO> roleDTOS = new HashSet<>();
+        if(userEntity.getRoles() != null) {
+        	for (RoleEntity role : userEntity.getRoles()) {
+                roleDTOS.add(RoleMapper.mapToDTO(role));
             }
+        }
 
-            return new JWTUserDTO(
-                    userEntity.getUsername(),
-                    userEntity.getPassword(),
-                    roleDTOS);
+        return new JWTUserDTO(
+                userEntity.getUsername(),
+                userEntity.getPassword(),
+                roleDTOS);
 	}
 }

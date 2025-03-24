@@ -58,18 +58,20 @@ public class UserServiceImpl implements UserService {
     public JWTUserDTO registerUser(RegisterUserDTO registerUserDTO) throws BadRequestException, ResourceNotFoundException {
 
     	Set<RoleEntity> roleEntities = new HashSet<>();
-    	for(String roleName : registerUserDTO.roleNames()) {
-    		RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
-                    .orElseThrow(() -> new ResourceNotFoundException("Role not found with role : " + roleName));
-    		roleEntities.add(roleEntity);
+    	if(registerUserDTO.roleNames() != null) {
+    		for(String roleName : registerUserDTO.roleNames()) {
+        		RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
+                        .orElseThrow(() -> new ResourceNotFoundException("Role not found with name : " + roleName));
+        		roleEntities.add(roleEntity);
+        	}
     	}
-
+    	
         UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
         user.setRoles(roleEntities);
         user.setId(null);
         user.setOrders(null);
         UserEntity savedUser = userRepository.save(user);
-        return JWTUserMapper.ToDTO(savedUser);
+        return JWTUserMapper.mapToDTO(savedUser);
     }
 
     @Override

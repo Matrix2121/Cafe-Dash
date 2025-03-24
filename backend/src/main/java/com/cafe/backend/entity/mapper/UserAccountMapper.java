@@ -24,20 +24,26 @@ public class UserAccountMapper {
         if (userEntity == null) {
             throw new DataMappingException("UserEntity cannot be null");
         }
-
+        
         Set<RoleDTO> roleDTOS = new HashSet<>();
-        for (RoleEntity role : userEntity.getRoles()) {
-            roleDTOS.add(RoleMapper.mapToDTO(role));
+        if(userEntity.getRoles() != null) {
+            for (RoleEntity role : userEntity.getRoles()) {
+                roleDTOS.add(RoleMapper.mapToDTO(role));
+            }
         }
 
-        Set<OrderDTO> orderDTOS = new HashSet<>();
-        for (OrderEntity order : userEntity.getOrders()) {
-            orderDTOS.add(OrderMapper.mapToDTO(order));
+    	Set<OrderDTO> orderDTOS = new HashSet<>();
+        if(userEntity.getOrders() != null) {
+            for (OrderEntity order : userEntity.getOrders()) {
+                orderDTOS.add(OrderMapper.mapToDTO(order));
+            }
         }
 
         Set<ReviewDTO> reviewDTOS = new HashSet<>();
-        for (ReviewEntity reviewEntity : userEntity.getReviews()) {
-            reviewDTOS.add(ReviewMapper.mapToDTO(reviewEntity));
+        if(userEntity.getReviews() != null) {
+        	for (ReviewEntity reviewEntity : userEntity.getReviews()) {
+                reviewDTOS.add(ReviewMapper.mapToDTO(reviewEntity));
+            }
         }
 
         return new UserDTO(
@@ -56,13 +62,17 @@ public class UserAccountMapper {
         }
 
         Set<RoleEntity> roleEntities = new HashSet<>();
-        for (RoleDTO role : userDTO.role()) {
-            roleEntities.add(RoleMapper.mapToEntity(role));
+        if(userDTO.role() != null) {
+        	for (RoleDTO role : userDTO.role()) {
+                roleEntities.add(RoleMapper.mapToEntity(role));
+            }
         }
 
         Set<OrderEntity> orderEntities = new HashSet<>();
-        for (OrderDTO order : userDTO.orders()) {
-            orderEntities.add(OrderMapper.mapToEntity(order));
+        if(userDTO.orders() != null) {
+        	for (OrderDTO order : userDTO.orders()) {
+                orderEntities.add(OrderMapper.mapToEntity(order));
+            }
         }
 
         return UserEntity.builder()
