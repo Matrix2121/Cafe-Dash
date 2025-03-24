@@ -14,7 +14,6 @@ const useReviews = (cafeteriaId: number) => {
             .then((response) => {
                 const allReviews = response.data;
                 setReviews(allReviews);
-                setError(null);
             })
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
