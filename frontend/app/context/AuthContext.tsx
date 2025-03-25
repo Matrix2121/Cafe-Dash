@@ -54,6 +54,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (username: string, password: string) => {
+    password = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
     const response = await api.post('/auth/login', { username, password });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);

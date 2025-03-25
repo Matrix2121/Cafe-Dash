@@ -6,6 +6,7 @@ export const theme = {
         surface: '#FFFFFF',
         textPrimary: '#333333',
         textSecondary: '#777777',
+        border: '#e0e0e0',
     },
     spacing: {
         xs: 4,

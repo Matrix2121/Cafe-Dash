@@ -1,10 +1,7 @@
 import React from "react";
 import { AuthProvider } from "./context/AuthContext";
 import Navigation from "@/app/navigation/Navigation";
-import {
-  GestureHandlerRootView,
-  NativeViewGestureHandler,
-} from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const App = () => {
   return (
