@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       username,
       email,
       passwordHash,
-      roleNames: ['admin'] // just temporarily
+      roleNames: ['admin'] // just temporarily 
     });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
