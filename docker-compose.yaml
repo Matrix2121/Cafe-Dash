@@ -1,12 +1,13 @@
 version: '3.8'
 
+# frontend is not included for now.
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - backend/.env
     ports:
       - "8080:8080"
     depends_on:
