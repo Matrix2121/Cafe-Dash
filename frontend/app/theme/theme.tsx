@@ -9,7 +9,6 @@ export const theme = {
         border: '#e0e0e0',
         ripple: 'rgba(0,0,0,0.1)',
         shadow: '#000',
-        error: '#FF3B30',
     },
     spacing: {
         xs: 4,

@@ -22,14 +22,10 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.background,
     },
     errorText: {
-        color: theme.colors.error,
-        fontSize: theme.fontSizes.body,
-        textAlign: 'center',
-    },
-    emptyText: {
         color: theme.colors.textSecondary,
         fontSize: theme.fontSizes.body,
-        textAlign: 'center',
+        textAlign: "center",
+        marginTop: theme.spacing.md,
     },
 });
 

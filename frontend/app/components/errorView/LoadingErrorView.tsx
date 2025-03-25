@@ -35,7 +35,7 @@ const LoadingErrorView = ({ loading, error, dataAvailable }: Props) => {
     if (!dataAvailable) {
         return (
             <View style={styles.errorContainer}>
-                <Text style={styles.emptyText}>
+                <Text style={styles.errorText}>
                     No cafe data available.
                 </Text>
             </View>
