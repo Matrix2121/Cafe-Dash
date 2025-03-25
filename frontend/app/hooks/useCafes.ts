@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {Cafe} from '../types/items';
-import api from '../services/apiClient';
+import customAPI from '../services/apiClient';
 import {url} from "@/app/common/constants";
 
 const useCafes = (id?: number) => {
@@ -10,7 +10,7 @@ const useCafes = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllCafes = () => {
-        api.get(`/cafeterias`)
+        customAPI.get(`/cafeterias`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafes(allCafes);
@@ -22,7 +22,7 @@ const useCafes = (id?: number) => {
             });
     }
     const fetchCafeById = (id: number) => {
-        api.get(`/cafeterias/${id}`)
+        customAPI.get(`/cafeterias/${id}`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafe(allCafes);
