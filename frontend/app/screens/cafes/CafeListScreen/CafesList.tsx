@@ -15,11 +15,13 @@ const CafesList = () => {
 
   if (loading || error || !hasData) {
     return (
-      <LoadingErrorView
-        loading={loading}
-        error={error}
-        dataAvailable={hasData}
-      />
+      <View style={styles.loadingErrorContainer}>
+        <LoadingErrorView
+          loading={loading}
+          error={error}
+          dataAvailable={hasData}
+        />
+      </View>
     );
   }
 

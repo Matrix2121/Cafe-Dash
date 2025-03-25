@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
-import { View, Image, Text } from 'react-native';
+import { View, Image, Text, Pressable } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import CafeListScreen from '../../cafes/CafeListScreen/CafesList';
 import Cart from '../../orders/CartScreen/Cart';
@@ -11,39 +11,59 @@ import { useAuth } from '@/app/context/AuthContext';
 import { Button } from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '@/app/navigation/Navigation';
+import { theme } from '@/app/theme/theme';
+
 const Tab = createBottomTabNavigator();
 
 const MainHub = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { user, logout } = useAuth();
+
   const handleLogout = () => {
     logout();
     navigation.navigate("login");
-  }
+  };
 
-  const { user, logout } = useAuth();
+  const handleProfilePress = () => {
+    navigation.navigate("profile", { userId: 1 });
+  };
+
   return (
-    <>
+    <View style={styles.container}>
+      {/* Fixed Header */}
       <View style={styles.header}>
-        <View style={styles.locationContainer}>
-          <MaterialIcons name="location-on" size={20} color="#444444" />
-          <Text style={styles.locationText}>Downtown Coffee District</Text>
-        </View>
-        <View style={styles.userContainer}>
-          {user && <Text style={styles.username}>Hi, {user.username}</Text>}
+        <Pressable 
+          onPress={handleProfilePress}
+          style={styles.profileContainer}
+          android_ripple={{ color: theme.colors.ripple }}
+        >
           <Image 
-          source={logo}
-          style={styles.profileImage}
-        />
-          <Button onPress={handleLogout}>
-            <MaterialIcons name="logout" size={24} color="#444444" />
-          </Button>
-        </View>
+            source={logo}
+            style={styles.profileImage}
+          />
+          {user && (
+            <Text style={styles.username}>
+              Hi, {user.username}!
+            </Text>
+          )}
+        </Pressable>
+        <Button 
+          onPress={handleLogout}
+          textColor={theme.colors.textSecondary}
+        >
+          <MaterialIcons 
+            name="logout" 
+            size={theme.iconSizes.md} 
+            color={theme.colors.textSecondary} 
+          />
+        </Button>
       </View>
 
+      {/* Main Content */}
       <Tab.Navigator
         screenOptions={{
-          tabBarActiveTintColor: '#444444',
-          tabBarInactiveTintColor: '#CECECC',
+          tabBarActiveTintColor: theme.colors.textPrimary,
+          tabBarInactiveTintColor: theme.colors.textSecondary,
           tabBarStyle: styles.tabBar,
           headerShown: false
         }}
@@ -53,7 +73,11 @@ const MainHub = () => {
           component={CafeListScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="local-cafe" size={24} color={color} />
+              <MaterialIcons 
+                name="local-cafe" 
+                size={theme.iconSizes.md} 
+                color={color} 
+              />
             )
           }}
         />
@@ -62,12 +86,16 @@ const MainHub = () => {
           component={Cart}
           options={{
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="shopping-cart" size={24} color={color} />
+              <MaterialIcons 
+                name="shopping-cart" 
+                size={theme.iconSizes.md} 
+                color={color} 
+              />
             )
           }}
         />
       </Tab.Navigator>
-    </>
+    </View>
   );
 };
 
