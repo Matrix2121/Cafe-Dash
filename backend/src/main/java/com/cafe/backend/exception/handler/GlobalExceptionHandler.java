@@ -9,6 +9,10 @@ import com.cafe.backend.exception.AuthenticationCustomException;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

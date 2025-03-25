@@ -15,7 +15,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleLogin = async () => {
@@ -100,6 +100,13 @@ const Login = () => {
               style={styles.registerButton}
             >
               JWT(Dev only)
+            </Button>
+            <Button
+              mode="contained"
+              onPress={() => logout()}
+              style={styles.registerButton}
+            >
+              Clear JWT(Dev only)
             </Button>
           </View>
         </ScrollView>

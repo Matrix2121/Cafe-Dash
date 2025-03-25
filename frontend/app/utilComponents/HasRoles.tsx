@@ -11,11 +11,12 @@ const HasRoles = ({ roles, children }: HasRolesProps) => {
 
   if (!user) return null;
 
-  const hasAllRoles = roles.every(requiredRole =>
+// Check if the user has at least one of the specified roles
+  const hasAnyRole = roles.some(requiredRole =>
     user.roles.some(role => role.authority === requiredRole)
-  );
+  );  
 
-  if (!hasAllRoles) return null;
+  if (!hasAnyRole) return null;
 
   return <>{children}</>;
 };

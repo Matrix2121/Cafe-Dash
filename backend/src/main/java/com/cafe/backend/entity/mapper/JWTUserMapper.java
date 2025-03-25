@@ -8,6 +8,10 @@ import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 public class JWTUserMapper {
 	
 	public static JWTUserDTO mapToDTO(UserEntity userEntity) throws DataMappingException {
