@@ -14,7 +14,6 @@ services:
       - db
     networks:
       - app-network
-      -
   db:
     image: postgres:15-alpine
     restart: always
