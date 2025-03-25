@@ -14,16 +14,7 @@ services:
       - db
     networks:
       - app-network
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:80"
-    networks:
-      - app-network
-
+      -
   db:
     image: postgres:15-alpine
     restart: always
