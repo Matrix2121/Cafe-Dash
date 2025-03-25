@@ -58,7 +58,6 @@ const Login = () => {
             <Text style={styles.title}><Text style={styles.highlight}>Welcome to </Text>Cafe-Dash</Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
             <TextInput
               label="Username"
               value={username}
