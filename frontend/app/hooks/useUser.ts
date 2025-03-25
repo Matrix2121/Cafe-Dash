@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {User, UserUpdate} from '../types/items';
-import api from '../services/apiClient';
+import customAPI from '../services/apiClient';
 import {url} from "@/app/common/constants";
 
 const useUser = (id?: number) => {
@@ -10,7 +10,7 @@ const useUser = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllUsers = async () => {
-        await api.get(`/users`)
+        await customAPI.get(`/users`)
             .then((response) => {
                 const allUsers = response.data;
                 setUsers(allUsers);
@@ -22,7 +22,7 @@ const useUser = (id?: number) => {
             });
     }
     const fetchUserById = async (id: number) => {
-        await api.get(`/users/${id}`)
+        await customAPI.get(`/users/${id}`)
             .then((response) => {
                 const user = response.data;
                 setUser(user);
@@ -41,7 +41,7 @@ const useUser = (id?: number) => {
     }, [id]);
 
     const updateUser = async (updatedUser: UserUpdate, id: number) => {
-         await api.put(`/users/${id}`, updatedUser)
+         await customAPI.put(`/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })

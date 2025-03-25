@@ -8,7 +8,7 @@ import { TextInput, Button, Text } from 'react-native-paper';
 import styles from "./Login.style";
 import logo from "../../../assets/images/logo.png";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from "@/app/services/apiClient";
+
 
 const Login = () => {
   const [username, setUsername] = useState('');
