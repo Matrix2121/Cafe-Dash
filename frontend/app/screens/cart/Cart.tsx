@@ -1,9 +1,8 @@
-// src/screens/CartScreen.tsx
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useCart } from '@/app/context/CartContext';
 import { CartItem } from '@/app/types/items';
-import styles from './Cart.styles'
+import styles from './Cart.style'
 
 const Cart = () => {
   const {

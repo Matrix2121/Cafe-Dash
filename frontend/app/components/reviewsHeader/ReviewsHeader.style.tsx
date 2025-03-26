@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
       padding: theme.spacing.md,
       backgroundColor: theme.colors.surface,
       zIndex: 1000,
-      shadowColor: '#000',
+      shadowColor: theme.colors.shadow,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,

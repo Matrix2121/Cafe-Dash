@@ -1,4 +1,3 @@
-// src/types/item.ts
 export type Cafe = {
   id: number;
   name: string;

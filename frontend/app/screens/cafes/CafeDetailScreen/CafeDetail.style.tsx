@@ -1,77 +1,57 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '@/app/theme/theme';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#F8F9FA', // background color
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.background,
   },
   title: {
-    fontSize: 24,
+    fontSize: theme.fontSizes.header,
     fontWeight: 'bold',
-    color: '#333333', // textPrimary
-    marginBottom: 16,
+    color: theme.colors.textPrimary,
+    marginBottom: theme.spacing.md,
   },
   detailsContainer: {
-    marginBottom: 16,
+    marginBottom: theme.spacing.md,
   },
   section: {
-    backgroundColor: '#FFFFFF', // surface color
-    borderRadius: 10,
-    padding: 16,
-    marginBottom: 16,
-    shadowColor: '#000',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
+    padding: theme.spacing.md,
+    marginBottom: theme.spacing.md,
+    shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3, // For Android
+    shadowRadius: theme.radii.sm,
+    elevation: theme.elevation.md,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: theme.fontSizes.title,
     fontWeight: 'bold',
-    color: '#444444', // primary
-    marginBottom: 12,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorText: {
-    fontSize: 16,
-    color: '#777777', // textSecondary
-  },
-  itemContainer: {
-    marginBottom: 16,
+    color: theme.colors.primary,
+    marginBottom: theme.spacing.sm,
   },
   label: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      color: '#555',
+    fontSize: theme.fontSizes.subheader,
+    fontWeight: 'bold',
+    color: theme.colors.textSecondary,
   },
   value: {
-      fontSize: 16,
-      color: '#000',
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.textPrimary,
   },
   headerImage: {
-    width: '100%',        // Full width of container
-    height: 200,          // Fixed height for consistency
-    borderRadius: 8,      // Match your card border radius
-    marginBottom: 16,     // Space between image and content
-    backgroundColor: '#CECECC', // Secondary color for loading state
-    shadowColor: '#000',  // Shadow to match your card style
+    width: '100%',
+    height: theme.components.cafeDetail.imageHeight,
+    borderRadius: theme.radii.md,
+    marginBottom: theme.spacing.md,
+    backgroundColor: theme.colors.secondary,
+    shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,         // Android shadow
+    shadowRadius: theme.radii.sm,
+    elevation: theme.elevation.md,
   },
 });
-
-export default styles;

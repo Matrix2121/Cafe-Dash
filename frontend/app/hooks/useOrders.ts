@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {Cafe} from '../types/items';
+import { useEffect, useState } from 'react';
+import { Cafe } from '../types/items';
 import api from '../services/apiClient';
 
 const useCafes = (id: number) => {

@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 240,
-    borderRadius: theme.radii.sm,
+    height: theme.sizes.imageHeight,
+    borderRadius: theme.components.cardImage.borderRadius,
     marginBottom: theme.spacing.md,
     backgroundColor: theme.colors.surface,
   },
