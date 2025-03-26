@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Cafe } from '../types/items';
 import customAPI from '../services/apiClient';
 
-const useCafes = (id?: number) => {
+const useCafes = (id?: number | null) => {
     const [cafes, setCafes] = useState<Cafe[]>([]);
     const [cafe, setCafe] = useState<Cafe | null>(null);
     const [loading, setLoading] = useState(true);
