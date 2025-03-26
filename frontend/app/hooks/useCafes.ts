@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Cafe } from '../types/items';
-import api from '../services/apiClient';
+import customAPI from '../services/apiClient';
 
 const useCafes = (id?: number) => {
     const [cafes, setCafes] = useState<Cafe[]>([]);
@@ -9,7 +9,7 @@ const useCafes = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllCafes = () => {
-        api.get(`/cafeterias`)
+        customAPI.get(`api/cafeterias`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafes(allCafes);
@@ -21,7 +21,7 @@ const useCafes = (id?: number) => {
             });
     }
     const fetchCafeById = (id: number) => {
-        api.get(`/cafeterias/${id}`)
+        customAPI.get(`api/cafeterias/${id}`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafe(allCafes);

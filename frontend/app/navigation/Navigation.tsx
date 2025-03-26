@@ -14,7 +14,8 @@ import CafeReviews from '../screens/cafes/CafeReviewsScreen/CafeReviews';
 import LeaveReview from '../screens/leaveReview/LeaveReview';
 import Cart from '../screens/cart/Cart'
 import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
-import Test from '../screens/test/Test';
+import CreateUser from '../screens/users/CreateUser';
+import Test from '../screens/test/Test'
 
 export type RootStackParamList = {
     login: undefined;
@@ -29,6 +30,7 @@ export type RootStackParamList = {
     createcafeteria: undefined;
     cart: undefined;
     test: undefined;
+    createuser: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +50,7 @@ const Navigation = () => {
             <Stack.Screen name="createcafeteria" component={CreateCafeteria} />
             <Stack.Screen name="cart" component={Cart} />
             <Stack.Screen name="test" component={Test} />
+            <Stack.Screen name="createuser" component={CreateUser} />
         </Stack.Navigator>
     );
 };

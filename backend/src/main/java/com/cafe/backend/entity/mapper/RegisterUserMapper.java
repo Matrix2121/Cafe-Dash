@@ -4,6 +4,10 @@ import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.exception.DataMappingException;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 public class RegisterUserMapper {
 
     private RegisterUserMapper() {

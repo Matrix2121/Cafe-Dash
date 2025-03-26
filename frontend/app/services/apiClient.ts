@@ -1,15 +1,13 @@
-// src/services/apiClient.ts
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { url } from '../common/constants';
 
-// Create axios instance with base URL
-const api = axios.create({
-  baseURL: `${url}/api`, // Replace with your backend URL
+const customAPI = axios.create({
+    baseURL:  process.env.API_URL
 });
 
 // Add request interceptor to inject JWT token
-api.interceptors.request.use(async (config) => {
+customAPI.interceptors.request.use(async (config) => {
   const token = await AsyncStorage.getItem('jwt');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -18,7 +16,7 @@ api.interceptors.request.use(async (config) => {
 });
 
 // Add response interceptor to handle 401 errors
-api.interceptors.response.use(
+customAPI.interceptors.response.use(
   response => response,
   async (error) => {
     if (error.response?.status === 401) {
@@ -29,4 +27,4 @@ api.interceptors.response.use(
   }
 );
 
-export default api;
+export default customAPI;
