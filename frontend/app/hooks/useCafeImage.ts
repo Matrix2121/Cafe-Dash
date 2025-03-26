@@ -1,4 +1,3 @@
-// src/hooks/useCafeImage.ts
 import { useEffect, useState } from "react";
 import api from "../services/apiClient";
 

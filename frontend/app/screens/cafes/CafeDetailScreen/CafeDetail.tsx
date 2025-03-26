@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {Image, ImageSourcePropType} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {RootStackParamList} from "@/app/navigation/Navigation";

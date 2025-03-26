@@ -58,9 +58,9 @@ const Test = () => {
         </Pressable>
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("mainhub")}
+          onPress={() => navigateToScreen("home")}
         >
-          <Text style={styles.testButtonText}>{"MainHub"}</Text>
+          <Text style={styles.testButtonText}>{"MainLayout"}</Text>
         </Pressable>
       </View>
       <View style={styles.rowContainer}>
