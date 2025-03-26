@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {User, UserUpdate} from '../types/items';
-import api from '../services/apiClient';
+import customAPI from '../services/apiClient';
 import {url} from "@/app/common/constants";
 
 const useUser = (id?: number) => {
@@ -9,8 +9,8 @@ const useUser = (id?: number) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchAllUsers = () => {
-        api.get(`/users`)
+    const fetchAllUsers = async () => {
+        await customAPI.get(`/users`)
             .then((response) => {
                 const allUsers = response.data;
                 setUsers(allUsers);
@@ -21,8 +21,8 @@ const useUser = (id?: number) => {
                 setLoading(false);
             });
     }
-    const fetchUserById = (id: number) => {
-        api.get(`/users/${id}`)
+    const fetchUserById = async (id: number) => {
+        await customAPI.get(`/users/${id}`)
             .then((response) => {
                 const user = response.data;
                 setUser(user);
@@ -40,8 +40,8 @@ const useUser = (id?: number) => {
         }
     }, [id]);
 
-    const updateUser = (updatedUser: UserUpdate, id: number) => {
-        api.put(`/users/${id}`, updatedUser)
+    const updateUser = async (updatedUser: UserUpdate, id: number) => {
+         await customAPI.put(`/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })

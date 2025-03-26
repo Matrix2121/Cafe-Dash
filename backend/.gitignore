@@ -34,3 +34,5 @@ build/
 
 ### Dont push properties ###
 !/src/main/resources/application.properties
+!/.env
+.env

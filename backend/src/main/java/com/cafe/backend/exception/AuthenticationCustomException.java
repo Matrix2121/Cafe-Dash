@@ -1,7 +1,7 @@
 package com.cafe.backend.exception;
 
 // errors with login
-public class AuthenticationCustomException extends BadRequestException{
+public class AuthenticationCustomException extends RuntimeException{
 
 	public AuthenticationCustomException(String message) {
 		super(message);
