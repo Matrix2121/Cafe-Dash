@@ -64,6 +64,16 @@ const Test = () => {
             </Pressable>
         </HasRoles>
       </View>
+      <View style={styles.rowContainer}>
+        <HasRoles roles={['admin','owner']}>
+            <Pressable
+            style={styles.testButton}
+            onPress={() => navigateToScreen("createuser")}
+            >
+            <Text style={styles.testButtonText}>{"Create User"}</Text>
+            </Pressable>
+        </HasRoles>
+      </View>
     </ScrollView>
   );
 };

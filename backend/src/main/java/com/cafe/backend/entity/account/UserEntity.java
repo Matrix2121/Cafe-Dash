@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * {@code UserAccount} is an entity class.
  * 
- * @author AngelStoynov
+ * @author AngelStoynov, ZapryanZapryanov
  */
 
 @Entity

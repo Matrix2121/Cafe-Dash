@@ -41,38 +41,37 @@ public class UserServiceImpl implements UserService {
     
     @Autowired 
     private RoleRepository roleRepository;
-
-    @Override
-    public UserDTO createUser(UserDTO userDTO) throws BadRequestException {
-        UserEntity user = UserMapper.mapToEntity(userDTO);
-        user.setId(null);
-        user.setRoles(null);
-        user.setOrders(null);
-        user.setReviews(null);
-        user.setDeleted(false);
-        UserEntity savedUser = userRepository.save(user);
-        return UserMapper.mapToDTO(savedUser);
-    }
-
-    @Override
-    public JWTUserDTO registerUser(RegisterUserDTO registerUserDTO) throws BadRequestException, ResourceNotFoundException {
-
-    	Set<RoleEntity> roleEntities = new HashSet<>();
-    	if(registerUserDTO.roleNames() != null) {
-    		for(String roleName : registerUserDTO.roleNames()) {
-        		RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
+    
+    private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
+        Set<RoleEntity> roleEntities = new HashSet<>();
+        if (registerUserDTO.roleNames() != null) {
+            for (String roleName : registerUserDTO.roleNames()) {
+                RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
                         .orElseThrow(() -> new ResourceNotFoundException("Role not found with name : " + roleName));
-        		roleEntities.add(roleEntity);
-        	}
-    	}
-    	
+                roleEntities.add(roleEntity);
+            }
+        }
         UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
         user.setRoles(roleEntities);
+        user.setDeleted(false);
         user.setId(null);
         user.setOrders(null);
-        UserEntity savedUser = userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    // used by admin and owner
+    @Override
+    public UserDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException, NotFoundException {
+        UserEntity user = createAndSaveUser(registerUserDTO);
+        return UserMapper.mapToDTO(user);
+    }
+    // used by Customers
+    @Override
+    public JWTUserDTO registerUser(RegisterUserDTO registerUserDTO) throws BadRequestException, ResourceNotFoundException {
+        UserEntity savedUser = createAndSaveUser(registerUserDTO);
         return JWTUserMapper.mapToDTO(savedUser);
     }
+
 
     @Override
     public UserDTO updateUser(Long id, UserDTO userDTO) throws BadRequestException, NotFoundException {
