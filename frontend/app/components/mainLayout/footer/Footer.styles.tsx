@@ -1,11 +1,14 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '@/app/theme/theme';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.surface,
     borderTopWidth: 1,
-    borderTopColor: '#CECECC',
-    height: 60,
-    paddingBottom: 5,
+    borderTopColor: theme.colors.border,
+    height: theme.sizes.tabBarHeight,
+    paddingBottom: theme.spacing.xs,
   },
 });
+
+export default styles;
