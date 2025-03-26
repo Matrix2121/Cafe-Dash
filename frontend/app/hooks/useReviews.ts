@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { url } from "@/app/common/constants";
 import { Review } from '../types/items';
 import api from '../services/apiClient';
 
@@ -10,7 +9,7 @@ const useReviews = (cafeteriaId: number) => {
 
     const fetchReviewsByCafeId = (cafeteriaId: number) => {
         setLoading(true);
-        api.get(`${url}api/reviews/${cafeteriaId}`)
+        api.get(`reviews/${cafeteriaId}`)
             .then((response) => {
                 const allReviews = response.data;
                 setReviews(allReviews);

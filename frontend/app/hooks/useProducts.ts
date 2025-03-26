@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../services/apiClient";
 import { Product } from "../types/items";
-import { url } from "@/app/common/constants";
 
 const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -10,8 +9,7 @@ const useProduct = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchAllProducts = () => {
-    api
-      .get(`${url}api/products`)
+    api.get(`/products`)
       .then((response) => {
         const allProducts = response.data;
         setProducts(allProducts);
@@ -28,8 +26,7 @@ const useProduct = () => {
   };
 
   const fetchProductById = (id: number) => {
-    api
-      .get(`${url}api/products/${id}`)
+    api.get(`/products/${id}`)
       .then((response) => {
         const product = response.data;
         setProduct(product);

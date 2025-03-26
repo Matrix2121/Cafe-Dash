@@ -1,7 +1,6 @@
-import {useEffect, useState} from 'react';
-import {User, UserUpdate} from '../types/items';
+import { useEffect, useState } from 'react';
+import { User, UserUpdate } from '../types/items';
 import api from '../services/apiClient';
-import {url} from "@/app/common/constants";
 
 const useUser = (id?: number) => {
     const [users, setUsers] = useState<User[]>([]);
