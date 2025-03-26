@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 
 const useValidation = () => {
     const regexPattern = /\S+@\S+\.\S+/;

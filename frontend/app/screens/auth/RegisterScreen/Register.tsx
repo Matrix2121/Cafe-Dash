@@ -23,7 +23,7 @@ const Register = () => {
     setError('');
     try {
       await register(username, email, password);
-      navigation.navigate("mainhub");
+      navigation.navigate("cafeslist");
     } catch (err: any) {
       setError(err.message);
     } finally {

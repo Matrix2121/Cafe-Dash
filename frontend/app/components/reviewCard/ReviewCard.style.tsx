@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
       borderRadius: theme.radii.md,
       marginVertical: theme.spacing.sm,
       padding: theme.spacing.sm,
-      shadowColor: '#000',
+      shadowColor: theme.colors.shadow,
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,

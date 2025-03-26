@@ -1,17 +1,19 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '@/app/theme/theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFFFFF', // surface color
-    borderRadius: 10,
-    margin: 8, // Smaller margin
-    padding: 12, // Smaller padding
-    shadowColor: '#000',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
+    margin: theme.spacing.sm,
+    padding: theme.spacing.md,
+    shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3, // For Android
-    width: '100%', // Make cards smaller to fit more on the screen
+    shadowRadius: theme.radii.sm,
+    elevation: theme.elevation.md,
+    width: '100%',
+    maxWidth: 400,
   },
   cafeteriaContainer: {
     flex: 1,
@@ -20,44 +22,44 @@ const styles = StyleSheet.create({
   },
   addButton: {
     position: 'absolute',
-    top: 8,
-    right: 8,
-    backgroundColor: '#444444', // primary color
-    borderRadius: 15,
-    width: 30,
-    height: 30,
+    top: theme.spacing.sm,
+    right: theme.spacing.sm,
+    backgroundColor: theme.colors.primary,
+    borderRadius: theme.radii.full,
+    width: theme.sizes.addButtonSize,
+    height: theme.sizes.addButtonSize,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1, // Ensure the button is above other content
+    zIndex: 1,
   },
   addButtonText: {
-    color: '#FFFFFF', // surface (white text)
-    fontSize: 18,
+    color: theme.colors.surface,
+    fontSize: theme.fontSizes.title,
     fontWeight: 'bold',
-    textAlign: 'center', // Ensures text is horizontally centered
-    marginBottom: 3,
+    textAlign: 'center',
+    marginBottom: 1,
   },
   name: {
-    fontSize: 18, // Smaller font size
+    fontSize: theme.fontSizes.title,
     fontWeight: 'bold',
-    marginBottom: 4, // Smaller margin
-    color: '#333333', // textPrimary
+    marginBottom: theme.spacing.xs,
+    color: theme.colors.textPrimary,
   },
   productType: {
-    fontSize: 12, // Smaller font size
-    color: '#777777', // textSecondary
-    marginBottom: 8, // Smaller margin
+    fontSize: theme.fontSizes.subheader,
+    color: theme.colors.textSecondary,
+    marginBottom: theme.spacing.sm,
   },
   description: {
-    fontSize: 14, // Smaller font size
-    color: '#444444', // primary
-    marginBottom: 8, // Smaller margin
-    lineHeight: 18, // Smaller line height
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.primary,
+    marginBottom: theme.spacing.sm,
+    lineHeight: theme.fontSizes.body + 4,
   },
   price: {
-    fontSize: 16, // Smaller font size
+    fontSize: theme.fontSizes.body + 2,
     fontWeight: 'bold',
-    color: 'grey', // primary
+    color: theme.colors.textSecondary,
   },
 });
 

@@ -5,8 +5,8 @@ import { Cafe } from '../types/items';
 
 import Login from '../screens/auth/LoginScreen/Login';
 import Register from '../screens/auth/RegisterScreen/Register';
+import Home from '../screens/home/Home';
 import Profile from "../screens/profile/Profile";
-import MainHub from '../screens/mainHub/MainHub';
 import CafesList from '../screens/cafes/CafeListScreen/CafesList';
 import CafeDetail from '../screens/cafes/CafeDetailScreen/CafeDetail';
 import CafeMenu from '../screens/cafes/CafeMenuScreen/CafeMenu';
@@ -20,9 +20,9 @@ import Test from '../screens/test/Test'
 export type RootStackParamList = {
     login: undefined;
     register: undefined;
+    home: undefined;
     profile: { userId: number };
-    mainhub: undefined;
-    cafeslist: { cafe: Cafe };
+    cafeslist: undefined;
     cafedetail: { cafe: Cafe };
     cafemenu: { cafe: Cafe };
     cafereviews: { cafe: Cafe };
@@ -40,8 +40,8 @@ const Navigation = () => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="login" component={Login} />
             <Stack.Screen name="register" component={Register} />
+            <Stack.Screen name="home" component={Home} />
             <Stack.Screen name="profile" component={Profile} />
-            <Stack.Screen name="mainhub" component={MainHub} />
             <Stack.Screen name="cafeslist" component={CafesList} />
             <Stack.Screen name="cafedetail" component={CafeDetail} />
             <Stack.Screen name="cafemenu" component={CafeMenu} />
