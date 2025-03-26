@@ -11,6 +11,7 @@ import CafeReviews from '../screens/cafes/CafeReviewsScreen/CafeReviews';
 import LeaveReview from '../screens/leaveReview/LeaveReview';
 import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import Profile from "../screens/profile/Profile";
+import CreateUser from '../screens/users/CreateUser';
 import { Cafe } from '../types/items';
 
 export type RootStackParamList = {
@@ -25,6 +26,7 @@ export type RootStackParamList = {
     leavereview: { cafe: Cafe; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
     test: undefined;
     createcafeteria: undefined;
+    createuser: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -43,6 +45,7 @@ const Navigation = () => {
             <Stack.Screen name="leavereview" component={LeaveReview} />
             <Stack.Screen name="createcafeteria" component={CreateCafeteria} />
             <Stack.Screen name="profile" component={Profile} />
+            <Stack.Screen name="createuser" component={CreateUser} />
         </Stack.Navigator>
     );
 };

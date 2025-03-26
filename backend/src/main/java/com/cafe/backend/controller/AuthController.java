@@ -24,6 +24,10 @@ import com.cafe.backend.security.CustomUserDetails;
 import com.cafe.backend.security.JwtUtil;
 import com.cafe.backend.service.UserService;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -35,7 +39,7 @@ public class AuthController {
     private UserService userService;
     
     @Autowired 
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
     
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -43,9 +47,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
+        	// automatically encodes the password
             Authentication authentication =
                     authenticationManager.authenticate(
-                            new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.password()));
+                            new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.passwordHash()));
             String token = jwtUtil.generateToken((UserDetails)authentication.getPrincipal());
             return ResponseEntity.ok(token);
         } catch (BadCredentialsException e) {
@@ -64,8 +69,6 @@ public class AuthController {
         if(userService.doesUserExist(registerUserDTO.username())) {
         	throw new UserAlreadyExistsException("User with this username already exists");
         }
-        // we hash the password here because if there is @Autowired PasswordEncoder
-        // in UserService a circular dependecy is detected
         RegisterUserDTO dtoWithHashedPassword = new RegisterUserDTO(
         		registerUserDTO.username(),
         		registerUserDTO.email(),
