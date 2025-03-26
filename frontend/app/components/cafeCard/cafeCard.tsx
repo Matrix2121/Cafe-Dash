@@ -2,9 +2,7 @@ import React from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
-import { Image, ImageSourcePropType } from "react-native";
-import { Text, Pressable, View } from "react-native";
+import { Image, ImageSourcePropType, Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
 import useCafeImage from "@/app/hooks/useCafeImage";
 import styles from "./cafeCard.style";
@@ -40,23 +38,24 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
       style={styles.cardStyle}
       onPress={() => navigation.navigate("cafemenu", { cafe })}
     >
-      <Card>
-        <Card.Content>
+      <Card style={styles.card}>
+        <Card.Content style={styles.cardContent}>
           {/* IMAGE SHOULD NOT BE AS ANY or ImageSourcePropType*/}
           <Image
             source={imageUrl as ImageSourcePropType}
             style={styles.image}
+            defaultSource={require('@/app/assets/images/logo.png')}
           />
           <View style={styles.titleContainer}>
             <Text style={styles.titleStyle}>{cafe.name}</Text>
-              {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
-                  <View>
-                    <Text style={styles.timeStyle}>Opening Hours:</Text>
-                    <Text style={styles.timeStyle}>
-                      {cafe.openingHour} - {cafe.closingHour}
-                    </Text>
-                  </View>
-              )}
+            {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
+              <View>
+                <Text style={styles.timeStyle}>Opening Hours:</Text>
+                <Text style={styles.timeStyle}>
+                  {cafe.openingHour} - {cafe.closingHour}
+                </Text>
+              </View>
+            )}
           </View>
           <Text style={styles.locationStyle}>{cafe.brand}</Text>
           <Text style={styles.locationStyle}>{cafe.location}</Text>

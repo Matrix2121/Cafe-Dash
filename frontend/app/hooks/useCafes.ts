@@ -1,7 +1,6 @@
-import {useEffect, useState} from 'react';
-import {Cafe} from '../types/items';
+import { useEffect, useState } from 'react';
+import { Cafe } from '../types/items';
 import customAPI from '../services/apiClient';
-import {url} from "@/app/common/constants";
 
 const useCafes = (id?: number) => {
     const [cafes, setCafes] = useState<Cafe[]>([]);

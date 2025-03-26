@@ -3,7 +3,7 @@ import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import { ScrollView, Text, FlatList } from 'react-native';
+import { Text, FlatList, View } from 'react-native';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
@@ -36,6 +36,7 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
             }
         }, [hasFetched])
     );
+    
 
     const handleLeaveReview = () => {
         navigation.navigate('leavereview', { 
@@ -44,7 +45,7 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
             <ReviewHeader
                 rating={cafe.rating}
                 totalReviews={cafe.countReview}
@@ -61,7 +62,7 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
                     renderItem={({ item }) => <ReviewCard key={item.id} review={item} />} 
                 />
             )}
-        </ScrollView>
+        </View>
     );
     
 };

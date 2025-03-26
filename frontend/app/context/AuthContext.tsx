@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import customAPI from '../services/apiClient';
 import CryptoJS from 'crypto-js';
@@ -33,7 +33,7 @@ const decodeToken = (token: string) => {
   }
 };
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (username: string, password: string) => {
     const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-    const response = await api.post('/auth/login', { username, passwordHash });
+    const response = await customAPI.post('/auth/login', { username, passwordHash });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);

@@ -6,6 +6,9 @@ export const theme = {
         surface: '#FFFFFF',
         textPrimary: '#333333',
         textSecondary: '#777777',
+        border: '#e0e0e0',
+        ripple: 'rgba(0,0,0,0.1)',
+        shadow: '#000',
     },
     spacing: {
         xs: 4,
@@ -24,7 +27,20 @@ export const theme = {
         sm: 4,
         md: 8,
         lg: 16,
+        full: 999,
     },
+    sizes: {
+        profileImage: 40,
+        tabBarHeight: 60,
+    },
+    iconSizes: {
+        md: 24,
+    },
+    elevation: {
+        sm: 2,
+        md: 4,
+        lg: 8,
+      },
 };
 
 export default theme;

@@ -1,31 +1,25 @@
 import { StyleSheet } from "react-native";
+import theme from "@/app/theme/theme";
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: theme.colors.background,
+    flex: 1,
   },
   gridContainer: {
-    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     width: "100%",
-    justifyContent: "space-evenly", // или "flex-start" ако искаш по-плътно
+    justifyContent: "space-evenly",
+    paddingVertical: theme.spacing.xs,
   },
-  loadingContainer: {
+  loadingErrorContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorText: {
-    fontSize: 16,
-    color: '#777777', // textSecondary
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.colors.background,
+    padding: theme.spacing.xl,
   },
 });
+
 export default styles;
