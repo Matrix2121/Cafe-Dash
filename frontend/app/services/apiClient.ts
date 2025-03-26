@@ -1,9 +1,8 @@
-// src/services/apiClient.ts
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const customAPI = axios.create({
-  baseURL: process.env.API_URL
+    baseURL:  process.env.API_URL
 });
 
 // Add request interceptor to inject JWT token
