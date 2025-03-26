@@ -111,7 +111,7 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
         }}
       >
         <Text style={styles.cartButtonText}>View Cart</Text>
-        <Text style={styles.cartTotalText}>${totalPrice}</Text>
+        <Text style={styles.cartTotalText}>${totalPrice.toFixed(2)}</Text>
       </TouchableOpacity>
      )}
     </View>
