@@ -19,4 +19,5 @@ public interface CafeteriaService {
     List<CafeteriaDTO> getAllCafeterias() throws NotFoundException, BadRequestException;
     CafeteriaDTO updateCafeteria(Long id, CafeteriaDTO cafeteriaDTO) throws NotFoundException, BadRequestException;
     List<ProductDTO> getAllProductsForCafeteriaId(Long id) throws NotFoundException, DataMappingException;
+    CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException;
 }
