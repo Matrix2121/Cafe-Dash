@@ -57,7 +57,6 @@ const Login = () => {
             <Image source={logo} style={styles.logo}/>
             <Text style={styles.title}><Text style={styles.highlight}>Welcome to </Text>Cafe-Dash</Text>
 
-            <Text>{process.env.API_URL}</Text>
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <TextInput
               label="Username"
