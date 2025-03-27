@@ -7,6 +7,22 @@ const styles = StyleSheet.create({
     padding: theme.spacing.md,
     backgroundColor: theme.colors.background,
   },
+  cafeHeader: {
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.background,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
+  },
+  cafeHeaderText: {
+    fontSize: theme.fontSizes.title,
+    fontWeight: 'bold',
+    color: theme.colors.textPrimary,
+  },
+  cafeLocationText: {
+    fontSize: theme.fontSizes.body,
+    color: theme.colors.textSecondary,
+    marginTop: theme.spacing.xs,
+  },
   itemContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

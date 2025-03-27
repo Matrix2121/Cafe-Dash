@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Review } from '../types/items';
-import api from '../services/apiClient';
+import customAPI from '../services/apiClient';
 
 const useReviews = (cafeteriaId: number) => {
     const [reviews, setReviews] = useState<Review[]>([]);
@@ -9,7 +9,7 @@ const useReviews = (cafeteriaId: number) => {
 
     const fetchReviewsByCafeId = (cafeteriaId: number) => {
         setLoading(true);
-        api.get(`reviews/${cafeteriaId}`)
+        customAPI.get(`api/reviews/${cafeteriaId}`)
             .then((response) => {
                 const allReviews = response.data;
                 setReviews(allReviews);
@@ -23,7 +23,7 @@ const useReviews = (cafeteriaId: number) => {
     };
 
     const postReview = async (review : Review) => {
-        await api.post(`/reviews`, review) //waits for a response from the backend
+        await customAPI.post(`api/reviews`, review) //waits for a response from the backend
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
             });

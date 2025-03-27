@@ -9,12 +9,13 @@ import styles from "./Login.style";
 import logo from "../../../assets/images/logo.png";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleLogin = async () => {
@@ -57,7 +58,6 @@ const Login = () => {
             <Text style={styles.title}><Text style={styles.highlight}>Welcome to </Text>Cafe-Dash</Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
             <TextInput
               label="Username"
               value={username}
@@ -100,6 +100,13 @@ const Login = () => {
               style={styles.registerButton}
             >
               JWT(Dev only)
+            </Button>
+            <Button
+              mode="contained"
+              onPress={() => logout()}
+              style={styles.registerButton}
+            >
+              Clear JWT(Dev only)
             </Button>
           </View>
         </ScrollView>

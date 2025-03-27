@@ -1,5 +1,9 @@
 package com.cafe.backend.exception;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 public abstract class BadRequestException extends Exception {
 	public BadRequestException(String message) {
         super(message);

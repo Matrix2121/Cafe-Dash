@@ -3,6 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native
 import { useCart } from '@/app/context/CartContext';
 import { CartItem } from '@/app/types/items';
 import styles from './Cart.style'
+import useCafes from '@/app/hooks/useCafes';
 
 const Cart = () => {
   const {
@@ -12,6 +13,9 @@ const Cart = () => {
     clearCart,
     totalPrice,
   } = useCart();
+
+  const cafeteriaId = cartItems.length > 0 ? cartItems[0].product.cafeteriaId : null;
+  const { cafe, loading, error } = useCafes(cafeteriaId);
 
   const renderItem = ({ item }: { item: CartItem }) => (
     <View style={styles.itemContainer}>
@@ -51,6 +55,16 @@ const Cart = () => {
         <Text style={styles.emptyText}>Your cart is empty</Text>
       ) : (
         <>
+          <View style={styles.cafeHeader}>
+            <Text style={styles.cafeHeaderText}>
+              Ordering from: {cafe?.name || 'Unknown Cafe'}
+            </Text>
+            {cafe?.location && (
+              <Text style={styles.cafeLocationText}>
+                {cafe.location}
+              </Text>
+            )}
+          </View>
           <FlatList
             data={cartItems}
             renderItem={renderItem}

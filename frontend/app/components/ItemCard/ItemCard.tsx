@@ -14,7 +14,6 @@ const ItemCard = ({product}: ItemCardProps) => {
     const handleAddToCart = async () => {
         try {
             addToCart(product);
-            Alert.alert('Success', 'Item added to cart!');
         } catch (error) {
             Alert.alert('Error', 'Failed to add product to cart');
         }

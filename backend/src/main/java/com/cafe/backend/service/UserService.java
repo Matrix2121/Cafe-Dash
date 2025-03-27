@@ -13,7 +13,7 @@ import com.cafe.backend.exception.NotFoundException;
  */
 
 public interface UserService {
-    UserDTO createUser(UserDTO userDTO) throws BadRequestException;
+    UserDTO createUser(RegisterUserDTO registerUserDTO) throws BadRequestException,NotFoundException;
 	
 	JWTUserDTO registerUser(RegisterUserDTO registerUserDTO) throws BadRequestException, NotFoundException;
 	

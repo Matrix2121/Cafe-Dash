@@ -20,6 +20,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
@@ -27,7 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtUtil jwtUtil;
 
     @Autowired
-    private UserDetailsService userService;
+    private UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -42,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = null;
 				try {
-					userDetails = userService.loadUserByUsername(username);
+					userDetails = userDetailsService.loadUserByUsername(username);
 				} catch (UsernameNotFoundException e) {
 					response.setContentType("text/plain");
 				    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

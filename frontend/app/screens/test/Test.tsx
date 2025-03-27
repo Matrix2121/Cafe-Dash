@@ -34,14 +34,13 @@ const Test = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.rowContainer}>
-        <HasRoles roles={['ADMIN']}>
           <Pressable
             style={styles.testButton}
             onPress={() => navigateToScreen("cafedetail", { cafe })}
           >
             <Text style={styles.testButtonText}>{"CafeDetail"}</Text>
           </Pressable>
-        </HasRoles>
+
         <Pressable
           style={styles.testButton}
           onPress={() => navigateToScreen("cafemenu", { cafe })}
@@ -66,16 +65,28 @@ const Test = () => {
       <View style={styles.rowContainer}>
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("profile", { userId: 1 })}
+          onPress={() => navigateToScreen("profile", { userId: 2 })}
         >
           <Text style={styles.testButtonText}>{"Profile"}</Text>
         </Pressable>
-        <Pressable
-          style={styles.testButton}
-          onPress={() => navigateToScreen("createcafeteria")}
-        >
-          <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
-        </Pressable>
+        <HasRoles roles={['admin']}>
+            <Pressable
+            style={styles.testButton}
+            onPress={() => navigateToScreen("createcafeteria")}
+            >
+            <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
+            </Pressable>
+        </HasRoles>
+      </View>
+      <View style={styles.rowContainer}>
+        <HasRoles roles={['admin','owner']}>
+            <Pressable
+            style={styles.testButton}
+            onPress={() => navigateToScreen("createuser")}
+            >
+            <Text style={styles.testButtonText}>{"Create User"}</Text>
+            </Pressable>
+        </HasRoles>
       </View>
     </ScrollView>
   );

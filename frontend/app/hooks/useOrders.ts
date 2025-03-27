@@ -8,7 +8,7 @@ const useCafes = (id: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchOrdersByUserId = (id: number) => {
-        api.get(`/orders/${id}`)
+        api.get(`api/orders/${id}`)
             .then((response) => {
                 const orders = response.data;
                 setOrders(orders);
