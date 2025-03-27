@@ -7,6 +7,7 @@ import java.util.Set;
  */
 
 public record JWTUserDTO(
+        Long id,
         String username,
         String password,
         Set<String> roles

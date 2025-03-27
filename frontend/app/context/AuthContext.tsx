@@ -7,7 +7,7 @@ type Role = {
 };
 
 type User = {
-  id: string;
+  id: number;
   username: string;
   sub: string;
   roles: Role[];

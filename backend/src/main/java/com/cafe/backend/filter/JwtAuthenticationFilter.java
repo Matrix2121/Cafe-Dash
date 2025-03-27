@@ -2,6 +2,7 @@ package com.cafe.backend.filter;
 
 import java.io.IOException;
 
+import com.cafe.backend.security.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 /**
- * @author ZapryanZapryanov
+ * @author ZapryanZapryanov, AngelStoynov
  */
 
 @Component
@@ -41,12 +42,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = getJWTFromRequest(request);
 
         if (StringUtils.hasText(token)) {
+            Long userId = jwtUtil.getUserIdFromToken(token);
             String username = jwtUtil.getUsernameFromToken(token);
 
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = null;
+            if (username != null && userId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                CustomUserDetails customUserDetails = null;
 				try {
-					userDetails = userDetailsService.loadUserByUsername(username);
+                    customUserDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(username);
 				} catch (UsernameNotFoundException e) {
 					response.setContentType("text/plain");
 				    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -54,13 +56,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 				    response.getWriter().flush();
 				    return;
 				}
-                if (jwtUtil.validateToken(token, userDetails)) {
+                if (jwtUtil.validateToken(token, customUserDetails)) {
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+                            new UsernamePasswordAuthenticationToken(customUserDetails, customUserDetails.getPassword(), customUserDetails.getAuthorities());
                     authentication.setDetails(
                             new WebAuthenticationDetailsSource().buildDetails(request)
                     );
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                    request.setAttribute("userId", customUserDetails.getId());
                 }
             }
         }

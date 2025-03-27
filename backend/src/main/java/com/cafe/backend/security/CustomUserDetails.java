@@ -11,12 +11,14 @@ import com.cafe.backend.dto.JWTUserDTO;
 
 public class CustomUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
+    private final Long id;
     private final String username;
     private final String password;
     private final Set<GrantedAuthority> authorities;
 
     public CustomUserDetails(JWTUserDTO jwtUserDTO) {
-    	this.password = jwtUserDTO.password();
+        this.id = jwtUserDTO.id();
+        this.password = jwtUserDTO.password();
         this.username = jwtUserDTO.username();
         this.authorities = jwtUserDTO.roles().stream()
                 .map(role -> (GrantedAuthority) () -> role)
@@ -36,6 +38,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
