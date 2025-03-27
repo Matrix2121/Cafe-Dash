@@ -54,7 +54,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   const login = async (username: string, password: string) => {
-    const response = await customAPI.post('api/auth/login', { username, password });
+    const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+    const response = await customAPI.post('api/auth/login', { username, passwordHash });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       username,
       email,
       passwordHash,
-      roles: [] 
+      roleNames: ['admin'] // just temporarily 
     });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);

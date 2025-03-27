@@ -13,6 +13,10 @@ import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.repository.UserRepository;
 import com.cafe.backend.security.CustomUserDetails;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 @Service
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
 	

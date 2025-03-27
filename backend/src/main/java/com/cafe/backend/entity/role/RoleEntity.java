@@ -3,6 +3,10 @@ package com.cafe.backend.entity.role;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 @Entity
 @Table(name = "role")
 @Data

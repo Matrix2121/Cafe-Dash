@@ -1,5 +1,9 @@
 package com.cafe.backend.exception;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 // errors with login
 public class AuthenticationCustomException extends RuntimeException{
 
