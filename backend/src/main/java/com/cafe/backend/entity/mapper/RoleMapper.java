@@ -4,6 +4,10 @@ import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
 
+/**
+ * @author ZapryanZapryanov
+ */
+
 public class RoleMapper {
 
     private RoleMapper() {

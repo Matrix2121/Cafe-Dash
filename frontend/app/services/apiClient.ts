@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { url } from '../common/constants';
 
 const customAPI = axios.create({
-    baseURL:  `${url}`,
+    baseURL:  process.env.API_URL
 });
 
 // Add request interceptor to inject JWT token

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import api from "../services/apiClient";
+import customAPI from "../services/apiClient";
 import { Product } from "../types/items";
 
 const useProduct = () => {
@@ -9,7 +9,8 @@ const useProduct = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchAllProducts = () => {
-    api.get(`api/products`)
+    customAPI
+      .get(`api/products`)
       .then((response) => {
         const allProducts = response.data;
         setProducts(allProducts);
@@ -26,7 +27,8 @@ const useProduct = () => {
   };
 
   const fetchProductById = (id: number) => {
-    api.get(`api/products/${id}`)
+    customAPI
+      .get(`api/products/${id}`)
       .then((response) => {
         const product = response.data;
         setProduct(product);
