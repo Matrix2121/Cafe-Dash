@@ -24,8 +24,10 @@ public class JWTUserMapper {
         }
 
         return new JWTUserDTO(
+                userEntity.getId(),
                 userEntity.getUsername(),
                 userEntity.getPassword(),
-                rolesSet);
+                rolesSet
+        );
 	}
 }

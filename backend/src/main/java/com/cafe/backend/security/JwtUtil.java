@@ -20,11 +20,12 @@ public class JwtUtil {
 
     private static final Long JWT_EXPARATION = 86400000L;
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(CustomUserDetails customUserDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("roles", userDetails.getAuthorities());
-        claims.put("username", userDetails.getUsername());
-        return createToken(claims, userDetails.getUsername());
+        claims.put("id", customUserDetails.getId());
+        claims.put("roles", customUserDetails.getAuthorities());
+        claims.put("username", customUserDetails.getUsername());
+        return createToken(claims, customUserDetails.getUsername());
     }	
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -44,6 +45,10 @@ public class JwtUtil {
         return getClaimsFromToken(token, Claims::getSubject);
     }
 
+    public Long getUserIdFromToken(String token) {
+        return getClaimsFromToken(token, claims -> claims.get("id", Long.class));
+    }
+
     public <T> T getClaimsFromToken(String token, Function<Claims, T> claimsResolver) {
     	// could also add more error handling but for now its ok
         final Claims claims = Jwts.parser()
@@ -53,9 +58,15 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
-    public boolean validateToken(String token, UserDetails userDetails) {
+    public boolean validateToken(String token, CustomUserDetails userDetails) {
         final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        final Long tokenId = getUserIdFromToken(token);
+
+        return username.equals(userDetails.getUsername())
+                && tokenId.equals(userDetails.getId())
+                && !isTokenExpired(token)
+                && userDetails.isEnabled()
+                && userDetails.isAccountNonLocked();
     }
 
     private boolean isTokenExpired(String token) {

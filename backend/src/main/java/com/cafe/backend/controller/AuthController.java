@@ -51,7 +51,7 @@ public class AuthController {
             Authentication authentication =
                     authenticationManager.authenticate(
                             new UsernamePasswordAuthenticationToken(loginRequest.username(), loginRequest.passwordHash()));
-            String token = jwtUtil.generateToken((UserDetails)authentication.getPrincipal());
+            String token = jwtUtil.generateToken((CustomUserDetails) authentication.getPrincipal());
             return ResponseEntity.ok(token);
         } catch (BadCredentialsException e) {
             return ResponseEntity
@@ -77,8 +77,8 @@ public class AuthController {
         
         JWTUserDTO jwtUserDTO = userService.registerUser(dtoWithHashedPassword);
         
-        UserDetails userDetails = new CustomUserDetails(jwtUserDTO);
-        String token = jwtUtil.generateToken(userDetails);
+        CustomUserDetails customUserDetails = new CustomUserDetails(jwtUserDTO);
+        String token = jwtUtil.generateToken(customUserDetails);
         return token;
     }
 }
