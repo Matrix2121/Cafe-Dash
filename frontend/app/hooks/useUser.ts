@@ -9,7 +9,7 @@ const useUser = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllUsers = () => {
-        api.get(`/users`)
+        api.get(`api/users`)
             .then((response) => {
                 const allUsers = response.data;
                 setUsers(allUsers);
@@ -21,7 +21,7 @@ const useUser = (id?: number) => {
             });
     }
     const fetchUserById = (id: number) => {
-        api.get(`/users/${id}`)
+        api.get(`api/users/${id}`)
             .then((response) => {
                 const user = response.data;
                 setUser(user);
@@ -40,7 +40,7 @@ const useUser = (id?: number) => {
     }, [id]);
 
     const updateUser = (updatedUser: UserUpdate, id: number) => {
-        api.put(`/users/${id}`, updatedUser)
+        api.put(`api/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })

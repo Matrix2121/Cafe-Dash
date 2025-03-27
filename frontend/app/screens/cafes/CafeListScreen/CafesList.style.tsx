@@ -3,15 +3,19 @@ import theme from "@/app/theme/theme";
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: theme.colors.background,
     flex: 1,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    backgroundColor: theme.colors.background,
   },
   gridContainer: {
     flexDirection: "row",
     flexWrap: "wrap",
-    width: "100%",
-    justifyContent: "space-evenly",
-    paddingVertical: theme.spacing.xs,
+    justifyContent: "space-between",
+  },
+  cardWrapper: {
+    width: "48%",
+    marginBottom: theme.spacing.md,
   },
   loadingErrorContainer: {
     flex: 1,

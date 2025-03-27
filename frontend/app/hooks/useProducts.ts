@@ -9,7 +9,7 @@ const useProduct = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchAllProducts = () => {
-    api.get(`/products`)
+    api.get(`api/products`)
       .then((response) => {
         const allProducts = response.data;
         setProducts(allProducts);
@@ -26,7 +26,7 @@ const useProduct = () => {
   };
 
   const fetchProductById = (id: number) => {
-    api.get(`/products/${id}`)
+    api.get(`api/products/${id}`)
       .then((response) => {
         const product = response.data;
         setProduct(product);

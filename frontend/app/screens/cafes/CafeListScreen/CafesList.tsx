@@ -28,7 +28,9 @@ const CafesList = () => {
     <ScrollView style={styles.mainContainer}>
       <View style={styles.gridContainer}>
         {cafes.map((cafe: Cafe) => (
-          <CafeCard key={cafe.id} cafe={cafe} />
+          <View key={cafe.id} style={styles.cardWrapper}>
+            <CafeCard cafe={cafe} />
+          </View>
         ))}
       </View>
     </ScrollView>

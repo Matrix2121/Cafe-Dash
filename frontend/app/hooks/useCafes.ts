@@ -9,7 +9,7 @@ const useCafes = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllCafes = () => {
-        api.get(`/cafeterias`)
+        api.get(`api/cafeterias`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafes(allCafes);
@@ -21,7 +21,7 @@ const useCafes = (id?: number) => {
             });
     }
     const fetchCafeById = (id: number) => {
-        api.get(`/cafeterias/${id}`)
+        api.get(`api/cafeterias/${id}`)
             .then((response) => {
                 const allCafes = response.data;
                 setCafe(allCafes);

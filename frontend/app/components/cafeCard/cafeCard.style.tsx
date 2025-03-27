@@ -3,7 +3,7 @@ import { theme } from "@/app/theme/theme";
 
 const styles = StyleSheet.create({
   cardStyle: {
-    width: "49%",
+    width: "100%",
     marginVertical: theme.spacing.sm,
   },
   card: {
