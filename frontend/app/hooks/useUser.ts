@@ -10,7 +10,7 @@ const useUser = (id?: number) => {
     const [error, setError] = useState<string | null>(null);
 
     const fetchAllUsers = async () => {
-        await customAPI.get(`/users`)
+        await customAPI.get(`api/users`)
             .then((response) => {
                 const allUsers = response.data;
                 setUsers(allUsers);
@@ -22,7 +22,7 @@ const useUser = (id?: number) => {
             });
     }
     const fetchUserById = async (id: number) => {
-        await customAPI.get(`/users/${id}`)
+        await customAPI.get(`api/users/${id}`)
             .then((response) => {
                 const user = response.data;
                 setUser(user);
@@ -41,7 +41,7 @@ const useUser = (id?: number) => {
     }, [id]);
 
     const updateUser = async (updatedUser: UserUpdate, id: number) => {
-         await customAPI.put(`/users/${id}`, updatedUser)
+         await customAPI.put(`api/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })
