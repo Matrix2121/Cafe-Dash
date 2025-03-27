@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (username: string, password: string) => {
     const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-    const response = await customAPI.post('/auth/login', { username, passwordHash });
+    const response = await customAPI.post('api/auth/login', { username, passwordHash });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const register = async (username: string, email: string, password: string) => {
     const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-    const response = await customAPI.post('/auth/register', {
+    const response = await customAPI.post('api/auth/register', {
       username,
       email,
       passwordHash,

@@ -13,5 +13,10 @@ down:
 	docker-compose down
 	@echo Docker containers are down
 
+logs:
+	docker logs -f cafe-dash_backend_1
+	@echo Logs comming from the spring boot
 
-
+up_sql:
+	docker exec -it cafe-dash_db_1 psql -U postgres -d cafe
+	@echo Start database

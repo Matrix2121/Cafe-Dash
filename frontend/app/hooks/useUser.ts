@@ -40,7 +40,7 @@ const useUser = (id?: number) => {
     }, [id]);
 
     const updateUser = async (updatedUser: UserUpdate, id: number) => {
-         await customAPI.put(`/users/${id}`, updatedUser)
+         await customAPI.put(`api/users/${id}`, updatedUser)
             .then((response) => {
                 setUser(response.data);
             })
