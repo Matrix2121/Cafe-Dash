@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
+import { theme } from "@/app/theme/theme";
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'stretch',
@@ -14,61 +15,63 @@ export default StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: theme.spacing.xl * 2, // 50px equivalent
   },
   logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 20,
-    borderRadius: 20,
-    elevation: 10,
-    shadowColor: 'black',
+    width: theme.components.login.logoSize,
+    height: theme.components.login.logoSize,
+    marginBottom: theme.spacing.lg,
+    borderRadius: theme.components.login.borderRadius,
+    elevation: theme.elevation.lg,
+    shadowColor: theme.colors.shadow,
     shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowRadius: theme.spacing.md,
   },
   registerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(142,129,129,0.4)',
-    width: 340,
-    height: 440,
-    borderRadius: 20,
-    margin: 0,
+    backgroundColor: theme.components.login.overlay,
+    width: theme.components.login.containerWidth,
+    height: 440, // Could add to theme.components.register if needed
+    borderRadius: theme.components.login.borderRadius,
+    margin: theme.spacing.none,
   },
   title: {
-    fontSize: 28,
+    fontSize: theme.fontSizes.header + 4, // 28px
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: "white",
-    borderBottomColor: '#CECECC',
-    borderBottomWidth: 3,
-    padding: 5,
+    marginBottom: theme.spacing.lg,
+    color: theme.colors.surface,
+    borderBottomColor: theme.colors.secondary,
+    borderBottomWidth: theme.spacing.xs / 1.5, // 3px
+    padding: theme.spacing.sm,
   },
   input: {
-    width: 300,
-    marginBottom: 10,
-    marginHorizontal: 30,
-    backgroundColor: '#CECECC',
-    borderColor: '#444444',
-    color: '#774936',
+    width: theme.components.login.inputWidth,
+    marginBottom: theme.spacing.sm,
+    marginHorizontal: theme.spacing.xl,
+    backgroundColor: theme.colors.secondary,
+    borderColor: theme.colors.primary,
+    color: theme.colors.textPrimary, // Added to theme.colors
   },
   registerButton: {
-    width: 200,
-    backgroundColor: '#444444',
+    width: theme.components.login.buttonWidth,
+    backgroundColor: theme.colors.primary,
   },
   loginButton: {
-    marginTop: 10,
-    width: 200,
-    borderColor: '#444444',
-    borderWidth: 2,
-    backgroundColor: '#CECECC',
+    marginTop: theme.spacing.sm,
+    width: theme.components.login.buttonWidth,
+    borderColor: theme.colors.primary,
+    borderWidth: theme.spacing.xs / 2, // 2px
+    backgroundColor: theme.colors.secondary,
   },
   highlight: {
-    color: "#444444",
+    color: theme.colors.primary,
     fontWeight: "bold",
   },
   errorText: {
-    color: '#444444',
-    marginBottom: 10,
+    color: theme.colors.primary,
+    marginBottom: theme.spacing.sm,
   },
 });
+
+export default styles;

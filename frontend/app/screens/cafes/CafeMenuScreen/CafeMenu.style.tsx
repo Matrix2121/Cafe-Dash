@@ -1,70 +1,82 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '@/app/theme/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    backgroundColor: '#F8F9FA', // background color
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.background,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#CECECC', // Secondary color (same as section header)
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-    borderRadius: 8,
+    backgroundColor: theme.colors.secondary,
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    marginBottom: theme.spacing.md,
+    borderRadius: theme.radii.md,
   },
   title: {
-    fontSize: 24,
+    fontSize: theme.fontSizes.header,
     fontWeight: 'bold',
-    color: '#333333', // textPrimary
+    color: theme.colors.textPrimary,
   },
   sectionHeader: {
-    fontSize: 18,
+    fontSize: theme.fontSizes.title,
     fontWeight: 'bold',
-    color: '#444444', // primary color
-    backgroundColor: '#CECECC', // secondary color
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: 16,
-    marginBottom: 8,
-    borderRadius: 8,
+    color: theme.colors.primary,
+    backgroundColor: theme.colors.secondary,
+    paddingVertical: theme.spacing.sm,
+    paddingHorizontal: theme.spacing.md,
+    marginTop: theme.spacing.md,
+    marginBottom: theme.spacing.sm,
+    borderRadius: theme.radii.md,
   },
   itemContainer: {
     flex: 2,
-    marginRight: 16, // Space between items
+    marginRight: theme.spacing.md,
   },
   itemList: {
-    paddingHorizontal: 8,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F8F9FA', // background color
-  },
-  errorText: {
-    fontSize: 16,
-    color: '#777777', // textSecondary
+    paddingHorizontal: theme.spacing.sm,
   },
   detailsButton: {
-    backgroundColor: 'transparent', // Match the section header style
-    paddingVertical: 4,
-    paddingHorizontal: 12,
-    borderRadius: 8,
+    backgroundColor: theme.colors.transparent,
+    paddingVertical: theme.spacing.xs,
+    paddingHorizontal: theme.spacing.sm,
+    borderRadius: theme.radii.md,
   },
   detailsButtonText: {
-    fontSize: 16,
+    fontSize: theme.fontSizes.body,
     fontWeight: 'bold',
-    color: '#444444', // Same color as section header text
+    color: theme.colors.primary,
+  },
+  cartButton: {
+    position: 'absolute',
+    bottom: theme.spacing.md,
+    left: theme.spacing.md,
+    right: theme.spacing.md,
+    backgroundColor: theme.colors.primary,
+    padding: theme.spacing.md,
+    borderRadius: theme.radii.md,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    elevation: theme.elevation.md,
+    shadowColor: theme.colors.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+  },
+  cartButtonText: {
+    color: theme.colors.surface,
+    fontSize: theme.fontSizes.title,
+    fontWeight: 'bold',
+  },
+  cartTotalText: {
+    color: theme.colors.surface,
+    fontSize: theme.fontSizes.title,
+    fontWeight: 'bold',
   },
 });
 

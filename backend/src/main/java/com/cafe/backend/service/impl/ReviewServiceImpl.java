@@ -9,6 +9,7 @@ import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.ReviewRepository;
 import com.cafe.backend.service.ReviewService;
+import com.cafe.backend.service.CafeteriaService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,19 +34,25 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Autowired
+    private CafeteriaService cafeteriaService;
+
     @Override
-    public ReviewDTO createReview(ReviewDTO reviewDTO) throws BadRequestException {
+    public ReviewDTO createReview(ReviewDTO reviewDTO) throws BadRequestException, NotFoundException {
         ReviewEntity review = ReviewMapper.mapToEntity(reviewDTO);
         review.setId(null);
         review.setCreatedAt(LocalDateTime.now());
 
         ReviewEntity savedReview = reviewRepository.save(review);
+        Long cafeteriaId = savedReview.getCafeteria().getId();
+        cafeteriaService.updateCafeteriaReviewFields(cafeteriaId, getcountReviews(cafeteriaId), getRating(cafeteriaId));
         return ReviewMapper.mapToDTO(savedReview);
     }
 
     @Override
     public ReviewDTO updateReview(Long id, ReviewDTO reviewDTO) throws BadRequestException, NotFoundException {
-        ReviewEntity review = reviewRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Could not find review with this id:" + id));
+        ReviewEntity review = reviewRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find review with this id:" + id));
 
         ReviewEntity updatedReview = updateReviewFields(reviewDTO, review);
         return ReviewMapper.mapToDTO(updatedReview);
@@ -63,7 +70,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewEntity> reviewEntities = reviewRepository.findByCafeteriaIdAndIsDeletedFalse(id);
 
         if (reviewEntities.isEmpty()) {
-            throw new ResourceNotFoundException("No products found");
+            throw new ResourceNotFoundException("No reviews found");
         }
 
         List<ReviewDTO> reviewDTOs = new LinkedList<ReviewDTO>();
@@ -72,5 +79,22 @@ public class ReviewServiceImpl implements ReviewService {
         }
 
         return reviewDTOs;
+    }
+
+    @Override
+    public Integer getcountReviews(Long cafeteriaId) throws BadRequestException, NotFoundException {
+        return getReviewsByCafeteriaId(cafeteriaId).size();
+    }
+
+    @Override
+    public Double getRating(Long cafeteriaId) throws BadRequestException, NotFoundException {
+        List<ReviewDTO> reviews = getReviewsByCafeteriaId(cafeteriaId);
+
+        Double averageRating = reviews.stream()
+                .mapToDouble(ReviewDTO::rating)
+                .average()
+                .orElse(0.0);
+                
+        return averageRating;
     }
 }

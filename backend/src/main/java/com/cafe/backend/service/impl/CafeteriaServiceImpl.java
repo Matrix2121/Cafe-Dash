@@ -3,16 +3,20 @@ package com.cafe.backend.service.impl;
 import com.cafe.backend.dto.CafeteriaDTO;
 import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
+import com.cafe.backend.entity.product.ProductEntity;
+
 import com.cafe.backend.entity.mapper.CafeteriaMapper;
 import com.cafe.backend.entity.mapper.ProductMapper;
-import com.cafe.backend.entity.product.ProductEntity;
+
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
+
 import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.ProductRepository;
 import com.cafe.backend.service.CafeteriaService;
+
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,7 +87,10 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         cafeteria.setBrand(updatedCafeteria.brand());
         cafeteria.setLocation(updatedCafeteria.location());
         cafeteria.setRating(updatedCafeteria.rating());
-        cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber());
+        cafeteria.setCountReview(updatedCafeteria.countReview());
+        cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber()); 
+        cafeteria.setOpeningHour(updatedCafeteria.openingHour());
+        cafeteria.setClosingHour(updatedCafeteria.closingHour());
         return cafeteriaRepository.save(cafeteria);
     }
 
@@ -102,5 +109,24 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         }
 
         return results;
+    }
+
+    @Override
+    public CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException {
+        CafeteriaDTO original = getCafeteriaById(cafeteriaId);
+
+        CafeteriaDTO updatedCafeteria = new CafeteriaDTO(
+            original.id(), 
+            original.name(), 
+            original.brand(), 
+            original.location(),
+            rating,
+            countReviews,
+            original.phoneNumber(),
+            original.openingHour(),
+            original.closingHour()
+        );
+
+        return updateCafeteria(cafeteriaId, updatedCafeteria);
     }
 }

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
+import { theme } from '@/app/theme/theme';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'stretch',
@@ -14,39 +15,37 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 50,
+        paddingTop: theme.spacing.xl * 2, // 50px equivalent
     },
     formContainer: {
-        backgroundColor: 'rgba(142,129,129,0.4)',
-        width: 340,
-        padding: 20,
-        borderRadius: 20,
+        backgroundColor: theme.components.login.overlay,
+        width: theme.components.login.containerWidth,
+        padding: theme.spacing.lg,
+        borderRadius: theme.components.login.borderRadius,
         alignItems: 'center',
     },
     title: {
-        fontSize: 28,
+        fontSize: theme.fontSizes.header + 4, // 28px
         fontWeight: 'bold',
-        marginBottom: 20,
-        color: "white",
-        borderBottomColor: '#CECECC',
-        borderBottomWidth: 3,
-        padding: 5,
+        marginBottom: theme.spacing.lg,
+        color: theme.colors.surface,
+        borderBottomColor: theme.colors.secondary,
+        borderBottomWidth: theme.spacing.xs / 1.5, // 3px
+        padding: theme.spacing.sm,
         textAlign: 'center',
     },
     input: {
-        width: 300,
-        marginBottom: 10,
-        backgroundColor: '#CECECC',
+        width: theme.components.login.inputWidth,
+        marginBottom: theme.spacing.sm,
+        backgroundColor: theme.colors.secondary,
     },
     createButton: {
-        marginTop: 30,
-        width: 200,
-        backgroundColor: '#444444',
+        marginTop: theme.spacing.xl,
+        width: theme.components.login.buttonWidth,
+        backgroundColor: theme.colors.primary,
     },
     errorText: {
-        color: '#444444',
-        marginBottom: 10,
+        color: theme.colors.primary,
+        marginBottom: theme.spacing.sm,
     },
 });
-
-export default styles;

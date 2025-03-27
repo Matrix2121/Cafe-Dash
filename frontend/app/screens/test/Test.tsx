@@ -7,6 +7,7 @@ import styles from './Test.style';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text } from 'react-native';
 import HasRoles from '@/app/utilComponents/HasRoles';
+import { Cafe } from '@/app/types/items';
 const Test = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -17,19 +18,32 @@ const Test = () => {
     navigation.navigate(screen, params as any);
   };
 
+  const cafe: Cafe = {
+    id: 1,
+    name: "Morning Brew",
+    brand: "Blue Bottle",
+    location: "456 Market St, San Francisco",
+    rating: 4.5,
+    countReview: 128,
+    phoneNumber: "+1 (415) 555-0192",
+    openingHour: "08:00:00",
+    closingHour: "20:00:00",
+    isDeleted: false
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.rowContainer}>
           <Pressable
             style={styles.testButton}
-            onPress={() => navigateToScreen("cafedetail", { cafeId: 1 })}
+            onPress={() => navigateToScreen("cafedetail", { cafe })}
           >
             <Text style={styles.testButtonText}>{"CafeDetail"}</Text>
           </Pressable>
 
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("cafemenu", { cafeId: 1 })}
+          onPress={() => navigateToScreen("cafemenu", { cafe })}
         >
           <Text style={styles.testButtonText}>{"CafeMenu"}</Text>
         </Pressable>
@@ -43,9 +57,9 @@ const Test = () => {
         </Pressable>
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("mainhub")}
+          onPress={() => navigateToScreen("home")}
         >
-          <Text style={styles.testButtonText}>{"MainHub"}</Text>
+          <Text style={styles.testButtonText}>{"MainLayout"}</Text>
         </Pressable>
       </View>
       <View style={styles.rowContainer}>

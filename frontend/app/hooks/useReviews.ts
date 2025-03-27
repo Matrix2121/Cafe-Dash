@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { url } from "@/app/common/constants";
 import { Review } from '../types/items';
 import customAPI from '../services/apiClient';
 

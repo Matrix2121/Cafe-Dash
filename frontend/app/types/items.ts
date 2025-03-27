@@ -1,4 +1,3 @@
-// src/types/item.ts
 export type Cafe = {
   id: number;
   name: string;
@@ -22,7 +21,7 @@ export type Product = {
 };
 
 export type CartItem = {
-  itemId: number;
+  product: Product;
   quantity: number;
 };
 

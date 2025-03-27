@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import {Image} from "react-native";
+import React from "react";
+import {Image, ImageSourcePropType} from "react-native";
 import {RouteProp} from "@react-navigation/native";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import {View, Text, ScrollView} from "react-native";
@@ -15,17 +15,17 @@ interface CafeDetailProps {
 
 const CafeDetail = ({ route }: CafeDetailProps) => {
     const { cafe } = route.params;
-    const { imageUrl, loading: loadingImage, error: errorImage } = useCafeImage(cafe.id);
+    const { imageUrl, loading, error } = useCafeImage(cafe.id);
 
-    const isLoading = loadingImage;
-    const combinedError = errorImage;
+    const isLoading = loading;
+    const combinedError = error;
     const hasData = !!imageUrl;
 
     if (isLoading || combinedError || !hasData) {
         return (
             <LoadingErrorView
-                loading={loadingImage}
-                error={errorImage}
+                loading={loading}
+                error={error}
                 dataAvailable={hasData}
             />
         );
@@ -39,10 +39,10 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{cafe.name}</Text>
             <Image
-                source={{uri: imageUrl}}
+                source={imageUrl as ImageSourcePropType}
                 style={styles.headerImage}
                 resizeMode="cover"
-                onError={() => console.log("Error loading image")}
+                defaultSource={require('@/app/assets/images/logo.png')}
             />
             <View style={styles.detailsContainer}>
                 <Text style={styles.label}>Brand:</Text>
@@ -55,7 +55,7 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
             <View style={styles.detailsContainer}>
                 <Text style={styles.label}>Rating:</Text>
                 <Text style={styles.value}>
-                    {cafe.rating} ({cafe.countReview} Reviews)
+                    {cafe.rating.toFixed(1)} ({cafe.countReview} Reviews)
                 </Text>
             </View>
             {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
