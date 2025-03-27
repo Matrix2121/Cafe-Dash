@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import customAPI from '../services/apiClient';
-import CryptoJS from 'crypto-js';
 
 type Role = {
   authority: string;
@@ -54,21 +53,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (username: string, password: string) => {
-    const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
-    const response = await customAPI.post('api/auth/login', { username, passwordHash });
+    const response = await customAPI.post('api/auth/login', { username, password });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
     setUser(decoded);
   };
 
-  const register = async (username: string, email: string, password: string) => {
-    const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+  const register = async (username: string, email: string, passwordHash: string) => {
     const response = await customAPI.post('api/auth/register', {
       username,
       email,
       passwordHash,
-      roleNames: ['admin'] // just temporarily 
+      roleNames: ['admin'] // just temporarily
     });
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
@@ -82,9 +79,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
-      {children}
-    </AuthContext.Provider>
+      <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+        {children}
+      </AuthContext.Provider>
   );
 };
 
