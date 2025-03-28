@@ -52,6 +52,9 @@ public class CafeteriaEntity {
     @Column(name = "closing_hour")
     private LocalTime closingHour;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private Set<ProductEntity> products;
 

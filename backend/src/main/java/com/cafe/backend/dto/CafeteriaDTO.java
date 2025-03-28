@@ -13,6 +13,7 @@ public record CafeteriaDTO(
         double rating, // 0.0 for creation
         int countReview, // 0 required for creation
         String phoneNumber, // required for creation
+        String imageUrl,
         LocalTime openingHour,
         LocalTime closingHour
 ) { }

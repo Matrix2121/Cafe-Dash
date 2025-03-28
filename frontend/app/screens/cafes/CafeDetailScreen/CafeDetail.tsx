@@ -4,8 +4,6 @@ import {RouteProp} from "@react-navigation/native";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import {View, Text, ScrollView} from "react-native";
 import styles from "./CafeDetail.style";
-import useCafeImage from "@/app/hooks/useCafeImage";
-import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
@@ -15,21 +13,6 @@ interface CafeDetailProps {
 
 const CafeDetail = ({ route }: CafeDetailProps) => {
     const { cafe } = route.params;
-    const { imageUrl, loading, error } = useCafeImage(cafe.id);
-
-    const isLoading = loading;
-    const combinedError = error;
-    const hasData = !!imageUrl;
-
-    if (isLoading || combinedError || !hasData) {
-        return (
-            <LoadingErrorView
-                loading={loading}
-                error={error}
-                dataAvailable={hasData}
-            />
-        );
-    }
 
     const isValidTime = (time: string | null | undefined) => {
         return !!time && time !== "00:00:00";
@@ -39,7 +22,7 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{cafe.name}</Text>
             <Image
-                source={imageUrl as ImageSourcePropType}
+                source={cafe.imageUrl as ImageSourcePropType}
                 style={styles.headerImage}
                 resizeMode="cover"
                 defaultSource={require('@/app/assets/images/logo.png')}

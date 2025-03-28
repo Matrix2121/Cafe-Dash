@@ -38,6 +38,7 @@ const Test = () => {
         rating: 4.5,
         countReview: 128,
         phoneNumber: "+1 (415) 555-0192",
+        imageUrl: "https://iili.io/3ugVhbI.jpg",
         openingHour: "08:00:00",
         closingHour: "20:00:00",
         isDeleted: false

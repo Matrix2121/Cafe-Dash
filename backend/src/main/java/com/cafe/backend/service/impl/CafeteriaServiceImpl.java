@@ -88,7 +88,8 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         cafeteria.setLocation(updatedCafeteria.location());
         cafeteria.setRating(updatedCafeteria.rating());
         cafeteria.setCountReview(updatedCafeteria.countReview());
-        cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber()); 
+        cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber());
+        cafeteria.setImageUrl(updatedCafeteria.imageUrl());
         cafeteria.setOpeningHour(updatedCafeteria.openingHour());
         cafeteria.setClosingHour(updatedCafeteria.closingHour());
         return cafeteriaRepository.save(cafeteria);
@@ -122,6 +123,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
             original.location(),
             rating,
             countReviews,
+            original.imageUrl(),
             original.phoneNumber(),
             original.openingHour(),
             original.closingHour()

@@ -6,7 +6,7 @@ import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.DataMappingException;
 
 /**
- * @author ZapryanZapryanov
+ * @author ZapryanZapryanov, AngelStoynov
  */
 
 public class ProductMapper {
@@ -21,6 +21,7 @@ public class ProductMapper {
                 productEntity.getName(),
                 productEntity.getPrice(),
                 productEntity.getProductType(),
+                productEntity.getImageUrl(),
                 productEntity.getCafeteria().getId()
         );
     }
@@ -35,6 +36,7 @@ public class ProductMapper {
                 .name(productDTO.name())
                 .price(productDTO.price())
                 .productType(productDTO.productType())
+                .imageUrl(productDTO.imageUrl())
                 .cafeteria(cafeteriaEntity)
                 .build();
     }
