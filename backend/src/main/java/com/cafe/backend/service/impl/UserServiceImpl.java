@@ -90,7 +90,9 @@ public class UserServiceImpl implements UserService {
         user.setRoles(roleEntities);
         user.setDeleted(false);
         user.setOrders(null);
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        System.out.println("UserServiceImpl ID (after save): " + user.getId());
+        return user;
     }
 
     private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
