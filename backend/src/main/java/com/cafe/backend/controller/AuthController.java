@@ -70,7 +70,6 @@ public class AuthController {
         	throw new UserAlreadyExistsException("User with this username already exists");
         }
         RegisterUserDTO dtoWithHashedPassword = new RegisterUserDTO(
-                registerUserDTO.id(),
         		registerUserDTO.username(),
         		registerUserDTO.email(),
         		passwordEncoder.encode(registerUserDTO.passwordHash()),
