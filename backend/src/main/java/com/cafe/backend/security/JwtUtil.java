@@ -25,6 +25,7 @@ public class JwtUtil {
         claims.put("id", customUserDetails.getId());
         claims.put("roles", customUserDetails.getAuthorities());
         claims.put("username", customUserDetails.getUsername());
+        System.out.println("Generating token for ID: " + customUserDetails.getId());
         return createToken(claims, customUserDetails.getUsername());
     }	
 

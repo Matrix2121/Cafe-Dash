@@ -82,10 +82,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean doesUserExist(String username) {
     	Optional<UserEntity> userOptional = userRepository.findByUsernameAndIsDeletedFalse(username);
-    	if (userOptional.isEmpty()) {
-    		return false;
-    	}
-    	return true;
+        return userOptional.isPresent();
     }
 
     @Override
