@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
         UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
         user.setRoles(roleEntities);
         user.setDeleted(false);
-        user.setId(null);
         user.setOrders(null);
         return userRepository.save(user);
     }
@@ -71,7 +70,6 @@ public class UserServiceImpl implements UserService {
         UserEntity savedUser = createAndSaveUser(registerUserDTO);
         return JWTUserMapper.mapToDTO(savedUser);
     }
-
 
     @Override
     public UserDTO updateUser(Long id, UserDTO userDTO) throws BadRequestException, NotFoundException {
