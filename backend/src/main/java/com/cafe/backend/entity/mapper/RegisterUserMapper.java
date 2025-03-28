@@ -18,6 +18,7 @@ public class RegisterUserMapper {
     	if(registerUserDTO == null) throw new DataMappingException("Dto cannot be null");
         try {
             return UserEntity.builder()
+                    .id(registerUserDTO.id())
                     .username(registerUserDTO.username())
                     .email(registerUserDTO.email())
                     .password(registerUserDTO.passwordHash())
