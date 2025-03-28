@@ -27,7 +27,7 @@ const Test = () => {
             console.warn('No user with this name available');
             return;
         }
-        navigateToScreen("profile", { userId: user.id });
+        navigateToScreen("profile", {userId: user.id});
     }
 
     const cafe: Cafe = {
@@ -99,6 +99,12 @@ const Test = () => {
                         <Text style={styles.testButtonText}>{"Create User"}</Text>
                     </Pressable>
                 </HasRoles>
+                <Pressable
+                    style={styles.testButton}
+                    onPress={() => navigateToScreen("contact")}
+                >
+                    <Text style={styles.testButtonText}>{"Contact us"}</Text>
+                </Pressable>
             </View>
         </ScrollView>
     );

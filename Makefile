@@ -18,5 +18,5 @@ logs:
 	@echo Logs comming from the spring boot
 
 up_sql:
-	docker exec -it cafe-dash_db_1 psql -U postgres -d cafe
 	@echo Start database
+	docker exec -it cafe-dash_db_1 psql -U postgres -d cafe
