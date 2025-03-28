@@ -6,6 +6,7 @@ export type Cafe = {
   rating: number;
   countReview: number;
   phoneNumber: string;
+  imageUrl: string;
   openingHour: string;
   closingHour: string;
   isDeleted: boolean;
@@ -16,8 +17,8 @@ export type Product = {
   name: string;
   price: number;
   productType: string;
+  imageUrl: string;
   cafeteriaId: number;
-  isDeleted: boolean;
 };
 
 export type CartItem = {

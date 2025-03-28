@@ -12,7 +12,7 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     scrollContainer: {
-        flexGrow: 1,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: theme.spacing.xl * 2,
@@ -72,15 +72,15 @@ export default StyleSheet.create({
         color: theme.colors.primary,
         marginBottom: theme.spacing.sm,
     },
+    navigationContainer: {
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        marginTop: theme.spacing.md,
+        marginRight: theme.spacing.md,
+    },
     testButton: {
-        top: theme.spacing.sm,
-        right: theme.spacing.none,
-        width: theme.components.testButton.width,
-        height: theme.components.testButton.height,
-        borderColor: theme.colors.primary,
-        borderWidth: theme.components.testButton.borderWidth,
-        backgroundColor: theme.colors.shadow,
-        position: 'absolute',
+        width: 80,
+        height: 80,
     },
     testButtonText: {
         color: theme.colors.surface,

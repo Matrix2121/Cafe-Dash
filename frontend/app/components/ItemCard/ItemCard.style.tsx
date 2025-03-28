@@ -15,6 +15,13 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 400,
   },
+  image: {
+    width: '100%',
+    height: theme.sizes.imageHeight,
+    borderRadius: theme.components.cardImage.borderRadius,
+    marginBottom: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
+  },
   cafeteriaContainer: {
     flex: 1,
     alignItems: 'flex-end',

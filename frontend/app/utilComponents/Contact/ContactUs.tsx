@@ -88,7 +88,7 @@ const ContactUs = () => {
                 title={isLoading ? 'Sending...' : 'Submit'}
                 onPress={onSubmit}
                 disabled={isLoading}
-                color="#0066cc"
+                color="#966348"
             />
         </ScrollView>
     );

@@ -41,6 +41,9 @@ public class ProductEntity {
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id")
     private CafeteriaEntity cafeteria;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

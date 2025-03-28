@@ -5,13 +5,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+
+/**
+ * @author ZapryanZapryanov, AngelStoynov
+ */
 
 @Component
 public class JwtUtil {
@@ -25,7 +28,6 @@ public class JwtUtil {
         claims.put("id", customUserDetails.getId());
         claims.put("roles", customUserDetails.getAuthorities());
         claims.put("username", customUserDetails.getUsername());
-        System.out.println("Id in jwtUtil: " + customUserDetails.getId());
         return createToken(claims, customUserDetails.getUsername());
     }	
 

@@ -16,7 +16,7 @@ import Cart from '../screens/cart/Cart'
 import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import CreateUser from '../screens/users/CreateUser';
 import Test from '../screens/test/Test'
-import ContactUs from "../utilComponents/ContactUs";
+import ContactUs from "../utilComponents/Contact/ContactUs";
 
 export type RootStackParamList = {
     login: undefined;
