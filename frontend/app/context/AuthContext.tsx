@@ -23,10 +23,21 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
-const decodeToken = (token: string) => {
+const decodeToken = (token: string): User => {
   try {
     const payload = token.split('.')[1];
-    return JSON.parse(atob(payload));
+    const decoded = JSON.parse(Buffer.from(payload, 'base64').toString());
+
+    return {
+      id: decoded.id,
+      username: decoded.username || decoded.sub,
+      sub: decoded.sub,
+      roles: Array.isArray(decoded.roles)
+          ? decoded.roles.map((role: string | Role) =>
+              typeof role === 'string' ? { authority: role } : role
+          )
+          : []
+    };
   } catch (error) {
     throw new Error('Invalid token');
   }
@@ -55,8 +66,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (username: string, password: string) => {
     const response = await customAPI.post('api/auth/login', { username, password });
     const token = response.data;
+    console.log("Raw Token:", token); // Debug the raw token
+
+    // Decode without atob to see the structure
+    const payload = token.split('.')[1];
+    console.log("Payload:", JSON.parse(atob(payload)));
+
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
+    console.log("Decoded User:", decoded);
     setUser(decoded);
   };
 
@@ -70,6 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const token = response.data;
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
+    console.log(decoded.id);
     setUser(decoded);
   };
 

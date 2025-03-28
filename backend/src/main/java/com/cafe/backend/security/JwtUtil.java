@@ -25,22 +25,9 @@ public class JwtUtil {
         claims.put("id", customUserDetails.getId());
         claims.put("roles", customUserDetails.getAuthorities());
         claims.put("username", customUserDetails.getUsername());
-        System.out.println("Generating token for ID: " + customUserDetails.getId());
+        System.out.println("Id in jwtUtil: " + customUserDetails.getId());
         return createToken(claims, customUserDetails.getUsername());
     }	
-
-    private String createToken(Map<String, Object> claims, String subject) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + JWT_EXPARATION);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(subject)
-                .setIssuedAt(now)
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, SECRET)
-                .compact();
-    }
 
     public String getUsernameFromToken(String token) {
         return getClaimsFromToken(token, Claims::getSubject);
@@ -78,5 +65,18 @@ public class JwtUtil {
         catch (ExpiredJwtException e) {
 			return true;
 		}
+    }
+
+    private String createToken(Map<String, Object> claims, String subject) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + JWT_EXPARATION);
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, SECRET)
+                .compact();
     }
 }

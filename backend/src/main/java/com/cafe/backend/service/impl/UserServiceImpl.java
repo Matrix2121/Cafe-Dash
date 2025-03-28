@@ -41,22 +41,6 @@ public class UserServiceImpl implements UserService {
     
     @Autowired 
     private RoleRepository roleRepository;
-    
-    private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
-        Set<RoleEntity> roleEntities = new HashSet<>();
-        if (registerUserDTO.roleNames() != null) {
-            for (String roleName : registerUserDTO.roleNames()) {
-                RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
-                        .orElseThrow(() -> new ResourceNotFoundException("Role not found with name : " + roleName));
-                roleEntities.add(roleEntity);
-            }
-        }
-        UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
-        user.setRoles(roleEntities);
-        user.setDeleted(false);
-        user.setOrders(null);
-        return userRepository.save(user);
-    }
 
     // used by admin and owner
     @Override
@@ -78,7 +62,7 @@ public class UserServiceImpl implements UserService {
         UserEntity updatedUser = updateUserFields(userDTO, user);
         return UserMapper.mapToDTO(updatedUser);
     }
-    
+
     @Override
     public boolean doesUserExist(String username) {
     	Optional<UserEntity> userOptional = userRepository.findByUsernameAndIsDeletedFalse(username);
@@ -90,6 +74,23 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         return UserMapper.mapToDTO(user);
+    }
+
+    private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
+        Set<RoleEntity> roleEntities = new HashSet<>();
+        if (registerUserDTO.roleNames() != null) {
+            for (String roleName : registerUserDTO.roleNames()) {
+                RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName)
+                        .orElseThrow(() -> new ResourceNotFoundException("Role not found with name : " + roleName));
+                roleEntities.add(roleEntity);
+            }
+        }
+        UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
+        System.out.println("UserServiceImpl ID: " + user.getId());
+        user.setRoles(roleEntities);
+        user.setDeleted(false);
+        user.setOrders(null);
+        return userRepository.save(user);
     }
 
     private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
