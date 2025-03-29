@@ -22,7 +22,7 @@ const ItemCard = ({product}: ItemCardProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
-                <Text style={styles.addButtonText}>+</Text>
+                <Image style={styles.addButtonIcon} source={require('@/app/assets/images/coffe-plus.svg')} />
             </TouchableOpacity>
             <Image
                 source={product.imageUrl as ImageSourcePropType}
