@@ -59,13 +59,6 @@ public class CafeteriaController {
         return cafeteriaService.updateCafeteria(id, updatedCafeteriaDTO);
     }
 
-    @GetMapping("/{cafeteriaId}/products")
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<ProductDTO> getAllProductsForCafeteriaId(@PathVariable("cafeteriaId") Long id)
-            throws BadRequestException, NotFoundException {
-        return cafeteriaService.getAllProductsForCafeteriaId(id);
-    }
-
     public void checkUserHasRole(String wantedRole) throws AuthenticationCustomException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null ||

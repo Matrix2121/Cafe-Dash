@@ -40,11 +40,31 @@ const useProduct = () => {
       });
   };
 
+  const fetchAllProductByCafeteriaId = (cafeteriaId: number) => {
+    customAPI
+        .get(`api/products/cafeteria/${cafeteriaId}`)
+        .then((response) => {
+          const allProducts = response.data;
+          setProducts(allProducts);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(
+              error?.response?.data?.message ||
+              error.message ||
+              "Something went wrong"
+          );
+          setLoading(false);
+        });
+  };
+
+
   return {
     product,
     products,
     fetchAllProducts,
     fetchProductById,
+    fetchAllProductByCafeteriaId,
     loading,
     error,
   };

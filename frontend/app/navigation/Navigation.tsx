@@ -1,8 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Cafe } from '../types/items';
-
+import { Cafeteria } from '../types/items';
 import Login from '../screens/auth/LoginScreen/Login';
 import Register from '../screens/auth/RegisterScreen/Register';
 import Home from '../screens/home/Home';
@@ -23,13 +22,13 @@ export type RootStackParamList = {
     login: undefined;
     register: undefined;
     home: undefined;
-    profile: undefined;
+    profile: {userId: number};
     orders: undefined;
     cafeslist: undefined;
-    cafedetail: { cafe: Cafe };
-    cafemenu: { cafe: Cafe };
-    cafereviews: { cafe: Cafe };
-    leavereview: { cafe: Cafe; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
+    cafedetail: { cafe: Cafeteria };
+    cafemenu: { cafe: Cafeteria };
+    cafereviews: { cafe: Cafeteria };
+    leavereview: { cafe: Cafeteria; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
     createcafeteria: undefined;
     cart: undefined;
     test: undefined;

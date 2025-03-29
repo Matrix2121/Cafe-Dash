@@ -20,12 +20,12 @@ const CafeMenu = ({route}: CafeMenuProps) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const {cafe} = route.params;
 
-    const {products, fetchAllProducts, loading, error} = useProducts();
+    const {products, fetchAllProductByCafeteriaId, loading, error} = useProducts();
     const {productsCount, totalPrice} = useCart();
 
     useEffect(() => {
-        fetchAllProducts();
-    }, []);
+        fetchAllProductByCafeteriaId(cafe.id);
+    }, [cafe.id]);
 
     const hasData = Array.isArray(products) && products.length > 0;
 

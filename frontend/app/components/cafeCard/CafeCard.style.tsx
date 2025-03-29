@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.background,
     borderRadius: theme.radii.md,
+    height: 460,
     overflow: 'hidden',
   },
   cardContent: {

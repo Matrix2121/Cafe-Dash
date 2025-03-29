@@ -4,7 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import CafeCard from "@/app/components/cafeCard/CafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import useCafes from "../../../hooks/useCafes";
-import { Cafe } from "@/app/types/items";
+import { Cafeteria } from "@/app/types/items";
 import styles from "./CafesList.style";
 
 const CafesList = () => {
@@ -27,7 +27,7 @@ const CafesList = () => {
   return (
     <ScrollView style={styles.mainContainer}>
       <View style={styles.gridContainer}>
-        {cafes.map((cafe: Cafe) => (
+        {cafes.map((cafe: Cafeteria) => (
           <View key={cafe.id} style={styles.cardWrapper}>
             <CafeCard cafe={cafe} />
           </View>
