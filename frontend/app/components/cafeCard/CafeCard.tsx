@@ -5,10 +5,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { Image, ImageSourcePropType, Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
 import styles from "./CafeCard.style";
-import { Cafe } from "@/app/types/items";
+import { Cafeteria } from "@/app/types/items";
 
 interface CafeCardProps {
-  cafe: Cafe;
+  cafe: Cafeteria;
 }
 
 const CafeCard = ({ cafe }: CafeCardProps) => {

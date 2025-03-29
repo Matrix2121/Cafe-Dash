@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Cafe } from '../types/items';
+import { Cafeteria } from '../types/items';
 import customAPI from '../services/apiClient';
 
 const useCafes = (id?: number | null) => {
-    const [cafes, setCafes] = useState<Cafe[]>([]);
-    const [cafe, setCafe] = useState<Cafe | null>(null);
+    const [cafes, setCafes] = useState<Cafeteria[]>([]);
+    const [cafe, setCafe] = useState<Cafeteria | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 

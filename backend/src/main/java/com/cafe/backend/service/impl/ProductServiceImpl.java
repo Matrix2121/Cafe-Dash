@@ -73,6 +73,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<ProductDTO> getAllProductsFromCafeteriaId(Long id) throws NotFoundException, DataMappingException {
+        List<ProductEntity> products = productRepository.findByCafeteriaId(id);
+
+        if (products.isEmpty()) {
+            throw new ResourceNotFoundException("No products found for cafeteria with ID: " + id);
+        }
+
+        List<ProductDTO> results = new ArrayList<>();
+        for (ProductEntity entity : products) {
+            results.add(ProductMapper.mapToDTO(entity));
+        }
+
+        return results;
+    }
+
+    @Override
     public ProductDTO updateProduct(Long productId, ProductDTO updatedProduct)
             throws NotFoundException, BadRequestException {
         ProductEntity product = productRepository.findById(productId)

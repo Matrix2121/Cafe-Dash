@@ -1,4 +1,4 @@
-export type Cafe = {
+export type Cafeteria = {
   id: number;
   name: string;
   brand: string;
@@ -10,7 +10,7 @@ export type Cafe = {
   openingHour: string;
   closingHour: string;
   isDeleted: boolean;
-};
+}
 
 export type Order = {
   id?: number;

@@ -96,23 +96,6 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     }
 
     @Override
-    public List<ProductDTO> getAllProductsForCafeteriaId(Long id) throws ResourceNotFoundException, DataMappingException {
-        List<ProductEntity> products = productRepository.findByCafeteriaId(id);
-
-        if (products.isEmpty()) {
-            throw new ResourceNotFoundException("No products found for cafeteria with ID: " + id);
-        }
-
-        List<ProductDTO> results = new ArrayList<>();
-
-        for (ProductEntity entity : products) {
-            results.add(ProductMapper.mapToDTO(entity));
-        }
-
-        return results;
-    }
-
-    @Override
     public CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException {
         CafeteriaDTO original = getCafeteriaById(cafeteriaId);
 
