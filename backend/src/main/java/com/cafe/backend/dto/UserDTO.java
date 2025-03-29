@@ -1,6 +1,7 @@
 package com.cafe.backend.dto;
 
 import java.util.Set;
+import java.util.List;
 
 /**
  * @author AngelStoynov
@@ -10,6 +11,6 @@ public record UserDTO(
         String username,
         String email,
         Set<RoleDTO> role,
-        Set<OrderDTO> orders,
+        List<OrderDTO> orders,
         Set<ReviewDTO> reviews
 ) {}

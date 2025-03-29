@@ -12,6 +12,26 @@ export type Cafe = {
   isDeleted: boolean;
 };
 
+export type Order = {
+  id?: number;
+  discount?: number;
+  readyPickupTime?: string;
+  status: string;
+  tip: number;
+  cafeteriaId: number;
+  userId: number;
+  totalPrice: number;
+  orderProducts: OrderProduct[];
+}
+
+export type OrderProduct = {
+  id?: number;
+  orderId?: number;
+  productId: number;
+  productPrice: number;
+  productQuantity: number;
+}
+
 export type Product = {
   id: number;
   name: string;
@@ -30,7 +50,7 @@ export type User = {
   id: number;
   username: string;
   email: string;
-  role: Role[];
+  roles: Role[];
   orders: Order[];
   reviews: Review[];
 }
@@ -44,26 +64,6 @@ export type UserUpdate = {
 export type Role = {
   id: number;
   roleName: string;
-}
-
-export type Order = {
-  id: number;
-  discount: number;
-  readyPickupTime: string;
-  status: string;
-  tip: number
-  cafeteriaId: number;
-  userId: number;
-  totalPrice: number;
-  orderProducts: OrderProduct[];
-}
-
-export type OrderProduct = {
-  id: number;
-  orderId: number;
-  productId: number;
-  productPrice: number;
-  productQuantity: number;
 }
 
 export type Review = {

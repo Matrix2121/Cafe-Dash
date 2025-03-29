@@ -2,16 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import customAPI from '../services/apiClient';
 
-type Role = {
-  authority: string;
-};
-
-type User = {
-  id: number;
-  username: string;
-  sub: string;
-  roles: Role[];
-};
+import { User } from "@/app/types/items"
 
 type AuthContextType = {
   user: User | null;

@@ -1,8 +1,8 @@
 package com.cafe.backend.entity.order;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
@@ -68,7 +68,7 @@ public class OrderEntity {
     private UserEntity user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<OrderProductEntity> orderProducts;
+    private List<OrderProductEntity> orderProducts;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

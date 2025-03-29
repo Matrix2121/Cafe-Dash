@@ -1,25 +1,22 @@
 import styles from "@/app/screens/profile/Profile.style";
 import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
-import {RootStackParamList} from "@/app/navigation/Navigation";
-import {RouteProp} from "@react-navigation/native";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
 import profileImage from "../../assets/images/profileScreen/profile.png";
 import editImage from "../../assets/images/profileScreen/edit.png";
 import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
 import orders from "../../assets/images/profileScreen/orders.png";
-import useUser from "@/app/hooks/useUser";
 import {TextInput} from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
+import { useAuth } from "@/app/context/AuthContext";
 
-type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
+const Profile = () => {
+    const { user } = useAuth();
+    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-interface IProps {
-    route: ProfileScreenRouteProp;
-}
-
-const Profile = ({route}: IProps) => {
-    const {userId} = route.params;
-    const {user, updateUser} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -32,9 +29,9 @@ const Profile = ({route}: IProps) => {
         const updatedUser = {
             id: user.id,
             username: username || user.username,
-            email: email || user.email,
+            // email: email || user.email,
         };
-        updateUser(updatedUser, userId);
+        // updateUser(updatedUser, userId);
         setEditUsername(false);
         setEditEmail(false);
         setModalVisible(false);
@@ -58,12 +55,13 @@ const Profile = ({route}: IProps) => {
             <View style={styles.imageContainer}>
                 <Image source={profileBackground} style={styles.imageLogo}/>
             </View>
+
             <View style={styles.profileLogoContainer}>
                 <Pressable style={styles.circle}>
                     <Text style={styles.letterInsideTheLogo}>{user?.username.charAt(0).toUpperCase()}</Text>
                 </Pressable>
                 <Text style={styles.profileTextLogo}>{user?.username}</Text>
-                <Text style={styles.secondaryText}>{user?.email}</Text>
+                {/* <Text style={styles.secondaryText}>{user?.email}</Text> */}
 
                 <View style={styles.orderContainer}>
                     <Pressable style={styles.rowContainer} onPress={openModal}>
@@ -71,6 +69,8 @@ const Profile = ({route}: IProps) => {
                         <Text style={styles.orderTextLogo}>Profile details</Text>
                     </Pressable>
                 </View>
+
+
                 <Modal
                     visible={modalVisible}
                     onRequestClose={closeModal}
@@ -107,7 +107,7 @@ const Profile = ({route}: IProps) => {
                                         <View style={styles.editContainer}>
                                             {editEmail ? (
                                                 <TextInput
-                                                    label={user?.email}
+                                                    // label={user?.email}
                                                     value={email}
                                                     onChangeText={setEmail}
                                                     style={styles.input}
@@ -115,7 +115,8 @@ const Profile = ({route}: IProps) => {
                                                     editable={editEmail}
                                                 />
                                             ) : (
-                                                <Text style={styles.editInput}>Email: {user?.email}</Text>
+                                                // <Text style={styles.editInput}>Email: {user?.email}</Text>
+                                                <Text style={styles.editInput}>Email: {user?.username}</Text>
                                             )}
                                             <Pressable onPress={toggleEmailEdit} style={styles.editButton}>
                                                 <Image source={editImage} style={styles.editLogo}/>
@@ -135,9 +136,15 @@ const Profile = ({route}: IProps) => {
                         </View>
                     </ImageBackground>
                 </Modal>
+
+
+
             </View>
             <View style={styles.orderContainer}>
-                <Pressable style={styles.rowContainer}>
+                <Pressable 
+                    style={styles.rowContainer}
+                    onPress={() => navigation.navigate("orders")}
+                >
                     <Image source={orders} style={styles.logo}/>
                     <Text style={styles.orderTextLogo}>Previous Orders</Text>
                 </Pressable>

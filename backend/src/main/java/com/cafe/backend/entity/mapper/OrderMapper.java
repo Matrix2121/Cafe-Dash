@@ -6,8 +6,8 @@ import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.exception.DataMappingException;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.LinkedList;
 
 /**
  * @author ZapryanZapryanov, AngelStoynov
@@ -20,8 +20,8 @@ public class OrderMapper {
             throw new DataMappingException("OrderEntity cannot be null");
         }
 
-        Set<OrderProductDTO> orderProductDTOs = new HashSet<>();
-        Set<OrderProductEntity> orderProductEntities = orderEntity.getOrderProducts();
+        List<OrderProductDTO> orderProductDTOs = new LinkedList<>();
+        List<OrderProductEntity> orderProductEntities = orderEntity.getOrderProducts();
 
         return new OrderDTO(
                 orderEntity.getId(),
@@ -50,7 +50,7 @@ public class OrderMapper {
                 .build();
     }
 
-    private static double calculateTotalPrice(Set<OrderProductEntity> orderProductEntities, Set<OrderProductDTO> orderProductDTOs) throws DataMappingException {
+    private static double calculateTotalPrice(List<OrderProductEntity> orderProductEntities, List<OrderProductDTO> orderProductDTOs) throws DataMappingException {
         double totalPrice = 0.0;
         for (OrderProductEntity orderProductEntity : orderProductEntities) {
             orderProductDTOs.add(OrderProductMapper.mapToDTO(orderProductEntity));

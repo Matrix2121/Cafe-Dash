@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
-import { TextInput, Button, Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@/app/navigation/Navigation';
-import {url} from "@/app/common/constants";
+import React, { useState } from "react";
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  View,
+} from "react-native";
+import { TextInput, Button, Text } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { url } from "@/app/common/constants";
 import loginBackground from "../../../assets/images/login-background.jpg";
 import styles from "@/app/screens/cafes/CafeCreateScreen/CreateCafe.style";
 
-const CreateCafeteriaScreen = () => {
-  const [name, setName] = useState('');
-  const [brand, setBrand] = useState('');
-  const [location, setLocation] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+const CreateCafeteria = () => {
+  const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [location, setLocation] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
+  const [error, setError] = useState("");
+
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleCreateCafeteria = async () => {
     if (!name || !brand || !location || !phoneNumber) {
-      setError('Please fill in all fields.');
+      setError("Please fill in all fields.");
       return;
     }
 
@@ -35,33 +41,30 @@ const CreateCafeteriaScreen = () => {
     };
 
     setLoading(true);
-    setError('');
+    setError("");
     try {
       const response = await fetch(`${url}api/cafeterias`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cafeteriaData)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cafeteriaData),
       });
       if (response.ok) {
         navigation.goBack();
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Something went wrong');
+        setError(errorData.message || "Something went wrong");
       }
     } catch (err: any) {
-      setError(err.message || 'An error occurred');
+      setError(err.message || "An error occurred");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <ImageBackground
-      source={loginBackground}
-      style={styles.backgroundImage}
-    >
+    <ImageBackground source={loginBackground} style={styles.backgroundImage}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -106,7 +109,7 @@ const CreateCafeteriaScreen = () => {
               disabled={loading}
               style={styles.createButton}
             >
-              {loading ? 'Creating...' : 'Create'}
+              {loading ? "Creating..." : "Create"}
             </Button>
           </View>
         </ScrollView>
@@ -115,4 +118,4 @@ const CreateCafeteriaScreen = () => {
   );
 };
 
-export default CreateCafeteriaScreen;
+export default CreateCafeteria;

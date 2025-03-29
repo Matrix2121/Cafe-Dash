@@ -1,6 +1,8 @@
 package com.cafe.backend.entity.mapper;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import com.cafe.backend.dto.OrderDTO;
@@ -27,7 +29,7 @@ public class UserMapper {
             }
         }
 
-        Set<OrderDTO> orderDTOS = new HashSet<>();
+        List<OrderDTO> orderDTOS = new LinkedList<>();
         if (userEntity.getOrders() != null) {
             for (OrderEntity order : userEntity.getOrders()) {
                 orderDTOS.add(OrderMapper.mapToDTO(order));
@@ -64,7 +66,7 @@ public class UserMapper {
             }
         }
 
-        Set<OrderEntity> orderEntities = new HashSet<>();
+        List<OrderEntity> orderEntities = new LinkedList<>();
         if(userDTO.orders() != null) {
         	for (OrderDTO order : userDTO.orders()) {
                 orderEntities.add(OrderMapper.mapToEntity(order));

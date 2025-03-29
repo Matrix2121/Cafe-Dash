@@ -1,6 +1,8 @@
 package com.cafe.backend.service.impl;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -111,7 +113,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (newUserDTO.orders() != null) {
-            Set<OrderEntity> orderEntities = getOrderEntities(newUserDTO);
+            List<OrderEntity> orderEntities = getOrderEntities(newUserDTO);
             user.setOrders(orderEntities);
         }
 
@@ -131,8 +133,8 @@ public class UserServiceImpl implements UserService {
         return roleEntities;
     }
 
-    private Set<OrderEntity> getOrderEntities(UserDTO newUserDTO) throws DataMappingException {
-        Set<OrderEntity> orderEntities = new HashSet<>();
+    private List<OrderEntity> getOrderEntities(UserDTO newUserDTO) throws DataMappingException {
+        List<OrderEntity> orderEntities = new LinkedList<>();
         for (OrderDTO order : newUserDTO.orders()) {
             orderEntities.add(OrderMapper.mapToEntity(order));
         }

@@ -34,7 +34,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             <Text style={styles.titleStyle}>{cafe.name}</Text>
             {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
               <View>
-                <Text style={styles.timeStyle}>Opening Hours:</Text>
+                <Text style={styles.timeStyle}>Open Hours:</Text>
                 <Text style={styles.timeStyle}>
                   {cafe.openingHour} - {cafe.closingHour}
                 </Text>
