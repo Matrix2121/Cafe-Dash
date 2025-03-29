@@ -1,9 +1,11 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { url } from '../common/constants';
+import Constants from 'expo-constants';
 
+
+const apiUrl = Constants.expoConfig?.extra?.apiUrl;
 const customAPI = axios.create({
-    baseURL:  process.env.API_URL
+    baseURL:  'http://localhost:8080'
 });
 
 // Add request interceptor to inject JWT token

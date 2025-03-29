@@ -30,11 +30,11 @@ public class ReviewEntity {
     @Column(name = "title", length = 255, nullable = false)
     private String title;
 
-    @Column(name = "body", length = 1023, nullable = true)
+    @Column(name = "body", length = 1023)
     private String body;
 
     @Column(name = "rating")
-    private Integer rating;
+    private int rating;
 
     @Column(name = "createdAt", nullable = false)
     private LocalDateTime createdAt;

@@ -58,7 +58,7 @@ const Profile = () => {
 
             <View style={styles.profileLogoContainer}>
                 <Pressable style={styles.circle}>
-                    <Text style={styles.letterInsideTheLogo}>{user?.username.charAt(0)}</Text>
+                    <Text style={styles.letterInsideTheLogo}>{user?.username.charAt(0).toUpperCase()}</Text>
                 </Pressable>
                 <Text style={styles.profileTextLogo}>{user?.username}</Text>
                 {/* <Text style={styles.secondaryText}>{user?.email}</Text> */}

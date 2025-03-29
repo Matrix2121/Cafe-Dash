@@ -4,9 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Image, ImageSourcePropType, Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
-import useCafeImage from "@/app/hooks/useCafeImage";
-import styles from "./cafeCard.style";
-import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
+import styles from "./CafeCard.style";
 import { Cafe } from "@/app/types/items";
 
 interface CafeCardProps {
@@ -16,19 +14,6 @@ interface CafeCardProps {
 const CafeCard = ({ cafe }: CafeCardProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
-  const { imageUrl, loading, error } = useCafeImage(cafe.id);
-  const hasData = !!imageUrl;
-
-  if (loading || error || !hasData) {
-    return (
-      <LoadingErrorView
-        loading={loading}
-        error={error}
-        dataAvailable={hasData}
-      />
-    );
-  }
-
   const isValidTime = (time: string | null | undefined) => {
     return !!time && time !== "00:00:00";
   };
@@ -36,13 +21,12 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
   return (
     <Pressable
       style={styles.cardStyle}
-      onPress={() => navigation.navigate("cafemenu", { cafe })}
+      onPress={() => navigation.navigate("cafedetail", { cafe })}
     >
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>
-          {/* IMAGE SHOULD NOT BE AS ANY or ImageSourcePropType*/}
           <Image
-            source={imageUrl as ImageSourcePropType}
+            source={cafe.imageUrl as ImageSourcePropType}
             style={styles.image}
             defaultSource={require('@/app/assets/images/logo.png')}
           />

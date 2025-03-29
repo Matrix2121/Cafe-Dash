@@ -12,8 +12,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: theme.radii.sm,
     elevation: theme.elevation.md,
+    width: "auto",
+  },
+  image: {
     width: '100%',
-    maxWidth: 400,
+    height: theme.sizes.imageHeight,
+    borderRadius: theme.components.cardImage.borderRadius,
+    marginBottom: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
   },
   cafeteriaContainer: {
     flex: 1,
@@ -31,6 +37,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+  },
+  addButtonIcon: {
+    height: 60,
+    width: 60,
   },
   addButtonText: {
     color: theme.colors.surface,

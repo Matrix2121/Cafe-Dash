@@ -22,7 +22,6 @@ public class RegisterUserMapper {
                     .email(registerUserDTO.email())
                     .password(registerUserDTO.passwordHash())
                     .build();
-            
         } catch (Exception e) {
             throw new DataMappingException("Cannot map register user to entity.", e);
         }

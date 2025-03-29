@@ -26,6 +26,7 @@ public class CafeteriaMapper {
                 cafeteria.getRating(),
                 cafeteria.getCountReview(),
                 cafeteria.getPhoneNumber(),
+                cafeteria.getImageUrl(),
                 cafeteria.getOpeningHour(),
                 cafeteria.getClosingHour()
         );
@@ -43,6 +44,7 @@ public class CafeteriaMapper {
                 .rating(cafeteriaDTO.rating())
                 .countReview(cafeteriaDTO.countReview())
                 .phoneNumber(cafeteriaDTO.phoneNumber())
+                .imageUrl(cafeteriaDTO.imageUrl())
                 .openingHour(cafeteriaDTO.openingHour())
                 .closingHour(cafeteriaDTO.closingHour())
                 .build();

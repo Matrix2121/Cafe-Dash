@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Alert } from 'react-native';
+import {View, Text, TouchableOpacity, Alert, ImageSourcePropType, Image} from 'react-native';
 import { Product } from '../../types/items';
 import styles from './ItemCard.style';
 import { useCart } from '@/app/context/CartContext';
@@ -22,8 +22,13 @@ const ItemCard = ({product}: ItemCardProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
-                <Text style={styles.addButtonText}>+</Text>
+                <Image style={styles.addButtonIcon} source={require('@/app/assets/images/coffe-plus.svg')} />
             </TouchableOpacity>
+            <Image
+                source={product.imageUrl as ImageSourcePropType}
+                style={styles.image}
+                defaultSource={require('@/app/assets/images/logo.png')}
+            />
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.price}>${product.price.toFixed(2)}</Text>
         </View>
