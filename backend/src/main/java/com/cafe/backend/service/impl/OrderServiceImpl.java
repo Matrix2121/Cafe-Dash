@@ -1,11 +1,12 @@
 package com.cafe.backend.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.LinkedList;
 
+import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
+import com.cafe.backend.exception.NotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,41 +47,18 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<OrderDTO> getAllOrders() throws ResourceNotFoundException, DataMappingException {
-        List<OrderEntity> ordersList = orderRepository.findAllByIsDeletedFalse();
-        if (ordersList.isEmpty()) {
-            throw new ResourceNotFoundException("No orders found");
+    @Override
+    public OrderDTO createOrder(OrderDTO orderDTO) throws ResourceNotFoundException, DataMappingException, BadRequestException {
+        if (orderDTO.userId() == null) {
+            throw new BadRequestException("User ID must not be null");
         }
-        List<OrderDTO> orderDTOs = new ArrayList<>();
-        for (OrderEntity entity : ordersList) {
-            orderDTOs.add(OrderMapper.mapToDTO(entity));
+        if (orderDTO.cafeteriaId() == null) {
+            throw new BadRequestException("Cafeteria ID must not be null");
         }
-        return orderDTOs;
-    }
-
-    public OrderDTO getOrderById(Long id) throws ResourceNotFoundException, DataMappingException {
-        OrderEntity order = orderRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
-        return OrderMapper.mapToDTO(order);
-    }
-
-    public OrderDTO createOrder(OrderDTO orderDTO) throws ResourceNotFoundException, DataMappingException {
-        Set<OrderProductEntity> orderProductEntities = new HashSet<>();
-
-        for (OrderProductDTO orderProduct : orderDTO.orderProducts()) {
-            ProductEntity productEntity = productRepository.findById(orderProduct.productId())
-                    .orElseThrow(() -> new ResourceNotFoundException(
-                            "Product not found with id: " + orderProduct.productId()));
-
-            OrderProductEntity orderProductEntity = new OrderProductEntity();
-            orderProductEntity.setOrder(null);
-            orderProductEntity.setDeleted(false);
-            orderProductEntity.setProduct(productEntity);
-            orderProductEntity.setProductQuantity(orderProduct.productQuantity());
-            orderProductEntity.setProductPrice(orderProduct.productPrice());
-            orderProductEntities.add(orderProductEntity);
+        if (orderDTO.orderProducts() == null || orderDTO.orderProducts().isEmpty()) {
+            throw new BadRequestException("Order must contain at least one product");
         }
-
+        
         CafeteriaEntity cafeteriaEntity = cafeteriaRepository.findById(orderDTO.cafeteriaId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Cafeteria not found with id: " + orderDTO.cafeteriaId()));
@@ -91,19 +69,54 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity orderToSave = OrderMapper.mapToEntity(orderDTO);
         orderToSave.setCafeteria(cafeteriaEntity);
         orderToSave.setUser(user);
-
         OrderEntity savedOrder = orderRepository.save(orderToSave);
+        List<OrderProductEntity> savedOrderProductEntities = new LinkedList<>();
 
-        for (OrderProductEntity orderProductEntity : orderProductEntities) {
-            orderProductEntity.setOrder(savedOrder);
-        }
+        savedOrderProductEntities = setOrderProductEntities(savedOrder, orderDTO);
+        
+        savedOrder.setOrderProducts(savedOrderProductEntities);
 
-        orderProductRepository.saveAll(orderProductEntities);
-        savedOrder.setOrderProducts(orderProductEntities);
+        OrderEntity finalOrder = orderRepository.save(savedOrder);
 
-        return OrderMapper.mapToDTO(savedOrder);
+        return OrderMapper.mapToDTO(finalOrder);
     }
 
+    @Override
+    public OrderDTO getOrderById(Long id) throws ResourceNotFoundException, DataMappingException {
+        OrderEntity order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
+        return OrderMapper.mapToDTO(order);
+    }
+
+    @Override
+    public List<OrderDTO> getAllOrders() throws ResourceNotFoundException, DataMappingException {
+        List<OrderEntity> orderEntities = orderRepository.findAllByIsDeletedFalse();
+        if (orderEntities.isEmpty()) {
+            throw new ResourceNotFoundException("No orders found");
+        }
+        List<OrderDTO> orderDTOs = new LinkedList<>();
+        for (OrderEntity entity : orderEntities) {
+            orderDTOs.add(OrderMapper.mapToDTO(entity));
+        }
+        return orderDTOs;
+    }
+    
+    @Override
+    public List<OrderDTO> getOrdersByUserId(Long userId) throws NotFoundException, BadRequestException {
+        List<OrderEntity> orderEntities = orderRepository.findByUserIdAndIsDeletedFalse(userId);
+        if (orderEntities.isEmpty()) {
+            throw new ResourceNotFoundException("No orders found");
+        }
+        List<OrderDTO> orderDTOs = new LinkedList<>();
+        String str = "control point";
+        System.out.println(str);
+        for (OrderEntity entity : orderEntities) {
+            orderDTOs.add(OrderMapper.mapToDTO(entity));
+        }
+        return orderDTOs;
+    }
+
+    @Override
     public OrderDTO updateOrder(Long id, OrderDTO updatedOrderDTO) throws ResourceNotFoundException, DataMappingException {
         OrderEntity order = orderRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
@@ -113,5 +126,27 @@ public class OrderServiceImpl implements OrderService {
         order.setTip(updatedOrderDTO.tip());
         OrderEntity savedOrder = orderRepository.save(order);
         return OrderMapper.mapToDTO(savedOrder);
+    }
+
+    private List<OrderProductEntity> setOrderProductEntities(OrderEntity savedOrder, OrderDTO orderDTO) throws ResourceNotFoundException {
+        List<OrderProductEntity> orderProductEntities = new LinkedList<>();
+        for (OrderProductDTO orderProduct : orderDTO.orderProducts()) {
+            ProductEntity productEntity = productRepository.findById(orderProduct.productId())
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            "Product not found with id: " + orderProduct.productId()));
+
+            OrderProductEntity orderProductEntity = new OrderProductEntity();
+            orderProductEntity.setOrder(savedOrder);
+            orderProductEntity.setProduct(productEntity);
+            orderProductEntity.setProductPrice(orderProduct.productPrice());
+            orderProductEntity.setProductQuantity(orderProduct.productQuantity()); 
+            orderProductEntity.setDeleted(false);
+            orderProductEntities.add(orderProductEntity);
+        }
+
+        List<OrderProductEntity> savedOrderProducts = new LinkedList<>();
+        savedOrderProducts = orderProductRepository.saveAll(orderProductEntities);
+
+        return savedOrderProducts;
     }
 }

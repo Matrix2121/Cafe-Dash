@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Product, CartItem } from "../types/items";
+import { Product, CartItem, Order } from "../types/items";
+import { useAuth } from "./AuthContext";
 
 type CartContextType = {
   cartItems: CartItem[];
@@ -9,11 +10,13 @@ type CartContextType = {
   clearCart: () => void;
   productsCount: number;
   totalPrice: number;
+  currOrder: () => Order;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+  const { user } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -82,6 +85,26 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return { ...cartItem, quantity: newQuantity };
   };
 
+  const currOrder = () : Order  => {
+    if (!user) throw new Error("User must be logged in to create order");
+    if (cartItems.length === 0) throw new Error("Cart is empty");
+
+    return {
+      discount : 0,
+      status: "PROCESSING",
+      readyPickupTime: new Date().toISOString(),
+      tip: 0,
+      cafeteriaId: cartItems[0].product.cafeteriaId,
+      userId: user.id,
+      totalPrice: totalPrice,
+      orderProducts: cartItems.map((cartItem) => ({
+        productId: cartItem.product.id,
+        productPrice: cartItem.product.price,
+        productQuantity: cartItem.quantity
+        }))
+      } 
+    }
+
   return (
     <CartContext.Provider
       value={{
@@ -92,6 +115,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         clearCart,
         productsCount,
         totalPrice,
+        currOrder,
       }}
     >
       {children}

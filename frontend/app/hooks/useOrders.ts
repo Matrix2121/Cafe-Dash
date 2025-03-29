@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Cafe } from '../types/items';
-import api from '../services/apiClient';
+import { Order } from '../types/items';
+import customAPI from '../services/apiClient';
+import { Alert } from 'react-native';
 
-const useCafes = (id: number) => {
-    const [orders, setOrders] = useState<Cafe | null>(null);
+const useOrders = (userId?: number) => {
+    const [orders, setOrders] = useState<Order[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchOrdersByUserId = (id: number) => {
-        api.get(`api/orders/${id}`)
+    const fetchOrdersByUserId = async (userId: number) => {
+        customAPI.get(`api/orders/user/${userId}`)
             .then((response) => {
                 const orders = response.data;
                 setOrders(orders);
@@ -17,14 +18,29 @@ const useCafes = (id: number) => {
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
                 setLoading(false);
+            })
+            .finally(()=> {
+                setLoading(false);
+            });
+    }
+
+    const postOrder = async (order : Order) => {
+        await customAPI.post(`api/orders`, order)
+            .catch((error) => {
+                setError(error?.response?.data?.message || error.message || 'Something went wrong');
             });
     }
 
     useEffect(() => {
-        fetchOrdersByUserId(id)
-    }, []);
+        if (userId === undefined) {
+            Alert.alert("Error", "Invalid user id");
+            setLoading(false);
+            return;
+        }
+        fetchOrdersByUserId(userId);
+    }, [userId]);
 
-    return {orders, loading, error};
+    return {orders, postOrder, loading, error};
 };
 
-export default useCafes;
+export default useOrders;

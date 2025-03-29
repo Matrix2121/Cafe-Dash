@@ -4,6 +4,7 @@ import { useCart } from '@/app/context/CartContext';
 import { CartItem } from '@/app/types/items';
 import styles from './Cart.style'
 import useCafes from '@/app/hooks/useCafes';
+import useOrders from '@/app/hooks/useOrders';
 
 const Cart = () => {
   const {
@@ -12,10 +13,12 @@ const Cart = () => {
     updateQuantity,
     clearCart,
     totalPrice,
+    currOrder,
   } = useCart();
 
   const cafeteriaId = cartItems.length > 0 ? cartItems[0].product.cafeteriaId : null;
   const { cafe, loading, error } = useCafes(cafeteriaId);
+  const { postOrder } = useOrders();
 
   const renderItem = ({ item }: { item: CartItem }) => (
     <View style={styles.itemContainer}>
@@ -72,13 +75,21 @@ const Cart = () => {
           />
           <View style={styles.summaryContainer}>
             <Text style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</Text>
+
             <TouchableOpacity
               onPress={clearCart}
               style={styles.clearButton}
             >
               <Text style={styles.clearText}>Clear Cart</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.checkoutButton}>
+
+            <TouchableOpacity 
+              onPress={async () => {
+                await postOrder(currOrder());
+                clearCart();
+              }}
+              style={styles.checkoutButton}
+            >
               <Text style={styles.checkoutText}>Proceed to Checkout</Text>
             </TouchableOpacity>
           </View>

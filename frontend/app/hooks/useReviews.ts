@@ -7,7 +7,7 @@ const useReviews = (cafeteriaId: number) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchReviewsByCafeId = (cafeteriaId: number) => {
+    const fetchReviewsByCafeId = async (cafeteriaId: number) => {
         setLoading(true);
         customAPI.get(`api/reviews/${cafeteriaId}`)
             .then((response) => {

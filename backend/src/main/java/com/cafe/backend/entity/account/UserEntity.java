@@ -6,6 +6,8 @@ import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,7 +47,7 @@ public class UserEntity {
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private Set<OrderEntity> orders = new HashSet<>();
+    private List<OrderEntity> orders = new LinkedList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

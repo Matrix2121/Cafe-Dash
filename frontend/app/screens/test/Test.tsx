@@ -59,13 +59,13 @@ const Test = () => {
           style={styles.testButton}
           onPress={() => navigateToScreen("home")}
         >
-          <Text style={styles.testButtonText}>{"MainLayout"}</Text>
+          <Text style={styles.testButtonText}>{"home"}</Text>
         </Pressable>
       </View>
       <View style={styles.rowContainer}>
         <Pressable
           style={styles.testButton}
-          onPress={() => navigateToScreen("profile", { userId: 2 })}
+          onPress={() => navigateToScreen("profile")}
         >
           <Text style={styles.testButtonText}>{"Profile"}</Text>
         </Pressable>

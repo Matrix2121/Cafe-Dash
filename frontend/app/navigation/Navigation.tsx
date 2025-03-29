@@ -7,6 +7,7 @@ import Login from '../screens/auth/LoginScreen/Login';
 import Register from '../screens/auth/RegisterScreen/Register';
 import Home from '../screens/home/Home';
 import Profile from "../screens/profile/Profile";
+import Orders from "../screens/orders/Orders";
 import CafesList from '../screens/cafes/CafeListScreen/CafesList';
 import CafeDetail from '../screens/cafes/CafeDetailScreen/CafeDetail';
 import CafeMenu from '../screens/cafes/CafeMenuScreen/CafeMenu';
@@ -21,7 +22,8 @@ export type RootStackParamList = {
     login: undefined;
     register: undefined;
     home: undefined;
-    profile: { userId: number };
+    profile: undefined;
+    orders: undefined;
     cafeslist: undefined;
     cafedetail: { cafe: Cafe };
     cafemenu: { cafe: Cafe };
@@ -42,6 +44,7 @@ const Navigation = () => {
             <Stack.Screen name="register" component={Register} />
             <Stack.Screen name="home" component={Home} />
             <Stack.Screen name="profile" component={Profile} />
+            <Stack.Screen name="orders" component={Orders} />
             <Stack.Screen name="cafeslist" component={CafesList} />
             <Stack.Screen name="cafedetail" component={CafeDetail} />
             <Stack.Screen name="cafemenu" component={CafeMenu} />

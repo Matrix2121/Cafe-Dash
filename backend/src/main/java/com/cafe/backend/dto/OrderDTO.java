@@ -2,7 +2,7 @@ package com.cafe.backend.dto;
 
 import com.cafe.backend.enums.OrderStatusEnum;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author ZapryanZapryanov
@@ -16,5 +16,5 @@ public record OrderDTO(
         Long cafeteriaId,
         Long userId,
         double totalPrice,
-        Set<OrderProductDTO> orderProducts
+        List<OrderProductDTO> orderProducts
 ) {}

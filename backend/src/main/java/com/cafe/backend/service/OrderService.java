@@ -10,5 +10,6 @@ public interface OrderService {
 	OrderDTO createOrder(OrderDTO orderDTO) throws NotFoundException, BadRequestException;
 	OrderDTO getOrderById(Long id) throws NotFoundException, BadRequestException;
 	List<OrderDTO> getAllOrders() throws NotFoundException, BadRequestException;
+	List<OrderDTO> getOrdersByUserId(Long userId) throws NotFoundException, BadRequestException;
 	OrderDTO updateOrder(Long id, OrderDTO updatedOrderDTO) throws NotFoundException, BadRequestException;
 }

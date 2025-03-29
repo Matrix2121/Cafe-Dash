@@ -39,7 +39,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public OrderDTO getOrderById(@PathVariable Long id) throws NotFoundException, BadRequestException {
+    public OrderDTO getOrderById(@PathVariable("id") Long id) throws NotFoundException, BadRequestException {
         return orderService.getOrderById(id);
     }
     
@@ -53,5 +53,11 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO updateOrder(@PathVariable Long id, @RequestBody OrderDTO orderDTO) throws NotFoundException, BadRequestException {
         return orderService.updateOrder(id, orderDTO);
+    }
+    
+    @GetMapping("/user/{userId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<OrderDTO> getOrdersByUserId(@PathVariable("userId") Long id) throws NotFoundException, BadRequestException {
+        return orderService.getOrdersByUserId(id);
     }
 }
