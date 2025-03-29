@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Image, ImageSourcePropType, Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
-import styles from "./cafeCard.style";
+import styles from "./CafeCard.style";
 import { Cafe } from "@/app/types/items";
 
 interface CafeCardProps {
@@ -21,7 +21,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
   return (
     <Pressable
       style={styles.cardStyle}
-      onPress={() => navigation.navigate("cafemenu", { cafe })}
+      onPress={() => navigation.navigate("cafedetail", { cafe })}
     >
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>

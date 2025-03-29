@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: theme.radii.sm,
     elevation: theme.elevation.md,
-    width: '100%',
-    maxWidth: 400,
+    width: "auto",
   },
   image: {
     width: '100%',
@@ -38,6 +37,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1,
+  },
+  addButtonIcon: {
+    height: 60,
+    width: 60,
   },
   addButtonText: {
     color: theme.colors.surface,

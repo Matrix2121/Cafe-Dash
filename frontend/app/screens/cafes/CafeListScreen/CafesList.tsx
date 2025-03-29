@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import CafeCard from "@/app/components/cafeCard/cafeCard";
+import CafeCard from "@/app/components/cafeCard/CafeCard";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import useCafes from "../../../hooks/useCafes";
 import { Cafe } from "@/app/types/items";
