@@ -64,6 +64,7 @@ export type UserUpdate = {
 export type Role = {
   id: number;
   roleName: string;
+  authority: string; // jwt stores the role names as authority
 }
 
 export type Review = {

@@ -42,7 +42,6 @@ public class UserMapper {
                 reviewDTOS.add(ReviewMapper.mapToDTO(review));
             }
         }
-        System.out.println("UserDTO ID: " + userEntity.getId());
 
         return new UserDTO(
                 userEntity.getId(),
@@ -60,8 +59,8 @@ public class UserMapper {
         }
 
         Set<RoleEntity> roleEntities = new HashSet<>();
-        if(userDTO.role() != null) {
-        	for (RoleDTO role : userDTO.role()) {
+        if(userDTO.roles() != null) {
+        	for (RoleDTO role : userDTO.roles()) {
                 roleEntities.add(RoleMapper.mapToEntity(role));
             }
         }

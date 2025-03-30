@@ -17,6 +17,7 @@ import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import CreateUser from '../screens/users/CreateUser';
 import Test from '../screens/test/Test'
 import ContactUs from "../screens/contact/ContactUs";
+import UsersList from '../screens/users/UsersList';
 
 export type RootStackParamList = {
     login: undefined;
@@ -34,6 +35,7 @@ export type RootStackParamList = {
     test: undefined;
     createuser: undefined;
     contact: undefined;
+    userslist: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -56,6 +58,7 @@ const Navigation = () => {
             <Stack.Screen name="test" component={Test} />
             <Stack.Screen name="createuser" component={CreateUser} />
             <Stack.Screen name="contact" component={ContactUs} />
+            <Stack.Screen name="userslist" component={UsersList} />
         </Stack.Navigator>
     );
 };
