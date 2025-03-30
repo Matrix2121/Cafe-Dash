@@ -2,6 +2,8 @@ package com.cafe.backend.dto;
 
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * @author AngelStoynov
  */
@@ -14,6 +16,6 @@ public record CafeteriaDTO(
         int countReview, // 0 required for creation
         String phoneNumber, // required for creation
         String imageUrl,
-        LocalTime openingHour,
-        LocalTime closingHour
+        @JsonFormat(pattern = "H:mm") LocalTime openingHour,
+        @JsonFormat(pattern = "H:mm") LocalTime closingHour
 ) { }
