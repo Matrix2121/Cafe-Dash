@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: theme.spacing.xl * 2, // 50px equivalent
+    paddingTop: theme.spacing.xl * 2,
   },
   logo: {
     width: theme.components.login.logoSize,
@@ -32,17 +32,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.components.login.overlay,
     width: theme.components.login.containerWidth,
-    height: 440, // Could add to theme.components.register if needed
+    height: 440, 
     borderRadius: theme.components.login.borderRadius,
     margin: theme.spacing.none,
   },
   title: {
-    fontSize: theme.fontSizes.header + 4, // 28px
+    fontSize: theme.fontSizes.header + 4, 
     fontWeight: 'bold',
     marginBottom: theme.spacing.lg,
     color: theme.colors.surface,
     borderBottomColor: theme.colors.secondary,
-    borderBottomWidth: theme.spacing.xs / 1.5, // 3px
+    borderBottomWidth: theme.spacing.xs / 1.5,
     padding: theme.spacing.sm,
   },
   input: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     marginHorizontal: theme.spacing.xl,
     backgroundColor: theme.colors.secondary,
     borderColor: theme.colors.primary,
-    color: theme.colors.textPrimary, // Added to theme.colors
+    color: theme.colors.textPrimary,
   },
   registerButton: {
     width: theme.components.login.buttonWidth,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: theme.spacing.sm,
     width: theme.components.login.buttonWidth,
     borderColor: theme.colors.primary,
-    borderWidth: theme.spacing.xs / 2, // 2px
+    borderWidth: theme.spacing.xs / 2,
     backgroundColor: theme.colors.secondary,
   },
   highlight: {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   errorText: {
-    color: theme.colors.primary,
+    color: theme.colors.textValidationError,
     marginBottom: theme.spacing.sm,
   },
 });

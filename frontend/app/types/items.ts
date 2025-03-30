@@ -12,6 +12,23 @@ export type Cafeteria = {
   isDeleted: boolean;
 }
 
+export type CreateCafeteriaDTO = {
+  name: string;
+  brand: string;
+  location: string;
+  phoneNumber: string;
+  imageUrl: string;
+  openingHour: string;
+  closingHour: string;
+};
+
+export type CreateUserDTO = {
+  username: string;
+  email: string;
+  passwordHash: string;
+  roleNames: string[];
+}
+
 export type Order = {
   id?: number;
   discount?: number;

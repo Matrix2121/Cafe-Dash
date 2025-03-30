@@ -45,7 +45,6 @@ export default StyleSheet.create({
         backgroundColor: theme.colors.primary,
     },
     errorText: {
-        color: theme.colors.primary,
-        marginBottom: theme.spacing.sm,
+        color: theme.colors.textValidationError
     },
 });
