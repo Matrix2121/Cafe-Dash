@@ -19,7 +19,7 @@ interface NewUser {
   roleNames: string[];
 }
 
-const CreateUser: React.FC = () => {
+const CreateUser = () => {
   const { user } = useAuth();
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -43,9 +43,9 @@ const CreateUser: React.FC = () => {
     setError('');
 
     let roleNames: string[] = [];
-    if (user && user.roles.some(r => r.authority === 'admin')) {
+    if (user && user.roles.some(r => r.roleName === 'admin')) {
       roleNames = selectedRoles;
-    } else if (user && user.roles.some(r => r.authority === 'owner')) {
+    } else if (user && user.roles.some(r => r.roleName === 'owner')) {
       roleNames = ['employee'];
     }
     const passwordHash = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);

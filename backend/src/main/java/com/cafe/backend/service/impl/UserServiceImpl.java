@@ -1,19 +1,30 @@
 package com.cafe.backend.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.cafe.backend.dto.*;
-import com.cafe.backend.entity.mapper.*;
-import com.cafe.backend.entity.review.ReviewEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cafe.backend.dto.JWTUserDTO;
+import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.dto.RegisterUserDTO;
+import com.cafe.backend.dto.ReviewDTO;
+import com.cafe.backend.dto.RoleDTO;
+import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
+import com.cafe.backend.entity.mapper.JWTUserMapper;
+import com.cafe.backend.entity.mapper.OrderMapper;
+import com.cafe.backend.entity.mapper.RegisterUserMapper;
+import com.cafe.backend.entity.mapper.ReviewMapper;
+import com.cafe.backend.entity.mapper.RoleMapper;
+import com.cafe.backend.entity.mapper.UserMapper;
 import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
@@ -77,6 +88,19 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         return UserMapper.mapToDTO(user);
     }
+    
+    @Override
+    public List<UserDTO> getAllUsers() throws BadRequestException, NotFoundException{
+    	List<UserEntity> userEntities = userRepository.findAllByIsDeletedFalse();
+    	if(userEntities.isEmpty()) {
+    		throw new ResourceNotFoundException("No users found");
+    	}
+    	List<UserDTO> userDTOs = new ArrayList<>();
+    	for(UserEntity entity : userEntities) {
+    		userDTOs.add(UserMapper.mapToDTO(entity));
+    	}
+    	return userDTOs;
+    }
 
     private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
         Set<RoleEntity> roleEntities = new HashSet<>();
@@ -88,12 +112,10 @@ public class UserServiceImpl implements UserService {
             }
         }
         UserEntity user = RegisterUserMapper.mapToEntity(registerUserDTO);
-        System.out.println("UserServiceImpl ID: " + user.getId());
         user.setRoles(roleEntities);
         user.setDeleted(false);
         user.setOrders(null);
         user = userRepository.save(user);
-        System.out.println("UserServiceImpl ID (after save): " + user.getId());
         return user;
     }
 
@@ -107,7 +129,7 @@ public class UserServiceImpl implements UserService {
             user.setEmail(newUserDTO.email());
         }
 
-        if (newUserDTO.role() != null) {
+        if (newUserDTO.roles() != null) {
             Set<RoleEntity> roleEntities = getRoleEntities(newUserDTO);
             user.setRoles(roleEntities);
         }
@@ -127,7 +149,7 @@ public class UserServiceImpl implements UserService {
 
     private Set<RoleEntity> getRoleEntities(UserDTO userDTO) throws DataMappingException {
         Set<RoleEntity> roleEntities = new HashSet<>();
-        for (RoleDTO role : userDTO.role()) {
+        for (RoleDTO role : userDTO.roles()) {
             roleEntities.add(RoleMapper.mapToEntity(role));
         }
         return roleEntities;
