@@ -11,6 +11,7 @@ export const theme = {
         shadow: '#000',
         transparent: 'transparent',
         textTertiary: '#555555',
+        textValidationError: '#E3525E'
     },
     spacing: {
         none: 0,

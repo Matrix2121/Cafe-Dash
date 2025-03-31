@@ -1,8 +1,7 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Cafe } from '../types/items';
-
+import { Cafeteria } from '../types/items';
 import Login from '../screens/auth/LoginScreen/Login';
 import Register from '../screens/auth/RegisterScreen/Register';
 import Home from '../screens/home/Home';
@@ -18,23 +17,25 @@ import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import CreateUser from '../screens/users/CreateUser';
 import Test from '../screens/test/Test'
 import ContactUs from "../screens/contact/ContactUs";
+import UsersList from '../screens/users/UsersList';
 
 export type RootStackParamList = {
     login: undefined;
     register: undefined;
     home: undefined;
-    profile: undefined;
+    profile: {userId: number};
     orders: undefined;
     cafeslist: undefined;
-    cafedetail: { cafe: Cafe };
-    cafemenu: { cafe: Cafe };
-    cafereviews: { cafe: Cafe };
-    leavereview: { cafe: Cafe; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
+    cafedetail: { cafe: Cafeteria };
+    cafemenu: { cafe: Cafeteria };
+    cafereviews: { cafe: Cafeteria };
+    leavereview: { cafe: Cafeteria; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
     createcafeteria: undefined;
     cart: undefined;
     test: undefined;
     createuser: undefined;
     contact: undefined;
+    userslist: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -57,6 +58,7 @@ const Navigation = () => {
             <Stack.Screen name="test" component={Test} />
             <Stack.Screen name="createuser" component={CreateUser} />
             <Stack.Screen name="contact" component={ContactUs} />
+            <Stack.Screen name="userslist" component={UsersList} />
         </Stack.Navigator>
     );
 };

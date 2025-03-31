@@ -36,9 +36,11 @@ const useUser = (id?: number) => {
 
     useEffect(() => {
         if (id != null) {
-            fetchUserById(id);
+          fetchUserById(id);
+        } else {
+          fetchAllUsers();
         }
-    }, [id]);
+      }, [id]);
 
     const updateUser = async (updatedUser: UserUpdate, id: number) => {
          await customAPI.put(`api/users/${id}`, updatedUser)

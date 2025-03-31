@@ -2,7 +2,6 @@ import React, { useState, useCallback } from 'react';
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-
 import { Text, FlatList, View } from 'react-native';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import useReviews from '@/app/hooks/useReviews';

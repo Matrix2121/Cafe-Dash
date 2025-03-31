@@ -64,8 +64,8 @@ public class UserAccountMapper {
         }
 
         Set<RoleEntity> roleEntities = new HashSet<>();
-        if(userDTO.role() != null) {
-        	for (RoleDTO role : userDTO.role()) {
+        if(userDTO.roles() != null) {
+        	for (RoleDTO role : userDTO.roles()) {
                 roleEntities.add(RoleMapper.mapToEntity(role));
             }
         }

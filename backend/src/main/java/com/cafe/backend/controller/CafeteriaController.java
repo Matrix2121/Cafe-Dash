@@ -42,7 +42,7 @@ public class CafeteriaController {
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     public CafeteriaDTO getCafeteriaById(@PathVariable("id") Long id) throws BadRequestException, NotFoundException {
-        // checkUserHasRole("admin");
+    	// SecurityRoleHelper.checkUserHasAnyRole("admin");
         return cafeteriaService.getCafeteriaById(id);
     }
 
@@ -57,20 +57,5 @@ public class CafeteriaController {
     public CafeteriaDTO updateCafeteria(@PathVariable("id") Long id, @RequestBody CafeteriaDTO updatedCafeteriaDTO)
             throws NotFoundException, BadRequestException {
         return cafeteriaService.updateCafeteria(id, updatedCafeteriaDTO);
-    }
-
-    @GetMapping("/{cafeteriaId}/products")
-    @ResponseStatus(value = HttpStatus.OK)
-    public List<ProductDTO> getAllProductsForCafeteriaId(@PathVariable("cafeteriaId") Long id)
-            throws BadRequestException, NotFoundException {
-        return cafeteriaService.getAllProductsForCafeteriaId(id);
-    }
-
-    public void checkUserHasRole(String wantedRole) throws AuthenticationCustomException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication == null ||
-                authentication.getAuthorities().stream().noneMatch(a -> a.getAuthority().equals(wantedRole))) {
-            throw new AuthenticationCustomException("User does not have the required guest role.");
-        }
     }
 }

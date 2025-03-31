@@ -1,31 +1,28 @@
 import styles from "@/app/screens/profile/Profile.style";
-import { Image, ImageBackground, Modal, Pressable, Text, View } from "react-native";
-import React, { useState } from "react";
-import { RootStackParamList } from "@/app/navigation/Navigation";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-
+import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {RootStackParamList} from "@/app/navigation/Navigation";
+import {RouteProp, useFocusEffect, useNavigation} from "@react-navigation/native";
+import {StackNavigationProp} from "@react-navigation/stack";
 import profileImage from "../../assets/images/profileScreen/profile.png";
 import editImage from "../../assets/images/profileScreen/edit.png";
 import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
 import orders from "../../assets/images/profileScreen/orders.png";
-import { TextInput } from "react-native-paper";
+import {TextInput} from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
 import useUser from "@/app/hooks/useUser";
-import { useAuth } from "@/app/context/AuthContext";
 
-const Profile = () => {
+type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
+
+interface IProps {
+    route: ProfileScreenRouteProp;
+}
+
+const Profile = ({route}: IProps) => {
+
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
-    const { user : authUser } = useAuth();
-    let userId = authUser?.id;
-
-    const { user, updateUser } = useUser(userId ? Number(userId) : userId = undefined);
-
-    if(userId === undefined){
-        navigation.navigate("login");
-    }
-
+    const {userId} = route.params;
+    const {user, updateUser} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -40,6 +37,7 @@ const Profile = () => {
             username: username || user.username,
             email: email || user.email,
         };
+
         updateUser(updatedUser, user.id);
         setEditUsername(false);
         setEditEmail(false);
@@ -78,7 +76,6 @@ const Profile = () => {
                         <Text style={styles.orderTextLogo}>Profile details</Text>
                     </Pressable>
                 </View>
-
 
                 <Modal
                     visible={modalVisible}
@@ -144,12 +141,9 @@ const Profile = () => {
                         </View>
                     </ImageBackground>
                 </Modal>
-
-
-
             </View>
             <View style={styles.orderContainer}>
-                <Pressable 
+                <Pressable
                     style={styles.rowContainer}
                     onPress={() => navigation.navigate("orders")}
                 >

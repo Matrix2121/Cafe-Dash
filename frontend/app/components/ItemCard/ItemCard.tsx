@@ -25,7 +25,7 @@ const ItemCard = ({product}: ItemCardProps) => {
                 <Image style={styles.addButtonIcon} source={require('@/app/assets/images/coffe-plus.svg')} />
             </TouchableOpacity>
             <Image
-                source={product.imageUrl as ImageSourcePropType}
+                source={{uri: product.imageUrl}}
                 style={styles.image}
                 defaultSource={require('@/app/assets/images/logo.png')}
             />

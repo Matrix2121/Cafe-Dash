@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: theme.spacing.md,
     },
+    goBackButton: {
+        marginTop: theme.spacing.xl,
+        width: theme.components.login.buttonWidth,
+        backgroundColor: theme.colors.primary,
+    }
 });
 
 export default styles;
