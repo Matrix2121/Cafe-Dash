@@ -25,8 +25,7 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
     >
       <Card style={styles.card}>
         <Card.Content style={styles.cardContent}>
-          <Image
-            source={cafe.imageUrl as ImageSourcePropType}
+          <Image source={{ uri: cafe.imageUrl }}
             style={styles.image}
             defaultSource={require('@/app/assets/images/logo.png')}
           />

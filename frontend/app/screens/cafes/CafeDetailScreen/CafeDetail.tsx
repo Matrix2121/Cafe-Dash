@@ -37,7 +37,7 @@ const CafeDetail = ({route}: CafeDetailProps) => {
                         </Pressable>
                     </View>
                     <Image
-                        source={cafe.imageUrl as ImageSourcePropType}
+                        source={{uri: cafe.imageUrl}}
                         style={styles.headerImage}
                         resizeMode="cover"
                         defaultSource={require('@/app/assets/images/logo.png')}
