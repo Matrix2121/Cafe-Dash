@@ -1,21 +1,30 @@
 import styles from "@/app/screens/profile/Profile.style";
-import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
-import React, {useEffect, useState} from "react";
+import { Image, ImageBackground, Modal, Pressable, Text, View } from "react-native";
+import React, { useState } from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
-import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import profileImage from "../../assets/images/profileScreen/profile.png";
 import editImage from "../../assets/images/profileScreen/edit.png";
 import profileBackground from "../../assets/images/profileScreen/profileBackground.jpg";
 import orders from "../../assets/images/profileScreen/orders.png";
-import {TextInput} from "react-native-paper";
+import { TextInput } from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
+import useUser from "@/app/hooks/useUser";
 import { useAuth } from "@/app/context/AuthContext";
 
 const Profile = () => {
-    const { user } = useAuth();
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+    const { user : authUser } = useAuth();
+    let userId = authUser?.id;
+
+    const { user, updateUser } = useUser(userId ? Number(userId) : userId = undefined);
+
+    if(userId === undefined){
+        navigation.navigate("login");
+    }
 
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
@@ -29,9 +38,9 @@ const Profile = () => {
         const updatedUser = {
             id: user.id,
             username: username || user.username,
-            // email: email || user.email,
+            email: email || user.email,
         };
-        // updateUser(updatedUser, userId);
+        updateUser(updatedUser, user.id);
         setEditUsername(false);
         setEditEmail(false);
         setModalVisible(false);
@@ -61,7 +70,7 @@ const Profile = () => {
                     <Text style={styles.letterInsideTheLogo}>{user?.username.charAt(0).toUpperCase()}</Text>
                 </Pressable>
                 <Text style={styles.profileTextLogo}>{user?.username}</Text>
-                {/* <Text style={styles.secondaryText}>{user?.email}</Text> */}
+                <Text style={styles.secondaryText}>{user?.email}</Text>
 
                 <View style={styles.orderContainer}>
                     <Pressable style={styles.rowContainer} onPress={openModal}>
@@ -107,7 +116,7 @@ const Profile = () => {
                                         <View style={styles.editContainer}>
                                             {editEmail ? (
                                                 <TextInput
-                                                    // label={user?.email}
+                                                    label={user?.email}
                                                     value={email}
                                                     onChangeText={setEmail}
                                                     style={styles.input}
@@ -115,8 +124,7 @@ const Profile = () => {
                                                     editable={editEmail}
                                                 />
                                             ) : (
-                                                // <Text style={styles.editInput}>Email: {user?.email}</Text>
-                                                <Text style={styles.editInput}>Email: {user?.username}</Text>
+                                                <Text style={styles.editInput}>Email: {user?.email}</Text>
                                             )}
                                             <Pressable onPress={toggleEmailEdit} style={styles.editButton}>
                                                 <Image source={editImage} style={styles.editLogo}/>

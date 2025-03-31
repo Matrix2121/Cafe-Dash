@@ -8,6 +8,7 @@ const useUser = (id?: number) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
+    //tova ako nqma da trqbva trqbva da se mahne
     const fetchAllUsers = async () => {
         await customAPI.get(`api/users`)
             .then((response) => {

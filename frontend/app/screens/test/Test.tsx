@@ -7,7 +7,6 @@ import styles from './Test.style';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Text} from 'react-native';
 import HasRoles from '@/app/utilComponents/HasRoles';
-import {Cafe} from '@/app/types/items';
 import {useAuth} from "@/app/context/AuthContext";
 
 const Test = () => {
@@ -27,22 +26,8 @@ const Test = () => {
             console.warn('No user with this name available');
             return;
         }
-        navigateToScreen("profile", {userId: user.id});
+        navigateToScreen("profile");
     }
-
-    const cafe: Cafe = {
-        id: 1,
-        name: "Morning Brew",
-        brand: "Blue Bottle",
-        location: "456 Market St, San Francisco",
-        rating: 4.5,
-        countReview: 128,
-        phoneNumber: "+1 (415) 555-0192",
-        imageUrl: "https://iili.io/3ugVhbI.jpg",
-        openingHour: "08:00:00",
-        closingHour: "20:00:00",
-        isDeleted: false
-    };
 
     return (
         <ScrollView contentContainerStyle={styles.container}>

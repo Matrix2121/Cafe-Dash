@@ -29,7 +29,7 @@ const CafeDetail = ({route}: CafeDetailProps) => {
                 <View>
                     <View style={styles.returnContainer}>
                         <Text style={styles.title}>{cafe.name}:</Text>
-                        <Pressable onPress={() => navigation.navigate("test")}>
+                        <Pressable onPress={() => navigation.navigate("home")}>
                             <Image
                                 style={styles.testButton}
                                 source={require('@/app/assets/images/navigation.png')}

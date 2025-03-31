@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     },
 
     letterInsideTheLogo: {
-        fontSize: 18,
+        fontSize: 36,
         color: "#fff",
     },
 
