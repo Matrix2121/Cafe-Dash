@@ -3,7 +3,7 @@ import {RootStackParamList} from "@/app/navigation/Navigation";
 import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 
-import {View, Image, Text, Pressable, ImageSourcePropType} from 'react-native';
+import {View, Image, Text, Pressable} from 'react-native';
 import {Button} from 'react-native-paper';
 import {useAuth} from '@/app/context/AuthContext';
 import styles from './Header.style';
@@ -20,14 +20,15 @@ const Header = () => {
 
     return (
         <View style={styles.header}>
-            <View style={styles.userInfo}>
-                <Image
-                    style={styles.image}
-                    defaultSource={require('@/app/assets/images/logo.png')}
-                />
-                {user && <Text style={styles.username}>Hi, {user.username}</Text>}
-            </View>
-
+            <Pressable onPress={() => navigation.navigate("profile")}>
+                <View style={styles.userInfo}>
+                    <Image
+                        style={styles.image}
+                        defaultSource={require('@/app/assets/images/logo.png')}
+                    />
+                    {user && <Text style={styles.username}>Hi, {user.username}</Text>}
+                </View>
+            </Pressable>
             <View style={styles.logoutContainer}>
                 <Button
                     onPress={handleLogout}

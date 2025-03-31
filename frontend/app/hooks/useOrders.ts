@@ -33,7 +33,6 @@ const useOrders = (userId?: number) => {
 
     useEffect(() => {
         if (userId === undefined) {
-            Alert.alert("Error", "Invalid user id");
             setLoading(false);
             return;
         }

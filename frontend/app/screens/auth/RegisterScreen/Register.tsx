@@ -55,7 +55,7 @@ const Register = () => {
     setLoading(true);
     try {
       await register(username, email, password);
-      navigation.navigate("cafeslist");
+      navigation.navigate("home");
     } catch (err: any) {
       setApiError(err.message);
     } finally {

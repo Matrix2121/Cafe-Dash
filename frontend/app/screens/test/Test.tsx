@@ -26,7 +26,7 @@ const Test = () => {
             console.warn('No user with this name available');
             return;
         }
-        navigateToScreen("profile", {userId: user.id});
+        navigateToScreen("profile");
     }
 
     return (
