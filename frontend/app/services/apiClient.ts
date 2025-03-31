@@ -5,7 +5,7 @@ import Constants from 'expo-constants';
 
 const apiUrl = Constants.expoConfig?.extra?.apiUrl;
 const customAPI = axios.create({
-    baseURL:  'http://localhost:8080'
+    baseURL:  apiUrl
 });
 
 // Add request interceptor to inject JWT token
