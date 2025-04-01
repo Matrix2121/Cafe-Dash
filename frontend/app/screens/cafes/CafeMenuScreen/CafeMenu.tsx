@@ -1,115 +1,66 @@
-import React, {useEffect} from "react";
-import {RootStackParamList} from "@/app/navigation/Navigation";
-import {RouteProp, useNavigation, CommonActions} from "@react-navigation/native";
-import {StackNavigationProp} from "@react-navigation/stack";
+import React, { useEffect } from "react";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { RouteProp } from "@react-navigation/native";
 
-import {FlatList, SectionList, View, Text, TouchableOpacity} from "react-native";
-import ItemCard from "../../../components/ItemCard/ItemCard";
+import { View } from "react-native";
 import useProducts from "@/app/hooks/useProducts";
 import styles from "./CafeMenu.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
-import {useCart} from "@/app/context/CartContext";
+import { useCart } from "@/app/context/CartContext";
+import CurrentCafeCartButton from "@/app/components/viewCafeButton/currentCafeCartButton/CurrentCafeCartButton";
+import DifferentCafeCartButton from "@/app/components/viewCafeButton/differentCafeCartButton/DifferentCafeCartButton";
+import MenuHeader from "@/app/components/menuHeader/MenuHeader";
+import ItemsList from "@/app/components/itemsList/ItemsList";
 
 type CafeMenuRouteProp = RouteProp<RootStackParamList, "cafemenu">;
 
 interface CafeMenuProps {
-    route: CafeMenuRouteProp;
+  route: CafeMenuRouteProp;
 }
 
-const CafeMenu = ({route}: CafeMenuProps) => {
-    const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-    const {cafe} = route.params;
+const CafeMenu = ({ route }: CafeMenuProps) => {
+  const { cafe } = route.params;
+  const { products, fetchAllProductByCafeteriaId, loading, error } = useProducts();
+  const { productsCount, currentCafeteria, totalPrice } = useCart();
 
-    const {products, fetchAllProductByCafeteriaId, loading, error} = useProducts();
-    const {productsCount, totalPrice} = useCart();
+  const isDifferentCafeteria = currentCafeteria && currentCafeteria.id !== cafe.id;
 
-    useEffect(() => {
-        fetchAllProductByCafeteriaId(cafe.id);
-    }, [cafe.id]);
+  useEffect(() => {
+    fetchAllProductByCafeteriaId(cafe.id);
+  }, [cafe.id]);
 
-    const hasData = Array.isArray(products) && products.length > 0;
+  const hasData = Array.isArray(products) && products.length > 0;
 
-    const sections = [
-        {
-            title: "Drinks",
-            data: Array.isArray(products) ? products.filter((item) => item.productType === "DRINKS") : [],
-        },
-        {
-            title: "Promotion",
-            data: Array.isArray(products) ? products.filter((item) => item.productType === "PROMO") : [],
-        },
-        {
-            title: "Eating",
-            data: Array.isArray(products) ? products.filter((item) => item.productType === "Eating") : [],
-        },
-    ];
+  return (
+    <View style={styles.container}>
+      <MenuHeader cafe={cafe} />
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.headerContainer}>
-                <Text style={styles.title}>Menu</Text>
-                <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafereviews', {cafe})}>
-                    <Text style={styles.detailsButtonText}>Reviews</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.detailsButton} onPress={() => navigation.navigate('cafedetail', {cafe})}>
-                    <Text style={styles.detailsButtonText}>Details</Text>
-                </TouchableOpacity>
-            </View>
+      {loading || error || !hasData ? (
+        <LoadingErrorView
+          loading={loading}
+          error={error}
+          dataAvailable={hasData}
+        />
+      ) : (
+        <ItemsList products={products} />
+      )}
 
-            {(loading || error || !hasData) ? (
-                <LoadingErrorView
-                    loading={loading}
-                    error={error}
-                    dataAvailable={hasData}
-                />
-            ) : (
-                <SectionList
-                    sections={sections}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderSectionHeader={({section: {title}}) => (
-                        <Text style={styles.sectionHeader}>{title}</Text>
-                    )}
-                    renderItem={({}) => null}
-                    renderSectionFooter={({section}) => (
-                        <FlatList
-                            data={section.data}
-                            keyExtractor={(item) => item.id.toString()}
-                            numColumns={2}
-                            renderItem={({item}) => (
-                                <View style={styles.itemContainer}>
-                                    <ItemCard product={item}/>
-                                </View>
-                            )}
-                            contentContainerStyle={styles.itemList}
-                        />
-                    )}
-                />
-            )}
-            {productsCount > 0 && (
-                <TouchableOpacity
-                    style={styles.cartButton}
-                    onPress={() => {
-                        navigation.dispatch(
-                            CommonActions.reset({
-                                index: 0,
-                                routes: [
-                                    {
-                                        name: 'home',
-                                        params: {
-                                            screen: 'cart'
-                                        }
-                                    }
-                                ],
-                            })
-                        );
-                    }}
-                >
-                    <Text style={styles.cartButtonText}>View Cart</Text>
-                    <Text style={styles.cartTotalText}>${totalPrice.toFixed(2)}</Text>
-                </TouchableOpacity>
-            )}
-        </View>
-    );
+      {isDifferentCafeteria && productsCount > 0 && (
+        <DifferentCafeCartButton
+          currentCafeteriaName={currentCafeteria.name}
+          totalPrice={totalPrice}
+          productsCount={productsCount}
+        />
+      )}
+
+      {!isDifferentCafeteria && productsCount > 0 && (
+        <CurrentCafeCartButton
+          totalPrice={totalPrice}
+          productsCount={productsCount}
+        />
+      )}
+    </View>
+  );
 };
 
 export default CafeMenu;

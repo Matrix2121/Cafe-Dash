@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: theme.radii.sm,
     elevation: theme.elevation.md,
-    width: 'auto'
+    width: '100%'
   },
   image: {
     width: '100%',
