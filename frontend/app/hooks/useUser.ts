@@ -8,7 +8,6 @@ const useUser = (id?: number) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    //tova ako nqma da trqbva trqbva da se mahne
     const fetchAllUsers = async () => {
         await customAPI.get(`api/users`)
             .then((response) => {
@@ -37,8 +36,6 @@ const useUser = (id?: number) => {
     useEffect(() => {
         if (id != null) {
           fetchUserById(id);
-        } else {
-          fetchAllUsers();
         }
       }, [id]);
 
@@ -52,7 +49,7 @@ const useUser = (id?: number) => {
             })
     }
 
-    return {users, user, updateUser, loading, error};
+    return {users, user, updateUser, fetchAllUsers, loading, error};
 };
 
 export default useUser;
