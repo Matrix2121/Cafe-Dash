@@ -22,7 +22,7 @@ const Profile = ({route}: IProps) => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const {userId} = route.params;
-    const {user, updateUser} = useUser(userId);
+    const {user, users, updateUser} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -151,6 +151,17 @@ const Profile = ({route}: IProps) => {
                     <Text style={styles.orderTextLogo}>Previous Orders</Text>
                 </Pressable>
             </View>
+            {user?.roles.some(role => role.roleName === 'admin') && (
+                <View style={styles.orderContainer}>
+                    <Pressable
+                        style={styles.rowContainer}
+                        onPress={() => navigation.navigate("orders")}
+                    >
+                        <Image source={orders} style={styles.logo}/>
+                        <Text style={styles.orderTextLogo}>Previous Orders</Text>
+                    </Pressable>
+                </View>
+            )}
         </View>
     )
 }
