@@ -11,6 +11,9 @@ import orders from "../../assets/images/profileScreen/orders.png";
 import {TextInput} from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
 import useUser from "@/app/hooks/useUser";
+import {SvgUri} from "react-native-svg";
+import { List } from 'react-native-paper';
+
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
 
@@ -22,10 +25,11 @@ const Profile = ({route}: IProps) => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const {userId} = route.params;
-    const {user, users, updateUser} = useUser(userId);
+    const {user, users, fetchAllUsers, updateUser, loading, error} = useUser(userId);
     const [modalVisible, setModalVisible] = useState(false);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [expanded, setExpanded] = useState(false);
 
     const handleSubmit = () => {
         if (!user || !user.id) {
@@ -42,6 +46,16 @@ const Profile = ({route}: IProps) => {
         setEditUsername(false);
         setEditEmail(false);
         setModalVisible(false);
+    };
+
+    const handlePress = () => {
+        setExpanded(prev => {
+            const next = !prev;
+            if (next && users.length === 0) {
+                fetchAllUsers();
+            }
+            return next;
+        });
     };
 
     const openModal = () => {
@@ -69,7 +83,7 @@ const Profile = ({route}: IProps) => {
                 </Pressable>
                 <Text style={styles.profileTextLogo}>{user?.username}</Text>
                 <Text style={styles.secondaryText}>{user?.email}</Text>
-
+                
                 <View style={styles.orderContainer}>
                     <Pressable style={styles.rowContainer} onPress={openModal}>
                         <Image source={profileImage} style={styles.logo}/>
@@ -152,14 +166,33 @@ const Profile = ({route}: IProps) => {
                 </Pressable>
             </View>
             {user?.roles.some(role => role.roleName === 'admin') && (
-                <View style={styles.orderContainer}>
-                    <Pressable
-                        style={styles.rowContainer}
-                        onPress={() => navigation.navigate("orders")}
-                    >
-                        <Image source={orders} style={styles.logo}/>
-                        <Text style={styles.orderTextLogo}>Previous Orders</Text>
-                    </Pressable>
+                <View style={styles.accordion}>
+                    <List.Section>
+                        <List.Accordion
+                            title="All Users"
+                            expanded={expanded}
+                            onPress={handlePress}
+                            left={props => <List.Icon {...props} icon="account-group" />}
+                        >
+                            {loading && <Text style={styles.loading}>Loading users...</Text>}
+                            {error && <Text style={styles.error}>Error: {error}</Text>}
+                            {!loading && users.map((user) => (
+                                <Pressable onPress={() => navigation.navigate('profile', {userId: user.id})}>
+                                    <List.Item
+                                        key={user.id}
+                                        title={user.username}
+                                        description={() => (
+                                            <View>
+                                                <Text>Email: {user.email}</Text>
+                                                <Text>Roles: {user.roles.map(role => role.roleName).join(', ')}</Text>
+                                            </View>
+                                        )}
+                                        left={() => <List.Icon icon="account" />}
+                                    />
+                                </Pressable>
+                            ))}
+                        </List.Accordion>
+                    </List.Section>
                 </View>
             )}
         </View>

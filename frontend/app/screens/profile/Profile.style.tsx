@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-end",
         alignItems: "center",
-        paddingTop: 40
+        paddingTop: 40,
     },
 
     profileTextLogo: {
@@ -208,6 +208,43 @@ const styles = StyleSheet.create({
         textAlign: "left",
         flex: 1
     },
+
+    accordionContent: {
+        paddingLeft: 10,
+        paddingTop: 10,
+    },
+
+    userRow: {
+        marginBottom: 8,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ccc',
+        paddingVertical: 6,
+    },
+
+    username: {
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+
+    email: {
+        fontSize: 14,
+        color: 'gray',
+    },
+
+    loading: {
+        padding: 10,
+        fontStyle: 'italic'
+    },
+
+    error: {
+        padding: 10,
+        color: 'red'
+    },
+
+    accordion: {
+        justifyContent: "center",
+        alignItems: "center",
+    }
 })
 
 export default styles
