@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   cardWrapper: {
-    width: "48%",
+    width: "100%",
     marginBottom: theme.spacing.md,
   },
   loadingErrorContainer: {
