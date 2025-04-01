@@ -21,12 +21,13 @@ const Test = () => {
         navigation.navigate(screen, params as any);
     };
 
+
     const navigateToProfile = () => {
         if (!user?.id) {
             console.warn('No user with this name available');
             return;
         }
-        navigateToScreen("profile");
+        navigateToScreen("profile", {userId: user.id});
     }
 
     return (
