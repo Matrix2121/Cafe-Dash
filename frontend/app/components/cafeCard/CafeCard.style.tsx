@@ -9,10 +9,16 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.background,
     borderRadius: theme.radii.md,
-    height: 460,
-    overflow: 'hidden',
+    height: 330,
+    overflow: "hidden",
   },
-  cardContent: {
+  image: {
+    width: "100%",
+    height: 180,
+    resizeMode: "cover",
+  },
+  contentContainer: {
+    height: 150,
     padding: theme.spacing.md,
   },
   titleStyle: {
@@ -21,39 +27,26 @@ const styles = StyleSheet.create({
     color: theme.colors.textPrimary,
     marginBottom: theme.spacing.xs,
   },
-  ratingStyle: {
+  infoRow: {
+    justifyContent: "center",
+    marginVertical: theme.spacing.xs / 2, //2px
+  },
+  brandStyle: {
+    color: theme.colors.textPrimary,
+    fontWeight: "600",
+  },
+  timeStyle: {
     fontSize: theme.fontSizes.body,
     color: theme.colors.textSecondary,
-    marginBottom: theme.spacing.xs,
   },
   locationStyle: {
     fontSize: theme.fontSizes.body,
     color: theme.colors.textSecondary,
-    marginBottom: theme.spacing.xs,
   },
-  ratingLocationStyle: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-  },
-  image: {
-    width: '100%',
-    height: theme.sizes.imageHeight,
-    borderRadius: theme.components.cardImage.borderRadius,
-    marginBottom: theme.spacing.md,
-    backgroundColor: theme.colors.surface,
-  },
-  titleContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing.sm,
-  },
-  timeStyle: {
-    fontSize: theme.fontSizes.subheader,
+  ratingStyle: {
+    fontSize: theme.fontSizes.body,
     color: theme.colors.textSecondary,
-    marginBottom: theme.spacing.xs,
-  }
+  },
 });
 
 export default styles;

@@ -2,7 +2,7 @@ import React from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Image, ImageSourcePropType, Text, Pressable, View } from "react-native";
+import { Image, Text, Pressable, View } from "react-native";
 import { Card } from "react-native-paper";
 import styles from "./CafeCard.style";
 import { Cafeteria } from "@/app/types/items";
@@ -24,30 +24,61 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
       onPress={() => navigation.navigate("cafedetail", { cafe })}
     >
       <Card style={styles.card}>
-        <Card.Content style={styles.cardContent}>
-          <Image source={{ uri: cafe.imageUrl }}
-            style={styles.image}
-            defaultSource={require('@/app/assets/images/logo.png')}
-          />
-          <View style={styles.titleContainer}>
-            <Text style={styles.titleStyle}>{cafe.name}</Text>
+        
+        {/* Image */}
+        <Image
+          source={{ uri: cafe.imageUrl }}
+          style={styles.image}
+          defaultSource={require("@/app/assets/images/logo.png")}
+        />
+
+        {/* Content container */}
+        <View style={styles.contentContainer}>
+
+          {/* Title */}
+          <Text
+            style={styles.titleStyle}
+            ellipsizeMode="tail"
+          >
+            {cafe.name}
+          </Text>
+
+          {/* Brand */}
+          <View style={styles.infoRow}>
+            <Text
+              style={styles.brandStyle}
+              ellipsizeMode="tail"
+            >
+              {cafe.brand}
+            </Text>
+          </View>
+
+          {/* Hours */}
+          <View style={styles.infoRow}>
             {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
-              <View>
-                <Text style={styles.timeStyle}>Open Hours:</Text>
-                <Text style={styles.timeStyle}>
-                  {cafe.openingHour} - {cafe.closingHour}
-                </Text>
-              </View>
+              <Text style={styles.timeStyle}>
+                {cafe.openingHour} - {cafe.closingHour}
+              </Text>
             )}
           </View>
-          <Text style={styles.locationStyle}>{cafe.brand}</Text>
-          <Text style={styles.locationStyle}>{cafe.location}</Text>
-          <View style={styles.ratingLocationStyle}>
-            <Text style={styles.ratingStyle}>
+
+          {/* Location */}
+          <View style={styles.infoRow}>
+            <Text
+              style={styles.locationStyle}
+              ellipsizeMode="tail"
+            >
+              {cafe.location}
+            </Text>
+          </View>
+
+          {/* Rating */}
+          <View style={styles.infoRow}>
+            <Text style={styles.ratingStyle} numberOfLines={1}>
               ⭐ {cafe.rating.toFixed(1)} ({cafe.countReview} reviews)
             </Text>
           </View>
-        </Card.Content>
+        </View>
       </Card>
     </Pressable>
   );
