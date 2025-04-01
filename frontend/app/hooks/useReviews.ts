@@ -23,7 +23,7 @@ const useReviews = (cafeteriaId: number) => {
     };
 
     const postReview = async (review : Review) => {
-        await customAPI.post(`api/reviews`, review) //waits for a response from the backend
+        await customAPI.post(`api/reviews`, review)
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
             });

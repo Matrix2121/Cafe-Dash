@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
-import { Product, CartItem, Order } from "../types/items";
+import React, { createContext, useContext, useState, ReactNode, useMemo } from "react";
+import { Product, CartItem, Order, Cafeteria } from "../types/items";
 import { useAuth } from "./AuthContext";
+import useCafes from "../hooks/useCafes";
 
 type CartContextType = {
   cartItems: CartItem[];
@@ -8,6 +9,7 @@ type CartContextType = {
   updateQuantity: (productId: Product, quantity: number) => void;
   removeFromCart: (product: Product) => void;
   clearCart: () => void;
+  currentCafeteria: Cafeteria | null;
   productsCount: number;
   totalPrice: number;
   currOrder: () => Order;
@@ -20,7 +22,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const cafeteriaId = cartItems[0] ? cartItems[0]?.product.cafeteriaId : null;
+
+  const { cafe: currentCafeteria } = useCafes(cafeteriaId);
+
+  const memoizedCafeteria = useMemo(() => {
+    return currentCafeteria ?? null;
+  }, [currentCafeteria]);
+
   const addToCart = (product: Product) => {
+    if(cartItems.length > 0 && product.cafeteriaId != cartItems[0].product.cafeteriaId){
+      clearCart();
+    }
+
     setCartItems((prevCartItems) => {
       const existingProduct = prevCartItems.find(
         (cartItem) => cartItem.product.id === product.id
@@ -114,6 +128,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         clearCart,
         productsCount,
+        currentCafeteria : memoizedCafeteria,
         totalPrice,
         currOrder,
       }}
