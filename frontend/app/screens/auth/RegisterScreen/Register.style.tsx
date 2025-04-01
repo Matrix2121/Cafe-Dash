@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
     height: theme.components.login.logoSize,
     marginBottom: theme.spacing.lg,
     borderRadius: theme.components.login.borderRadius,
-    elevation: theme.elevation.lg,
-    shadowColor: theme.colors.shadow,
-    shadowOpacity: 0.5,
-    shadowRadius: theme.spacing.md,
   },
   registerContainer: {
     justifyContent: 'center',

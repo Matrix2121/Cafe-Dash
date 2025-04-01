@@ -11,16 +11,17 @@ import {MaterialIcons} from '@expo/vector-icons';
 
 const Header = () => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-
-    const handleLogout = () => {
-        logout();
-        navigation.navigate("login");
-    }
     const {user, logout} = useAuth();
+
+    const handleLogout = async () => {
+        await logout();
+        navigation.navigate("login");
+    };
+    if (!user) return null;
 
     return (
         <View style={styles.header}>
-            <Pressable onPress={() => navigation.navigate("profile")}>
+            <Pressable onPress={() => navigation.navigate("profile", { userId: user.id })}>
                 <View style={styles.userInfo}>
                     <Image
                         style={styles.image}

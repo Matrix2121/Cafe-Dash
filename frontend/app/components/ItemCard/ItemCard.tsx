@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Alert, ImageSourcePropType, Image} from 'r
 import { Product } from '../../types/items';
 import styles from './ItemCard.style';
 import { useCart } from '@/app/context/CartContext';
+import {SvgUri} from "react-native-svg";
 
 type ItemCardProps = {
     product: Product;
@@ -22,7 +23,11 @@ const ItemCard = ({product}: ItemCardProps) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity onPress={handleAddToCart} style={styles.addButton}>
-                <Image style={styles.addButtonIcon} source={require('@/app/assets/images/coffe-plus.svg')} />
+                <SvgUri
+                    width="60"
+                    height="60"
+                    uri = 'https://cafedashstorage.blob.core.windows.net/svgs/coffe-plus.svg'
+                    />
             </TouchableOpacity>
             <Image
                 source={{uri: product.imageUrl}}

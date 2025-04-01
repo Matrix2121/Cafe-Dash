@@ -5,14 +5,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.md,
-    margin: theme.spacing.sm,
+    marginVertical: theme.spacing.md,
     padding: theme.spacing.md,
     shadowColor: theme.colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: theme.radii.sm,
     elevation: theme.elevation.md,
-    width: "auto",
+    width: 'auto'
   },
   image: {
     width: '100%',
