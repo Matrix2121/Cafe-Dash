@@ -7,7 +7,7 @@ import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
 import styles from './CafeReviews.style'
-import ReviewHeader from '@/app/components/reviewsHeader/ReviewsHeader';
+import ReviewHeader from '@/app/components/headers/reviewsHeader/ReviewsHeader';
 
 type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviews">;
 

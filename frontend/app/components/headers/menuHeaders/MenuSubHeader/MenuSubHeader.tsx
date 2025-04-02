@@ -4,17 +4,17 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { Cafeteria } from "@/app/types/items"
 import { TouchableOpacity, View, Text } from "react-native";
-import styles from "./MenuHeader.style";
+import styles from "./MenuSubHeader.style";
 
-interface MenuHeader {
+interface MenuSubheader {
     cafe: Cafeteria;
 }
 
-const MenuHeader = ({cafe} : MenuHeader) => {
+const MenuSubheader = ({cafe} : MenuSubheader) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.title}>Menu</Text>
+    <View style={styles.header}>
+      <Text style={styles.title}>{cafe.name}</Text>
       <TouchableOpacity
         style={styles.detailsButton}
         onPress={() => navigation.navigate("cafereviews", { cafe })}
@@ -31,4 +31,4 @@ const MenuHeader = ({cafe} : MenuHeader) => {
   );
 };
 
-export default MenuHeader;
+export default MenuSubheader;

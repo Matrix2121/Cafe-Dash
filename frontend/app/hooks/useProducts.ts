@@ -58,6 +58,24 @@ const useProduct = () => {
         });
   };
 
+  const fetchAllProductByOrderId = (orderId: number) => {
+    customAPI
+        .get(`api/products/order/${orderId}`)
+        .then((response) => {
+          const allProducts = response.data;
+          setProducts(allProducts);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(
+              error?.response?.data?.message ||
+              error.message ||
+              "Something went wrong"
+          );
+          setLoading(false);
+        });
+  };
+
 
   return {
     product,
@@ -65,6 +83,7 @@ const useProduct = () => {
     fetchAllProducts,
     fetchProductById,
     fetchAllProductByCafeteriaId,
+    fetchAllProductByOrderId,
     loading,
     error,
   };

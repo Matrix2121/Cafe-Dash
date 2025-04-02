@@ -6,106 +6,18 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: theme.spacing.md,
-  },
-  orderContainer: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.md,
-    margin: theme.spacing.md,
-    padding: theme.spacing.md,
-    elevation: theme.elevation.sm,
-  },
-  orderHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: theme.spacing.sm,
-  },
-  orderId: {
-    fontSize: theme.fontSizes.title,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-  },
-  orderDate: {
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textSecondary,
-  },
-  statusContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: theme.spacing.sm,
-  },
-  statusDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    marginRight: theme.spacing.sm,
-  },
-  statusText: {
-    fontSize: theme.fontSizes.body,
-    fontWeight: '500',
-  },
-  itemRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: theme.spacing.xs,
-  },
-  itemName: {
-    flex: 2,
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textPrimary,
-  },
-  itemQuantity: {
-    flex: 1,
-    textAlign: 'center',
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textSecondary,
-  },
-  itemPrice: {
-    flex: 1,
-    textAlign: 'right',
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textPrimary,
-  },
-  totalContainer: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: theme.spacing.sm,
-    borderTopWidth: 1,
-    borderTopColor: theme.colors.border,
-    paddingTop: theme.spacing.sm,
-  },
-  totalLabel: {
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textPrimary,
-    marginRight: theme.spacing.sm,
-  },
-  totalAmount: {
-    fontSize: theme.fontSizes.body,
-    color: theme.colors.textPrimary,
-    fontWeight: 'bold',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: theme.fontSizes.body,
-  },
-  emptyText: {
-    fontSize: theme.fontSizes.title,
-    color: theme.colors.textSecondary,
-  },
-  listContent: {
+  gridContainer: {
     paddingBottom: theme.spacing.xl,
   },
+  cardWrapper: {
+    flex: 1,
+  },
   loadingErrorContainer: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      backgroundColor: theme.colors.background,
-      padding: theme.spacing.xl,
-    },
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: theme.spacing.xl,
+  },
 });
 
 export default styles;

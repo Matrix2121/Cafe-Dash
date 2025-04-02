@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import theme from "@/app/theme/theme";
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",

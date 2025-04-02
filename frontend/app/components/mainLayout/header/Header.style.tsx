@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.border,
     width: "100%",
-    height: 70,
+    height: 60,
   },
   userInfo: {
     flexDirection: 'row',

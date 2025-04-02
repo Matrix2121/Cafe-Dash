@@ -48,7 +48,7 @@ public class ProductController {
         return productService.getAllProductsFromCafeteriaId(id);
     }
     
-    @GetMapping("/cafeteria/{orderId}")
+    @GetMapping("/order/{orderId}")
     @ResponseStatus(value = HttpStatus.OK)
     public List<ProductDTO> getAllProductsFromOrderId(@PathVariable("orderId") Long id) throws BadRequestException, NotFoundException {
         return productService.getAllProductsFromOrderId(id);

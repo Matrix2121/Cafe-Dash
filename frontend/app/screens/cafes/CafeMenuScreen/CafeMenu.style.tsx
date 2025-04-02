@@ -4,8 +4,10 @@ import { theme } from "@/app/theme/theme";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: theme.spacing.md,
     backgroundColor: theme.colors.background,
+  },
+  menuContainer: {
+    padding: theme.spacing.md,
   },
 });
 
