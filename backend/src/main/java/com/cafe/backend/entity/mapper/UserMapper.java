@@ -19,26 +19,9 @@ public class UserMapper {
             throw new DataMappingException("UserEntity cannot be null.");
         }
 
-        List<RoleDTO> roleDTOS = new ArrayList<>();
-        if (userEntity.getRoles() != null) {
-            for (RoleEntity role : userEntity.getRoles()) {
-                roleDTOS.add(RoleMapper.mapToDTO(role));
-            }
-        }
-
-        List<OrderDTO> orderDTOS = new LinkedList<>();
-        if (userEntity.getOrders() != null) {
-            for (OrderEntity order : userEntity.getOrders()) {
-                orderDTOS.add(OrderMapper.mapToDTO(order));
-            }
-        }
-
-        List<ReviewDTO> reviewDTOS = new ArrayList<>();
-        if (userEntity.getReviews() != null) {
-            for (ReviewEntity review : userEntity.getReviews()) {
-                reviewDTOS.add(ReviewMapper.mapToDTO(review));
-            }
-        }
+        List<RoleDTO> roleDTOS = mapRoles(userEntity.getRoles());
+        List<OrderDTO> orderDTOS = mapOrders(userEntity.getOrders());
+        List<ReviewDTO> reviewDTOS = mapReviews(userEntity.getReviews());
 
         return new UserDTO(
                 userEntity.getId(),
@@ -48,6 +31,42 @@ public class UserMapper {
                 orderDTOS,
                 reviewDTOS
         );
+    }
+
+    private static List<RoleDTO> mapRoles(List<RoleEntity> roles) throws DataMappingException {
+        if (roles == null || roles.isEmpty()) {
+            return new ArrayList<>();
+        }
+    
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (RoleEntity role : roles) {
+            roleDTOs.add(RoleMapper.mapToDTO(role));
+        }
+        return roleDTOs;
+    }
+
+    private static List<OrderDTO> mapOrders(List<OrderEntity> orders) throws DataMappingException {
+        if (orders == null || orders.isEmpty()) {
+            return new LinkedList<>();
+        }
+    
+        List<OrderDTO> orderDTOs = new LinkedList<>();
+        for (OrderEntity order : orders) {
+            orderDTOs.add(OrderMapper.mapToDTO(order));
+        }
+        return orderDTOs;
+    }
+    
+    private static List<ReviewDTO> mapReviews(List<ReviewEntity> reviews) throws DataMappingException {
+        if (reviews == null || reviews.isEmpty()) {
+            return new ArrayList<>();
+        }
+    
+        List<ReviewDTO> reviewDTOs = new ArrayList<>();
+        for (ReviewEntity review : reviews) {
+            reviewDTOs.add(ReviewMapper.mapToDTO(review));
+        }
+        return reviewDTOs;
     }
 
     public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {

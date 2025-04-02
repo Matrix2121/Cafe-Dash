@@ -85,8 +85,8 @@ public class CafeteriaServiceImpl implements CafeteriaService {
             original.location(),
             rating,
             countReviews,
-            original.imageUrl(),
             original.phoneNumber(),
+            original.imageUrl(),
             original.openingHour(),
             original.closingHour()
         );

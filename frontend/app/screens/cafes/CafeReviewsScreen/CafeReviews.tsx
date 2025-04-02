@@ -21,12 +21,10 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const { reviews, loading, error, fetchReviewsByCafeId } = useReviews(cafe.id);
     const [shouldRefetch, setShouldRefetch] = useState(true);
-    const {refreshCafeteria} = useCafes(cafe.id);
 
     useEffect(() => {
         if (shouldRefetch) {
             fetchReviewsByCafeId(cafe.id);
-            // refreshCafeteria(cafe.id);
             setShouldRefetch(false);
         }
     }, [shouldRefetch]);

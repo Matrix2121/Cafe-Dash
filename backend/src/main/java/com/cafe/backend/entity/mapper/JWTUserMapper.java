@@ -1,9 +1,7 @@
 package com.cafe.backend.entity.mapper;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.cafe.backend.dto.JWTUserDTO;
 import com.cafe.backend.entity.account.UserEntity;
