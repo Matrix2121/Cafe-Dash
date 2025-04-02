@@ -19,7 +19,6 @@ public class UserMapper {
             throw new DataMappingException("UserEntity cannot be null.");
         }
 
-        // Create defensive copies of collections before iteration
         List<RoleDTO> roleDTOS = mapRoles(userEntity.getRoles());
         List<OrderDTO> orderDTOS = mapOrders(userEntity.getOrders());
         List<ReviewDTO> reviewDTOS = mapReviews(userEntity.getReviews());
@@ -34,58 +33,40 @@ public class UserMapper {
         );
     }
 
-    private static List<RoleDTO> mapRoles(List<RoleEntity> roles) {
+    private static List<RoleDTO> mapRoles(List<RoleEntity> roles) throws DataMappingException {
         if (roles == null || roles.isEmpty()) {
             return new ArrayList<>();
         }
-        // Create a new ArrayList from the collection
-        return new ArrayList<>(roles).stream()
-                .map(t -> {
-                    try {
-                        return RoleMapper.mapToDTO(t);
-                    } catch (DataMappingException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    return null;
-                })
-                .toList();
+    
+        List<RoleDTO> roleDTOs = new ArrayList<>();
+        for (RoleEntity role : roles) {
+            roleDTOs.add(RoleMapper.mapToDTO(role));
+        }
+        return roleDTOs;
     }
 
-    private static List<OrderDTO> mapOrders(List<OrderEntity> orders) {
+    private static List<OrderDTO> mapOrders(List<OrderEntity> orders) throws DataMappingException {
         if (orders == null || orders.isEmpty()) {
             return new LinkedList<>();
         }
-        // Create a new LinkedList from the collection
-        return new LinkedList<>(orders).stream()
-                .map(t -> {
-                    try {
-                        return OrderMapper.mapToDTO(t);
-                    } catch (DataMappingException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    return null;
-                })
-                .toList();
+    
+        List<OrderDTO> orderDTOs = new LinkedList<>();
+        for (OrderEntity order : orders) {
+            orderDTOs.add(OrderMapper.mapToDTO(order));
+        }
+        return orderDTOs;
     }
-
-    private static List<ReviewDTO> mapReviews(List<ReviewEntity> reviews) {
+    
+    private static List<ReviewDTO> mapReviews(List<ReviewEntity> reviews) throws DataMappingException {
         if (reviews == null || reviews.isEmpty()) {
             return new ArrayList<>();
         }
-        // Create a new ArrayList from the collection
-        return new ArrayList<>(reviews).stream()
-                .map(t -> {
-                    try {
-                        return ReviewMapper.mapToDTO(t);
-                    } catch (DataMappingException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    return null;
-                })
-                .toList();
+    
+        List<ReviewDTO> reviewDTOs = new ArrayList<>();
+        for (ReviewEntity review : reviews) {
+            reviewDTOs.add(ReviewMapper.mapToDTO(review));
+        }
+        return reviewDTOs;
     }
 
     public static UserEntity mapToEntity(UserDTO userDTO) throws DataMappingException {
