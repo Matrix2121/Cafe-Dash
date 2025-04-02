@@ -1,8 +1,8 @@
 import styles from "@/app/screens/profile/Profile.style";
 import {Image, ImageBackground, Modal, Pressable, Text, View} from "react-native";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {RootStackParamList} from "@/app/navigation/Navigation";
-import {RouteProp, useFocusEffect, useNavigation} from "@react-navigation/native";
+import {RouteProp, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import profileImage from "../../assets/images/profileScreen/profile.png";
 import editImage from "../../assets/images/profileScreen/edit.png";
@@ -13,6 +13,8 @@ import updateImage from "../../assets/images/login-background.jpg";
 import useUser from "@/app/hooks/useUser";
 import { List } from 'react-native-paper';
 import HasRoles from "@/app/utilComponents/HasRoles";
+import ProfileHeader from "@/app/components/headers/profileHeader/ProfileHeader";
+
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
 
@@ -72,6 +74,7 @@ const Profile = ({route}: IProps) => {
 
     return (
         <View style={styles.profileContainer}>
+            <ProfileHeader/>
             <View style={styles.imageContainer}>
                 <Image source={profileBackground} style={styles.imageLogo}/>
             </View>

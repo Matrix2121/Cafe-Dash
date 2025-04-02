@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "./Navigation";
 import { useAuth } from "../context/AuthContext";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, Alert, View } from "react-native";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -11,6 +11,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (!loading && !user) {
+      Alert.alert("You have to login first");
       navigation.navigate("login");
     }
   }, [user, loading, navigation]);

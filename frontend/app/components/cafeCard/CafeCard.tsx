@@ -66,7 +66,6 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             </Text>
           </View>
 
-          {/* Rating */}
           <View style={styles.infoRow}>
             <Text style={styles.ratingStyle} numberOfLines={1}>
               ⭐ {cafe.rating.toFixed(1)} ({cafe.countReview} reviews)

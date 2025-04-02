@@ -11,10 +11,13 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.border,
+    width: "100%",
+    height: 60,
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
+    height: 46,
   },
   image: {
     width: theme.components.header.imageSize,
@@ -27,11 +30,9 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: theme.colors.textPrimary,
   },
-  logoutContainer: {
-    marginLeft: 'auto',
-  },
   logoutButton: {
     backgroundColor: theme.colors.transparent,
+    justifyContent: 'center',
   },
 });
 

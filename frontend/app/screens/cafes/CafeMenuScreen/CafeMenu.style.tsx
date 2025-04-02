@@ -4,7 +4,6 @@ import { theme } from "@/app/theme/theme";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: theme.spacing.md,
     backgroundColor: theme.colors.background,
   },
   noDataText: {
@@ -12,7 +11,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 16,
     color: 'gray',
-  }
+  },
+  menuContainer: {
+    padding: theme.spacing.md,
+  },
 });
 
 export default styles;

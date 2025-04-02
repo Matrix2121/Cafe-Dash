@@ -9,7 +9,8 @@ import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import { useCart } from "@/app/context/CartContext";
 import CurrentCafeCartButton from "@/app/components/viewCafeButton/currentCafeCartButton/CurrentCafeCartButton";
 import DifferentCafeCartButton from "@/app/components/viewCafeButton/differentCafeCartButton/DifferentCafeCartButton";
-import MenuHeader from "@/app/components/menuHeader/MenuHeader";
+import MenuSubheader from "@/app/components/headers/menuHeaders/MenuSubHeader/MenuSubHeader";
+import MenuHeader from "@/app/components/headers/menuHeaders/MenuHeader/MenuHeader";
 import ItemsList from "@/app/components/itemsList/ItemsList";
 
 type CafeMenuRouteProp = RouteProp<RootStackParamList, "cafemenu">;
@@ -20,10 +21,12 @@ interface CafeMenuProps {
 
 const CafeMenu = ({ route }: CafeMenuProps) => {
   const { cafe } = route.params;
-  const { products, fetchAllProductByCafeteriaId, loading, error } = useProducts();
+  const { products, fetchAllProductByCafeteriaId, loading, error } =
+    useProducts();
   const { productsCount, currentCafeteria, totalPrice } = useCart();
 
-  const isDifferentCafeteria = currentCafeteria && currentCafeteria.id !== cafe.id;
+  const isDifferentCafeteria =
+    currentCafeteria && currentCafeteria.id !== cafe.id;
 
   useEffect(() => {
     fetchAllProductByCafeteriaId(cafe.id);
@@ -33,19 +36,22 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
 
   return (
     <View style={styles.container}>
-      <MenuHeader cafe={cafe} />
+      <MenuHeader />
+      <View style={styles.menuContainer}>
+        <MenuSubheader cafe={cafe} />
 
-      {loading || error ? (
-          <LoadingErrorView
-              loading={loading}
-              error={error}
-              dataAvailable={hasData}
-          />
+        {loading || error ? (
+            <LoadingErrorView
+                loading={loading}
+                error={error}
+                dataAvailable={hasData}
+            />
       ) : !hasData ? (
           <Text style={styles.noDataText}>This cafeteria has no products yet.</Text>
-      ) : (
-          <ItemsList products={products} />
-      )}
+        ) : (
+            <ItemsList products={products} />
+        )}
+      </View>
 
       {isDifferentCafeteria && productsCount > 0 && (
         <DifferentCafeCartButton

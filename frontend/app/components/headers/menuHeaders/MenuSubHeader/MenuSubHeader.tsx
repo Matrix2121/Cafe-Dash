@@ -4,20 +4,20 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {Cafeteria} from "@/app/types/items"
 import {TouchableOpacity, View, Text} from "react-native";
-import styles from "./MenuHeader.style";
+import styles from "./MenuSubHeader.style";
 import {SvgUri} from "react-native-svg";
 
-interface MenuHeader {
+interface MenuSubheader {
     cafe: Cafeteria;
 }
 
-const MenuHeader = ({cafe}: MenuHeader) => {
+const MenuSubheader = ({cafe}: MenuSubheader) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     return (
-        <View style={styles.headerContainer}>
+        <View style={styles.header}>
             <View style={styles.detailsContainer}>
                 <SvgUri uri={'https://cafedashstorage.blob.core.windows.net/svgs/coffe-bean.svg'} height={30} width={30} />
-                <Text style={styles.detailsButtonText}>Menu</Text>
+                <Text style={styles.detailsButtonText}>{cafe.name}</Text>
             </View>
             <TouchableOpacity
                 style={styles.detailsButton}
@@ -32,4 +32,4 @@ const MenuHeader = ({cafe}: MenuHeader) => {
     );
 };
 
-export default MenuHeader;
+export default MenuSubheader;

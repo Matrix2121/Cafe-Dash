@@ -61,16 +61,35 @@ const useProduct = () => {
                 setLoading(false);
             });
     };
+  const fetchAllProductByOrderId = (orderId: number) => {
+    customAPI
+        .get(`api/products/order/${orderId}`)
+        .then((response) => {
+          const allProducts = response.data;
+          setProducts(allProducts);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setError(
+              error?.response?.data?.message ||
+              error.message ||
+              "Something went wrong"
+          );
+          setLoading(false);
+        });
+  };
 
-    return {
-        product,
-        products,
-        fetchAllProducts,
-        fetchProductById,
-        fetchAllProductByCafeteriaId,
-        loading,
-        error,
-    };
+
+  return {
+    product,
+    products,
+    fetchAllProducts,
+    fetchProductById,
+    fetchAllProductByCafeteriaId,
+    fetchAllProductByOrderId,
+    loading,
+    error,
+  };
 };
 
 export default useProduct;

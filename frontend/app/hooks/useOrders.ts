@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Order } from '../types/items';
 import customAPI from '../services/apiClient';
-import { Alert } from 'react-native';
 
 const useOrders = (userId?: number) => {
     const [orders, setOrders] = useState<Order[]>([]);
