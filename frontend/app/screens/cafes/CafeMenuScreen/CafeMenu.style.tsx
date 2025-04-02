@@ -6,15 +6,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
+  menuContainer: {
+    padding: theme.spacing.md,
+  },
   noDataText: {
     textAlign: 'center',
     marginTop: 20,
     fontSize: 16,
     color: 'gray',
   },
-  menuContainer: {
-    padding: theme.spacing.md,
-  },
+  
 });
 
 export default styles;

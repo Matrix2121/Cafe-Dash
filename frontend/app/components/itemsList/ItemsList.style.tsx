@@ -15,11 +15,13 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flex: 2,
-    marginRight: theme.spacing.sm,
-    marginLeft: theme.spacing.sm,
+    marginHorizontal: theme.spacing.sm,
   },
   itemList: {
     paddingHorizontal: theme.spacing.sm,
+  },
+  listContent: {
+    paddingBottom: 210,
   },
 });
 
