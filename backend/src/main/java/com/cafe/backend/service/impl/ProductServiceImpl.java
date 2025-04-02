@@ -3,12 +3,14 @@ package com.cafe.backend.service.impl;
 import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.mapper.ProductMapper;
+import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.entity.product.ProductEntity;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.CafeteriaRepository;
+import com.cafe.backend.repository.OrderProductRepository;
 import com.cafe.backend.repository.ProductRepository;
 import com.cafe.backend.service.ProductService;
 
@@ -32,9 +34,11 @@ import java.util.List;
 @Transactional
 public class ProductServiceImpl implements ProductService {
     @Autowired
+    private CafeteriaRepository cafeteriaRepository;
+    @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private CafeteriaRepository cafeteriaRepository;
+    private OrderProductRepository orderProductRepository;
 
     @Override
     public ProductDTO createProduct(ProductDTO productDTO) throws BadRequestException {
@@ -78,6 +82,30 @@ public class ProductServiceImpl implements ProductService {
 
         if (products.isEmpty()) {
             throw new ResourceNotFoundException("No products found for cafeteria with ID: " + id);
+        }
+
+        List<ProductDTO> results = new ArrayList<>();
+        for (ProductEntity entity : products) {
+            results.add(ProductMapper.mapToDTO(entity));
+        }
+
+        return results;
+    }
+
+    @Override
+    public List<ProductDTO> getAllProductsFromOrderId(Long id) throws NotFoundException, DataMappingException {
+        List<OrderProductEntity> orderProducts = orderProductRepository.findByOrderIdAndIsDeletedFalse(id);
+
+        if (orderProducts.isEmpty()) {
+            throw new ResourceNotFoundException("No products found for order with ID: " + id);
+        }
+
+        List<ProductEntity> products = orderProducts.stream()
+            .map(OrderProductEntity::getProduct)
+            .toList();
+
+        if (products.isEmpty()) {
+            throw new ResourceNotFoundException("No products found for order with ID: " + id);
         }
 
         List<ProductDTO> results = new ArrayList<>();

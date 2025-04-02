@@ -16,5 +16,6 @@ public interface ProductService {
 	ProductDTO getProductById(Long productId) throws NotFoundException, BadRequestException;
 	List<ProductDTO> getAllProducts() throws NotFoundException, BadRequestException;
 	List<ProductDTO> getAllProductsFromCafeteriaId(Long id) throws NotFoundException, DataMappingException;
+	List<ProductDTO> getAllProductsFromOrderId(Long id) throws NotFoundException, DataMappingException;
 	ProductDTO updateProduct(Long productId, ProductDTO updatedProduct) throws NotFoundException, BadRequestException;
 }
