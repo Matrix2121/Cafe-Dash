@@ -1,15 +1,11 @@
 package com.cafe.backend.controller;
 
 import com.cafe.backend.dto.CafeteriaDTO;
-import com.cafe.backend.dto.ProductDTO;
-import com.cafe.backend.exception.AuthenticationCustomException;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.service.CafeteriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
