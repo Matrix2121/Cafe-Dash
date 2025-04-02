@@ -1,6 +1,7 @@
 package com.cafe.backend.entity.cafeteria;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
 import com.cafe.backend.entity.product.ProductEntity;
@@ -56,7 +57,7 @@ public class CafeteriaEntity {
     private String imageUrl;
 
     @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<ProductEntity> products;
+    private List<ProductEntity> products;
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

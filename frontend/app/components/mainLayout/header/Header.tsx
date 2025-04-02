@@ -12,16 +12,17 @@ const Header = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { user, logout } = useAuth();
 
-  const handleLogout = async () => {
-    await logout();
-    navigation.navigate("login");
-  };
-  if (!user) return null;
+    const handleLogout = async () => {
+        await logout();
+        navigation.navigate("login");
+    };
+    if (!user) return null;
+    const userId = Number(user.id);
 
   return (
     <View style={styles.header}>
       <Pressable
-        onPress={() => navigation.navigate("profile", { userId: user.id })}
+        onPress={() => navigation.navigate("profile", { userId: userId })}
       >
         <View style={styles.userInfo}>
           <Image

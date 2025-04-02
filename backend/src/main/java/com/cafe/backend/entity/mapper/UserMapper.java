@@ -1,9 +1,6 @@
 package com.cafe.backend.entity.mapper;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.ReviewDTO;
@@ -22,7 +19,7 @@ public class UserMapper {
             throw new DataMappingException("UserEntity cannot be null.");
         }
 
-        Set<RoleDTO> roleDTOS = new HashSet<>();
+        List<RoleDTO> roleDTOS = new ArrayList<>();
         if (userEntity.getRoles() != null) {
             for (RoleEntity role : userEntity.getRoles()) {
                 roleDTOS.add(RoleMapper.mapToDTO(role));
@@ -36,7 +33,7 @@ public class UserMapper {
             }
         }
 
-        Set<ReviewDTO> reviewDTOS = new HashSet<>();
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
         if (userEntity.getReviews() != null) {
             for (ReviewEntity review : userEntity.getReviews()) {
                 reviewDTOS.add(ReviewMapper.mapToDTO(review));
@@ -58,7 +55,7 @@ public class UserMapper {
             throw new DataMappingException("UserDTO cannot be null.");
         }
 
-        Set<RoleEntity> roleEntities = new HashSet<>();
+        List<RoleEntity> roleEntities = new ArrayList<>();
         if(userDTO.roles() != null) {
         	for (RoleDTO role : userDTO.roles()) {
                 roleEntities.add(RoleMapper.mapToEntity(role));
@@ -72,8 +69,7 @@ public class UserMapper {
             }
         }
 
-        // Up for discussion
-        Set<ReviewEntity> reviewEntities = new HashSet<>();
+        List<ReviewEntity> reviewEntities = new ArrayList<>();
         if(userDTO.reviews() != null) {
         	for (ReviewDTO review : userDTO.reviews()) {
                 reviewEntities.add(ReviewMapper.mapToEntity(review));

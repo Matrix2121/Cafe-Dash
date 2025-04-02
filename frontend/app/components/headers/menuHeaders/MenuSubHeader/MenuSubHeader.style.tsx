@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: theme.colors.textPrimary,
   },
+  detailsContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   detailsButton: {
     backgroundColor: theme.colors.transparent,
     paddingVertical: theme.spacing.xs,
@@ -24,7 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: theme.radii.md,
   },
   detailsButtonText: {
-    fontSize: theme.fontSizes.body,
+    fontSize: theme.fontSizes.header,
     fontWeight: "bold",
     color: theme.colors.primary,
   },

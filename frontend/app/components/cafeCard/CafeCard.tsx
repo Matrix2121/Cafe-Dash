@@ -24,18 +24,15 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
       onPress={() => navigation.navigate("cafemenu", { cafe })}
     >
       <Card style={styles.card}>
-        
-        {/* Image */}
+
         <Image
           source={{ uri: cafe.imageUrl }}
           style={styles.image}
           defaultSource={require("@/app/assets/images/logo.png")}
         />
 
-        {/* Content container */}
         <View style={styles.contentContainer}>
 
-          {/* Title */}
           <Text
             style={styles.titleStyle}
             ellipsizeMode="tail"
@@ -43,7 +40,6 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             {cafe.name}
           </Text>
 
-          {/* Brand */}
           <View style={styles.infoRow}>
             <Text
               style={styles.brandStyle}
@@ -53,7 +49,6 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             </Text>
           </View>
 
-          {/* Hours */}
           <View style={styles.infoRow}>
             {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
               <Text style={styles.timeStyle}>
@@ -62,7 +57,6 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             )}
           </View>
 
-          {/* Location */}
           <View style={styles.infoRow}>
             <Text
               style={styles.locationStyle}
@@ -72,7 +66,6 @@ const CafeCard = ({ cafe }: CafeCardProps) => {
             </Text>
           </View>
 
-          {/* Rating */}
           <View style={styles.infoRow}>
             <Text style={styles.ratingStyle} numberOfLines={1}>
               ⭐ {cafe.rating.toFixed(1)} ({cafe.countReview} reviews)

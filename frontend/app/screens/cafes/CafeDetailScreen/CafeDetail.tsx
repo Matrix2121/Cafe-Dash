@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, ScrollView } from "react-native";
 import styles from "./CafeDetail.style";
 import DetailsHeader from "@/app/components/headers/detailsHeader/DetailsHeader";
+import { SvgUri } from "react-native-svg";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
@@ -23,30 +24,43 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
 
   return (
     <View style={styles.pageContainer}>
-      <DetailsHeader cafeName={cafe.name} />
       <ScrollView
         style={styles.container}
         contentContainerStyle={{ paddingBottom: 120 }}
       >
-        <Image
-          source={{ uri: cafe.imageUrl }}
-          style={styles.headerImage}
-          resizeMode="cover"
-          defaultSource={require("@/app/assets/images/logo.png")}
-        />
-        <View style={styles.detailsContainer}>
-          <Text style={styles.label}>Brand:</Text>
-          <Text style={styles.value}>{cafe.brand}</Text>
-        </View>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.label}>Address:</Text>
-          <Text style={styles.value}>{cafe.location}</Text>
-        </View>
-        <View style={styles.detailsContainer}>
-          <Text style={styles.label}>Rating:</Text>
-          <Text style={styles.value}>
-            {cafe.rating.toFixed(1)} ({cafe.countReview} Reviews)
-          </Text>
+        <View>
+          <View style={styles.returnContainer}>
+            <Text style={styles.title}>{cafe.name}:</Text>
+            <Pressable onPress={() => navigation.goBack()}>
+              <SvgUri
+                height={30}
+                width={30}
+                uri={
+                  "https://cafedashstorage.blob.core.windows.net/svgs/coffe-bean.svg"
+                }
+              />
+            </Pressable>
+          </View>
+          <Image
+            source={{ uri: cafe.imageUrl }}
+            style={styles.headerImage}
+            resizeMode="cover"
+            defaultSource={require("@/app/assets/images/logo.png")}
+          />
+          <View style={styles.detailsContainer}>
+            <Text style={styles.label}>Brand:</Text>
+            <Text style={styles.value}>{cafe.brand}</Text>
+          </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.label}>Address:</Text>
+            <Text style={styles.value}>{cafe.location}</Text>
+          </View>
+          <View style={styles.detailsContainer}>
+            <Text style={styles.label}>Rating:</Text>
+            <Text style={styles.value}>
+              {cafe.rating.toFixed(1)} ({cafe.countReview} Reviews)
+            </Text>
+          </View>
         </View>
         {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
           <View style={styles.detailsContainer}>
@@ -70,10 +84,10 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
         </Pressable>
         <Pressable
           style={styles.navigationButton}
-          onPress={() => navigation.navigate("cafemenu", { cafe })}
+          onPress={() => navigation.navigate("cafereviews", { cafe })}
         >
           <Text style={styles.navigationButtonText}>
-            Check {cafe.name} products
+            Leave {cafe.name} a review ⭐
           </Text>
         </Pressable>
       </View>
