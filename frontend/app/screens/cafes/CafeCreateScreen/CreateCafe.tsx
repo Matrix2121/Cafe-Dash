@@ -1,15 +1,8 @@
 import React, { useState } from "react";
-import {
-  ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  View,
-} from "react-native";
+import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import customAPI from "@/app/services/apiClient";
 import { CreateCafeteriaDTO } from "@/app/types/items";
-import loginBackground from "../../../assets/images/login-background.jpg";
 import styles from "@/app/screens/cafes/CafeCreateScreen/CreateCafe.style";
 
 const CreateCafeteria = () => {
@@ -29,7 +22,7 @@ const CreateCafeteria = () => {
   const handleCreateCafeteria = async () => {
     setFormErrors({});
     setApiError("");
-    
+
     const errors: { [key: string]: string } = {};
 
     if (!name) errors.name = "Name is required.";
@@ -91,7 +84,10 @@ const CreateCafeteria = () => {
   };
 
   return (
-    <ImageBackground source={loginBackground} style={styles.backgroundImage}>
+    <ImageBackground
+      source={{ uri: "https://iili.io/3IoPfjI.jpg" }}
+      style={styles.backgroundImage}
+    >
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
