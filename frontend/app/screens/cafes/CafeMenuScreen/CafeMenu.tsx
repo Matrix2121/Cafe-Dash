@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp } from "@react-navigation/native";
 
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import useProducts from "@/app/hooks/useProducts";
 import styles from "./CafeMenu.style";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
@@ -35,14 +35,16 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
     <View style={styles.container}>
       <MenuHeader cafe={cafe} />
 
-      {loading || error || !hasData ? (
-        <LoadingErrorView
-          loading={loading}
-          error={error}
-          dataAvailable={hasData}
-        />
+      {loading || error ? (
+          <LoadingErrorView
+              loading={loading}
+              error={error}
+              dataAvailable={hasData}
+          />
+      ) : !hasData ? (
+          <Text style={styles.noDataText}>This cafeteria has no products yet.</Text>
       ) : (
-        <ItemsList products={products} />
+          <ItemsList products={products} />
       )}
 
       {isDifferentCafeteria && productsCount > 0 && (

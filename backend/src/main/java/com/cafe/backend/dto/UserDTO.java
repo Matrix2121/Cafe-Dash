@@ -12,5 +12,5 @@ public record UserDTO(
         String email,
         Set<RoleDTO> roles,
         List<OrderDTO> orders,
-        Set<ReviewDTO> reviews
+        List<ReviewDTO> reviews
 ) {}

@@ -28,7 +28,7 @@ const Login = () => {
         setError('');
         try {
             await login(username, password);
-            navigation.navigate("test");
+            navigation.navigate("home");
         } catch (err) {
             setError('Invalid credentials');
         } finally {
@@ -43,7 +43,7 @@ const Login = () => {
         >
             <View style={styles.navigationContainer}>
                 <Pressable
-                    onPress={() => navigation.navigate("test")}
+                    onPress={() => navigation.navigate("cafeslist")}
                 >
                     <Image style={styles.testButton} source={require('@/app/assets/images/navigation.png')}/>
                 </Pressable>

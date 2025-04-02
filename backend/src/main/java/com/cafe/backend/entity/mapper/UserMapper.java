@@ -1,9 +1,6 @@
 package com.cafe.backend.entity.mapper;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.ReviewDTO;
@@ -36,7 +33,7 @@ public class UserMapper {
             }
         }
 
-        Set<ReviewDTO> reviewDTOS = new HashSet<>();
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
         if (userEntity.getReviews() != null) {
             for (ReviewEntity review : userEntity.getReviews()) {
                 reviewDTOS.add(ReviewMapper.mapToDTO(review));
@@ -73,7 +70,7 @@ public class UserMapper {
         }
 
         // Up for discussion
-        Set<ReviewEntity> reviewEntities = new HashSet<>();
+        List<ReviewEntity> reviewEntities = new ArrayList<>();
         if(userDTO.reviews() != null) {
         	for (ReviewDTO review : userDTO.reviews()) {
                 reviewEntities.add(ReviewMapper.mapToEntity(review));

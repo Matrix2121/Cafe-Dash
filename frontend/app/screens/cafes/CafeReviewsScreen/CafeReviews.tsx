@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -8,6 +8,7 @@ import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
 import styles from './CafeReviews.style'
 import ReviewHeader from '@/app/components/reviewsHeader/ReviewsHeader';
+import useCafes from "@/app/hooks/useCafes";
 
 type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviews">;
 
@@ -17,31 +18,28 @@ interface CafeReviewsProps {
 
 const CafeReviews = ({ route }: CafeReviewsProps) => {
     const { cafe } = route.params;
-    const { reviews, loading, error, postReview, fetchReviewsByCafeId } = useReviews(cafe.id);
-
-    const hasData = Array.isArray(reviews) && reviews.length > 0;
-
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-    
-    //hasFetched is used as a flag to check if the data is fetched when the screen comes into focus
-    const [hasFetched, setHasFetched] = useState(false);
-    
-    //useFocusEffect is called every time the screen come into focus
-    useFocusEffect(
-        useCallback(() => {
-            if(!hasFetched){
-                fetchReviewsByCafeId(cafe.id);
-                setHasFetched(true)
-            }
-        }, [hasFetched])
-    );
-    
+    const { reviews, loading, error, fetchReviewsByCafeId } = useReviews(cafe.id);
+    const [shouldRefetch, setShouldRefetch] = useState(true);
+    const {refreshCafeteria} = useCafes(cafe.id);
+
+    useEffect(() => {
+        if (shouldRefetch) {
+            fetchReviewsByCafeId(cafe.id);
+            // refreshCafeteria(cafe.id);
+            setShouldRefetch(false);
+        }
+    }, [shouldRefetch]);
 
     const handleLeaveReview = () => {
-        navigation.navigate('leavereview', { 
+        navigation.navigate('leavereview', {
             cafe,
-            goingBack: () => setHasFetched(false), }); //sets the goingBack logic for when it is called in LeaveReview
+            goingBack: () => setShouldRefetch(true),
+        });
     };
+
+    const hasData = Array.isArray(reviews) && reviews.length > 0;
+    console.log(cafe);
 
     return (
         <View style={styles.container}>
@@ -63,7 +61,6 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
             )}
         </View>
     );
-    
 };
 
 export default CafeReviews;

@@ -5,6 +5,7 @@ import {RootStackParamList} from "@/app/navigation/Navigation";
 import {View, Text, ScrollView} from "react-native";
 import styles from "./CafeDetail.style";
 import {StackNavigationProp} from "@react-navigation/stack";
+import {SvgUri} from "react-native-svg";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
@@ -16,7 +17,7 @@ const CafeDetail = ({route}: CafeDetailProps) => {
     const {cafe} = route.params;
 
     const isValidTime = (time: string | null | undefined) => {
-        return !!time && time !== "00:00:00";
+        return !!time && time !== "00:00";
     };
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
@@ -30,9 +31,9 @@ const CafeDetail = ({route}: CafeDetailProps) => {
                     <View style={styles.returnContainer}>
                         <Text style={styles.title}>{cafe.name}:</Text>
                         <Pressable onPress={() => navigation.goBack()}>
-                            <Image
-                                style={styles.testButton}
-                                source={require('@/app/assets/images/navigation.png')}
+                            <SvgUri
+                                height={30} width={30}
+                                uri={'https://cafedashstorage.blob.core.windows.net/svgs/coffe-bean.svg'}
                             />
                         </Pressable>
                     </View>
@@ -79,9 +80,9 @@ const CafeDetail = ({route}: CafeDetailProps) => {
                 </Pressable>
                 <Pressable
                     style={styles.navigationButton}
-                    onPress={() => navigation.navigate('cafemenu', {cafe})}
+                    onPress={() => navigation.navigate('cafereviews', {cafe})}
                 >
-                    <Text style={styles.navigationButtonText}>Check {cafe.name} products</Text>
+                    <Text style={styles.navigationButtonText}>Leave {cafe.name} a review ⭐</Text>
                 </Pressable>
             </View>
         </View>
