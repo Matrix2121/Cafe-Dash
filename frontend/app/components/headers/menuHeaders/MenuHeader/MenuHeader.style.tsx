@@ -8,18 +8,18 @@ const styles = StyleSheet.create({
     padding: theme.spacing.md,
     backgroundColor: theme.colors.surface,
     elevation: theme.elevation.sm,
-    height: 60
+    height: 60,
+  },
+  title: {
+    fontSize: theme.fontSizes.header,
+    color: theme.colors.textPrimary,
+    fontWeight: "bold",
   },
   backButton: {
     marginLeft: "auto",
     marginRight: -4,
     height: 50,
     width: 50,
-  },
-  headerTitle: {
-    fontSize: theme.fontSizes.header,
-    color: theme.colors.textPrimary,
-    fontWeight: "bold",
   },
 });
 

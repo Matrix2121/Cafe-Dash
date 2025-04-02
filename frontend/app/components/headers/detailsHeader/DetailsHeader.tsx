@@ -2,8 +2,8 @@ import React from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Cafeteria } from "@/app/types/items";
-import { TouchableOpacity, View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
+
 import styles from "./DetailsHeader.style";
 import theme from "@/app/theme/theme";
 

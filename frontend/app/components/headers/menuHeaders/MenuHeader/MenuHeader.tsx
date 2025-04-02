@@ -11,7 +11,7 @@ const MenuHeader = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}>Menu</Text>
+      <Text style={styles.title}>Menu</Text>
       <Pressable
         onPress={() => navigation.goBack()}
         style={styles.backButton}

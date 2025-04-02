@@ -9,6 +9,8 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     elevation: theme.elevation.sm,
     height: 60,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: theme.colors.border,
   },
   title: {
     fontSize: theme.fontSizes.header,
