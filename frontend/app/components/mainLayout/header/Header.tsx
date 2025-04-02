@@ -13,9 +13,13 @@ const Header = () => {
   const { user, logout } = useAuth();
 
     const handleLogout = async () => {
-        await logout();
-        navigation.navigate("login");
+      await logout();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'login' }],
+      });
     };
+
     if (!user) return null;
     const userId = Number(user.id);
 
@@ -27,12 +31,12 @@ const Header = () => {
         <View style={styles.userInfo}>
           <Image
             style={styles.image}
-            defaultSource={require("@/app/assets/images/logo.png")}
+            source={require("@/app/assets/images/logo.png")}
           />
           {user && <Text style={styles.username}>Hi, {user.username}</Text>}
         </View>
       </Pressable>
-      <View style={styles.logoutContainer}>
+      <View>
         <Pressable onPress={handleLogout} style={styles.logoutButton}>
           <MaterialIcons name="logout" color={"black"} size={24} />
         </Pressable>

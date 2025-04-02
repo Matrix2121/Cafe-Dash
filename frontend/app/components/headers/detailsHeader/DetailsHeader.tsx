@@ -3,6 +3,7 @@ import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, Pressable, Image } from "react-native";
+import { SvgUri } from "react-native-svg";
 
 import styles from "./DetailsHeader.style";
 import theme from "@/app/theme/theme";
@@ -21,9 +22,11 @@ const DetailsHeader = ({ cafeName }: DetailsHeader) => {
         style={styles.backButton}
         android_ripple={{ color: theme.colors.ripple }}
       >
-        <Image
+        <SvgUri
+          height={40}
+          width={40}
           style={styles.backButton}
-          source={require("@/app/assets/images/navigation.png")}
+          uri={"https://cafedashstorage.blob.core.windows.net/svgs/coffe-bean.svg"}
         />
       </Pressable>
     </View>

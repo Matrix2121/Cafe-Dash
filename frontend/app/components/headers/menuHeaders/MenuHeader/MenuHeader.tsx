@@ -3,6 +3,7 @@ import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, Pressable, Image } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
 
 import styles from "./MenuHeader.style";
 import theme from "@/app/theme/theme";
@@ -17,10 +18,7 @@ const MenuHeader = () => {
         style={styles.backButton}
         android_ripple={{ color: theme.colors.ripple }}
       >
-        <Image
-          style={styles.backButton}
-          source={require("@/app/assets/images/navigation.png")}
-        />
+        <MaterialIcons name="arrow-back" size={28} style={styles.backButton}/>
       </Pressable>
     </View>
   );

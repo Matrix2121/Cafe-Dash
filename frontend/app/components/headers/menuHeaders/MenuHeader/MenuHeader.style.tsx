@@ -16,10 +16,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   backButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: "auto",
-    marginRight: -4,
-    height: 50,
-    width: 50,
   },
 });
 

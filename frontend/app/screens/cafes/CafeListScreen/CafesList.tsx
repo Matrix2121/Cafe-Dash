@@ -12,6 +12,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import HasRoles from "@/app/utilComponents/HasRoles";
+import { Card } from "react-native-paper";
 
 const CafesList = () => {
     const {cafes, loading, error} = useCafes();
@@ -49,13 +50,15 @@ const CafesList = () => {
             <ScrollView>
                 <View style={styles.gridContainer}>
                     <HasRoles roles={['admin']}>
-                        <Pressable onPress={() => navigation.navigate("createcafeteria")} style={styles.addCafeteria}>
-                            <SvgUri
-                                uri={'https://cafedashstorage.blob.core.windows.net/svgs/plus-white.svg'}
-                                width={80}
-                                height={80}
-                            />
-                        </Pressable>
+                        <Card>
+                            <Pressable onPress={() => navigation.navigate("createcafeteria")} style={styles.addCafeteria}>
+                                <SvgUri
+                                    uri={'https://cafedashstorage.blob.core.windows.net/svgs/plus-white.svg'}
+                                    width={80}
+                                    height={80}
+                                />
+                            </Pressable>
+                        </Card>
                     </HasRoles>
                     {cafes.map((cafe: Cafeteria) => (
                         <View key={cafe.id} style={styles.cardWrapper}>

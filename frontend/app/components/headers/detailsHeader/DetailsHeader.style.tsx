@@ -20,8 +20,6 @@ const styles = StyleSheet.create({
   backButton: {
     marginLeft: "auto",
     marginRight: -4,
-    height: 50,
-    width: 50,
   },
 });
 

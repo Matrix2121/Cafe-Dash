@@ -6,7 +6,6 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, ScrollView } from "react-native";
 import styles from "./CafeDetail.style";
 import DetailsHeader from "@/app/components/headers/detailsHeader/DetailsHeader";
-import { SvgUri } from "react-native-svg";
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
@@ -24,23 +23,12 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
 
   return (
     <View style={styles.pageContainer}>
+      <DetailsHeader cafeName={cafe.name}/>
       <ScrollView
         style={styles.container}
         contentContainerStyle={{ paddingBottom: 120 }}
       >
         <View>
-          <View style={styles.returnContainer}>
-            <Text style={styles.title}>{cafe.name}:</Text>
-            <Pressable onPress={() => navigation.goBack()}>
-              <SvgUri
-                height={30}
-                width={30}
-                uri={
-                  "https://cafedashstorage.blob.core.windows.net/svgs/coffe-bean.svg"
-                }
-              />
-            </Pressable>
-          </View>
           <Image
             source={{ uri: cafe.imageUrl }}
             style={styles.headerImage}

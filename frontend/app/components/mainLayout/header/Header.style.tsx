@@ -30,12 +30,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: theme.colors.textPrimary,
   },
-  logoutContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 46,
-    paddingRight: 10,
-  },
   logoutButton: {
     backgroundColor: theme.colors.transparent,
     justifyContent: 'center',

@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.background,
   },
   gridContainer: {
-    flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
@@ -19,11 +18,11 @@ const styles = StyleSheet.create({
   },
   addCafeteria: {
     width: "100%",
-    backgroundColor: '#cdcbcb',
+    backgroundColor: theme.colors.surface,
     borderRadius: theme.radii.md,
     alignItems: "center",
     justifyContent: "center",
-    height: 330
+    height: "auto"
   },
   loadingErrorContainer: {
     flex: 1,

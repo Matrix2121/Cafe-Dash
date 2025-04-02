@@ -10,16 +10,15 @@ const styles = StyleSheet.create({
     elevation: theme.elevation.sm,
     height: 60
   },
-  backButton: {
-    marginLeft: "auto",
-    marginRight: -4,
-    height: 50,
-    width: 50,
-  },
-  headerTitle: {
+  title: {
     fontSize: theme.fontSizes.header,
     color: theme.colors.textPrimary,
     fontWeight: "bold",
+  },
+  backButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: "auto",
   },
 });
 

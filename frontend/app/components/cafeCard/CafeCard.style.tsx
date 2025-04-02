@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.background,
     borderRadius: theme.radii.md,
-    height: 330,
+    height: "auto",
     overflow: "hidden",
   },
   image: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   contentContainer: {
-    height: 150,
+    height: "auto",
     padding: theme.spacing.md,
   },
   titleStyle: {
