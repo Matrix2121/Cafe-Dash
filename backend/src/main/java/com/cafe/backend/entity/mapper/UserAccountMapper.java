@@ -24,14 +24,14 @@ public class UserAccountMapper {
             throw new DataMappingException("UserEntity cannot be null");
         }
         
-        Set<RoleDTO> roleDTOS = new HashSet<>();
+        List<RoleDTO> roleDTOS = new ArrayList<>();
         if(userEntity.getRoles() != null) {
             for (RoleEntity role : userEntity.getRoles()) {
                 roleDTOS.add(RoleMapper.mapToDTO(role));
             }
         }
 
-    	List<OrderDTO> orderDTOS = new LinkedList<>();
+    	List<OrderDTO> orderDTOS = new ArrayList<>();
         if(userEntity.getOrders() != null) {
             for (OrderEntity order : userEntity.getOrders()) {
                 orderDTOS.add(OrderMapper.mapToDTO(order));
@@ -60,14 +60,14 @@ public class UserAccountMapper {
             throw new DataMappingException("UserDTO cannot be null");
         }
 
-        Set<RoleEntity> roleEntities = new HashSet<>();
+        List<RoleEntity> roleEntities = new ArrayList<>();
         if(userDTO.roles() != null) {
         	for (RoleDTO role : userDTO.roles()) {
                 roleEntities.add(RoleMapper.mapToEntity(role));
             }
         }
 
-        List<OrderEntity> orderEntities = new LinkedList<>();
+        List<OrderEntity> orderEntities = new ArrayList<>();
         if(userDTO.orders() != null) {
         	for (OrderDTO order : userDTO.orders()) {
                 orderEntities.add(OrderMapper.mapToEntity(order));
