@@ -1,20 +1,15 @@
 package com.cafe.backend.service.impl;
 
 import com.cafe.backend.dto.CafeteriaDTO;
-import com.cafe.backend.dto.ProductDTO;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
-import com.cafe.backend.entity.product.ProductEntity;
 
 import com.cafe.backend.entity.mapper.CafeteriaMapper;
-import com.cafe.backend.entity.mapper.ProductMapper;
 
 import com.cafe.backend.exception.BadRequestException;
-import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.ResourceNotFoundException;
 
 import com.cafe.backend.repository.CafeteriaRepository;
-import com.cafe.backend.repository.ProductRepository;
 import com.cafe.backend.service.CafeteriaService;
 
 import jakarta.transaction.Transactional;
@@ -39,9 +34,6 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
     @Autowired
     private CafeteriaRepository cafeteriaRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
 
     @Override
     public CafeteriaDTO createCafeteria(CafeteriaDTO cafeteriaDTO) throws BadRequestException {
