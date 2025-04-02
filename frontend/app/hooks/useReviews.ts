@@ -30,7 +30,7 @@ const useReviews = (cafeteriaId: number) => {
     const postReview = async (review: Review) => {
         try {
             await customAPI.post(`api/reviews`, review);
-            // await fetchReviewsByCafeId(cafeteriaId);
+            await fetchReviewsByCafeId(cafeteriaId);
         } catch (error: any) {
             setError(error?.response?.data?.message || error.message || 'Something went wrong');
         }

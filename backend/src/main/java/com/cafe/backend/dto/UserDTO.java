@@ -10,7 +10,7 @@ public record UserDTO(
         Long id,
         String username,
         String email,
-        Set<RoleDTO> roles,
+        List<RoleDTO> roles,
         List<OrderDTO> orders,
         List<ReviewDTO> reviews
 ) {}

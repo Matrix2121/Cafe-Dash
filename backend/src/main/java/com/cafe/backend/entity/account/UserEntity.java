@@ -37,10 +37,9 @@ public class UserEntity {
     @Column(name = "password", length = 120, nullable = false)
     private String password;
 
-    // could be optimized further
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<RoleEntity> roles;
+    private List<RoleEntity> roles;
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

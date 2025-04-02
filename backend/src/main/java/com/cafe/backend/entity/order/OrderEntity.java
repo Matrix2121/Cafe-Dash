@@ -2,8 +2,6 @@ package com.cafe.backend.entity.order;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
-
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.order_product.OrderProductEntity;
@@ -73,16 +71,4 @@ public class OrderEntity {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrderEntity that = (OrderEntity) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
