@@ -16,8 +16,12 @@ const useCafes = (id?: number | null) => {
                 setLoading(false);
             })
             .catch((error) => {
-                setError(error?.response?.data?.message || error.message || 'Something went wrong');
-                setLoading(false);
+                if (error.response?.status === 404) {
+                    setCafes([]);
+                } else {
+                    setError(error?.response?.data?.message || error.message || 'Something went wrong');
+                    setLoading(false);
+                }
             });
     }
     const fetchCafeById = (id: number) => {
@@ -43,7 +47,7 @@ const useCafes = (id?: number | null) => {
         }
     }, [id]);
 
-    return {cafes, cafe, loading, error};
+    return {cafes, cafe, loading, error, refreshCafeteria: fetchCafeById};
 };
 
 export default useCafes;

@@ -22,7 +22,7 @@ const Footer = () => {
         }}
       >
         <Tab.Screen 
-          name="Cafes"
+          name="cafes"
           component={CafeList}
           options={{
             tabBarIcon: ({ color }) => (
@@ -35,7 +35,7 @@ const Footer = () => {
           }}
         />
         <Tab.Screen 
-          name="Cart" 
+          name="cart"
           component={Cart}
           options={{
             tabBarIcon: ({ color }) => (

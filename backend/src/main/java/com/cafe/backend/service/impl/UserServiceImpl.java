@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (newUserDTO.reviews() != null) {
-            Set<ReviewEntity> reviewEntities = getReviewsEntities(newUserDTO);
+            List<ReviewEntity> reviewEntities = getReviewsEntities(newUserDTO);
             user.setReviews(reviewEntities);
         }
 
@@ -163,8 +163,8 @@ public class UserServiceImpl implements UserService {
         return orderEntities;
     }
 
-    private Set<ReviewEntity> getReviewsEntities(UserDTO newUserDTO) throws DataMappingException {
-        Set<ReviewEntity> reviewEntities = new HashSet<>();
+    private List<ReviewEntity> getReviewsEntities(UserDTO newUserDTO) throws DataMappingException {
+        List<ReviewEntity> reviewEntities = new ArrayList<>();
         for (ReviewDTO reviewDTO : newUserDTO.reviews()) {
             reviewEntities.add(ReviewMapper.mapToEntity(reviewDTO));
         }

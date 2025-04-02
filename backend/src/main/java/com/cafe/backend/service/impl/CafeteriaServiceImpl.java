@@ -74,6 +74,26 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         return CafeteriaMapper.mapToDTO(newUpdatedCafeteria);
     }
 
+    @Override
+    public CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException {
+        CafeteriaDTO original = getCafeteriaById(cafeteriaId);
+
+        CafeteriaDTO updatedCafeteria = new CafeteriaDTO(
+            original.id(),
+            original.name(),
+            original.brand(),
+            original.location(),
+            rating,
+            countReviews,
+            original.imageUrl(),
+            original.phoneNumber(),
+            original.openingHour(),
+            original.closingHour()
+        );
+
+        return updateCafeteria(cafeteriaId, updatedCafeteria);
+    }
+
     private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {
         cafeteria.setName(updatedCafeteria.name());
         cafeteria.setBrand(updatedCafeteria.brand());
@@ -85,25 +105,5 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         cafeteria.setOpeningHour(updatedCafeteria.openingHour());
         cafeteria.setClosingHour(updatedCafeteria.closingHour());
         return cafeteriaRepository.save(cafeteria);
-    }
-
-    @Override
-    public CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException {
-        CafeteriaDTO original = getCafeteriaById(cafeteriaId);
-
-        CafeteriaDTO updatedCafeteria = new CafeteriaDTO(
-            original.id(), 
-            original.name(), 
-            original.brand(), 
-            original.location(),
-            rating,
-            countReviews,
-            original.imageUrl(),
-            original.phoneNumber(),
-            original.openingHour(),
-            original.closingHour()
-        );
-
-        return updateCafeteria(cafeteriaId, updatedCafeteria);
     }
 }

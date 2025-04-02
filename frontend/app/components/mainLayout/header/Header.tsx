@@ -18,10 +18,11 @@ const Header = () => {
         navigation.navigate("login");
     };
     if (!user) return null;
+    const userId = Number(user.id);
 
     return (
         <View style={styles.header}>
-            <Pressable onPress={() => navigation.navigate("profile", { userId: user.id })}>
+            <Pressable onPress={() => navigation.navigate("profile", { userId: userId })}>
                 <View style={styles.userInfo}>
                     <Image
                         style={styles.image}

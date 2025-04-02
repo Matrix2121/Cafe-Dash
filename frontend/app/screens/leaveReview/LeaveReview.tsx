@@ -3,10 +3,11 @@ import { useNavigation, RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import { AirbnbRating } from "react-native-ratings"; // Install this package: npm install react-native-ratings
+import { AirbnbRating } from "react-native-ratings";
 import styles from "./LeaveReview.style"
 import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
+import {useAuth} from "@/app/context/AuthContext";
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -18,16 +19,22 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { cafe, goingBack } = route.params;
   const cafeteriaId = cafe.id;
-  const { postReview } = useReviews(cafeteriaId);
+  const { postReview, loading, error } = useReviews(cafeteriaId);
 
   const [title, setTitle] = useState("");
   const [body, setbody] = useState("");
   const [rating, setRating] = useState(0);
+  const {user} = useAuth();
 
   const handleSubmitReview = async () => {
     if (!title || rating === 0) {
-      Alert.alert("Error", "Please fill out all required fields and provide a rating.");  //needs refractoring
+      Alert.alert("Error", "Please fill out all required fields and provide a rating.");  //needs refaractoring
       return;
+    }
+
+    if (!user) {
+        Alert.alert("User id is not correct.");
+        return;
     }
 
     const reviewData = {
@@ -35,7 +42,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
       body: body?.trim() || undefined,
       rating,
       cafeteriaId,
-      userId: 1,
+      userId: user.id,
     };
 
     await postReview(reviewData)

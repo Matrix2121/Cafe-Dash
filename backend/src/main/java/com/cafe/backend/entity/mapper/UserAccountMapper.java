@@ -10,10 +10,7 @@ import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.entity.role.RoleEntity;
 import com.cafe.backend.exception.DataMappingException;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class UserAccountMapper {
 
@@ -41,7 +38,7 @@ public class UserAccountMapper {
             }
         }
 
-        Set<ReviewDTO> reviewDTOS = new HashSet<>();
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
         if(userEntity.getReviews() != null) {
         	for (ReviewEntity reviewEntity : userEntity.getReviews()) {
                 reviewDTOS.add(ReviewMapper.mapToDTO(reviewEntity));

@@ -11,9 +11,8 @@ import orders from "../../assets/images/profileScreen/orders.png";
 import {TextInput} from "react-native-paper";
 import updateImage from "../../assets/images/login-background.jpg";
 import useUser from "@/app/hooks/useUser";
-import {SvgUri} from "react-native-svg";
 import { List } from 'react-native-paper';
-
+import HasRoles from "@/app/utilComponents/HasRoles";
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
 
@@ -165,7 +164,7 @@ const Profile = ({route}: IProps) => {
                     <Text style={styles.orderTextLogo}>Previous Orders</Text>
                 </Pressable>
             </View>
-            {user?.roles.some(role => role.roleName === 'admin') && (
+            <HasRoles roles={['admin']}>
                 <View style={styles.accordion}>
                     <List.Section>
                         <List.Accordion
@@ -194,7 +193,7 @@ const Profile = ({route}: IProps) => {
                         </List.Accordion>
                     </List.Section>
                 </View>
-            )}
+            </HasRoles>
         </View>
     )
 }

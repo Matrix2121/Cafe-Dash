@@ -6,10 +6,7 @@ import com.cafe.backend.entity.role.RoleEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-import java.util.LinkedList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * {@code UserAccount} is an entity class.
@@ -46,12 +43,12 @@ public class UserEntity {
     private Set<RoleEntity> roles;
 
     @Builder.Default
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderEntity> orders = new LinkedList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<ReviewEntity> reviews = new HashSet<>();
+    private List<ReviewEntity> reviews = new ArrayList<>();
 
     @Column(name = "is_deleted")
     private boolean isDeleted;

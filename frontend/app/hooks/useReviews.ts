@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Review } from '../types/items';
 import customAPI from '../services/apiClient';
+import useCafes from "@/app/hooks/useCafes";
 
 const useReviews = (cafeteriaId: number) => {
     const [reviews, setReviews] = useState<Review[]>([]);
@@ -15,19 +16,26 @@ const useReviews = (cafeteriaId: number) => {
                 setReviews(allReviews);
             })
             .catch((error) => {
-                setError(error?.response?.data?.message || error.message || 'Something went wrong');
+                if (error?.response?.status === 404) {
+                    setReviews([]);
+                } else {
+                    setError(error?.response?.data?.message || error.message || 'Something went wrong');
+                }
             })
             .finally(() => {
                 setLoading(false);
             });
     };
 
-    const postReview = async (review : Review) => {
-        await customAPI.post(`api/reviews`, review)
-            .catch((error) => {
-                setError(error?.response?.data?.message || error.message || 'Something went wrong');
-            });
+    const postReview = async (review: Review) => {
+        try {
+            await customAPI.post(`api/reviews`, review);
+            // await fetchReviewsByCafeId(cafeteriaId);
+        } catch (error: any) {
+            setError(error?.response?.data?.message || error.message || 'Something went wrong');
+        }
     };
+
 
     return { reviews, loading, error, postReview, fetchReviewsByCafeId };
 };

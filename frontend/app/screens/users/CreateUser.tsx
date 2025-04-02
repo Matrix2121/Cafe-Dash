@@ -74,9 +74,9 @@ const CreateUser = () => {
     }
 
     let roleNames: string[] = [];
-    if (user && user.roles.some(r => r.roleName === 'admin')) {
+    if (user && user.roles.some(r => r.authority === 'admin')) {
       roleNames = selectedRoles;
-    } else if (user && user.roles.some(r => r.roleName === 'owner')) {
+    } else if (user && user.roles.some(r => r.authority === 'owner')) {
       roleNames = ['employee'];
     }
 
