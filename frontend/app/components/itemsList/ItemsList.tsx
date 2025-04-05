@@ -51,6 +51,7 @@ const ItemsList = ({ products }: ItemsList) => {
           contentContainerStyle={styles.itemList}
         />
       )}
+      contentContainerStyle={styles.listContent}
     />
   );
 };
