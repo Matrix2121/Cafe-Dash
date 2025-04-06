@@ -3,10 +3,13 @@ package com.cafe.backend.dto;
 import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Builder;
 
 /**
  * @author AngelStoynov
  */
+
+@Builder
 public record CafeteriaDTO(
         Long id, // null for creation
         String name, // required for creation

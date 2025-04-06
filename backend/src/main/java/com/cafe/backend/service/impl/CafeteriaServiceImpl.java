@@ -45,6 +45,9 @@ public class CafeteriaServiceImpl implements CafeteriaService {
 
     @Override
     public CafeteriaDTO getCafeteriaById(Long id) throws NotFoundException, BadRequestException {
+        if (id == null) {
+            throw new BadRequestException("Cafeteria ID cannot be null");
+        }
         CafeteriaEntity cafeteria = cafeteriaRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find cafeteria with this id: " + id));
         return CafeteriaMapper.mapToDTO(cafeteria);
@@ -77,7 +80,7 @@ public class CafeteriaServiceImpl implements CafeteriaService {
     @Override
     public CafeteriaDTO updateCafeteriaReviewFields(Long cafeteriaId, Integer countReviews, Double rating) throws BadRequestException, NotFoundException {
         CafeteriaDTO original = getCafeteriaById(cafeteriaId);
-
+        validateUpdateCafeteriaFields(countReviews, rating);
         CafeteriaDTO updatedCafeteria = new CafeteriaDTO(
             original.id(),
             original.name(),
@@ -90,8 +93,16 @@ public class CafeteriaServiceImpl implements CafeteriaService {
             original.openingHour(),
             original.closingHour()
         );
-
         return updateCafeteria(cafeteriaId, updatedCafeteria);
+    }
+
+    private void validateUpdateCafeteriaFields(Integer countReviews, Double rating) throws ResourceNotFoundException, BadRequestException {
+        if (countReviews == null || rating == null) {
+            throw new ResourceNotFoundException("Rating or count reviews were not found");
+        }
+        if (countReviews < 0 || rating < 0) {
+            throw new BadRequestException("Rating or review cannot be less than 0");
+        }
     }
 
     private CafeteriaEntity updateCafeteriaFields(CafeteriaDTO updatedCafeteria, CafeteriaEntity cafeteria) {

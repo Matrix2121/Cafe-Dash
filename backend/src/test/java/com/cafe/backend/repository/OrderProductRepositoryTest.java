@@ -4,6 +4,7 @@ import com.cafe.backend.data.TestData;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.cafeteria.CafeteriaEntity;
 import com.cafe.backend.entity.order.OrderEntity;
+import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.entity.product.ProductEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-class OrderRepositoryTest {
+class OrderProductRepositoryTest {
 
     @Autowired
     private ProductRepository productRepository;
@@ -34,10 +35,14 @@ class OrderRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderProductRepository orderProductRepository;
+
     private ProductEntity savedProduct;
     private CafeteriaEntity savedCafeteria;
     private UserEntity savedUser;
     private OrderEntity savedOrder;
+    private OrderProductEntity savedOrderProduct;
 
     @BeforeEach
     void setUp() {
@@ -45,40 +50,35 @@ class OrderRepositoryTest {
         savedCafeteria = cafeteriaRepository.save(TestData.createTestCafeteria());
         savedOrder = orderRepository.save(TestData.createTestOrder(savedUser, savedCafeteria, new ArrayList<>()));
         savedProduct = productRepository.save(TestData.createTestProduct(savedCafeteria));
+        savedOrderProduct = orderProductRepository.save(TestData.createTestOrderProduct(savedProduct, savedOrder));
     }
 
     @Test
     void testFindAllByIsDeletedFalse() {
-        assertThat(savedOrder).isNotNull();
-        List<OrderEntity> results = orderRepository.findAllByIsDeletedFalse();
-        assertThat(results).isNotNull();
-        assertFalse(results.get(0).isDeleted());
-        assertEquals(1, results.size());
+        assertThat(savedOrderProduct).isNotNull();
+        assertThat(savedOrderProduct.getId()).isGreaterThan(0);
+
+        List<OrderProductEntity> result = orderProductRepository.findAllByIsDeletedFalse();
+        assertThat(result).isNotNull();
+        assertEquals(1, result.size());
+
+        assertFalse(result.get(0).isDeleted());
+        assertEquals(savedOrderProduct.getId(), result.get(0).getId());
     }
 
     @Test
-    void testFindByIdAndIsDeletedFalse() {
+    void testFindByOrderIdAndIsDeletedFalse() {
+        assertThat(savedOrderProduct).isNotNull();
+        assertThat(savedOrderProduct.getId()).isGreaterThan(0);
+
         assertThat(savedOrder).isNotNull();
+        assertThat(savedOrder.getId()).isGreaterThan(0);
 
-        List<OrderEntity> results = orderRepository.findByIdAndIsDeletedFalse(1L);
-        assertThat(results).isNotNull();
-        assertFalse(results.get(0).isDeleted());
+        List<OrderProductEntity> result = orderProductRepository.findByOrderIdAndIsDeletedFalse(savedOrder.getId());
+        assertThat(result).isNotNull();
+        assertEquals(1, result.size());
 
-        assertEquals(savedOrder.getId(), results.get(0).getId());
-        assertEquals(1, results.size());
-    }
-
-    @Test
-    void testFindByUserIdAndIsDeletedFalse() {
-        assertThat(savedOrder).isNotNull();
-        assertThat(savedUser).isNotNull();
-
-        List<OrderEntity> results = orderRepository.findByIdAndIsDeletedFalse(savedUser.getId());
-        assertThat(results).isNotNull();
-
-        assertFalse(results.get(0).isDeleted());
-        assertNotNull(savedUser.getId());
-        assertEquals(1, results.size());
-        assertEquals(savedUser.getId(), savedOrder.getUser().getId());
+        assertFalse(result.get(0).isDeleted());
+        assertEquals(savedOrderProduct.getId(), result.get(0).getId());
     }
 }
