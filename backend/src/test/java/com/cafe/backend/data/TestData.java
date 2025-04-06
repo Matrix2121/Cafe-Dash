@@ -91,10 +91,11 @@ public class TestData {
         return order;
     }
 
-    public static OrderProductEntity createTestOrderProduct(ProductEntity product, int quantity) {
+    public static OrderProductEntity createTestOrderProduct(ProductEntity product, OrderEntity order) {
         return OrderProductEntity.builder()
+                .order(order)
                 .product(product)
-                .productQuantity(quantity)
+                .productQuantity(1)
                 .productPrice(product.getPrice())
                 .isDeleted(false)
                 .build();

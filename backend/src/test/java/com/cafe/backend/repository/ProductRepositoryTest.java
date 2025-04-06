@@ -46,6 +46,7 @@ class ProductRepositoryTest {
         List<ProductEntity> results = productRepository.findByCafeteriaId(savedCafeteria.getId());
         assertEquals(1, results.size());
         assertFalse(results.isEmpty(), "Expected at least one product");
+
         assertEquals(savedProduct.getName(), results.get(0).getName());
         assertEquals(ProductTypeEnum.DRINKS, results.get(0).getProductType());
     }

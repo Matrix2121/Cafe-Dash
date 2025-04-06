@@ -41,7 +41,7 @@ class ReviewRepositoryTest {
     }
 
     @Test
-    void findByCafeteriaIdAndIsDeletedFalse() {
+    void testFindByCafeteriaIdAndIsDeletedFalse() {
         assertThat(savedCafeteria).isNotNull();
         assertThat(savedUser).isNotNull();
         assertThat(savedReview).isNotNull();

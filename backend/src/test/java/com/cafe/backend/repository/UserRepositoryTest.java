@@ -2,7 +2,6 @@ package com.cafe.backend.repository;
 
 import com.cafe.backend.data.TestData;
 import com.cafe.backend.entity.account.UserEntity;
-import com.cafe.backend.entity.role.RoleEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void findByUsernameAndIsDeletedFalse() {
+    void testFindByUsernameAndIsDeletedFalse() {
         assertThat(savedUser).isNotNull();
         Optional<UserEntity> result = userRepository.findByUsernameAndIsDeletedFalse(savedUser.getUsername());
         assertThat(result).isPresent();
@@ -42,7 +41,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void findAllByIsDeletedFalse() {
+    void testFindAllByIsDeletedFalse() {
         UserEntity deleted = UserEntity.builder()
                 .username("deleted")
                 .email("email_deleted")

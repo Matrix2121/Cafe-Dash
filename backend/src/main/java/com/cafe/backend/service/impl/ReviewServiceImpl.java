@@ -45,7 +45,7 @@ public class ReviewServiceImpl implements ReviewService {
 
         ReviewEntity savedReview = reviewRepository.save(review);
         Long cafeteriaId = savedReview.getCafeteria().getId();
-        cafeteriaService.updateCafeteriaReviewFields(cafeteriaId, getcountReviews(cafeteriaId), getRating(cafeteriaId));
+        cafeteriaService.updateCafeteriaReviewFields(cafeteriaId, getCountReviews(cafeteriaId), getRating(cafeteriaId));
         return ReviewMapper.mapToDTO(savedReview);
     }
 
@@ -82,7 +82,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Integer getcountReviews(Long cafeteriaId) throws BadRequestException, NotFoundException {
+    public Integer getCountReviews(Long cafeteriaId) throws BadRequestException, NotFoundException {
         return getReviewsByCafeteriaId(cafeteriaId).size();
     }
 

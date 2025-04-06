@@ -29,7 +29,7 @@ class RoleRepositoryTest {
     }
 
     @Test
-    void findByRoleNameAndIsDeletedFalse() {
+    void testFindByRoleNameAndIsDeletedFalse() {
         assertThat(savedRole).isNotNull();
         assertThat(savedRole.getId()).isGreaterThan(0);
 
