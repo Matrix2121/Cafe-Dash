@@ -9,7 +9,7 @@ import lombok.*;
 import java.util.*;
 
 /**
- * {@code UserAccount} is an entity class.
+ * {@code User} is an entity class.
  * 
  * @author AngelStoynov, ZapryanZapryanov
  */
