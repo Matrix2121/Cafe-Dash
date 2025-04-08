@@ -15,7 +15,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'gray',
   },
-  
+  plusContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 export default styles;

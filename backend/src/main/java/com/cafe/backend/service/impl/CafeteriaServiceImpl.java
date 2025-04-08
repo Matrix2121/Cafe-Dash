@@ -89,9 +89,9 @@ public class CafeteriaServiceImpl implements CafeteriaService {
             rating,
             countReviews,
             original.phoneNumber(),
-            original.imageUrl(),
             original.openingHour(),
-            original.closingHour()
+            original.closingHour(),
+            original.imageUrl()
         );
         return updateCafeteria(cafeteriaId, updatedCafeteria);
     }
@@ -112,9 +112,9 @@ public class CafeteriaServiceImpl implements CafeteriaService {
         cafeteria.setRating(updatedCafeteria.rating());
         cafeteria.setCountReview(updatedCafeteria.countReview());
         cafeteria.setPhoneNumber(updatedCafeteria.phoneNumber());
-        cafeteria.setImageUrl(updatedCafeteria.imageUrl());
         cafeteria.setOpeningHour(updatedCafeteria.openingHour());
         cafeteria.setClosingHour(updatedCafeteria.closingHour());
+        cafeteria.setImageUrl(updatedCafeteria.imageUrl());
         return cafeteriaRepository.save(cafeteria);
     }
 }
