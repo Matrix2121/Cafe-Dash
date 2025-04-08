@@ -18,7 +18,7 @@ public record CafeteriaDTO(
         double rating, // 0.0 for creation
         int countReview, // 0 required for creation
         String phoneNumber, // required for creation
-        String imageUrl,
         @JsonFormat(pattern = "H:mm") LocalTime openingHour,
-        @JsonFormat(pattern = "H:mm") LocalTime closingHour
+        @JsonFormat(pattern = "H:mm") LocalTime closingHour,
+        String imageUrl
 ) { }

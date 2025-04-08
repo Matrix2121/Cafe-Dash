@@ -17,6 +17,7 @@ import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
 import CreateUser from '../screens/users/CreateUser';
 import Test from '../screens/test/Test'
 import ContactUs from "../screens/contact/ContactUs";
+import CreateProduct from "@/app/screens/products/CreateProduct/CreateProduct";
 import UsersList from '../screens/users/UsersList';
 
 export type RootStackParamList = {
@@ -31,6 +32,7 @@ export type RootStackParamList = {
     cafereviews: { cafe: Cafeteria };
     leavereview: { cafe: Cafeteria; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
     createcafeteria: undefined;
+    createproduct: {cafe: Cafeteria};
     cart: undefined;
     test: undefined;
     createuser: undefined;
@@ -54,6 +56,7 @@ const Navigation = () => {
             <Stack.Screen name="cafereviews" component={CafeReviews} />
             <Stack.Screen name="leavereview" component={LeaveReview} />
             <Stack.Screen name="createcafeteria" component={CreateCafeteria} />
+            <Stack.Screen name="createproduct" component={CreateProduct} />
             <Stack.Screen name="cart" component={Cart} />
             <Stack.Screen name="test" component={Test} />
             <Stack.Screen name="createuser" component={CreateUser} />

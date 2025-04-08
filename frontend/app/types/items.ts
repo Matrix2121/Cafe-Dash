@@ -6,10 +6,10 @@ export type Cafeteria = {
   rating: number;
   countReview: number;
   phoneNumber: string;
-  imageUrl: string;
   openingHour: string;
   closingHour: string;
   isDeleted: boolean;
+  imageUrl: string;
 }
 
 export type CreateCafeteriaDTO = {
@@ -17,9 +17,9 @@ export type CreateCafeteriaDTO = {
   brand: string;
   location: string;
   phoneNumber: string;
-  imageUrl: string;
   openingHour: string;
   closingHour: string;
+  imageUrl: string;
 };
 
 export type CreateUserDTO = {

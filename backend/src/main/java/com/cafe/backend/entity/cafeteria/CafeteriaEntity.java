@@ -55,7 +55,7 @@ public class CafeteriaEntity {
     @Column(name = "image_url")
     private String imageUrl;
 
-    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cafeteria", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductEntity> products;
 
     @Column(name = "is_deleted")

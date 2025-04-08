@@ -42,11 +42,11 @@ public class ReviewEntity {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cafeteriaId", nullable = false)
     private CafeteriaEntity cafeteria;
 }
