@@ -42,12 +42,12 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
     return (
         <View style={styles.container}>
             <ReviewHeader
-                rating={updatedCafe?.rating ?? 0}
-                totalReviews={updatedCafe?.countReview ?? 0}
+                rating={updatedCafe?.rating ?? cafe.rating}
+                totalReviews={updatedCafe?.countReview ?? cafe.countReview}
                 onLeaveReview={handleLeaveReview}
             />
 
-    
+
             {loading || error ? (
                 <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />
             ) : !hasData ? (
