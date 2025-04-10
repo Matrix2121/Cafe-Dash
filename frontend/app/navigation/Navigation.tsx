@@ -30,7 +30,7 @@ export type RootStackParamList = {
     cafedetail: { cafe: Cafeteria };
     cafemenu: { cafe: Cafeteria };
     cafereviews: { cafe: Cafeteria };
-    leavereview: { cafe: Cafeteria; goingBack: () => void }; //leavereview needs the goingBack function to reset the value of hasFetched to false in CafeReviews
+    leavereview: { cafe: Cafeteria };
     createcafeteria: undefined;
     createproduct: {cafe: Cafeteria};
     cart: undefined;
