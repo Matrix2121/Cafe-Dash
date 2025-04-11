@@ -4,7 +4,7 @@ import {useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {Cafeteria} from "@/app/types/items"
 import {TouchableOpacity, View, Text} from "react-native";
-import styles from "./MenuSubHeader.style";
+import styles from "./CafeMenuSubheader.style";
 import {SvgUri} from "react-native-svg";
 
 interface MenuSubheader {

@@ -8,6 +8,7 @@ import styles from "./LeaveReview.style"
 import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
 import {useAuth} from "@/app/context/AuthContext";
+import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -28,7 +29,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
   const handleSubmitReview = async () => {
     if (!title || rating === 0) {
-      Alert.alert("Error", "Please fill out all required fields and provide a rating.");  //needs refaractoring
+      Alert.alert("Invalid input", "Please fill out all required fields and provide a rating.");
       return;
     }
 
@@ -46,45 +47,47 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
     };
 
     await postReview(reviewData)
-        navigation.goBack(); //ensures the going back in the navigation stack
+    navigation.goBack();
   };
 
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Leave a Review</Text>
+      <CommonHeader title="Leave a Review"/>
+      <View style={styles.formContainer}>
 
-      <View style={styles.ratingContainer}>
-        <Text style={styles.label}>Rating:</Text>
-        <AirbnbRating
-          defaultRating={rating}
-          onFinishRating={(newRating: number) => setRating(newRating)}
-          size={32}
-          showRating={false}
-          selectedColor={theme.colors.primary}
+        <View style={styles.ratingContainer}>
+          <Text style={styles.label}>Rating:</Text>
+          <AirbnbRating
+            defaultRating={rating}
+            onFinishRating={(newRating: number) => setRating(newRating)}
+            size={32}
+            showRating={false}
+            selectedColor={theme.colors.primary}
+          />
+        </View>
+
+        <Text style={styles.label}>Title:</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter a title for your review (required)"
+          value={title}
+          onChangeText={setTitle}
         />
+
+        <Text style={styles.label}>Comment:</Text>
+        <TextInput
+          style={[styles.input, styles.commentInput]}
+          placeholder="Write your review here... (optional)"
+          value={body}
+          onChangeText={setbody}
+          multiline
+        />
+
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmitReview}>
+          <Text style={styles.submitButtonText}>Submit Review</Text>
+        </TouchableOpacity>
       </View>
-
-      <Text style={styles.label}>Title:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter a title for your review (required)"
-        value={title}
-        onChangeText={setTitle}
-      />
-
-      <Text style={styles.label}>Comment:</Text>
-      <TextInput
-        style={[styles.input, styles.commentInput]}
-        placeholder="Write your review here... (optional)"
-        value={body}
-        onChangeText={setbody}
-        multiline
-      />
-
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmitReview}>
-        <Text style={styles.submitButtonText}>Submit Review</Text>
-      </TouchableOpacity>
     </View>
   );
 };

@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colors.background,
   },
+  scrollContainer: {
+    flex: 1,
+    marginBottom: 100,
+  },
   menuContainer: {
     padding: theme.spacing.md,
   },
@@ -15,12 +19,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'gray',
   },
-  plusContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.radii.md,
-  }
 });
 
 export default styles;

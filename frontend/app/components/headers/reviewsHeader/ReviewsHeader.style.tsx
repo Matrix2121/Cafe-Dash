@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
+      height: 60
     },
     ratingContainer: {
       flexDirection: 'row',
@@ -34,16 +35,10 @@ const styles = StyleSheet.create({
       fontSize: theme.fontSizes.body,
       color: theme.colors.textSecondary,
     },
-    leaveReviewButton: {
-      backgroundColor: theme.colors.primary,
-      paddingVertical: theme.spacing.sm,
-      paddingHorizontal: theme.spacing.md,
-      borderRadius: theme.radii.sm,
-    },
-    leaveReviewButtonText: {
-      fontSize: theme.fontSizes.body,
-      color: theme.colors.surface,
-      fontWeight: 'bold',
+    backButton: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: "auto",
     },
   });
   
