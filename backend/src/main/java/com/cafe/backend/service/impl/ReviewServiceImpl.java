@@ -39,11 +39,11 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public ReviewDTO createReview(ReviewDTO reviewDTO) throws BadRequestException, NotFoundException {
-        ReviewEntity review = ReviewMapper.mapToEntity(reviewDTO);
-        review.setId(null);
-        review.setCreatedAt(LocalDateTime.now());
+        ReviewEntity reviewEntity = ReviewMapper.mapToEntity(reviewDTO);
+        reviewEntity.setId(null);
+        reviewEntity.setCreatedAt(LocalDateTime.now());
 
-        ReviewEntity savedReview = reviewRepository.save(review);
+        ReviewEntity savedReview = reviewRepository.save(reviewEntity);
         Long cafeteriaId = savedReview.getCafeteria().getId();
         cafeteriaService.updateCafeteriaReviewFields(cafeteriaId, getCountReviews(cafeteriaId), getRating(cafeteriaId));
         return ReviewMapper.mapToDTO(savedReview);
