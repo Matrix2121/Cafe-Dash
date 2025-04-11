@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
   plusContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.radii.md,
   }
 });
 

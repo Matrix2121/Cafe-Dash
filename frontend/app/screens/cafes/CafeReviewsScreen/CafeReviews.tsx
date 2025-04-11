@@ -8,7 +8,7 @@ import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
 import styles from './CafeReviews.style'
 import ReviewHeader from '@/app/components/headers/reviewsHeader/ReviewsHeader';
-import useCafes from "@/app/hooks/useCafes";
+import useCafes from '@/app/hooks/useCafes';
 
 type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviews">;
 
@@ -20,33 +20,34 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
     const { cafe } = route.params;
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const { reviews, loading, error, fetchReviewsByCafeId } = useReviews(cafe.id);
-    const [shouldRefetch, setShouldRefetch] = useState(true);
+    const { cafe: updatedCafe, refreshCafeteria } = useCafes(cafe.id);
+
 
     useEffect(() => {
-        if (shouldRefetch) {
+        const unsubscribe = navigation.addListener('focus', () => {
             fetchReviewsByCafeId(cafe.id);
-            setShouldRefetch(false);
-        }
-    }, [shouldRefetch]);
+            refreshCafeteria(cafe.id);
+        });
+    
+        return unsubscribe;
+    }, [navigation, cafe.id]);
+    
 
     const handleLeaveReview = () => {
-        navigation.navigate('leavereview', {
-            cafe,
-            goingBack: () => setShouldRefetch(true),
-        });
+        navigation.navigate('leavereview', {cafe});
     };
 
     const hasData = Array.isArray(reviews) && reviews.length > 0;
-    console.log(cafe);
 
     return (
         <View style={styles.container}>
             <ReviewHeader
-                rating={cafe.rating}
-                totalReviews={cafe.countReview}
+                rating={updatedCafe?.rating ?? cafe.rating}
+                totalReviews={updatedCafe?.countReview ?? cafe.countReview}
                 onLeaveReview={handleLeaveReview}
             />
-    
+
+
             {loading || error ? (
                 <LoadingErrorView loading={loading} error={error} dataAvailable={hasData} />
             ) : !hasData ? (

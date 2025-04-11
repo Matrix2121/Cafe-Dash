@@ -17,7 +17,7 @@ interface LeaveReviewProps {
 
 const LeaveReview = ({ route }: LeaveReviewProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  const { cafe, goingBack } = route.params;
+  const { cafe } = route.params;
   const cafeteriaId = cafe.id;
   const { postReview, loading, error } = useReviews(cafeteriaId);
 
@@ -46,7 +46,6 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
     };
 
     await postReview(reviewData)
-        goingBack(); // goingBack is called to reset the state of hasFetched to false in CafeReviews
         navigation.goBack(); //ensures the going back in the navigation stack
   };
 
