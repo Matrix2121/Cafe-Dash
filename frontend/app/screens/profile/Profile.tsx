@@ -13,7 +13,7 @@ import updateImage from "../../assets/images/login-background.jpg";
 import useUser from "@/app/hooks/useUser";
 import { List } from 'react-native-paper';
 import HasRoles from "@/app/utilComponents/HasRoles";
-import ProfileHeader from "@/app/components/headers/profileHeader/ProfileHeader";
+import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
@@ -74,7 +74,7 @@ const Profile = ({route}: IProps) => {
 
     return (
         <View style={styles.profileContainer}>
-            <ProfileHeader/>
+            <CommonHeader title="Profile"/>
             <View style={styles.imageContainer}>
                 <Image source={profileBackground} style={styles.imageLogo}/>
             </View>

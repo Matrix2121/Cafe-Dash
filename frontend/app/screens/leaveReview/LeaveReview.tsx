@@ -8,7 +8,7 @@ import styles from "./LeaveReview.style"
 import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
 import {useAuth} from "@/app/context/AuthContext";
-import LeaveReviewHeader from "@/app/components/headers/leaveReviewHeader/leaveReviewHeader";
+import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -53,7 +53,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
   return (
     <View style={styles.container}>
-      <LeaveReviewHeader/>
+      <CommonHeader title="Leave a Review"/>
       <View style={styles.formContainer}>
 
         <View style={styles.ratingContainer}>

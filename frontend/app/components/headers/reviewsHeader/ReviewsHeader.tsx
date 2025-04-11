@@ -12,7 +12,7 @@ interface ReviewHeaderProps {
   totalReviews: number;
 }
 
-const ReviewHeader: React.FC<ReviewHeaderProps> = ({ rating, totalReviews }) => {
+const ReviewHeader = ({ rating, totalReviews }: ReviewHeaderProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
