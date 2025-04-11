@@ -8,6 +8,7 @@ import styles from "./LeaveReview.style"
 import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
 import {useAuth} from "@/app/context/AuthContext";
+import LeaveReviewHeader from "@/app/components/headers/leaveReviewHeader/leaveReviewHeader";
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -52,7 +53,8 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Leave a Review</Text>
+    <LeaveReviewHeader/>
+    <View style={styles.formContainer}>
 
       <View style={styles.ratingContainer}>
         <Text style={styles.label}>Rating:</Text>
@@ -85,6 +87,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
       <TouchableOpacity style={styles.submitButton} onPress={handleSubmitReview}>
         <Text style={styles.submitButtonText}>Submit Review</Text>
       </TouchableOpacity>
+    </View>
     </View>
   );
 };

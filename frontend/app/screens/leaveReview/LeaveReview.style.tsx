@@ -4,8 +4,9 @@ import { theme } from "@/app/theme/theme";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+    },
+    formContainer: {
       padding: theme.spacing.md,
-      backgroundColor: theme.colors.background,
     },
     header: {
       fontSize: theme.fontSizes.header,

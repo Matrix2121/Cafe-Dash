@@ -7,10 +7,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: theme.spacing.md,
     backgroundColor: theme.colors.surface,
+    zIndex: 1000,
+    shadowColor: theme.colors.shadow,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
     elevation: theme.elevation.sm,
-    height: 60,
+    height: 60
   },
-  headerTitle: {
+  title: {
     fontSize: theme.fontSizes.header,
     color: theme.colors.textPrimary,
     fontWeight: "bold",

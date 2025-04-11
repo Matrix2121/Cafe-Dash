@@ -2,7 +2,7 @@ import React, {useState, useCallback, useEffect} from 'react';
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { RouteProp, useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { Text, FlatList, View } from 'react-native';
+import { Text, FlatList, View, TouchableOpacity } from 'react-native';
 import ReviewCard from '@/app/components/reviewCard/ReviewCard';
 import useReviews from '@/app/hooks/useReviews';
 import LoadingErrorView from '@/app/components/errorView/LoadingErrorView';
@@ -44,7 +44,6 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
             <ReviewHeader
                 rating={updatedCafe?.rating ?? cafe.rating}
                 totalReviews={updatedCafe?.countReview ?? cafe.countReview}
-                onLeaveReview={handleLeaveReview}
             />
 
 
@@ -58,6 +57,12 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
                     renderItem={({ item }) => <ReviewCard key={item.id} review={item} />} 
                 />
             )}
+
+            <TouchableOpacity style={styles.Button} onPress={() => navigation.navigate("leavereview", { cafe })}>
+                <Text style={styles.ButtonText}>
+                    Leave a review
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };

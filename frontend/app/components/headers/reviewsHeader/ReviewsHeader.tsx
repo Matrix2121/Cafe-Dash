@@ -1,14 +1,19 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { View, Text, Pressable } from "react-native";
 import styles from "./ReviewsHeader.style"
+import { MaterialIcons } from "@expo/vector-icons";
+import theme from "@/app/theme/theme";
 
 interface ReviewHeaderProps {
   rating: number;
   totalReviews: number;
-  onLeaveReview: () => void;
 }
 
-const ReviewHeader: React.FC<ReviewHeaderProps> = ({ rating, totalReviews, onLeaveReview }) => {
+const ReviewHeader: React.FC<ReviewHeaderProps> = ({ rating, totalReviews }) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View style={styles.container}>
       <View style={styles.ratingContainer}>
@@ -17,9 +22,13 @@ const ReviewHeader: React.FC<ReviewHeaderProps> = ({ rating, totalReviews, onLea
         <Text style={styles.totalReviews}>({totalReviews} reviews)</Text>
       </View>
 
-      <TouchableOpacity style={styles.leaveReviewButton} onPress={onLeaveReview}>
-        <Text style={styles.leaveReviewButtonText}>Leave a Review</Text>
-      </TouchableOpacity>
+      <Pressable
+        onPress={() => navigation.goBack()}
+        style={styles.backButton}
+        android_ripple={{ color: theme.colors.ripple }}
+      >
+        <MaterialIcons name="arrow-back" size={28} style={styles.backButton}/>
+      </Pressable>
     </View>
   );
 };

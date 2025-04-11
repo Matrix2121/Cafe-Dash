@@ -3,16 +3,16 @@ import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, Pressable, Image } from "react-native";
-
-import styles from "./OrdersHeader.style";
-import theme from "@/app/theme/theme";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const MenuHeader = () => {
+import styles from "./leaveReviewHeader.style";
+import theme from "@/app/theme/theme";
+
+const LeaveReviewHeader = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View style={styles.header}>
-      <Text style={styles.headerTitle}>My Orders</Text>
+      <Text style={styles.title}>Leave a review</Text>
       <Pressable
         onPress={() => navigation.goBack()}
         style={styles.backButton}
@@ -24,4 +24,4 @@ const MenuHeader = () => {
   );
 };
 
-export default MenuHeader;
+export default LeaveReviewHeader;
