@@ -108,8 +108,6 @@ public class OrderServiceImpl implements OrderService {
             throw new ResourceNotFoundException("No orders found");
         }
         List<OrderDTO> orderDTOs = new LinkedList<>();
-        String str = "control point";
-        System.out.println(str);
         for (OrderEntity entity : orderEntities) {
             orderDTOs.add(OrderMapper.mapToDTO(entity));
         }
