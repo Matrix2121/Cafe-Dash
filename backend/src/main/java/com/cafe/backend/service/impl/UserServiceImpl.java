@@ -13,6 +13,7 @@ import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.dto.RoleDTO;
+import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
 import com.cafe.backend.entity.mapper.JWTUserMapper;
@@ -67,8 +68,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateUser(Long id, UserDTO userDTO) throws BadRequestException, NotFoundException {
-        UserEntity user = userRepository.findById(id)
+    public UserDTO updateUser(Long id, UpdateUserDTO userDTO) throws BadRequestException, NotFoundException {
+        UserEntity user = userRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         UserEntity updatedUser = updateUserFields(userDTO, user);
         return UserMapper.mapToDTO(updatedUser);
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserById(Long id) throws BadRequestException, NotFoundException {
-        UserEntity user = userRepository.findById(id)
+        UserEntity user = userRepository.findByIdAndIsDeletedFalse(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
         return UserMapper.mapToDTO(user);
     }
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    private UserEntity updateUserFields(UserDTO newUserDTO, UserEntity user) throws DataMappingException {
+    private UserEntity updateUserFields(UpdateUserDTO newUserDTO, UserEntity user) throws DataMappingException {
 
         if (newUserDTO.username() != null) {
             user.setUsername(newUserDTO.username());
@@ -132,23 +133,14 @@ public class UserServiceImpl implements UserService {
             user.setRoles(roleEntities);
         }
 
-        if (newUserDTO.orders() != null) {
-            List<OrderEntity> orderEntities = getOrderEntities(newUserDTO);
-            user.setOrders(orderEntities);
-        }
-
-        if (newUserDTO.reviews() != null) {
-            List<ReviewEntity> reviewEntities = getReviewsEntities(newUserDTO);
-            user.setReviews(reviewEntities);
-        }
-
         return userRepository.save(user);
     }
 
-    private List<RoleEntity> getRoleEntities(UserDTO userDTO) throws DataMappingException {
+    private List<RoleEntity> getRoleEntities(UpdateUserDTO userDTO) throws DataMappingException {
         List<RoleEntity> roleEntities = new ArrayList<>();
-        for (RoleDTO role : userDTO.roles()) {
-            roleEntities.add(RoleMapper.mapToEntity(role));
+        for (String roleName : userDTO.roles()) {
+        	RoleEntity roleEntity = roleRepository.findByRoleNameAndIsDeletedFalse(roleName).get();
+        	roleEntities.add(roleEntity);
         }
         return roleEntities;
     }

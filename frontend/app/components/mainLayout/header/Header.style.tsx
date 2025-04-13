@@ -33,6 +33,23 @@ const styles = StyleSheet.create({
   logoutButton: {
     backgroundColor: theme.colors.transparent,
     justifyContent: 'center',
+    marginLeft: 8,
+  },
+  
+  adminButton: {
+    backgroundColor: theme.colors.primary,
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 8,
+  },
+  
+  adminButtonText: {
+    color: theme.colors.surface,
+    fontSize: 14,
+    fontWeight: '600',
   },
 });
 

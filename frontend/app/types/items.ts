@@ -76,6 +76,7 @@ export type UserUpdate = {
   id: number;
   username: string;
   email: string;
+  roles: string[];
 }
 
 export type Role = {
@@ -85,7 +86,7 @@ export type Role = {
 }
 
 export type Review = {
-  id?: number;
+  id: number;
   title: string;
   body?: string;
   rating: number;

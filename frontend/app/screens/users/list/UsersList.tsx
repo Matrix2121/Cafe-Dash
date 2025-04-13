@@ -1,14 +1,15 @@
 import React from "react";
 import { FlatList, View, Text } from "react-native";
 import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
-import useUser from "@/app/hooks/useUser";
+import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 import { User } from "@/app/types/items";
 import UserCard from "@/app/components/userCard/UserCard";
 import styles from "./UsersList.style";
 import { useAuth } from "@/app/context/AuthContext";
+import useAllUsers from "@/app/hooks/useAllUsers";
 
 const UsersList = () => {
-  const { users, loading, error } = useUser();
+  const { users, loading, error } = useAllUsers();
   const { user } = useAuth();
 
   const filteredUsers = user ? users.filter(u => u.id !== user.id) : users;
@@ -45,6 +46,7 @@ const UsersList = () => {
 
   return (
     <View style={styles.mainContainer}>
+      <CommonHeader title="List of Users"/>
       <FlatList
         contentContainerStyle={styles.listContainer}
         data={filteredUsers}

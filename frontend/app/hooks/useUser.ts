@@ -3,53 +3,37 @@ import { User, UserUpdate } from '../types/items';
 import customAPI from '../services/apiClient';
 
 const useUser = (id?: number) => {
-    const [users, setUsers] = useState<User[]>([]);
-    const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    const fetchAllUsers = async () => {
-        await customAPI.get(`api/users`)
-            .then((response) => {
-                const allUsers = response.data;
-                setUsers(allUsers);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error?.response?.data?.message || error.message || 'Something went wrong');
-                setLoading(false);
-            });
+  const fetchUserById = async (id: number) => {
+    try {
+      const response = await customAPI.get(`api/users/${id}`);
+      setUser(response.data);
+    } catch (error: any) {
+      setError(error?.response?.data?.message || error.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
-    const fetchUserById = async (id: number) => {
-        await customAPI.get(`api/users/${id}`)
-            .then((response) => {
-                const user = response.data;
-                setUser(user);
-                setLoading(false);
-            })
-            .catch((error) => {
-                setError(error?.response?.data?.message || error.message || 'Something went wrong');
-                setLoading(false);
-            });
+  };
+
+  useEffect(() => {
+    if (id != null) {
+      fetchUserById(id);
     }
+  }, [id]);
 
-    useEffect(() => {
-        if (id != null) {
-          fetchUserById(id);
-        }
-      }, [id]);
-
-    const updateUser = async (updatedUser: UserUpdate, id: number) => {
-         await customAPI.put(`api/users/${id}`, updatedUser)
-            .then((response) => {
-                setUser(response.data);
-            })
-            .catch((error) => {
-                setError(error?.response?.data?.message || error);
-            })
+  const updateUser = async (updatedUser: UserUpdate, id: number) => {
+    try {
+      const response = await customAPI.put(`api/users/${id}`, updatedUser);
+      setUser(response.data);
+    } catch (error: any) {
+      setError(error?.response?.data?.message || error.message || 'Something went wrong');
     }
+  };
 
-    return {users, user, updateUser, fetchAllUsers, loading, error};
+  return { user, updateUser, loading, error };
 };
 
 export default useUser;

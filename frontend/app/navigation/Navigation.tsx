@@ -14,11 +14,13 @@ import CafeReviews from '../screens/cafes/CafeReviewsScreen/CafeReviews';
 import LeaveReview from '../screens/leaveReview/LeaveReview';
 import Cart from '../screens/cart/Cart'
 import CreateCafeteria from '../screens/cafes/CafeCreateScreen/CreateCafe';
-import CreateUser from '../screens/users/CreateUser';
+import CreateUser from '../screens/users/create/CreateUser';
 import Test from '../screens/test/Test'
 import ContactUs from "../screens/contact/ContactUs";
 import CreateProduct from "@/app/screens/products/CreateProduct/CreateProduct";
-import UsersList from '../screens/users/UsersList';
+import UsersList from '../screens/users/list/UsersList';
+import UserReviewsList from '../screens/users/reviews/UserReviewsList';
+import UserEdit from '../screens/users/edit/UserEdit';
 
 export type RootStackParamList = {
     login: undefined;
@@ -38,6 +40,8 @@ export type RootStackParamList = {
     createuser: undefined;
     contact: undefined;
     userslist: undefined;
+    userreviews: {userId: number};
+    useredit: {userId: number}
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -62,6 +66,8 @@ const Navigation = () => {
             <Stack.Screen name="createuser" component={CreateUser} />
             <Stack.Screen name="contact" component={ContactUs} />
             <Stack.Screen name="userslist" component={UsersList} />
+            <Stack.Screen name="userreviews" component={UserReviewsList} />
+            <Stack.Screen name="useredit" component={UserEdit} />
         </Stack.Navigator>
     );
 };
