@@ -18,4 +18,5 @@ public interface ReviewService {
     List<ReviewDTO> getReviewsByCafeteriaId(Long id) throws BadRequestException, NotFoundException;
     Integer getCountReviews(Long cafeteriaId) throws BadRequestException, NotFoundException;
     Double getRating(Long cafeteriaId) throws BadRequestException, NotFoundException;
+    List<ReviewDTO> getReviewsByUserId(Long userId) throws BadRequestException, NotFoundException;
 }

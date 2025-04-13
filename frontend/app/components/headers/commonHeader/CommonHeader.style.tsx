@@ -4,21 +4,25 @@ import theme from "@/app/theme/theme";
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-    padding: theme.spacing.md,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
     backgroundColor: theme.colors.surface,
-    elevation: theme.elevation.sm,
+    borderBottomWidth: 1,
+    borderBottomColor: theme.colors.border,
+    width: "100%",
     height: 60,
   },
   title: {
     fontSize: theme.fontSizes.header,
-    color: theme.colors.textPrimary,
     fontWeight: "bold",
+    color: theme.colors.textPrimary,
   },
   backButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: "auto",
+    padding: 6,
   },
 });
 

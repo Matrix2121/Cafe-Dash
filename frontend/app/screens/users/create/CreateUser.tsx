@@ -5,6 +5,7 @@ import HasRoles from '@/app/utilComponents/HasRoles';
 import customAPI from '@/app/services/apiClient';
 import { useAuth } from '@/app/context/AuthContext';
 import { CreateUserDTO } from '@/app/types/items';
+import CommonHeader from '@/app/components/headers/commonHeader/CommonHeader';
 import styles from './CreateUser.style';
 
 const CreateUser = () => {
@@ -110,6 +111,7 @@ const CreateUser = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
+      <CommonHeader title="Create a new User"/>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.registerContainer}>
           <Text style={styles.title}>

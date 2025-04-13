@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe.backend.dto.RegisterUserDTO;
+import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
@@ -57,7 +58,7 @@ public class UserController {
     
     @PutMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody UserDTO updatedUserDTO)
+    public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody UpdateUserDTO updatedUserDTO)
             throws NotFoundException, BadRequestException {
         return userService.updateUser(id, updatedUserDTO);
     }

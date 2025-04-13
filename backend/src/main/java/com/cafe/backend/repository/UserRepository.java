@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
+	Optional<UserEntity> findByIdAndIsDeletedFalse(Long id);
+	
 	Optional<UserEntity> findByUsernameAndIsDeletedFalse(String username);
 	
 	List<UserEntity> findAllByIsDeletedFalse();

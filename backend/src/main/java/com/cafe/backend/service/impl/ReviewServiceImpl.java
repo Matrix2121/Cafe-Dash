@@ -97,4 +97,24 @@ public class ReviewServiceImpl implements ReviewService {
                 
         return averageRating;
     }
+    
+    @Override
+    public List<ReviewDTO> getReviewsByUserId(Long userId) throws BadRequestException, NotFoundException {
+        if (userId == null || userId <= 0) {
+            throw new BadRequestException("Invalid user ID");
+        }
+
+        List<ReviewEntity> reviewEntities = reviewRepository.findByUserIdAndIsDeletedFalse(userId);
+
+        if (reviewEntities.isEmpty()) {
+            throw new ResourceNotFoundException("No reviews found for user");
+        }
+
+        List<ReviewDTO> reviewDTOs = new LinkedList<>();
+        for (ReviewEntity reviewEntity : reviewEntities) {
+            reviewDTOs.add(ReviewMapper.mapToDTO(reviewEntity));
+        }
+
+        return reviewDTOs;
+    }
 }

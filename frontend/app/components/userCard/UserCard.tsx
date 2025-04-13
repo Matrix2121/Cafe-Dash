@@ -23,11 +23,15 @@ const UserCard = ({ user }: UserCardProps) => {
           <HasRoles roles={["admin"]}>
             <View style={styles.rolesContainer}>
               <Text style={styles.rolesLabel}>Roles:</Text>
-              {user.roles.map((role: Role, index: number) => (
-                <Text key={index} style={styles.role}>
-                  {role.roleName}
-                </Text>
-              ))}
+              {user.roles.length > 0 ? (
+                user.roles.map((role: Role, index: number) => (
+                  <Text key={index} style={styles.role}>
+                    {role.roleName}
+                  </Text>
+                ))
+              ) : (
+                <Text style={styles.role}>None</Text>
+              )}
             </View>
           </HasRoles>
         </View>
@@ -62,7 +66,7 @@ const UserCard = ({ user }: UserCardProps) => {
         <Pressable
           style={styles.actionButton}
           onPress={() =>
-            navigation.navigate("reviews", { userId: user.id })
+            navigation.navigate("userreviews", { userId: user.id })
           }
         >
           <Text style={styles.actionButtonText}>Reviews</Text>

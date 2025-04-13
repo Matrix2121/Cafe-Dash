@@ -75,7 +75,6 @@ const CreateCafeteria = () => {
       setOpeningHour("");
       setClosingHour("");
       alert("Cafeteria created successfully");
-      // navigation.goBack();
     } catch (err: any) {
       setApiError(err.message);
     } finally {

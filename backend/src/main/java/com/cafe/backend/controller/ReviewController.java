@@ -49,4 +49,10 @@ public class ReviewController {
             throws NotFoundException, BadRequestException {
         return reviewService.getReviewsByCafeteriaId(id);
     }
+    
+    @GetMapping("/user/{userId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<ReviewDTO> getReviewsByUserId(@PathVariable Long userId) throws BadRequestException, NotFoundException {
+        return reviewService.getReviewsByUserId(userId);
+    }
 }

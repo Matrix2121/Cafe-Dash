@@ -4,8 +4,18 @@ import { theme } from "@/app/theme/theme";
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
-    padding: theme.spacing.sm,
+    backgroundColor: theme.colors.background,
+  },
+  noReviews: {
+    fontSize: theme.fontSizes.title,
+    color: theme.colors.textPrimary,
+    textAlign: 'center',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: theme.spacing.lg,
   },
   listContainer: {
     paddingBottom: theme.spacing.sm,
