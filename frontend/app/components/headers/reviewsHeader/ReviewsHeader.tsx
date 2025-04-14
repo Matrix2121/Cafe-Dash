@@ -5,6 +5,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, Pressable } from "react-native";
 import styles from "./ReviewsHeader.style"
 import { MaterialIcons } from "@expo/vector-icons";
+import * as Haptics from 'expo-haptics';
 import theme from "@/app/theme/theme";
 
 interface ReviewHeaderProps {
@@ -23,7 +24,10 @@ const ReviewHeader = ({ rating, totalReviews }: ReviewHeaderProps) => {
       </View>
 
       <Pressable
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          navigation.goBack();
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }}
         style={styles.backButton}
         android_ripple={{ color: theme.colors.ripple }}
       >

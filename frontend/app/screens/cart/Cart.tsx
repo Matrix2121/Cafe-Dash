@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useCart } from '@/app/context/CartContext';
 import { CartItem } from '@/app/types/items';
-import styles from './Cart.style'
 import useCafes from '@/app/hooks/useCafes';
 import useOrders from '@/app/hooks/useOrders';
+import * as Haptics from 'expo-haptics';
+import styles from './Cart.style'
 
 const Cart = () => {
   const {
@@ -30,21 +31,30 @@ const Cart = () => {
       </View>
       <View style={styles.quantityContainer}>
         <TouchableOpacity
-          onPress={() => updateQuantity(item.product, item.quantity - 1)}
+          onPress={() => {
+            updateQuantity(item.product, item.quantity - 1);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          }}
           style={styles.quantityButton}
         >
           <Text>-</Text>
         </TouchableOpacity>
         <Text style={styles.quantityText}>{item.quantity}</Text>
         <TouchableOpacity
-          onPress={() => updateQuantity(item.product, item.quantity + 1)}
+          onPress={() => {
+            updateQuantity(item.product, item.quantity + 1);
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          }}
           style={styles.quantityButton}
         >
           <Text>+</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => removeFromCart(item.product)}
+        onPress={() => {
+          removeFromCart(item.product);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }}
         style={styles.removeButton}
       >
         <Text style={styles.removeText}>Remove</Text>
@@ -77,7 +87,9 @@ const Cart = () => {
             <Text style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</Text>
 
             <TouchableOpacity
-              onPress={clearCart}
+              onPress={() => {
+                clearCart;
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);}}
               style={styles.clearButton}
             >
               <Text style={styles.clearText}>Clear Cart</Text>
@@ -87,6 +99,7 @@ const Cart = () => {
               onPress={async () => {
                 await postOrder(currOrder());
                 clearCart();
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
               }}
               style={styles.checkoutButton}
             >

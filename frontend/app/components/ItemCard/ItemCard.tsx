@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Alert,
-  ImageSourcePropType,
-  Image,
-} from "react-native";
+import { View, Text, TouchableOpacity, Alert, Image } from "react-native";
 import { Product } from "../../types/items";
-import styles from "./ItemCard.style";
 import { useCart } from "@/app/context/CartContext";
 import { SvgUri } from "react-native-svg";
+import * as Haptics from 'expo-haptics';
+import styles from "./ItemCard.style";
 
 type ItemCardProps = {
   product: Product;
@@ -22,6 +16,7 @@ const ItemCard = ({ product }: ItemCardProps) => {
   const handleAddToCart = async () => {
     try {
       addToCart(product);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     } catch (error) {
       Alert.alert("Error", "Failed to add product to cart");
     }

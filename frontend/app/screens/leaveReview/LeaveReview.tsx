@@ -9,6 +9,7 @@ import theme from "@/app/theme/theme";
 import useReviews from "@/app/hooks/useReviews";
 import {useAuth} from "@/app/context/AuthContext";
 import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
+import * as Haptics from 'expo-haptics';
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -48,6 +49,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
     await postReview(reviewData)
     navigation.goBack();
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
 

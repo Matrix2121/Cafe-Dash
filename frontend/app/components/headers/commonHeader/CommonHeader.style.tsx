@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   backButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 6,
   },
 });
 

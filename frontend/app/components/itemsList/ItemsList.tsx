@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, SectionList, View, Text } from "react-native";
-import ItemCard from "../ItemCard/ItemCard";
+import ItemCard from "../itemCard/ItemCard";
 import { Product } from "@/app/types/items";
 import styles from "./ItemsList.style";
 
