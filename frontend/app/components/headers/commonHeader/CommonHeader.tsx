@@ -2,8 +2,9 @@ import React from "react";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import * as Haptics from 'expo-haptics';
 
 import styles from "./CommonHeader.style";
 import theme from "@/app/theme/theme";
@@ -18,7 +19,10 @@ const CommonHeader = ({ title }: CommonHeaderProps) => {
     <View style={styles.header}>
       <Text style={styles.title}>{title}</Text>
       <Pressable
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          navigation.goBack();
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }}
         style={styles.backButton}
         android_ripple={{ color: theme.colors.ripple }}
       >

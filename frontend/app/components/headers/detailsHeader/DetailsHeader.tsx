@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, Pressable, Image } from "react-native";
 import { SvgUri } from "react-native-svg";
+import * as Haptics from 'expo-haptics';
 
 import styles from "./DetailsHeader.style";
 import theme from "@/app/theme/theme";
@@ -18,7 +19,10 @@ const DetailsHeader = ({ cafeName }: DetailsHeader) => {
     <View style={styles.header}>
       <Text style={styles.title}>{cafeName}</Text>
       <Pressable
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          navigation.goBack();
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        }}
         style={styles.backButton}
         android_ripple={{ color: theme.colors.ripple }}
       >
