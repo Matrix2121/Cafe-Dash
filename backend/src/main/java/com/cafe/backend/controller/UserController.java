@@ -76,4 +76,11 @@ public class UserController {
     	// SecurityRoleHelper.checkUserHasAnyRole("admin");
         return userService.getAllUsers();
     }
+
+    @PostMapping("/update-token/{id}")
+    public UserDTO updateToken(@PathVariable("id") Long id, @RequestBody String token) throws NotFoundException, BadRequestException {
+        String token1 = token.replace("\"", "");
+        System.out.println("Received push token: " + token1); // Добави логване за дебъг
+        return userService.updateExpoPushToken(id, token1);
+    }
 }

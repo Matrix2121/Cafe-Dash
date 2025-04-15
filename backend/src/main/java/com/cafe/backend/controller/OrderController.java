@@ -7,6 +7,7 @@ import com.cafe.backend.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.enums.OrderStatusEnum;
 import com.cafe.backend.service.OrderService;
 
 /**
@@ -53,6 +55,12 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO updateOrder(@PathVariable Long id, @RequestBody OrderDTO orderDTO) throws NotFoundException, BadRequestException {
         return orderService.updateOrder(id, orderDTO);
+    }
+
+    @PatchMapping("/status/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDTO updateOrderStatus(@PathVariable Long id, @RequestBody OrderStatusEnum newOrderStatus) throws NotFoundException, BadRequestException {
+        return orderService.updateOrderStatus(id, newOrderStatus);
     }
     
     @GetMapping("/user/{userId}")

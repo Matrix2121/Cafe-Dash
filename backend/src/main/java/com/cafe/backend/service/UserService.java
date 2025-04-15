@@ -22,4 +22,5 @@ public interface UserService {
 	UserDTO getUserById(Long id) throws BadRequestException, NotFoundException;
 	List<UserDTO> getAllUsers() throws BadRequestException, NotFoundException;
 	boolean doesUserExist(String username);
+	UserDTO updateExpoPushToken(Long id, String token) throws BadRequestException, NotFoundException;
 }

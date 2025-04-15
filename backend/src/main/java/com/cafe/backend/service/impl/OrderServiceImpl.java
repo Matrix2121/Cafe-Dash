@@ -18,6 +18,7 @@ import com.cafe.backend.entity.mapper.OrderMapper;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.order_product.OrderProductEntity;
 import com.cafe.backend.entity.product.ProductEntity;
+import com.cafe.backend.enums.OrderStatusEnum;
 import com.cafe.backend.exception.ResourceNotFoundException;
 import com.cafe.backend.repository.CafeteriaRepository;
 import com.cafe.backend.repository.OrderProductRepository;
@@ -46,6 +47,9 @@ public class OrderServiceImpl implements OrderService {
     private OrderProductRepository orderProductRepository;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private NotificationServiceImpl notificationService;
 
     @Override
     public OrderDTO createOrder(OrderDTO orderDTO) throws ResourceNotFoundException, DataMappingException, BadRequestException {
@@ -126,6 +130,16 @@ public class OrderServiceImpl implements OrderService {
         return OrderMapper.mapToDTO(savedOrder);
     }
 
+    @Override
+    public OrderDTO updateOrderStatus(Long id, OrderStatusEnum updatedStatus) throws NotFoundException, BadRequestException {
+        OrderEntity order = orderRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product does no exist with this id: " + id));
+        order.setStatus(updatedStatus);
+        OrderEntity savedOrder = orderRepository.save(order);
+        notificationSender(order, updatedStatus);
+        return OrderMapper.mapToDTO(savedOrder);
+    }
+
     private List<OrderProductEntity> setOrderProductEntities(OrderEntity savedOrder, OrderDTO orderDTO) throws ResourceNotFoundException {
         List<OrderProductEntity> orderProductEntities = new LinkedList<>();
         for (OrderProductDTO orderProduct : orderDTO.orderProducts()) {
@@ -146,5 +160,42 @@ public class OrderServiceImpl implements OrderService {
         savedOrderProducts = orderProductRepository.saveAll(orderProductEntities);
 
         return savedOrderProducts;
+    }
+
+    private void notificationSender(OrderEntity order, OrderStatusEnum orderStatus) {
+        String pushToken = order.getUser().getExpoPushToken();
+
+        if (pushToken != null && order.isNotificationsEnabled()) {
+            String title =  "Order from " + order.getCafeteria() + " update";
+            String body;
+            switch (orderStatus) {
+                case PROCESSING:
+                    body = "Your order is being processed";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    break;
+                case PREPARING:
+                    body = "Your order is being prepared";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                break;
+                case READY:
+                    body = "Your order is ready for pickup";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                break;
+                case POSTPONED:
+                    body = "Your order has been postponed";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                break;
+                case DELIVERED:
+                    body = "Your order has been delivered";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    order.setNotificationsEnabled(false);
+                break;
+                case CANCELLED:
+                    body = "Your order has been cancelled";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    order.setNotificationsEnabled(false);
+                break;
+            }
+        }
     }
 }

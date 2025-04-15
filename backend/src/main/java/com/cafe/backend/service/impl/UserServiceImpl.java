@@ -12,7 +12,6 @@ import com.cafe.backend.dto.JWTUserDTO;
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.ReviewDTO;
-import com.cafe.backend.dto.RoleDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.entity.account.UserEntity;
@@ -20,7 +19,6 @@ import com.cafe.backend.entity.mapper.JWTUserMapper;
 import com.cafe.backend.entity.mapper.OrderMapper;
 import com.cafe.backend.entity.mapper.RegisterUserMapper;
 import com.cafe.backend.entity.mapper.ReviewMapper;
-import com.cafe.backend.entity.mapper.RoleMapper;
 import com.cafe.backend.entity.mapper.UserMapper;
 import com.cafe.backend.entity.order.OrderEntity;
 import com.cafe.backend.entity.review.ReviewEntity;
@@ -99,6 +97,14 @@ public class UserServiceImpl implements UserService {
     		userDTOs.add(UserMapper.mapToDTO(entity));
     	}
     	return userDTOs;
+    }
+
+    @Override
+    public UserDTO updateExpoPushToken(Long id, String token) throws BadRequestException, NotFoundException{
+        UserEntity user = userRepository.findByIdAndIsDeletedFalse(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
+        user.setExpoPushToken(token);
+        return UserMapper.mapToDTO(user);
     }
 
     private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
