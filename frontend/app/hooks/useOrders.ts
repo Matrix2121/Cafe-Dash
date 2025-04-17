@@ -51,7 +51,7 @@ const useOrders = (userId?: number) => {
     const updateOrderStatus = (orderId: number, newStatus: string) => {
         setLoading(true);
         customAPI
-            .patch(`api/orders/${orderId}/status`, {
+            .put(`api/orders/status/${orderId}`, {
                 orderStatusEnum: newStatus.toUpperCase(),
             })
             .then((response) => {
