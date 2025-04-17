@@ -89,6 +89,14 @@ const Test = () => {
                         <Text style={styles.testButtonText}>{"Users List"}</Text>
                     </Pressable>
                 </HasRoles>
+                <HasRoles roles={['admin', 'owner', 'employee']}>
+                    <Pressable
+                        style={styles.testButton}
+                        onPress={() => navigateToScreen("editorder")}
+                    >
+                        <Text style={styles.testButtonText}>{"Edit orders"}</Text>
+                    </Pressable>
+                </HasRoles>
             </View>
         </ScrollView>
     );

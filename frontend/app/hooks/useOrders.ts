@@ -30,6 +30,46 @@ const useOrders = (userId?: number) => {
             });
     }
 
+    const fetchAllOrders = async ()  => {
+        await customAPI
+            .get(`api/orders`)
+            .then((response) => {
+                const orders = response.data;
+                setOrders(orders);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(
+                    error?.response?.data?.message ||
+                    error.message ||
+                    "Something went wrong"
+                );
+                setLoading(false);
+            });
+    };
+
+    const updateOrderStatus = (orderId: number, newStatus: string) => {
+        setLoading(true);
+        customAPI
+            .patch(`api/orders/${orderId}/status`, {
+                orderStatusEnum: newStatus.toUpperCase(),
+            })
+            .then((response) => {
+                const orders = response.data;
+                setOrders(orders);
+            })
+            .catch((error) => {
+                setError(
+                    error?.response?.data?.message ||
+                    error.message ||
+                    "Something went wrong"
+                );
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    };
+
     useEffect(() => {
         if (userId === undefined) {
             setLoading(false);
@@ -38,7 +78,7 @@ const useOrders = (userId?: number) => {
         fetchOrdersByUserId(userId);
     }, [userId]);
 
-    return {orders, postOrder, loading, error};
+    return {orders, postOrder, fetchAllOrders, updateOrderStatus, loading, error};
 };
 
 export default useOrders;
