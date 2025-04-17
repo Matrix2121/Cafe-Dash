@@ -166,7 +166,7 @@ public class OrderServiceImpl implements OrderService {
         String pushToken = order.getUser().getExpoPushToken();
 
         if (pushToken != null && order.isNotificationsEnabled()) {
-            String title =  "Order from " + order.getCafeteria() + " update";
+            String title =  "Order from " + order.getCafeteria().getName() + " update";
             String body;
             switch (orderStatus) {
                 case PROCESSING:
@@ -189,11 +189,13 @@ public class OrderServiceImpl implements OrderService {
                     body = "Your order has been delivered";
                     notificationService.sendPushNotification(pushToken, title, body);
                     order.setNotificationsEnabled(false);
+                    orderRepository.save(order);
                 break;
                 case CANCELLED:
                     body = "Your order has been cancelled";
                     notificationService.sendPushNotification(pushToken, title, body);
                     order.setNotificationsEnabled(false);
+                    orderRepository.save(order);
                 break;
             }
         }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.cafe.backend.dto.JWTUserDTO;
 import com.cafe.backend.dto.OrderDTO;
+import com.cafe.backend.dto.PushTokenUpdateRequestDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
@@ -100,10 +101,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO updateExpoPushToken(Long id, String token) throws BadRequestException, NotFoundException{
-        UserEntity user = userRepository.findByIdAndIsDeletedFalse(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + id));
-        user.setExpoPushToken(token);
+    public UserDTO updateExpoPushToken(PushTokenUpdateRequestDTO request) throws BadRequestException, NotFoundException{
+        Long userId = request.userId();
+        String pushToken = request.pushToken();
+        UserEntity user = userRepository.findByIdAndIsDeletedFalse(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + userId));
+        user.setExpoPushToken(pushToken);
         return UserMapper.mapToDTO(user);
     }
 

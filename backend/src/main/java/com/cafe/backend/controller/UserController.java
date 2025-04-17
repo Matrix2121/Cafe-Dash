@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cafe.backend.dto.PushTokenUpdateRequestDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
@@ -77,10 +78,10 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/update-token/{id}")
-    public UserDTO updateToken(@PathVariable("id") Long id, @RequestBody String token) throws NotFoundException, BadRequestException {
-        String token1 = token.replace("\"", "");
-        System.out.println("Received push token: " + token1); // Добави логване за дебъг
-        return userService.updateExpoPushToken(id, token1);
+    @PostMapping("/update-token")
+    public UserDTO updateToken(@RequestBody PushTokenUpdateRequestDTO request) throws NotFoundException, BadRequestException {
+        
+        return userService.updateExpoPushToken(request);
     }
+
 }
