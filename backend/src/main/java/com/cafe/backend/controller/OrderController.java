@@ -51,7 +51,7 @@ public class OrderController {
         return orderService.updateOrder(id, orderDTO);
     }
 
-    @PatchMapping("/{id}/status")
+    @PutMapping("/status/{id}")
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO updateOrderStatus(@PathVariable Long id, @RequestBody OrderStatusDTO orderStatusEnum) throws NotFoundException, BadRequestException {
         return orderService.updateOrderStatus(id, orderStatusEnum);

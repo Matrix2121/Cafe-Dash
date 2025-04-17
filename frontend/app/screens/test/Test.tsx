@@ -35,32 +35,18 @@ const Test = () => {
             <View style={styles.rowContainer}>
                 <Pressable
                     style={styles.testButton}
-                    onPress={() => navigateToScreen("cafeslist")}
-                >
-                    <Text style={styles.testButtonText}>{"CafesList Ako ne si lognat"}</Text>
-                </Pressable>
-                <HasRoles roles={['admin']}>
-                    <Pressable
-                        style={styles.testButton}
-                        onPress={() => navigateToScreen("home")}
-                    >
-                        <Text style={styles.testButtonText}>{"MainLayout Ako si lognat"}</Text>
-                    </Pressable>
-                </HasRoles>
-            </View>
-            <View style={styles.rowContainer}>
-                <Pressable
-                    style={styles.testButton}
                     onPress={() => navigateToProfile()}
                 >
                     <Text style={styles.testButtonText}>{"Profile"}</Text>
                 </Pressable>
-                <Pressable
-                    style={styles.testButton}
-                    onPress={() => navigateToScreen("contact")}
-                >
-                    <Text style={styles.testButtonText}>{"Contact us"}</Text>
-                </Pressable>
+                <HasRoles roles={['admin', 'owner', 'employee']}>
+                    <Pressable
+                        style={styles.testButton}
+                        onPress={() => navigateToScreen("editorder")}
+                    >
+                        <Text style={styles.testButtonText}>{"Edit orders"}</Text>
+                    </Pressable>
+                </HasRoles>
             </View>
             <View style={styles.rowContainer}>
                 <HasRoles roles={['admin', 'owner']}>
@@ -77,24 +63,6 @@ const Test = () => {
                         onPress={() => navigateToScreen("createcafeteria")}
                     >
                         <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
-                    </Pressable>
-                </HasRoles>
-            </View>
-            <View style={styles.rowContainer}>
-                <HasRoles roles={['admin']}>
-                    <Pressable
-                        style={styles.testButton}
-                        onPress={() => navigateToScreen("userslist")}
-                    >
-                        <Text style={styles.testButtonText}>{"Users List"}</Text>
-                    </Pressable>
-                </HasRoles>
-                <HasRoles roles={['admin', 'owner', 'employee']}>
-                    <Pressable
-                        style={styles.testButton}
-                        onPress={() => navigateToScreen("editorder")}
-                    >
-                        <Text style={styles.testButtonText}>{"Edit orders"}</Text>
                     </Pressable>
                 </HasRoles>
             </View>
