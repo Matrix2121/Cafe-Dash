@@ -21,6 +21,7 @@ import CreateProduct from "@/app/screens/products/CreateProduct/CreateProduct";
 import UsersList from '../screens/users/list/UsersList';
 import UserReviewsList from '../screens/users/reviews/UserReviewsList';
 import UserEdit from '../screens/users/edit/UserEdit';
+import EditOrder from "@/app/components/editOrders/EditOrder";
 
 export type RootStackParamList = {
     login: undefined;
@@ -36,6 +37,7 @@ export type RootStackParamList = {
     createcafeteria: undefined;
     createproduct: {cafe: Cafeteria};
     cart: undefined;
+    editorder: undefined;
     test: undefined;
     createuser: undefined;
     contact: undefined;
@@ -68,6 +70,7 @@ const Navigation = () => {
             <Stack.Screen name="userslist" component={UsersList} />
             <Stack.Screen name="userreviews" component={UserReviewsList} />
             <Stack.Screen name="useredit" component={UserEdit} />
+            <Stack.Screen name="editorder" component={EditOrder} />
         </Stack.Navigator>
     );
 };

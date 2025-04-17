@@ -3,6 +3,8 @@ package com.cafe.backend.service.impl;
 import java.util.List;
 import java.util.LinkedList;
 
+import com.cafe.backend.dto.OrderStatusDTO;
+import com.cafe.backend.enums.OrderStatusEnum;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.DataMappingException;
 import com.cafe.backend.exception.NotFoundException;
@@ -29,7 +31,7 @@ import com.cafe.backend.service.OrderService;
 import jakarta.transaction.Transactional;
 
 /**
- * @author ZapryanZapryanov
+ * @author ZapryanZapryanov, AngelStoynov
  */
 
 @Service
@@ -124,6 +126,19 @@ public class OrderServiceImpl implements OrderService {
         order.setTip(updatedOrderDTO.tip());
         OrderEntity savedOrder = orderRepository.save(order);
         return OrderMapper.mapToDTO(savedOrder);
+    }
+
+    @Override
+    public OrderDTO updateOrderStatus(Long id, OrderStatusDTO orderStatusDTO) throws NotFoundException, BadRequestException {
+
+        if (orderStatusDTO == null) {
+            throw new BadRequestException("Cannot update the status of the order with id: " + id + " because orderStatusDTO is null.");
+        }
+
+        OrderEntity orderEntity = orderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Order does not exist with this id: " + id));
+        orderEntity.setStatus(orderStatusDTO.orderStatusEnum());
+        orderRepository.save(orderEntity);
+        return OrderMapper.mapToDTO(orderEntity);
     }
 
     private List<OrderProductEntity> setOrderProductEntities(OrderEntity savedOrder, OrderDTO orderDTO) throws ResourceNotFoundException {

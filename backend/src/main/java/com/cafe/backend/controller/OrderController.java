@@ -2,18 +2,14 @@ package com.cafe.backend.controller;
 
 import java.util.List;
 
+import com.cafe.backend.dto.OrderStatusDTO;
+import com.cafe.backend.enums.OrderStatusEnum;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cafe.backend.dto.OrderDTO;
 import com.cafe.backend.service.OrderService;
@@ -53,6 +49,12 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public OrderDTO updateOrder(@PathVariable Long id, @RequestBody OrderDTO orderDTO) throws NotFoundException, BadRequestException {
         return orderService.updateOrder(id, orderDTO);
+    }
+
+    @PatchMapping("/{id}/status")
+    @ResponseStatus(HttpStatus.OK)
+    public OrderDTO updateOrderStatus(@PathVariable Long id, @RequestBody OrderStatusDTO orderStatusEnum) throws NotFoundException, BadRequestException {
+        return orderService.updateOrderStatus(id, orderStatusEnum);
     }
     
     @GetMapping("/user/{userId}")
