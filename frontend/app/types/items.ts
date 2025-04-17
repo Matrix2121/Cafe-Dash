@@ -70,6 +70,7 @@ export type User = {
   roles: Role[];
   orders: Order[];
   reviews: Review[];
+  expoPushToken: String; //to be removed
 }
 
 export type UserUpdate = {

@@ -12,6 +12,9 @@
       "supportsTablet": true
     },
     "android": {
+      //needs revision
+      "package": "com.cafe.dash",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/images/logo.png",
         "backgroundColor": "#ffffff"
@@ -36,6 +39,15 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    // needs revision
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "xxxxxxxxxxxxxxxxxxxx"
+      }
     }
   }
 }
