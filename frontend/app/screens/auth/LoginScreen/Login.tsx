@@ -39,34 +39,6 @@ const Login = () => {
       source={{ uri: "https://iili.io/3IoPfjI.jpg" }}
       style={styles.backgroundImage}
     >
-
-      {/* Left for testing */}
-      <View style={styles.navigationContainer}>
-        <TouchableOpacity
-          style={styles.testButton}
-          onPress={() => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: "home",
-                    params: {
-                      screen: "Cafes",
-                    },
-                  },
-                ],
-              })
-            );
-          }}
-        >
-          <Image
-            style={styles.testButton}
-            source={require("@/app/assets/images/navigation.png")}
-          />
-        </TouchableOpacity>
-
-      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}

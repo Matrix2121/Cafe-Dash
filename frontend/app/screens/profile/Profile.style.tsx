@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         fontWeight: 300,
         marginHorizontal: 0,
         paddingVertical: 4,
-        backgroundColor: "rgba(0,0,0,0)",
+        backgroundColor: "white",
     },
 
     editInput: {
