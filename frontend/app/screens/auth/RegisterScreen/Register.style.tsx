@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: theme.spacing.xl * 2,
+    paddingBottom: 50,
   },
   logo: {
     width: theme.components.login.logoSize,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: theme.components.login.overlay,
     width: theme.components.login.containerWidth,
-    height: 440, 
+    height: 460,
     borderRadius: theme.components.login.borderRadius,
     margin: theme.spacing.none,
   },
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
   },
   loginButton: {
-    marginTop: theme.spacing.sm,
     width: theme.components.login.buttonWidth,
     borderColor: theme.colors.primary,
     borderWidth: theme.spacing.xs / 2,
@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
   errorText: {
     color: theme.colors.textValidationError,
     marginBottom: theme.spacing.sm,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    gap: theme.spacing.md,
   },
 });
 

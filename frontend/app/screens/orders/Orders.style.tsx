@@ -18,6 +18,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: theme.spacing.xl,
   },
+  emptyText: {
+    color: theme.colors.textSecondary,
+    fontSize: 20,
+    textAlign: "center",
+  },
+  errorContainer: {
+    flex: 1,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
 
 export default styles;

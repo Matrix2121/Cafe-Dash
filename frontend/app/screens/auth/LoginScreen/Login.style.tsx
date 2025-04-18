@@ -12,10 +12,11 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     scrollContainer: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
         paddingTop: theme.spacing.xl * 2,
+        paddingBottom: 50,
     },
     logo: {
         width: theme.components.login.logoSize,
@@ -49,12 +50,10 @@ export default StyleSheet.create({
         borderColor: theme.colors.primary,
     },
     loginButton: {
-        marginTop: theme.spacing.xl,
         width: theme.components.login.buttonWidth,
         backgroundColor: theme.colors.primary,
     },
     registerButton: {
-        marginTop: theme.spacing.sm,
         width: theme.components.login.buttonWidth,
         borderColor: theme.colors.primary,
         borderWidth: theme.spacing.xs / 2,
@@ -81,5 +80,9 @@ export default StyleSheet.create({
     testButtonText: {
         color: theme.colors.surface,
         fontSize: theme.fontSizes.header + 6,
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        gap: theme.spacing.md,
     }
 });

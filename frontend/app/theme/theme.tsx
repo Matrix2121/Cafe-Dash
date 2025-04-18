@@ -97,7 +97,7 @@ export const theme = {
             containerWidth: 340,
             containerHeight: 400,
             inputWidth: 300,
-            buttonWidth: 200,
+            buttonWidth: 140,
             logoSize: 100,
             borderRadius: 20,
             overlay: 'rgba(142,129,129,0.4)'
