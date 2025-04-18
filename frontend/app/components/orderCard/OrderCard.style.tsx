@@ -79,6 +79,9 @@ const styles = StyleSheet.create({
       color: theme.colors.textPrimary,
       fontWeight: "bold",
     },
+    noProductsText: {
+      color: theme.colors.textSecondary,
+    },
 });
 
 export default styles;

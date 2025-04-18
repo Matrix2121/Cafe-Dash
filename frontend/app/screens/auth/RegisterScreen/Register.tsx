@@ -123,23 +123,25 @@ const Register = () => {
               <Text style={styles.errorText}>{formErrors.password}</Text>
             )}
 
-            <Button
-              mode="contained"
-              onPress={handleRegister}
-              style={styles.registerButton}
-              loading={loading}
-              disabled={loading}
-            >
-              {loading ? 'Registering...' : 'Register'}
-            </Button>
+            <View style={styles.buttonContainer}>
+              <Button
+                mode="contained"
+                onPress={handleRegister}
+                style={styles.registerButton}
+                loading={loading}
+                disabled={loading}
+              >
+                {loading ? 'Registering...' : 'Register'}
+              </Button>
 
-            <Button
-              mode="contained"
-              onPress={() => navigation.navigate("login")}
-              style={styles.loginButton}
-            >
-              Back To Login
-            </Button>
+              <Button
+                mode="contained"
+                onPress={() => navigation.navigate("login")}
+                style={styles.loginButton}
+              >
+                Login
+              </Button>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

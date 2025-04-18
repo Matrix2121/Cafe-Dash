@@ -65,7 +65,6 @@ const Login = () => {
             source={require("@/app/assets/images/navigation.png")}
           />
         </TouchableOpacity>
-        {/* Left for testing */}
 
       </View>
       <KeyboardAvoidingView
@@ -98,23 +97,25 @@ const Login = () => {
               mode="outlined"
             />
 
-            <Button
-              mode="contained"
-              onPress={handleLogin}
-              style={styles.loginButton}
-              loading={loading}
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </Button>
+            <View style={styles.buttonContainer}>
+              <Button
+                mode="contained"
+                onPress={handleLogin}
+                style={styles.loginButton}
+                loading={loading}
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Login"}
+              </Button>
 
-            <Button
-              mode="contained"
-              onPress={() => navigation.navigate("register")}
-              style={styles.registerButton}
-            >
-              Sign Up
-            </Button>
+              <Button
+                mode="contained"
+                onPress={() => navigation.navigate("register")}
+                style={styles.registerButton}
+              >
+                Sign Up
+              </Button>
+            </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>

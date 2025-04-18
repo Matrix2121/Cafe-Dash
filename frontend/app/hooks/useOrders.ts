@@ -17,6 +17,7 @@ const useOrders = (userId?: number) => {
             .catch((error) => {
                 setError(error?.response?.data?.message || error.message || 'Something went wrong');
                 setLoading(false);
+                setOrders([])
             })
             .finally(()=> {
                 setLoading(false);

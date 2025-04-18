@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 10,
     },
+
     orderHeader: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -83,6 +84,18 @@ const styles = StyleSheet.create({
         fontSize: theme.fontSizes.body,
         color: theme.colors.textPrimary,
         fontWeight: "bold",
+    },
+    errorText: {
+
+    },
+    loadingIndicator: {
+
+    },
+    emptyContainer: {
+
+    },
+    emptyText: {
+
     },
 });
 

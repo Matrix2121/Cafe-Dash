@@ -88,7 +88,7 @@ const Cart = () => {
 
             <TouchableOpacity
               onPress={() => {
-                clearCart;
+                clearCart();
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);}}
               style={styles.clearButton}
             >
