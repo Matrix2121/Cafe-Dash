@@ -108,7 +108,6 @@ const Profile = ({ route }: IProps) => {
           </Pressable>
         </View>
 
-        {/* Modal for editing */}
         <Modal
           visible={modalVisible}
           onRequestClose={closeModal}
