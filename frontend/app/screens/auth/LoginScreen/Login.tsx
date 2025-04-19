@@ -7,6 +7,7 @@ import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Vie
 import { TextInput, Button, Text } from "react-native-paper";
 import styles from "./Login.style";
 import logo from "../../../assets/images/logo.png";
+import {ResponsiveLayout} from "@/app/orientation/ResponsiveLayout";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -35,63 +36,63 @@ const Login = () => {
   };
 
   return (
-    <ImageBackground
-      source={{ uri: "https://iili.io/3IoPfjI.jpg" }}
-      style={styles.backgroundImage}
-    >
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-      >
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-          <View style={styles.loginContainer}>
-            <Image source={logo} style={styles.logo} />
-            <Text style={styles.title}>
-              <Text style={styles.highlight}>Welcome to </Text>Cafe-Dash
-            </Text>
+        <ImageBackground
+            source={{uri: "https://iili.io/3IoPfjI.jpg"}}
+            style={styles.backgroundImage}
+        >
+          <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              style={styles.container}
+          >
+            <ScrollView contentContainerStyle={styles.scrollContainer}>
+              <View style={styles.loginContainer}>
+                <Image source={logo} style={styles.logo}/>
+                <Text style={styles.title}>
+                  <Text style={styles.highlight}>Welcome to </Text>Cafe-Dash
+                </Text>
 
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
-            <TextInput
-              label="Username"
-              value={username}
-              onChangeText={setUsername}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              style={styles.input}
-              mode="outlined"
-            />
-            <TextInput
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              style={styles.input}
-              mode="outlined"
-            />
+                {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                <TextInput
+                    label="Username"
+                    value={username}
+                    onChangeText={setUsername}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    style={styles.input}
+                    mode="outlined"
+                />
+                <TextInput
+                    label="Password"
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry
+                    style={styles.input}
+                    mode="outlined"
+                />
 
-            <View style={styles.buttonContainer}>
-              <Button
-                mode="contained"
-                onPress={handleLogin}
-                style={styles.loginButton}
-                loading={loading}
-                disabled={loading}
-              >
-                {loading ? "Logging in..." : "Login"}
-              </Button>
+                <View style={styles.buttonContainer}>
+                  <Button
+                      mode="contained"
+                      onPress={handleLogin}
+                      style={styles.loginButton}
+                      loading={loading}
+                      disabled={loading}
+                  >
+                    {loading ? "Logging in..." : "Login"}
+                  </Button>
 
-              <Button
-                mode="contained"
-                onPress={() => navigation.navigate("register")}
-                style={styles.registerButton}
-              >
-                Sign Up
-              </Button>
-            </View>
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </ImageBackground>
+                  <Button
+                      mode="contained"
+                      onPress={() => navigation.navigate("register")}
+                      style={styles.registerButton}
+                  >
+                    Sign Up
+                  </Button>
+                </View>
+              </View>
+            </ScrollView>
+          </KeyboardAvoidingView>
+        </ImageBackground>
   );
 };
 
