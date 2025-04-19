@@ -39,35 +39,6 @@ const Login = () => {
       source={{ uri: "https://iili.io/3IoPfjI.jpg" }}
       style={styles.backgroundImage}
     >
-
-      {/* Left for testing */}
-      <View style={styles.navigationContainer}>
-        <TouchableOpacity
-          style={styles.testButton}
-          onPress={() => {
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 0,
-                routes: [
-                  {
-                    name: "home",
-                    params: {
-                      screen: "Cafes",
-                    },
-                  },
-                ],
-              })
-            );
-          }}
-        >
-          <Image
-            style={styles.testButton}
-            source={require("@/app/assets/images/navigation.png")}
-          />
-        </TouchableOpacity>
-        {/* Left for testing */}
-
-      </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
@@ -98,24 +69,26 @@ const Login = () => {
               mode="outlined"
             />
 
-            <Button
-              mode="contained"
-              onPress={handleLogin}
-              style={styles.loginButton}
-              loading={loading}
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </Button>
+            <View style={styles.buttonContainer}>
+              <Button
+                mode="contained"
+                onPress={handleLogin}
+                style={styles.loginButton}
+                loading={loading}
+                disabled={loading}
+              >
+                {loading ? "Logging in..." : "Login"}
+              </Button>
 
-            <Button
-              mode="contained"
-              onPress={() => navigation.navigate("register")}
-              style={styles.registerButton}
-              labelStyle={styles.registerButtonLabel}
-            >
-              Sign Up
-            </Button>
+              <Button
+                mode="contained"
+                onPress={() => navigation.navigate("register")}
+                style={styles.registerButton}
+                labelStyle={styles.registerButtonLabel}
+              >
+                Sign Up
+              </Button>
+            </View>
             <TouchableOpacity onPress={() => navigation.navigate("forgotpassword")}>
               <Text>Forgot Password?</Text>
             </TouchableOpacity>
