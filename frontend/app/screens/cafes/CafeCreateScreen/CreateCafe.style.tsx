@@ -15,7 +15,7 @@ export default StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: theme.spacing.xl * 2, // 50px equivalent
+        paddingTop: theme.spacing.xl * 2,
     },
     formContainer: {
         backgroundColor: theme.components.login.overlay,
@@ -25,12 +25,12 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: theme.fontSizes.header + 4, // 28px
+        fontSize: theme.fontSizes.header + 4,
         fontWeight: 'bold',
         marginBottom: theme.spacing.lg,
         color: theme.colors.surface,
         borderBottomColor: theme.colors.secondary,
-        borderBottomWidth: theme.spacing.xs / 1.5, // 3px
+        borderBottomWidth: theme.spacing.xs / 1.5,
         padding: theme.spacing.sm,
         textAlign: 'center',
     },

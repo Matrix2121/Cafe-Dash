@@ -21,6 +21,8 @@ import CreateProduct from "@/app/screens/products/CreateProduct/CreateProduct";
 import UsersList from '../screens/users/list/UsersList';
 import UserReviewsList from '../screens/users/reviews/UserReviewsList';
 import UserEdit from '../screens/users/edit/UserEdit';
+import ForgotPassword from '../screens/forgottenPassword/ForgotPassword';
+import ResetPassword from '../screens/forgottenPassword/ResetPassword';
 import EditOrder from "@/app/components/editOrders/EditOrder";
 
 export type RootStackParamList = {
@@ -43,7 +45,9 @@ export type RootStackParamList = {
     contact: undefined;
     userslist: undefined;
     userreviews: {userId: number};
-    useredit: {userId: number}
+    useredit: {userId: number};
+    forgotpassword: undefined;
+    resetpassword: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -70,6 +74,8 @@ const Navigation = () => {
             <Stack.Screen name="userslist" component={UsersList} />
             <Stack.Screen name="userreviews" component={UserReviewsList} />
             <Stack.Screen name="useredit" component={UserEdit} />
+            <Stack.Screen name="forgotpassword" component={ForgotPassword} />
+            <Stack.Screen name="resetpassword" component={ResetPassword} />
             <Stack.Screen name="editorder" component={EditOrder} />
         </Stack.Navigator>
     );
