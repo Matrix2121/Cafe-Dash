@@ -49,6 +49,23 @@ const useOrders = (userId?: number) => {
             });
     };
 
+    const fetchAllOrdersProcessing = async (status: string) => {
+        await customAPI.get(`api/orders/status?status=${encodeURIComponent(status)}`)
+            .then((response) => {
+                const orders = response.data;
+                setOrders(orders);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setError(
+                    error?.response?.data?.message ||
+                    error.message ||
+                    "Something went wrong"
+                );
+                setLoading(false);
+            });
+    };
+
     const updateOrderStatus = (orderId: number, newStatus: string) => {
         setLoading(true);
         customAPI
@@ -79,7 +96,7 @@ const useOrders = (userId?: number) => {
         fetchOrdersByUserId(userId);
     }, [userId]);
 
-    return {orders, postOrder, fetchAllOrders, updateOrderStatus, loading, error};
+    return {orders, postOrder, fetchAllOrders, updateOrderStatus, fetchAllOrdersProcessing, loading, error};
 };
 
 export default useOrders;
