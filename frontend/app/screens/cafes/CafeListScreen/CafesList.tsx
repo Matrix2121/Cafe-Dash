@@ -51,7 +51,8 @@ const CafesList = () => {
                 <View style={styles.gridContainer}>
                     <HasRoles roles={['admin']}>
                         <Card>
-                            <Pressable onPress={() => navigation.navigate("createcafeteria")} style={styles.addCafeteria}>
+                            <Pressable onPress={() => navigation.navigate("createcafeteria")}
+                                       style={styles.addCafeteria}>
                                 <SvgUri
                                     uri={'https://cafedashstorage.blob.core.windows.net/svgs/plus-white.svg'}
                                     width={80}
