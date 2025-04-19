@@ -33,6 +33,12 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    @GetMapping("/status")
+    @ResponseStatus(code = HttpStatus.OK)
+    public List<OrderDTO> getOrdersByStatus(@RequestParam("status") OrderStatusEnum status) throws NotFoundException, BadRequestException {
+        return orderService.getOrdersByStatus(status);
+    }
+
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
     public OrderDTO getOrderById(@PathVariable("id") Long id) throws NotFoundException, BadRequestException {

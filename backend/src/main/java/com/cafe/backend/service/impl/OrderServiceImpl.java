@@ -2,6 +2,7 @@ package com.cafe.backend.service.impl;
 
 import java.util.List;
 import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 import com.cafe.backend.dto.OrderStatusDTO;
 import com.cafe.backend.enums.OrderStatusEnum;
@@ -29,6 +30,7 @@ import com.cafe.backend.repository.UserRepository;
 import com.cafe.backend.service.OrderService;
 
 import jakarta.transaction.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author ZapryanZapryanov, AngelStoynov
@@ -102,7 +104,20 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderDTOs;
     }
-    
+
+    @Override
+    public List<OrderDTO> getOrdersByStatus(OrderStatusEnum status) throws NotFoundException, DataMappingException {
+        List<OrderEntity> orders = orderRepository.findByStatus(status);
+        if (orders.isEmpty()) {
+            throw new ResourceNotFoundException("No orders found with status: " + status);
+        }
+        List<OrderDTO> orderDTOs = new LinkedList<>();
+        for (OrderEntity entity : orders) {
+            orderDTOs.add(OrderMapper.mapToDTO(entity));
+        }
+        return orderDTOs;
+    }
+
     @Override
     public List<OrderDTO> getOrdersByUserId(Long userId) throws NotFoundException, BadRequestException {
         List<OrderEntity> orderEntities = orderRepository.findByUserIdAndIsDeletedFalse(userId);
