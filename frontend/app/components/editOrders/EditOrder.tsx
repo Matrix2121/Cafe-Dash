@@ -14,7 +14,7 @@ import useOrders from "@/app/hooks/useOrders";
 import styles from "./EditOrder.style";
 
 const EditOrder = () => {
-    const {orders, fetchAllOrdersProcessing, updateOrderStatus} = useOrders();
+    const {orders, fetchAllOrdersByStatus, updateOrderStatus} = useOrders();
     const {fetchAllProductByOrderId, products} = useProduct();
 
     const [statusMap, setStatusMap] = useState<{ [key: number]: string }>({});
@@ -24,7 +24,7 @@ const EditOrder = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
-            await fetchAllOrdersProcessing("PROCESSING");
+            await fetchAllOrdersByStatus("PROCESSING");
         };
         fetchOrders();
     }, []);

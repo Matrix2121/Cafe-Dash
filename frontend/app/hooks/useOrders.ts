@@ -49,7 +49,7 @@ const useOrders = (userId?: number) => {
             });
     };
 
-    const fetchAllOrdersProcessing = async (status: string) => {
+    const fetchAllOrdersByStatus = async (status: string) => {
         await customAPI.get(`api/orders/status?status=${encodeURIComponent(status)}`)
             .then((response) => {
                 const orders = response.data;
@@ -96,7 +96,7 @@ const useOrders = (userId?: number) => {
         fetchOrdersByUserId(userId);
     }, [userId]);
 
-    return {orders, postOrder, fetchAllOrders, updateOrderStatus, fetchAllOrdersProcessing, loading, error};
+    return {orders, postOrder, fetchAllOrders, updateOrderStatus, fetchAllOrdersByStatus, loading, error};
 };
 
 export default useOrders;
