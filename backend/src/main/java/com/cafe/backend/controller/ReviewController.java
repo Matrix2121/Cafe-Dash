@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.cafe.backend.dto.ReviewDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
+import com.cafe.backend.security.SecurityRoleHelper;
 import com.cafe.backend.service.ReviewService;
 
 /**
@@ -89,6 +90,7 @@ public class ReviewController {
     @GetMapping("/user/{userId}")
     @ResponseStatus(value = HttpStatus.OK)
     public List<ReviewDTO> getReviewsByUserId(@PathVariable Long userId) throws BadRequestException, NotFoundException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return reviewService.getReviewsByUserId(userId);
     }
 }

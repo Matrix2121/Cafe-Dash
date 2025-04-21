@@ -107,7 +107,7 @@ public class ReviewServiceImpl implements ReviewService {
         List<ReviewEntity> reviewEntities = reviewRepository.findByUserIdAndIsDeletedFalse(userId);
 
         if (reviewEntities.isEmpty()) {
-            throw new ResourceNotFoundException("No reviews found for user");
+            return null;
         }
 
         List<ReviewDTO> reviewDTOs = new LinkedList<>();

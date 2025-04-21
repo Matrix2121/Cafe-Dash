@@ -55,6 +55,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (username: string, passwordHash: string) => {
     const response = await customAPI.post('api/auth/login', { username, passwordHash });
     const token = response.data;
+    // logged just for demonstration purposes
+    console.log(token);
     await AsyncStorage.setItem('jwt', token);
     const decoded = decodeToken(token);
     console.log(decoded.id);

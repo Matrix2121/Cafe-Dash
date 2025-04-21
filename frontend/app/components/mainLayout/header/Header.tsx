@@ -39,7 +39,7 @@ const Header = () => {
       </Pressable>
 
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <HasRoles roles={["admin"]}>
+        <HasRoles roles={["admin", "owner"]}>
           <Pressable onPress={() => navigation.navigate("test")} style={styles.adminButton}>
             <Text style={styles.adminButtonText}>Admin Page</Text>
           </Pressable>
