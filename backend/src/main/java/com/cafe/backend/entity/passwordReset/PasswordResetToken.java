@@ -20,7 +20,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+/**
+ * {@code PasswordResetToken} is an entity class representing a token used for password reset.
+ * This class stores information about the reset token, including the associated user and the token's expiry date.
+ * <p>
+ * The entity is mapped to the {@code reset_token} table in the database and includes a reference to the user entity
+ * that the token is associated with, as well as the token itself and the token's expiry date.
+ * </p>
+ *
+ * @author ZapryanZapryanov
+ */
 @Entity
 @Data
 @Builder
@@ -37,10 +46,9 @@ public class PasswordResetToken {
 
     private String token;
 
-    @ManyToOne(fetch = FetchType.EAGER) // 👈 changed from OneToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     private Date expiryDate;
-
 }

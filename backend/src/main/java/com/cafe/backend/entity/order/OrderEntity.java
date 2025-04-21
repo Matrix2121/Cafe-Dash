@@ -27,9 +27,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * {@code OrderEntity} is an entity class representing an order in the system.
+ * This class contains details about the order, such as its status, discount, tip, and associated cafeteria and user.
+ * <p>
+ * The entity is mapped to the {@code orders} table in the database and supports relationships to other entities:
+ * - The {@code cafeteria} is linked to a {@code CafeteriaEntity}.
+ * - The {@code user} is linked to a {@code UserEntity}.
+ * - The order contains a list of products, represented by {@code orderProducts}.
+ * </p>
+ *
  * @author ZapryanZapryanov
  */
-
 @Entity
 @Table(name = "orders")
 @Getter
@@ -60,7 +68,7 @@ public class OrderEntity {
     @ManyToOne
     @JoinColumn(name = "cafeteria_id", referencedColumnName = "id", nullable = false)
     private CafeteriaEntity cafeteria;
-    
+
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private UserEntity user;
@@ -70,5 +78,4 @@ public class OrderEntity {
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
-
 }
