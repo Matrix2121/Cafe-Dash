@@ -9,19 +9,24 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * {@code Review} is an entity class.
+ * {@code ReviewEntity} is an entity class representing a review left by a user for a cafeteria.
+ * This class stores information about the review, such as the title, body, rating, creation date, and whether it is deleted.
+ * <p>
+ * The entity is mapped to the {@code review} table in the database. It also maintains relationships with other entities:
+ * - The {@code user} is linked to a {@code UserEntity}, representing the user who created the review.
+ * - The {@code cafeteria} is linked to a {@code CafeteriaEntity}, representing the cafeteria being reviewed.
+ * </p>
+ *
  * @author VasilStoykov
  */
-
 @Data
 @Entity
 @Table(name = "review")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ReviewEntity {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

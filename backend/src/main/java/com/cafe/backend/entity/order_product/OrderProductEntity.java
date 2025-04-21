@@ -20,9 +20,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
+ * {@code OrderProductEntity} is an entity class that represents the association between an order and a product.
+ * This class stores information about the specific product included in an order, such as its price, quantity, and order reference.
+ * <p>
+ * The entity is mapped to the {@code order_product} table in the database and establishes relationships to other entities:
+ * - The {@code order} is linked to an {@code OrderEntity}.
+ * - The {@code product} is linked to a {@code ProductEntity}.
+ * </p>
+ *
  * @author ZapryanZapryanov
  */
-
 @Entity
 @Data
 @Builder
@@ -52,7 +59,7 @@ public class OrderProductEntity {
 
     @Column(name = "product_quantity", nullable = false)
     private int productQuantity;
-    
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

@@ -9,18 +9,26 @@ import lombok.*;
 import java.util.*;
 
 /**
- * {@code User} is an entity class.
- * 
+ * {@code UserEntity} is an entity class that represents a user in the system.
+ * It contains information about the user's identity, credentials, roles, orders, reviews, and deletion status.
+ * <p>
+ * This class is mapped to the {@code users} table in the database.
+ * The entity is designed to:
+ * - Store the user's unique identifier {@code id}.
+ * - Store the user's {@code username}, {@code email}, and {@code password}.
+ * - Maintain a list of roles assigned to the user {@code roles}.
+ * - Maintain a list of orders and reviews associated with the user {@code orders} and {@code reviews}.
+ * - Track whether the user is deleted {@code isDeleted}.
+ * </p>
+ *
  * @author AngelStoynov, ZapryanZapryanov
  */
-
 @Entity
 @Table(name = "users")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class UserEntity {
 
     @Id
@@ -30,7 +38,7 @@ public class UserEntity {
 
     @Column(name = "username", length = 100, nullable = false, unique = true)
     private String username;
-    
+
     @Column(name = "email", length = 100, nullable = false, unique = true)
     private String email;
 

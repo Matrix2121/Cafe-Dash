@@ -7,11 +7,23 @@ import com.cafe.backend.entity.review.ReviewEntity;
 import com.cafe.backend.exception.DataMappingException;
 
 /**
+ * {@code ReviewMapper} is a utility class used for mapping between {@code ReviewEntity} and {@code ReviewDTO}.
+ * This class provides methods to convert a {@code ReviewEntity} to a {@code ReviewDTO} and vice versa.
+ * <p>
+ * The methods in this class will throw a {@link DataMappingException} if the input is {@code null}.
+ * </p>
+ *
  * @author VasilStoykov
  */
-
 public class ReviewMapper {
 
+    /**
+     * Maps a {@code ReviewEntity} to a {@code ReviewDTO}.
+     *
+     * @param reviewEntity the {@code ReviewEntity} to map.
+     * @return a {@code ReviewDTO} representing the given entity.
+     * @throws DataMappingException if the input {@code reviewEntity} is {@code null}.
+     */
     public static ReviewDTO mapToDTO(ReviewEntity reviewEntity) throws DataMappingException {
         if (reviewEntity == null) {
             throw new DataMappingException("ReviewEntity cannot be null");
@@ -27,6 +39,13 @@ public class ReviewMapper {
         );
     }
 
+    /**
+     * Maps a {@code ReviewDTO} to a {@code ReviewEntity}.
+     *
+     * @param reviewDTO the {@code ReviewDTO} to map.
+     * @return a {@code ReviewEntity} representing the given DTO.
+     * @throws DataMappingException if the input {@code reviewDTO} is {@code null}.
+     */
     public static ReviewEntity mapToEntity(ReviewDTO reviewDTO) throws DataMappingException {
         if (reviewDTO == null) {
             throw new DataMappingException("ReviewDTO cannot be null");

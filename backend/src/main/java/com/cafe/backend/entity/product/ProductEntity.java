@@ -7,10 +7,15 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * {@code Product} is an entity class.
+ * {@code ProductEntity} is an entity class representing a product in the system.
+ * This class stores information about a product, such as its name, price, type, associated cafeteria, and image URL.
+ * <p>
+ * The entity is mapped to the {@code product} table in the database. It maintains relationships with other entities:
+ * - The {@code cafeteria} is linked to a {@code CafeteriaEntity}.
+ * </p>
+ *
  * @author AngelStoynov
  */
-
 @Data
 @Entity
 @Builder
@@ -19,7 +24,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class ProductEntity {
 
     @Id
