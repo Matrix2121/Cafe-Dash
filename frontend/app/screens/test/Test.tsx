@@ -57,7 +57,7 @@ const Test = () => {
                         <Text style={styles.testButtonText}>{"Create User"}</Text>
                     </Pressable>
                 </HasRoles>
-                <HasRoles roles={['admin']}>
+                <HasRoles roles={['admin', 'owner']}>
                     <Pressable
                         style={styles.testButton}
                         onPress={() => navigateToScreen("createcafeteria")}

@@ -20,6 +20,7 @@ import com.cafe.backend.dto.UserDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
 import com.cafe.backend.exception.UserAlreadyExistsException;
+import com.cafe.backend.security.SecurityRoleHelper;
 import com.cafe.backend.service.UserService;
 
 /**
@@ -60,6 +61,7 @@ public class UserController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public UserDTO createUser(@RequestBody RegisterUserDTO registerUserDTO) throws BadRequestException, NotFoundException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         if (userService.doesUserExist(registerUserDTO.username())) {
             throw new UserAlreadyExistsException("User with this username already exists");
         }
@@ -87,6 +89,7 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody UpdateUserDTO updatedUserDTO)
             throws NotFoundException, BadRequestException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return userService.updateUser(id, updatedUserDTO);
     }
 
@@ -114,6 +117,7 @@ public class UserController {
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     public List<UserDTO> getAllUsers() throws NotFoundException, BadRequestException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return userService.getAllUsers();
     }
 }

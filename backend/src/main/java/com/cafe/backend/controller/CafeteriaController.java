@@ -3,6 +3,7 @@ package com.cafe.backend.controller;
 import com.cafe.backend.dto.CafeteriaDTO;
 import com.cafe.backend.exception.BadRequestException;
 import com.cafe.backend.exception.NotFoundException;
+import com.cafe.backend.security.SecurityRoleHelper;
 import com.cafe.backend.service.CafeteriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +42,7 @@ public class CafeteriaController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public CafeteriaDTO createCafeteria(@RequestBody CafeteriaDTO cafeteriaDTO) throws BadRequestException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return cafeteriaService.createCafeteria(cafeteriaDTO);
     }
 
@@ -84,6 +86,7 @@ public class CafeteriaController {
     @ResponseStatus(value = HttpStatus.OK)
     public CafeteriaDTO updateCafeteria(@PathVariable("id") Long id, @RequestBody CafeteriaDTO updatedCafeteriaDTO)
             throws NotFoundException, BadRequestException {
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return cafeteriaService.updateCafeteria(id, updatedCafeteriaDTO);
     }
 }

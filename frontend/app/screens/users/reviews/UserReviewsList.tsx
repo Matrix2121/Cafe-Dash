@@ -24,14 +24,16 @@ const UserReviewsList = ({ route }: IProps) => {
     <View style={styles.mainContainer}>
       <CommonHeader title="User Reviews" />
 
-      {loading || error ? (
+      {loading ? (
         <LoadingErrorView
           loading={loading}
           error={error}
           dataAvailable={hasReviews}
         />
       ) : !hasReviews ? (
-        <Text style={styles.noReviews}>No reviews</Text> // 👈 custom message
+        <Text style={styles.noReviews}>
+          {error?.message || "No reviews"}
+        </Text>
       ) : (
         <FlatList
           contentContainerStyle={styles.listContainer}
