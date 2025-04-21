@@ -139,7 +139,7 @@ const Register = () => {
                 onPress={() => navigation.navigate("login")}
                 style={styles.loginButton}
               >
-                Login
+                Back to Login
               </Button>
             </View>
           </View>

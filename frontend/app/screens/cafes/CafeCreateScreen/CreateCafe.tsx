@@ -41,11 +41,6 @@ const CreateCafeteria = () => {
       errors.closingHour = "Enter a valid time in HH:mm format.";
     }
 
-    const phoneRegex = /^\+[0-9]{10,15}$/;
-    if (phoneNumber && !phoneRegex.test(phoneNumber)) {
-      errors.phoneNumber = "Enter a valid phone number (10-15 digits).";
-    }
-
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
