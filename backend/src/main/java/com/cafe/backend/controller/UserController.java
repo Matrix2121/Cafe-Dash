@@ -90,7 +90,7 @@ public class UserController {
     @ResponseStatus(value = HttpStatus.OK)
     public UserDTO updateUser(@PathVariable("id") Long id, @RequestBody UpdateUserDTO updatedUserDTO)
             throws NotFoundException, BadRequestException {
-    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
+    	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner", "customer");
         return userService.updateUser(id, updatedUserDTO);
     }
 
