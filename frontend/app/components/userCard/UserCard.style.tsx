@@ -4,40 +4,37 @@ import { theme } from "@/app/theme/theme";
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: "#FFFFFF",
-    borderRadius: 12,
+    borderRadius: 16,
     marginVertical: theme.spacing.md,
-    padding: theme.spacing.lg,         
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 6,
-    elevation: 4,
-    width: "60%",
-    minHeight: 180,
-    alignSelf: "center",
+    padding: theme.spacing.lg,
     borderColor: "#E0E0E0",
     borderWidth: 1,
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    width: "90%",
+    maxWidth: 400,
+    alignSelf: "center",
   },
   topRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",
-    marginBottom: theme.spacing.sm,
+    marginBottom: theme.spacing.lg,
   },
   userInfoContainer: {
     flex: 1,
   },
-  adminButtonContainer: {
-    flexDirection: "row",
-  },
   username: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     color: "#333333",
     marginBottom: 4,
   },
   email: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#777777",
     marginBottom: 8,
   },
@@ -45,67 +42,62 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     alignItems: "center",
-    marginBottom: theme.spacing.sm,
+    marginTop: 6,
   },
   rolesLabel: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "600",
     color: "#999999",
-    marginRight: 8,
-  },
-  role: {
-    fontSize: 18,
-    color: "#555555",
     marginRight: 4,
   },
-
-  bottomButtonContainer: {
+  role: {
+    fontSize: 16,
+    color: "#555555",
+    marginRight: 6,
+  },
+  adminButtonContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
-    marginTop: theme.spacing.md,
   },
-  
-  actionButton: {
-    backgroundColor: theme.colors.primary,
-    paddingVertical: theme.spacing.md,
-    paddingHorizontal: theme.spacing.xl,
-    borderRadius: 8,
-    marginVertical: theme.spacing.xs,
-    marginRight: theme.spacing.sm,
-  },
-  actionButtonText: {
-    color: "#FFFFFF",
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-
-  /**
-   * ADMIN BUTTONS (Edit, Delete)
-   */
   adminButton: {
-    paddingVertical: theme.spacing.sm,
-    paddingHorizontal: theme.spacing.md,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
     borderRadius: 8,
-    marginVertical: theme.spacing.xs,
-    marginRight: theme.spacing.sm,
-    minWidth: 100,
+    minWidth: 80,
     alignItems: "center",
     justifyContent: "center",
+    marginLeft: 6,
   },
   adminButtonText: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
-    textAlign: "center",
   },
-
   editButton: {
-    backgroundColor: "#87CEEB",
+    backgroundColor: "#5DBCD2",
   },
   deleteButton: {
-    backgroundColor: "#FF6961",
+    backgroundColor: "#FF6B6B",
+  },
+  bottomButtonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    marginTop: theme.spacing.lg,
+  },
+  actionButton: {
+    backgroundColor: "#333333",
+    paddingVertical: 10,
+    paddingHorizontal: 24,
+    borderRadius: 10,
+    minWidth: 120,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  actionButtonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 
