@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import {Alert, KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import HasRoles from '@/app/utilComponents/HasRoles';
 import customAPI from '@/app/services/apiClient';
@@ -98,7 +98,7 @@ const CreateUser = () => {
       setEmail('');
       setPassword('');
       setSelectedRoles([]);
-      alert('User created successfully');
+      Alert.alert('User created successfully');
     } catch (err: any) {
       setApiError(err.message);
     } finally {

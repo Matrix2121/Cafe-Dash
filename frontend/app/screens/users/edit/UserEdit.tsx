@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, View } from 'react-native';
+import {Alert, KeyboardAvoidingView, Platform, View} from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import HasRoles from '@/app/utilComponents/HasRoles';
 import { useAuth } from '@/app/context/AuthContext';
@@ -87,7 +87,7 @@ const UserEdit = ({ route }: IProps) => {
   
     try {
       await updateUser(updatedUser, userId);
-      alert('User updated successfully');
+      Alert.alert('User updated successfully');
     } catch (err: any) {
       setApiError(err.message);
     }
