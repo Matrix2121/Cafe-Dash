@@ -57,6 +57,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ReviewEntity> reviews = new ArrayList<>();
 
+    @Column(name = "expo_push_token")
+    private String expoPushToken;
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

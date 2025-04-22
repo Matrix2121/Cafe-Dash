@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cafe.backend.dto.PushTokenUpdateRequestDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
@@ -119,5 +120,10 @@ public class UserController {
     public List<UserDTO> getAllUsers() throws NotFoundException, BadRequestException {
     	SecurityRoleHelper.checkUserHasAnyRole("admin", "owner");
         return userService.getAllUsers();
+    }
+
+    @PostMapping("/update-token")
+    public UserDTO updateToken(@RequestBody PushTokenUpdateRequestDTO request) throws NotFoundException, BadRequestException {
+        return userService.updateExpoPushToken(request);
     }
 }

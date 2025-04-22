@@ -94,3 +94,8 @@ export type Review = {
   userId: number;
   createdAt?: Date;
 }
+
+export type PushTokenUpdateRequest = {
+  userId: number;
+  pushToken: string;
+}

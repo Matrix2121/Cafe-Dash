@@ -1,19 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CommonActions, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/app/navigation/Navigation";
 import { useAuth } from "@/app/context/AuthContext";
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, View, TouchableOpacity } from "react-native";
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Image,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import styles from "./Login.style";
 import logo from "../../../assets/images/logo.png";
+import { registerPushToken } from "@/app/hooks/registerPushToken";
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleLogin = async () => {
@@ -26,6 +36,9 @@ const Login = () => {
     setError("");
     try {
       await login(username, password);
+      if (user?.id) {
+        await registerPushToken(user.id);
+      }
       navigation.navigate("home");
     } catch (err) {
       setError("Invalid credentials");
@@ -89,7 +102,9 @@ const Login = () => {
                 Sign Up
               </Button>
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate("forgotpassword")}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("forgotpassword")}
+            >
               <Text>Forgot Password?</Text>
             </TouchableOpacity>
           </View>

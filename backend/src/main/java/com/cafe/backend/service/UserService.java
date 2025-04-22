@@ -3,6 +3,7 @@ package com.cafe.backend.service;
 import java.util.List;
 
 import com.cafe.backend.dto.JWTUserDTO;
+import com.cafe.backend.dto.PushTokenUpdateRequestDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
@@ -89,4 +90,6 @@ public interface UserService {
 	 * @return {@code true} if the user exists, {@code false} otherwise.
 	 */
 	boolean doesUserExist(String username);
+
+	UserDTO updateExpoPushToken(PushTokenUpdateRequestDTO request) throws BadRequestException, NotFoundException;
 }

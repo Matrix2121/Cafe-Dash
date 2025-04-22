@@ -2,7 +2,6 @@ package com.cafe.backend.service.impl;
 
 import java.util.List;
 import java.util.LinkedList;
-import java.util.stream.Collectors;
 
 import com.cafe.backend.dto.OrderStatusDTO;
 import com.cafe.backend.enums.OrderStatusEnum;
@@ -30,7 +29,6 @@ import com.cafe.backend.repository.UserRepository;
 import com.cafe.backend.service.OrderService;
 
 import jakarta.transaction.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * {@code OrderServiceImpl} is the service-layer implementation of the {@link OrderService} interface.
@@ -53,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired private ProductRepository productRepository;
     @Autowired private OrderProductRepository orderProductRepository;
     @Autowired private UserRepository userRepository;
+    @Autowired private NotificationServiceImpl notificationService;
 
     /**
      * Creates a new order with associated user, cafeteria, and products.
@@ -211,6 +210,7 @@ public class OrderServiceImpl implements OrderService {
 
         orderEntity.setStatus(orderStatusDTO.orderStatusEnum());
         orderRepository.save(orderEntity);
+        notificationSender(orderEntity, orderEntity.getStatus());
 
         return OrderMapper.mapToDTO(orderEntity);
     }
@@ -239,5 +239,35 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderProductRepository.saveAll(orderProductEntities);
+    }
+
+    private void notificationSender(OrderEntity order, OrderStatusEnum orderStatus) {
+        String pushToken = order.getUser().getExpoPushToken();
+        if (pushToken != null && order.isNotificationsEnabled()) {
+            String title =  "Order from " + order.getCafeteria().getName() + " update";
+            String body = "null";
+            switch (orderStatus) {
+                case PROCESSING:
+                    body = "Your order is being processed";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    break;
+                case POSTPONED:
+                    body = "Your order has been postponed";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                break;
+                case DELIVERED:
+                    body = "Your order has been delivered";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    order.setNotificationsEnabled(false);
+                    orderRepository.save(order);
+                break;
+                case CANCELLED:
+                    body = "Your order has been cancelled";
+                    notificationService.sendPushNotification(pushToken, title, body);
+                    order.setNotificationsEnabled(false);
+                    orderRepository.save(order);
+                break;
+            }
+        }
     }
 }

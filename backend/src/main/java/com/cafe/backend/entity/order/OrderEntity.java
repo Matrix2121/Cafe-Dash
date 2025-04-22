@@ -76,6 +76,10 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrderProductEntity> orderProducts;
 
+    @Builder.Default
+    @Column(name = "notifications_enabled")
+    private boolean notificationsEnabled = true;
+
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe.backend.dto.JWTUserDTO;
+import com.cafe.backend.dto.PushTokenUpdateRequestDTO;
 import com.cafe.backend.dto.RegisterUserDTO;
 import com.cafe.backend.dto.UpdateUserDTO;
 import com.cafe.backend.dto.UserDTO;
@@ -101,6 +102,16 @@ public class UserServiceImpl implements UserService {
     	return userDTOs;
     }
 
+    @Override
+    public UserDTO updateExpoPushToken(PushTokenUpdateRequestDTO request) throws BadRequestException, NotFoundException{
+        Long userId = request.userId();
+        String pushToken = request.pushToken();
+        UserEntity user = userRepository.findByIdAndIsDeletedFalse(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Could not find user with this id:" + userId));
+        user.setExpoPushToken(pushToken);
+        return UserMapper.mapToDTO(user);
+    }
+
     private UserEntity createAndSaveUser(RegisterUserDTO registerUserDTO) throws ResourceNotFoundException, BadRequestException {
         List<RoleEntity> roleEntities = new ArrayList<>();
         if (registerUserDTO.roleNames() != null) {
@@ -144,4 +155,6 @@ public class UserServiceImpl implements UserService {
         }
         return roleEntities;
     }
+
+    
 }

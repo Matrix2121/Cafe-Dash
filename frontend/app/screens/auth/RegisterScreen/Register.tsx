@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, View } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '@/app/navigation/Navigation';
-import { TextInput, Button, Text } from 'react-native-paper';
+import React, { useState } from "react";
+import {
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Image,
+  View,
+} from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "@/app/navigation/Navigation";
+import { TextInput, Button, Text } from "react-native-paper";
 import styles from "./Register.style";
-import { useAuth } from '@/app/context/AuthContext';
+import { useAuth } from "@/app/context/AuthContext";
 import logoSrc from "../../../assets/images/logo.png";
 import loginBackground from "../../../assets/images/login-background.jpg";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { registerPushToken } from "@/app/hooks/registerPushToken";
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [apiError, setApiError] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [apiError, setApiError] = useState("");
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
-  const { register } = useAuth();
+  const { register, user } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const handleRegister = async () => {
     setFormErrors({});
-    setApiError('');
+    setApiError("");
 
     const errors: { [key: string]: string } = {};
 
@@ -55,6 +63,9 @@ const Register = () => {
     setLoading(true);
     try {
       await register(username, email, password);
+      if (user?.id) {
+        await registerPushToken(user.id);
+      }
       navigation.navigate("home");
     } catch (err: any) {
       setApiError(err.message);
@@ -66,7 +77,7 @@ const Register = () => {
   return (
     <ImageBackground source={loginBackground} style={styles.backgroundImage}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
         <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -83,7 +94,7 @@ const Register = () => {
               value={username}
               onChangeText={(text) => {
                 setUsername(text);
-                setFormErrors(prev => ({ ...prev, username: '' }));
+                setFormErrors((prev) => ({ ...prev, username: "" }));
               }}
               style={styles.input}
               mode="outlined"
@@ -97,7 +108,7 @@ const Register = () => {
               value={email}
               onChangeText={(text) => {
                 setEmail(text);
-                setFormErrors(prev => ({ ...prev, email: '' }));
+                setFormErrors((prev) => ({ ...prev, email: "" }));
               }}
               keyboardType="email-address"
               autoCapitalize="none"
@@ -113,7 +124,7 @@ const Register = () => {
               value={password}
               onChangeText={(text) => {
                 setPassword(text);
-                setFormErrors(prev => ({ ...prev, password: '' }));
+                setFormErrors((prev) => ({ ...prev, password: "" }));
               }}
               secureTextEntry
               style={styles.input}
@@ -131,7 +142,7 @@ const Register = () => {
                 loading={loading}
                 disabled={loading}
               >
-                {loading ? 'Registering...' : 'Register'}
+                {loading ? "Registering..." : "Register"}
               </Button>
 
               <Button

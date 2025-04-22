@@ -72,17 +72,21 @@ const OrderCard = ({order}: { order: Order }) => {
 
 const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
-        case "delivered":
-            return "#4CAF50";
-        case "processing":
-            return "#FFC107";
-        case "cancelled":
-            return "#F44336";
-        case "postponed":
-            return "#2196F3";
-        default:
-            return theme.colors.textSecondary;
+      case "processing":
+        return "#FFC107"; // Жълто - очаква се обработка
+      case "preparing":
+        return "#FF9800"; // Оранжево - подготвя се
+      case "ready":
+        return "#03A9F4"; // Светло синьо - готово за взимане
+      case "delivered":
+        return "#4CAF50"; // Зелено - доставено
+      case "postponed":
+        return "#2196F3"; // Синьо - отложено
+      case "cancelled":
+        return "#F44336"; // Червено - отказано
+      default:
+        return theme.colors.textSecondary; // Стандартен fallback
     }
-};
+  };
 
 export default OrderCard;
