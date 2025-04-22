@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View} from "react-native";
+import {Alert, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View} from "react-native";
 import {TextInput, Button, Text} from "react-native-paper";
 import customAPI from "@/app/services/apiClient";
 import styles from "@/app/screens/products/CreateProduct/CreateProduct.style";
@@ -7,7 +7,6 @@ import {RouteProp, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import { Dropdown } from 'react-native-element-dropdown';
-import AntDesign from '@expo/vector-icons/AntDesign';
 
 type ProductCreateProps = RouteProp<RootStackParamList, "createproduct">;
 
@@ -67,7 +66,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
             setPrice("");
             setProductType("");
             setImageUrl("");
-            alert("Product created successfully");
+            Alert.alert("Product created successfully");
             navigation.goBack();
         } catch (err: any) {
             setApiError(err.message);

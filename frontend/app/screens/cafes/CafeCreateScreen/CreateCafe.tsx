@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import {Alert, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, View} from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import customAPI from "@/app/services/apiClient";
 import { CreateCafeteriaDTO } from "@/app/types/items";
@@ -69,7 +69,7 @@ const CreateCafeteria = () => {
       setImageUrl("");
       setOpeningHour("");
       setClosingHour("");
-      alert("Cafeteria created successfully");
+      Alert.alert("Cafeteria created successfully");
     } catch (err: any) {
       setApiError(err.message);
     } finally {
