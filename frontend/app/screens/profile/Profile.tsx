@@ -1,8 +1,6 @@
 import styles from "@/app/screens/profile/Profile.style";
 import {
     Image,
-    ImageBackground,
-    Modal,
     Pressable, ScrollView,
     Text,
     View,
@@ -75,6 +73,7 @@ const Profile = ({route}: IProps) => {
                     </Pressable>
                     <Text style={styles.profileTextLogo}>{user?.username}</Text>
                     <Text style={styles.secondaryText}>{user?.email}</Text>
+                </View>
                 <View style={styles.orderContainer}>
                     <Pressable
                         style={styles.rowContainer}
