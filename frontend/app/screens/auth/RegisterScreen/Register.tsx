@@ -8,6 +8,7 @@ import { useAuth } from '@/app/context/AuthContext';
 import logoSrc from "../../../assets/images/logo.png";
 import loginBackground from "../../../assets/images/login-background.jpg";
 import { useNavigation } from '@react-navigation/native';
+import { useTranslation } from 'react-i18next';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -16,6 +17,7 @@ const Register = () => {
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const { t } = useTranslation();
 
   const { register } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
@@ -26,7 +28,6 @@ const Register = () => {
 
     const errors: { [key: string]: string } = {};
 
-    // validations could be moved to util file
     if (!username.trim()) {
       errors.username = "Username is required.";
     } else if (username.trim().length < 6) {
@@ -73,13 +74,13 @@ const Register = () => {
           <View style={styles.registerContainer}>
             <Image source={logoSrc} style={styles.logo} />
             <Text style={styles.title}>
-              <Text style={styles.highlight}>Create Your </Text>Account
+              <Text style={styles.highlight}>{t('create-account')}</Text>Account
             </Text>
 
             {apiError ? <Text style={styles.errorText}>{apiError}</Text> : null}
 
             <TextInput
-              label="Username"
+              label={t('username')}
               value={username}
               onChangeText={(text) => {
                 setUsername(text);
@@ -93,7 +94,7 @@ const Register = () => {
             )}
 
             <TextInput
-              label="Email"
+              label={t('email')}
               value={email}
               onChangeText={(text) => {
                 setEmail(text);
@@ -109,7 +110,7 @@ const Register = () => {
             )}
 
             <TextInput
-              label="Password"
+              label={t('password')}
               value={password}
               onChangeText={(text) => {
                 setPassword(text);
@@ -131,7 +132,7 @@ const Register = () => {
                 loading={loading}
                 disabled={loading}
               >
-                {loading ? 'Registering...' : 'Register'}
+                {loading ? 'Registering...' : t('register-button')}
               </Button>
 
               <Button
@@ -139,7 +140,7 @@ const Register = () => {
                 onPress={() => navigation.navigate("login")}
                 style={styles.loginButton}
               >
-                Back to Login
+                {t('back-to-login')}
               </Button>
             </View>
           </View>

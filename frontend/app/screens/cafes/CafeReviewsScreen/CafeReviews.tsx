@@ -9,6 +9,7 @@ import LoadingErrorView from "@/app/components/errorView/LoadingErrorView";
 import styles from "./CafeReviews.style";
 import ReviewHeader from "@/app/components/headers/reviewsHeader/ReviewsHeader";
 import useCafes from "@/app/hooks/useCafes";
+import { useTranslation } from 'react-i18next';
 
 type CafeReviewsRouteProp = RouteProp<RootStackParamList, "cafereviews">;
 
@@ -21,8 +22,9 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { reviews, loading, error, fetchReviewsByCafeId } = useReviews(cafe.id);
   const { cafe: updatedCafe, refreshCafeteria } = useCafes(cafe.id);
+  const { t } = useTranslation();
 
-  useEffect(() => {
+    useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       fetchReviewsByCafeId(cafe.id);
       refreshCafeteria(cafe.id);
@@ -66,7 +68,7 @@ const CafeReviews = ({ route }: CafeReviewsProps) => {
         style={styles.floatingButton}
         onPress={() => navigation.navigate("leavereview", { cafe })}
       >
-        <Text style={styles.floatingButtonText}>Leave a review</Text>
+        <Text style={styles.floatingButtonText}>{t("review")}</Text>
       </TouchableOpacity>
     </View>
   );

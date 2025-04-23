@@ -18,6 +18,7 @@ import useAllUsers from "@/app/hooks/useAllUsers";
 import {List} from "react-native-paper";
 import HasRoles from "@/app/utilComponents/HasRoles";
 import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
+import {useTranslation} from "react-i18next";
 
 type ProfileScreenRouteProp = RouteProp<RootStackParamList, "profile">;
 
@@ -28,6 +29,7 @@ interface IProps {
 const Profile = ({route}: IProps) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const {userId} = route.params;
+    const {t} = useTranslation();
 
     const {
         user,
@@ -61,7 +63,7 @@ const Profile = ({route}: IProps) => {
             keyboardShouldPersistTaps="handled"
         >
             <View style={styles.profileContainer}>
-                <CommonHeader title="Profile"/>
+                <CommonHeader title={t("profile")}/>
 
                 <View style={styles.imageContainer}>
                     <Image source={profileBackground} style={styles.imageLogo}/>
@@ -82,7 +84,7 @@ const Profile = ({route}: IProps) => {
                         onPress={() => navigation.navigate("orders", {userId})}
                     >
                         <Image source={orders} style={styles.logo}/>
-                        <Text style={styles.orderTextLogo}>Previous Orders</Text>
+                        <Text style={styles.orderTextLogo}>{t("orders")}</Text>
                     </Pressable>
                 </View>
 
@@ -90,7 +92,7 @@ const Profile = ({route}: IProps) => {
                     <View style={styles.accordion}>
                         <List.Section>
                             <List.Accordion
-                                title="All Users"
+                                title={t("see-users")}
                                 expanded={expanded}
                                 onPress={handlePress}
                                 left={(props) => <List.Icon {...props} icon="account-group"/>}

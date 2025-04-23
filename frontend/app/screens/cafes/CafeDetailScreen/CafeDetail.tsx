@@ -6,6 +6,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { View, Text, ScrollView } from "react-native";
 import styles from "./CafeDetail.style";
 import DetailsHeader from "@/app/components/headers/detailsHeader/DetailsHeader";
+import { useTranslation } from 'react-i18next';
 
 type CafeDetailRouteProp = RouteProp<RootStackParamList, "cafedetail">;
 
@@ -15,6 +16,7 @@ interface CafeDetailProps {
 
 const CafeDetail = ({ route }: CafeDetailProps) => {
   const { cafe } = route.params;
+  const { t } = useTranslation();
 
   const isValidTime = (time: string | null | undefined) => {
     return !!time && time !== "00:00:00";
@@ -36,15 +38,15 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
             defaultSource={require("@/app/assets/images/logo.png")}
           />
           <View style={styles.detailsContainer}>
-            <Text style={styles.label}>Brand:</Text>
+            <Text style={styles.label}>{t("brand")}:</Text>
             <Text style={styles.value}>{cafe.brand}</Text>
           </View>
           <View style={styles.detailsContainer}>
-            <Text style={styles.label}>Address:</Text>
+            <Text style={styles.label}>{t("address")}:</Text>
             <Text style={styles.value}>{cafe.location}</Text>
           </View>
           <View style={styles.detailsContainer}>
-            <Text style={styles.label}>Rating:</Text>
+            <Text style={styles.label}>{t("rating")}:</Text>
             <Text style={styles.value}>
               {cafe.rating.toFixed(1)} ({cafe.countReview} Reviews)
             </Text>
@@ -52,14 +54,14 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
         </View>
         {isValidTime(cafe.openingHour) && isValidTime(cafe.closingHour) && (
           <View style={styles.detailsContainer}>
-            <Text style={styles.label}>Opening Hours:</Text>
+            <Text style={styles.label}>{t("hours")}:</Text>
             <Text style={styles.value}>
               {cafe.openingHour} - {cafe.closingHour}
             </Text>
           </View>
         )}
         <View style={styles.detailsContainer}>
-          <Text style={styles.label}>Phone:</Text>
+          <Text style={styles.label}>{t("phone")}:</Text>
           <Text style={styles.value}>{cafe.phoneNumber}</Text>
         </View>
       </ScrollView>
@@ -68,14 +70,14 @@ const CafeDetail = ({ route }: CafeDetailProps) => {
           style={styles.contactButton}
           onPress={() => navigation.navigate("contact")}
         >
-          <Text style={styles.navigationButtonText}>Contact us here</Text>
+          <Text style={styles.navigationButtonText}>{t("contact")}</Text>
         </Pressable>
         <Pressable
           style={styles.navigationButton}
           onPress={() => navigation.navigate("cafereviews", { cafe })}
         >
           <Text style={styles.navigationButtonText}>
-            Leave {cafe.name} a review ⭐
+            {t("review")} ⭐
           </Text>
         </Pressable>
       </View>

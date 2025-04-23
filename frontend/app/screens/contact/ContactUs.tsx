@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, TextInput, Button, ScrollView, Alert} from 'reac
 import { send, EmailJSResponseStatus } from '@emailjs/react-native';
 import Constants from "expo-constants";
 import styles from "./ContactUs.style";
+import { useTranslation } from 'react-i18next';
 
 const ContactUs = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ const ContactUs = () => {
     const serviceKey = Constants.expoConfig?.extra?.serviceKey;
     const templateKey = Constants.expoConfig?.extra?.templateKey;
     const publicKey = Constants.expoConfig?.extra?.publicKey;
-
+    const { t } = useTranslation();
 
     const onSubmit = async () => {
         if (!email || !name || !message) {
@@ -54,13 +55,13 @@ const ContactUs = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>Contact Us</Text>
+            <Text style={styles.title}>{t("contact")}</Text>
 
             <TextInput
                 style={styles.input}
                 inputMode="email"
                 keyboardType="email-address"
-                placeholder="Email*"
+                placeholder={t("email")}
                 placeholderTextColor="#999"
                 value={email}
                 onChangeText={setEmail}
@@ -69,7 +70,7 @@ const ContactUs = () => {
 
             <TextInput
                 style={styles.input}
-                placeholder="Name*"
+                placeholder={t("username")}
                 placeholderTextColor="#999"
                 value={name}
                 onChangeText={setName}
@@ -77,7 +78,7 @@ const ContactUs = () => {
 
             <TextInput
                 style={[styles.input, styles.messageInput]}
-                placeholder="Your Message*"
+                placeholder={t("message")}
                 placeholderTextColor="#999"
                 multiline
                 numberOfLines={4}
@@ -86,7 +87,7 @@ const ContactUs = () => {
             />
 
             <Button
-                title={isLoading ? 'Sending...' : 'Submit'}
+                title={isLoading ? 'Sending...' : t("submit")}
                 onPress={onSubmit}
                 disabled={isLoading}
                 color="#966348"

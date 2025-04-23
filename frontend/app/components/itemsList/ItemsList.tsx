@@ -3,27 +3,29 @@ import { FlatList, SectionList, View, Text } from "react-native";
 import ItemCard from "@/app/components/itemCard/ItemCard";
 import { Product } from "@/app/types/items";
 import styles from "./ItemsList.style";
+import { useTranslation } from 'react-i18next';
 
 interface ItemsList {
   products: Product[];
 }
 
 const ItemsList = ({ products }: ItemsList) => {
-  const sections = [
+    const { t } = useTranslation();
+    const sections = [
     {
-      title: "Drinks",
+      title: t('drinks'),
       data: Array.isArray(products)
         ? products.filter((item) => item.productType === "DRINKS")
         : [],
     },
     {
-      title: "Promotion",
+      title: t('promo'),
       data: Array.isArray(products)
         ? products.filter((item) => item.productType === "PROMO")
         : [],
     },
     {
-      title: "Eating",
+      title: t('eating'),
       data: Array.isArray(products)
         ? products.filter((item) => item.productType === "EATING")
         : [],

@@ -5,6 +5,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {User, Role} from "@/app/types/items";
 import HasRoles from "@/app/utilComponents/HasRoles";
 import styles from "./UserCard.style";
+import {useTranslation} from "react-i18next";
 
 interface UserCardProps {
     user: User;
@@ -12,6 +13,7 @@ interface UserCardProps {
 
 const UserCard = ({user}: UserCardProps) => {
     const navigation = useNavigation<StackNavigationProp<any>>();
+    const { t } = useTranslation();
 
     return (
         <View style={styles.cardContainer}>
@@ -22,7 +24,7 @@ const UserCard = ({user}: UserCardProps) => {
 
                     <HasRoles roles={["admin"]}>
                         <View style={styles.rolesContainer}>
-                            <Text style={styles.rolesLabel}>Roles:</Text>
+                            <Text style={styles.rolesLabel}>{t("role")}:</Text>
                             {user.roles.length > 0 ? (
                                 user.roles.map((role: Role, index: number) => (
                                     <Text key={index} style={styles.role}>
@@ -42,7 +44,7 @@ const UserCard = ({user}: UserCardProps) => {
                             style={[styles.adminButton, styles.editButton]}
                             onPress={() => navigation.navigate("useredit", {userId: user.id})}
                         >
-                            <Text style={styles.adminButtonText}>Edit</Text>
+                            <Text style={styles.adminButtonText}>{t("edit")}</Text>
                         </Pressable>
                     </View>
                 </HasRoles>
@@ -53,13 +55,13 @@ const UserCard = ({user}: UserCardProps) => {
                     style={styles.actionButton}
                     onPress={() => navigation.navigate("orders", {userId: user.id})}
                 >
-                    <Text style={styles.actionButtonText}>Orders</Text>
+                    <Text style={styles.actionButtonText}>{t("order")}</Text>
                 </Pressable>
                 <Pressable
                     style={styles.actionButton}
                     onPress={() => navigation.navigate("userreviews", {userId: user.id})}
                 >
-                    <Text style={styles.actionButtonText}>Reviews</Text>
+                    <Text style={styles.actionButtonText}>{t("reviews")}</Text>
                 </Pressable>
             </View>
         </View>
