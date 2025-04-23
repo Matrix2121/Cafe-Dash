@@ -5,7 +5,7 @@ export default {
     name: "Cafe-Dash",
     slug: "Cafe-Dash",
     version: "1.0.0",
-    orientation: "portrait",
+    orientation: "default",
     icon: "./app/assets/images/logo.png",
     scheme: "myapp",
     userInterfaceStyle: "automatic",
