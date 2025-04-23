@@ -8,11 +8,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {Text} from 'react-native';
 import HasRoles from '@/app/utilComponents/HasRoles';
 import {useAuth} from "@/app/context/AuthContext";
+import {useTranslation} from "react-i18next";
 
 const Test = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const {user} = useAuth();
+    const { t } = useTranslation();
 
     const navigateToScreen = <T extends keyof RootStackParamList>(
         screen: T,
@@ -44,7 +46,7 @@ const Test = () => {
                         style={styles.testButton}
                         onPress={() => navigateToScreen("editorder")}
                     >
-                        <Text style={styles.testButtonText}>{"Edit orders"}</Text>
+                        <Text style={styles.testButtonText}>{t("edit-orders")}</Text>
                     </Pressable>
                 </HasRoles>
             </View>
@@ -54,7 +56,7 @@ const Test = () => {
                         style={styles.testButton}
                         onPress={() => navigateToScreen("createuser")}
                     >
-                        <Text style={styles.testButtonText}>{"Create User"}</Text>
+                        <Text style={styles.testButtonText}>{t("create-user")}</Text>
                     </Pressable>
                 </HasRoles>
                 <HasRoles roles={['admin', 'owner']}>
@@ -62,7 +64,7 @@ const Test = () => {
                         style={styles.testButton}
                         onPress={() => navigateToScreen("createcafeteria")}
                     >
-                        <Text style={styles.testButtonText}>{"CreateCafeteria"}</Text>
+                        <Text style={styles.testButtonText}>{t("create-cafeteria")}</Text>
                     </Pressable>
                 </HasRoles>
             </View>
@@ -72,7 +74,7 @@ const Test = () => {
                         style={styles.testButton}
                         onPress={() => navigateToScreen("userslist")}
                     >
-                        <Text style={styles.testButtonText}>{"See users"}</Text>
+                        <Text style={styles.testButtonText}>{t("see-users")}</Text>
                     </Pressable>
                 </HasRoles>
             </View>

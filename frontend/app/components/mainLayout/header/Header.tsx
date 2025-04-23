@@ -8,10 +8,12 @@ import { useAuth } from "@/app/context/AuthContext";
 import styles from "./Header.style";
 import { MaterialIcons } from "@expo/vector-icons";
 import HasRoles from "@/app/utilComponents/HasRoles";
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { user, logout } = useAuth();
+  const { t } = useTranslation();
 
   const handleLogout = async () => {
     await logout();
@@ -34,14 +36,14 @@ const Header = () => {
             style={styles.image}
             source={require("@/app/assets/images/logo.png")}
           />
-          {user && <Text style={styles.username}>Hi, {user.username}</Text>}
+          {user && <Text style={styles.username}>{t('welcome-cafe')}, {user.username}</Text>}
         </View>
       </Pressable>
 
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <HasRoles roles={["admin", "owner"]}>
           <Pressable onPress={() => navigation.navigate("test")} style={styles.adminButton}>
-            <Text style={styles.adminButtonText}>Admin Page</Text>
+            <Text style={styles.adminButtonText}>{t('admin-page')}</Text>
           </Pressable>
         </HasRoles>
 

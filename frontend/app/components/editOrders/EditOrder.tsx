@@ -12,6 +12,7 @@ import {Order, OrderProduct} from "@/app/types/items";
 import useProduct from "@/app/hooks/useProducts";
 import useOrders from "@/app/hooks/useOrders";
 import styles from "./EditOrder.style";
+import {useTranslation} from "react-i18next";
 
 const EditOrder = () => {
     const {orders, fetchAllOrdersByStatus, updateOrderStatus} = useOrders();
@@ -21,6 +22,7 @@ const EditOrder = () => {
     const [fetchedOrders, setFetchedOrders] = useState<Set<number>>(new Set());
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [localOrders, setLocalOrders] = useState<Order[]>([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchOrders = async () => {
@@ -112,7 +114,7 @@ const EditOrder = () => {
                         return (
                             <View key={order.id} style={styles.orderContainer}>
                                 <View style={styles.orderHeader}>
-                                    <Text style={styles.orderId}>Order #{order.id}</Text>
+                                    <Text style={styles.orderId}>{t("single-order")} #{order.id}</Text>
                                     <Text style={styles.orderDate}>
                                         {order.readyPickupTime
                                             ? new Date(order.readyPickupTime).toLocaleString("en-GB")
@@ -153,7 +155,7 @@ const EditOrder = () => {
                                 />
 
                                 <View style={styles.totalContainer}>
-                                    <Text style={styles.totalLabel}>Total:</Text>
+                                    <Text style={styles.totalLabel}>{t("total")}:</Text>
                                     <Text style={styles.totalAmount}>
                                         ${order.totalPrice.toFixed(2)}
                                     </Text>

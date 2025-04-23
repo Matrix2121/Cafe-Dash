@@ -12,6 +12,7 @@ import ItemsList from "@/app/components/itemsList/ItemsList";
 import AddProductButton from "@/app/components/addProductButton/addProductButton";
 import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 import CafeMenuDubHeader from "@/app/components/headers/cafeMenuSubheader/CafeMenuSubheader";
+import { useTranslation } from 'react-i18next';
 
 type CafeMenuRouteProp = RouteProp<RootStackParamList, "cafemenu">;
 
@@ -23,6 +24,7 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
   const { cafe } = route.params;
   const { products, fetchAllProductByCafeteriaId, loading, error } = useProducts();
   const { productsCount, currentCafeteria, totalPrice } = useCart();
+  const { t } = useTranslation();
 
   const isDifferentCafeteria =
     currentCafeteria && currentCafeteria.id !== cafe.id;
@@ -36,7 +38,7 @@ const CafeMenu = ({ route }: CafeMenuProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.scrollContainer}>
-      <CommonHeader title="Menu"/>
+      <CommonHeader title={t("menu")}/>
         <View style={styles.menuContainer}>
           <CafeMenuDubHeader cafe={cafe} />
           {loading || error ? (

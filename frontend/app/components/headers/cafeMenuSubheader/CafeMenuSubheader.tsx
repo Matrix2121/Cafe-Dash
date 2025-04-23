@@ -6,6 +6,7 @@ import {Cafeteria} from "@/app/types/items"
 import {TouchableOpacity, View, Text} from "react-native";
 import styles from "./CafeMenuSubheader.style";
 import {SvgUri} from "react-native-svg";
+import { useTranslation } from 'react-i18next';
 
 interface MenuSubheader {
     cafe: Cafeteria;
@@ -13,6 +14,7 @@ interface MenuSubheader {
 
 const MenuSubheader = ({cafe}: MenuSubheader) => {
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+    const { t } = useTranslation();
     return (
         <View style={styles.header}>
             <View style={styles.detailsContainer}>
@@ -25,7 +27,7 @@ const MenuSubheader = ({cafe}: MenuSubheader) => {
             >
                 <View style={styles.detailsContainer}>
                     <SvgUri uri={'https://cafedashstorage.blob.core.windows.net/svgs/shop.svg'} height={30} width={30} />
-                    <Text style={styles.detailsButtonText}>Details</Text>
+                    <Text style={styles.detailsButtonText}>{t("details")}</Text>
                 </View>
             </TouchableOpacity>
         </View>

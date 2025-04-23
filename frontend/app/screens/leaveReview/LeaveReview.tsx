@@ -10,6 +10,7 @@ import useReviews from "@/app/hooks/useReviews";
 import {useAuth} from "@/app/context/AuthContext";
 import CommonHeader from "@/app/components/headers/commonHeader/CommonHeader";
 import * as Haptics from 'expo-haptics';
+import { useTranslation } from 'react-i18next';
 
 type LeaveReviewRouteProp = RouteProp<RootStackParamList, "leavereview">;
 
@@ -22,7 +23,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
   const { cafe } = route.params;
   const cafeteriaId = cafe.id;
   const { postReview, loading, error } = useReviews(cafeteriaId);
-
+  const { t } = useTranslation();
   const [title, setTitle] = useState("");
   const [body, setbody] = useState("");
   const [rating, setRating] = useState(0);
@@ -55,11 +56,11 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
 
   return (
     <View style={styles.container}>
-      <CommonHeader title="Leave a Review"/>
+      <CommonHeader title={t("review")}/>
       <View style={styles.formContainer}>
 
         <View style={styles.ratingContainer}>
-          <Text style={styles.label}>Rating:</Text>
+          <Text style={styles.label}>{t("rating")}:</Text>
           <AirbnbRating
             defaultRating={rating}
             onFinishRating={(newRating: number) => setRating(newRating)}
@@ -69,7 +70,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
           />
         </View>
 
-        <Text style={styles.label}>Title:</Text>
+        <Text style={styles.label}>{t("rating")}:</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter a title for your review (required)"
@@ -77,7 +78,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
           onChangeText={setTitle}
         />
 
-        <Text style={styles.label}>Comment:</Text>
+        <Text style={styles.label}>{t("message")}:</Text>
         <TextInput
           style={[styles.input, styles.commentInput]}
           placeholder="Write your review here... (optional)"
@@ -87,7 +88,7 @@ const LeaveReview = ({ route }: LeaveReviewProps) => {
         />
 
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmitReview}>
-          <Text style={styles.submitButtonText}>Submit Review</Text>
+          <Text style={styles.submitButtonText}>{t("submit")}</Text>
         </TouchableOpacity>
       </View>
     </View>

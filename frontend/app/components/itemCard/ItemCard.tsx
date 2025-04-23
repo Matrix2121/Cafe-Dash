@@ -5,6 +5,8 @@ import { useCart } from "@/app/context/CartContext";
 import { SvgUri } from "react-native-svg";
 import * as Haptics from 'expo-haptics';
 import styles from "./ItemCard.style";
+import { useTranslation } from 'react-i18next';
+
 
 type ItemCardProps = {
   product: Product;
@@ -12,6 +14,7 @@ type ItemCardProps = {
 
 const ItemCard = ({ product }: ItemCardProps) => {
   const { addToCart } = useCart();
+  const { t } = useTranslation();
 
   const handleAddToCart = async () => {
     try {

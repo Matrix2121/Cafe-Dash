@@ -5,6 +5,7 @@ import { CartItem } from '@/app/types/items';
 import useCafes from '@/app/hooks/useCafes';
 import useOrders from '@/app/hooks/useOrders';
 import * as Haptics from 'expo-haptics';
+import { useTranslation } from 'react-i18next';
 import styles from './Cart.style'
 
 const Cart = () => {
@@ -20,8 +21,9 @@ const Cart = () => {
   const cafeteriaId = cartItems.length > 0 ? cartItems[0].product.cafeteriaId : null;
   const { cafe, loading, error } = useCafes(cafeteriaId);
   const { postOrder } = useOrders();
+  const { t } = useTranslation();
 
-  const renderItem = ({ item }: { item: CartItem }) => (
+    const renderItem = ({ item }: { item: CartItem }) => (
     <View style={styles.itemContainer}>
       <View style={styles.itemInfo}>
         <Text style={styles.itemName}>{item.product.name}</Text>
@@ -57,7 +59,7 @@ const Cart = () => {
         }}
         style={styles.removeButton}
       >
-        <Text style={styles.removeText}>Remove</Text>
+        <Text style={styles.removeText}>{t("remove")}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -70,7 +72,7 @@ const Cart = () => {
         <>
           <View style={styles.cafeHeader}>
             <Text style={styles.cafeHeaderText}>
-              Ordering from: {cafe?.name || 'Unknown Cafe'}
+                {t("order-from")}: {cafe?.name || 'Unknown Cafe'}
             </Text>
             {cafe?.location && (
               <Text style={styles.cafeLocationText}>
@@ -84,7 +86,7 @@ const Cart = () => {
             keyExtractor={item => item.product.id.toString()}
           />
           <View style={styles.summaryContainer}>
-            <Text style={styles.totalText}>Total: ${totalPrice.toFixed(2)}</Text>
+            <Text style={styles.totalText}>{t("total")}: ${totalPrice.toFixed(2)}</Text>
 
             <TouchableOpacity
               onPress={() => {
@@ -92,7 +94,7 @@ const Cart = () => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);}}
               style={styles.clearButton}
             >
-              <Text style={styles.clearText}>Clear Cart</Text>
+              <Text style={styles.clearText}>{t("clear")}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity 
@@ -103,7 +105,7 @@ const Cart = () => {
               }}
               style={styles.checkoutButton}
             >
-              <Text style={styles.checkoutText}>Proceed to Checkout</Text>
+              <Text style={styles.checkoutText}>{t("checkout")}</Text>
             </TouchableOpacity>
           </View>
         </>

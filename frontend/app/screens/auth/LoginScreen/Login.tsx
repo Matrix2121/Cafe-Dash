@@ -7,6 +7,8 @@ import { ImageBackground, KeyboardAvoidingView, Platform, ScrollView, Image, Vie
 import { TextInput, Button, Text } from "react-native-paper";
 import styles from "./Login.style";
 import logo from "../../../assets/images/logo.png";
+import { useTranslation } from 'react-i18next';
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -15,6 +17,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const { login } = useAuth();
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { t } = useTranslation();
 
   const handleLogin = async () => {
     if (!username || !password) {
@@ -47,12 +50,12 @@ const Login = () => {
           <View style={styles.loginContainer}>
             <Image source={logo} style={styles.logo} />
             <Text style={styles.title}>
-              <Text style={styles.highlight}>Welcome to </Text>Cafe-Dash
+              <Text style={styles.highlight}>{t('welcome')}</Text>Cafe-Dash
             </Text>
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
             <TextInput
-              label="Username"
+              label={t('username')}
               value={username}
               onChangeText={setUsername}
               keyboardType="email-address"
@@ -61,7 +64,7 @@ const Login = () => {
               mode="outlined"
             />
             <TextInput
-              label="Password"
+              label={t('password')}
               value={password}
               onChangeText={setPassword}
               secureTextEntry
@@ -77,7 +80,7 @@ const Login = () => {
                 loading={loading}
                 disabled={loading}
               >
-                {loading ? "Logging in..." : "Login"}
+                {loading ? "Logging in..." : t('login-button')}
               </Button>
 
               <Button
@@ -86,11 +89,11 @@ const Login = () => {
                 style={styles.registerButton}
                 labelStyle={styles.registerButtonLabel}
               >
-                Sign Up
+                {t('sign-up')}
               </Button>
             </View>
             <TouchableOpacity onPress={() => navigation.navigate("forgotpassword")}>
-              <Text>Forgot Password?</Text>
+              <Text>{t('forgot-password')}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>

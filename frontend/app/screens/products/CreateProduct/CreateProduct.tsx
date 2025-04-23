@@ -7,6 +7,8 @@ import {RouteProp, useNavigation} from "@react-navigation/native";
 import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackParamList} from "@/app/navigation/Navigation";
 import { Dropdown } from 'react-native-element-dropdown';
+import { useTranslation } from 'react-i18next';
+
 
 type ProductCreateProps = RouteProp<RootStackParamList, "createproduct">;
 
@@ -22,6 +24,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState("");
     const { cafe } = route.params;
+    const { t } = useTranslation();
 
     const data = [
         { label: 'PROMO', value: 'PROMO' },
@@ -88,11 +91,11 @@ const CreateProduct = ({ route }: ProductCreate) => {
             >
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.formContainer}>
-                        <Text style={styles.title}>Create Product</Text>
+                        <Text style={styles.title}>{t("create-product")}</Text>
                         {apiError ? <Text style={styles.errorText}>{apiError}</Text> : null}
 
                         <TextInput
-                            label="Name"
+                            label={t("name")}
                             value={name}
                             onChangeText={(text) => {
                                 setName(text);
@@ -105,7 +108,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
                             <Text style={styles.errorText}>{formErrors.name}</Text>
                         )}
                         <TextInput
-                            label="Price"
+                            label={t("price")}
                             value={price.toString()}
                             onChangeText={(text) => {
                                 const numeric = text.replace(/[^0-9.]/g, "");
@@ -130,7 +133,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
                             maxHeight={300}
                             labelField="label"
                             valueField="value"
-                            placeholder={!isFocus ? 'Select product type' : '...'}
+                            placeholder={!isFocus ? t("select-product") : '...'}
                             searchPlaceholder="Search..."
                             value={productType}
                             onFocus={() => setIsFocus(true)}
@@ -145,7 +148,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
                             <Text style={styles.errorText}>{formErrors.productType}</Text>
                         )}
                         <TextInput
-                            label="Image URL"
+                            label={t("url-photo")}
                             value={imageUrl}
                             onChangeText={(text) => {
                                 setImageUrl(text);
@@ -164,7 +167,7 @@ const CreateProduct = ({ route }: ProductCreate) => {
                             disabled={loading}
                             style={styles.createButton}
                         >
-                            {loading ? "Creating..." : "Create"}
+                            {loading ? "Creating..." : t("create-button")}
                         </Button>
                     </View>
                 </ScrollView>
