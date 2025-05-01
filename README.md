@@ -27,7 +27,7 @@ Cafe management system built with React Native and Spring Boot. It is hosted usi
 ## Installation
 1. Clone this repository
 2. Configure the application properties in backend/src/main/resources by creating a local database.
-3. Create roles directly in the database. The database must contains CUSTOMER role.
+3. Create roles directly in the database. The database must contain CUSTOMER role.
 4. Navigate to the frontend/
 5. ```bash
    npm install
